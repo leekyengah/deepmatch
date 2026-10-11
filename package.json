@@ -1,0 +1,24 @@
+{
+  "name": "deepmatch",
+  "private": true,
+  "version": "0.1.0",
+  "description": "DeepMatch greenfield monorepo — matching, chat, couple map, concierge, personal, admin",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w @deepmatch/web",
+    "dev:admin": "npm run dev -w @deepmatch/admin",
+    "build": "npm run build -w @deepmatch/shared && npm run build -w @deepmatch/web && npm run build -w @deepmatch/admin",
+    "lint": "npm run lint -w @deepmatch/shared && npm run lint -w @deepmatch/web && npm run lint -w @deepmatch/admin",
+    "typecheck": "npm run typecheck -w @deepmatch/shared && npm run typecheck -w @deepmatch/web && npm run typecheck -w @deepmatch/admin",
+    "test": "npm run test -w @deepmatch/shared",
+    "test:unit": "npm run test -w @deepmatch/shared",
+    "format:check": "echo \"format check placeholder — prettier optional\"",
+    "ci": "npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

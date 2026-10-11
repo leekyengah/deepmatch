@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dm-primary: #e95383;
+  --dm-blush: #f6c1d2;
+  --dm-canvas: #fff8fa;
+  --dm-deep: #822d4c;
+  --background: var(--dm-canvas);
+  --foreground: var(--dm-deep);
+}
+
+body {
+  color: var(--foreground);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, var(--dm-blush), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, #ffd6e4, transparent 50%),
+    var(--dm-canvas);
+  min-height: 100vh;
+  font-family: var(--font-display), "Be Vietnam Pro", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,0 +1,20 @@
+{
+  "project": "DeepMatch",
+  "updatedAt": "2026-10-11T18:45:00+07:00",
+  "state": "P0 docs complete; monorepo scaffolded; formal G0 countersign pending; no production deploy",
+  "blockerIds": ["B1", "B2", "B3", "B4", "B5", "B6"],
+  "waves": {
+    "A_p0_docs": "delivered_in_review",
+    "B_scaffold": "delivered_local",
+    "C_identity": "ui_schema_partial",
+    "D_matching_chat_map": "engine_ui_partial",
+    "E_admin_concierge": "admin_shell_partial",
+    "F_qa_release": "unit_only_no_prod"
+  },
+  "nextReady": [
+    "Founder countersign docs/p0/G0-SIGNOFF.md",
+    "Provide staging Supabase credentials",
+    "Auth Google Drive to sync Tổng quan",
+    "Run DM-002 real interviews"
+  ]
+}

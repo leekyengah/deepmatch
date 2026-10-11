@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dm-primary: #e95383;
+  --dm-blush: #f6c1d2;
+  --dm-canvas: #fff8fa;
+  --dm-deep: #822d4c;
+  --background: #f7f2f4;
+  --foreground: #822d4c;
+}
+
+body {
+  color: var(--foreground);
+  background: linear-gradient(180deg, #fff8fa, #f3e6eb 40%, #f7f2f4);
+  min-height: 100vh;
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+}

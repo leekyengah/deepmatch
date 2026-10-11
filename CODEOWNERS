@@ -1,0 +1,8 @@
+# DeepMatch CODEOWNERS — update with real GitHub handles after remote exists
+* @deepmatch-founder @deepmatch-tech
+
+/docs/p0/ @deepmatch-founder
+/docs/adr/ @deepmatch-tech @deepmatch-founder
+/supabase/ @deepmatch-tech
+/apps/admin/ @deepmatch-tech
+/.github/ @deepmatch-tech
