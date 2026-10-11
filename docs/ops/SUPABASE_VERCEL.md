@@ -9,37 +9,31 @@
 | Region | `ap-southeast-1` |
 | API URL | `https://zzqpvjdyvjarpphqhaze.supabase.co` |
 | Dashboard | https://supabase.com/dashboard/project/zzqpvjdyvjarpphqhaze |
-| Status | ACTIVE_HEALTHY |
-| Migrations | Pushed 2026-10-11 (init + auth trigger + RLS + invite RPC + matching/chat policies) |
+| Migrations | Pushed |
 
-Local link: `npx supabase link --project-ref zzqpvjdyvjarpphqhaze`  
-Env: `.env.local` / `apps/web/.env.local` / `apps/admin/.env.local` (**gitignored**)
+## Vercel (web)
 
-## Vercel
+| Field | Value |
+|---|---|
+| Team | `tradingbase` |
+| Project | `deepmatch` |
+| Production URL | https://deepmatch-eight.vercel.app |
+| Inspect | https://vercel.com/tradingbase/deepmatch |
+| Note | Deployment Protection may require Vercel login to view |
 
-Requires interactive login (CLI token invalid / non-TTY):
+### Auth redirect (do in Supabase Dashboard → Authentication → URL configuration)
 
-```bash
-npx vercel login
-# then from repo:
-npx vercel link --yes
-npx vercel --cwd apps/web --yes
-npx vercel --cwd apps/admin --yes
-```
+Add:
 
-Suggested project names:
+- `https://deepmatch-eight.vercel.app/**`
+- `http://localhost:3000/**`
 
-- `deepmatch-web` (root directory `apps/web`)
-- `deepmatch-admin` (root directory `apps/admin`)
+Site URL: `https://deepmatch-eight.vercel.app`
 
-Env vars to set on both (Production + Preview):
+## Admin
 
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `NEXT_PUBLIC_APP_ENV=staging`
-- feature flags as in `.env.example`
-- **Never** put `SUPABASE_SERVICE_ROLE_KEY` in client-exposed Vercel envs unless server-only and required; prefer Edge-safe anon key for web.
+Create/link `deepmatch-admin` with root deploy config for `apps/admin` (pending second project).
 
-## Production
+## Production GO
 
-Still **NO-GO** until G5/G6 Founder + Safety signoff.
+Still **NO-GO** for public launch until G5/G6 Founder + Safety signoff. Current URL is staging under tradingbase.
