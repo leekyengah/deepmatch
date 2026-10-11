@@ -1,12 +1,21 @@
 # NEXT ACTION
 
-## G0
+## Done
 
-- [x] Founder “đồng ý hết” — Gate G0 = GO (2026-10-11)
+- [x] Supabase cloud project `deepmatch` (`zzqpvjdyvjarpphqhaze`, ap-southeast-1)
+- [x] Linked + `db push` migrations
+- [x] Local `.env.local` written (gitignored) for root/web/admin
 
-## Unblock engineering
+## Need Founder (1 phút)
 
-1. **Founder/Ops:** tạo staging Supabase project + điền `.env.local` từ `.env.example` (URL, anon, service role — không commit secrets).
-2. **Engineering:** DM-022 Auth & consent wiring → pair invite → live RLS tests.
-3. Optional: export Tổng quan Doc → `docs/p0/tong-quan-deepmatch.md`.
-4. **Never** production deploy without G5/G6 Founder + Safety GO.
+Vercel CLI token hiện invalid / login cần TTY. Làm **một** trong hai:
+
+1. Trong terminal repo: `npx vercel login` → Continue with GitHub → rồi báo mình  
+2. Hoặc tạo token tại https://vercel.com/account/tokens → gửi token (hoặc set `$env:VERCEL_TOKEN`) — mình sẽ tạo `deepmatch-web` + `deepmatch-admin` và gắn env
+
+## After Vercel login
+
+```bash
+npx vercel --cwd apps/web --yes
+npx vercel --cwd apps/admin --yes
+```
