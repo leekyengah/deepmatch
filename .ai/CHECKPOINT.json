@@ -1,0 +1,15 @@
+{
+  "checkpoint": "WAVE_A_B_SCAFFOLD",
+  "commit": "31f26a06a0248dfedad410696b1e083be9d41a96",
+  "at": "2026-10-11T19:05:00+07:00",
+  "verified": {
+    "unitTests": "10/10 pass",
+    "webBuild": "pass next@15.1.11",
+    "adminBuild": "pass next@15.1.11"
+  },
+  "hardStops": [
+    "Formal G0 Founder countersign (docs/p0/G0-SIGNOFF.md)",
+    "No production deploy without G5/G6 GO",
+    "DM-002 real interviews pending"
+  ]
+}
