@@ -1,7 +1,4 @@
 {
   "framework": "nextjs",
-  "regions": ["sin1"],
-  "installCommand": "cd ../.. && npm install",
-  "buildCommand": "cd ../.. && npm run build -w @deepmatch/shared && npm run build -w @deepmatch/web",
-  "outputDirectory": ".next"
+  "regions": ["sin1"]
 }

@@ -1,0 +1,9 @@
+tools
+**/node_modules
+.git
+.env.local
+**/.env.local
+apps/admin
+docs
+tests
+.ai
