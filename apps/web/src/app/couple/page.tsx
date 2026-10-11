@@ -18,6 +18,12 @@ export default function CoupleHomePage() {
         Không gian cặp đôi chỉ sau lời mời + đồng ý hai phía. Mutual like không
         tự tạo pair.
       </p>
+      <Link
+        href="/couple/invite"
+        className="mt-6 inline-flex rounded-full bg-[var(--dm-primary)] px-5 py-2.5 text-sm font-semibold text-white"
+      >
+        Lời mời / ghép cặp
+      </Link>
       <div className="mt-8 grid gap-3">
         {tabs.map(([label, href]) => (
           <Link

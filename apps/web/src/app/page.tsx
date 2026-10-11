@@ -8,8 +8,8 @@ export default function HomePage() {
           DeepMatch
         </p>
         <nav className="flex gap-4 text-sm font-medium text-[var(--dm-deep)]/80">
-          <Link href="/onboarding">Bắt đầu</Link>
-          <Link href="/discover">Tìm nhau</Link>
+          <Link href="/signup">Bắt đầu</Link>
+          <Link href="/login">Đăng nhập</Link>
           <Link href="/me">Cá nhân</Link>
         </nav>
       </header>
@@ -28,7 +28,7 @@ export default function HomePage() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href="/onboarding"
+            href="/signup"
             className="rounded-full bg-[var(--dm-primary)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-105"
           >
             Tạo tài khoản
