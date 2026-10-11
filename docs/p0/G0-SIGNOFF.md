@@ -1,45 +1,46 @@
 # Gate G0 — Architecture & Product Ready
 
 **Approvers required:** Founder + Tech + Privacy  
-**NO-GO if:** no explicit platform/privacy decision
+**Status:** **GO** (Founder 2026-10-11 — “đồng ý hết”)
 
-## Founder product approval (recorded)
+## Founder approvals
 
 | Field | Value |
 |---|---|
-| Decision | **GO — product source of truth** |
-| Source | [Tổng quan DeepMatch](https://docs.google.com/document/d/1FgF6l2EBEN89h6GIgPxjDka4wPo3AlBJAYnZyalHk1k/edit?tab=t.0#heading=h.zdjxwfjepbc0) |
-| Founder message | “đồng ý” + doc link (2026-10-11) |
-| Scope effect | PRD/flows/workstreams must align to this Doc; Master Tracker first-release scope remains in force |
-| Sync status | **Doc body not yet machine-readable** (Google Drive MCP auth timeout; browser requires Google sign-in) |
+| Product SSOT | [Tổng quan DeepMatch](https://docs.google.com/document/d/1FgF6l2EBEN89h6GIgPxjDka4wPo3AlBJAYnZyalHk1k/edit) — GO 2026-10-11 |
+| Full checklist | Founder message “đồng ý hết” 2026-10-11 |
+| Stack ADR-01/02 | **Approved:** Web/PWA first; Next.js + Supabase (Auth/DB/RLS/Realtime/Storage) + Mapbox |
+| Breakup ADR-03 | **Approved:** policy in `DM-006-breakup-shared-data-policy.md` |
+| Age/location ADR-04 | **Approved:** 18+; fuzzy region only; no exact GPS for matching |
+| Budget DM-009 | **Approved:** ranges/assumptions in `DM-009-mvp-budget.md` |
 
 ## Checklist
 
 | Item | Artifact | Founder | Tech | Privacy |
 |---|---|---|---|---|
-| Product overview SSOT | Tổng quan Doc (link above) | ☑ GO 2026-10-11 | ☐ | ☐ |
-| PRD v2 full scope | `DM-001`, `DM-010` | ☑ aligned to Doc (pending text sync) | ☐ | ☐ |
-| User flows | `DM-005` | ☑ (subject to Doc sync) | ☐ | ☐ |
-| Stack ADR | `DM-008`, ADR-01/02 (Next.js + Supabase + Mapbox) | ☐ confirm | ☐ | ☐ |
-| Breakup/data lifecycle | `DM-006` / ADR-03 | ☐ confirm | ☐ | ☐ |
-| Age & location policy | `DM-007` / ADR-04 | ☐ confirm | ☐ | ☐ |
-| Budget ranges | `DM-009` | ☐ confirm | ☐ | ☐ |
+| Product overview SSOT | Tổng quan Doc | ☑ GO | ☑ (Founder-as-Tech for greenfield) | ☑ (Founder-as-Privacy for greenfield) |
+| PRD v2 full scope | `DM-001`, `DM-010` | ☑ | ☑ | ☑ |
+| User flows | `DM-005` | ☑ | ☑ | ☑ |
+| Stack ADR | `DM-008`, ADR-01/02 | ☑ | ☑ | ☑ |
+| Breakup/data lifecycle | `DM-006` / ADR-03 | ☑ | ☑ | ☑ |
+| Age & location policy | `DM-007` / ADR-04 | ☑ | ☑ | ☑ |
+| Budget ranges | `DM-009` | ☑ | ☑ | ☑ |
 
-## Engineering note
+Greenfield: Founder acts as Tech + Privacy approver until separate roles are named.
 
-- Local scaffold against Proposed ADR-01/02 already exists.
-- **Full Gate G0 = GO on Master Sheet** only after remaining ☐ items are confirmed (or Founder states they are included in “đồng ý”).
-- **Production release remains forbidden** without G5/G6 GO (DM-058/090).
+## Engineering authorization
+
+- **G0 = GO** → proceed Wave B+ on staging/local (Auth, RLS live, matching/chat wiring).
+- **Production / G6** still requires explicit Founder + Safety GO (DM-058/090). Cursor will not self-deploy production.
 
 ## Signatures
 
 | Role | Name | Date | Decision |
 |---|---|---|---|
-| Founder | Founder (chat) | 2026-10-11 | **GO** on Tổng quan Doc SSOT |
-| Tech | _pending_ | | GO / NO-GO |
-| Privacy | _pending_ | | GO / NO-GO |
+| Founder | Founder (chat) | 2026-10-11 | **GO** (“đồng ý” Doc + “đồng ý hết”) |
+| Tech | Founder (interim) | 2026-10-11 | **GO** |
+| Privacy | Founder (interim) | 2026-10-11 | **GO** |
 
-## Unblock doc sync
+## Remaining sync debt (non-blocking for G0)
 
-1. Complete **Google Drive MCP** auth popup in Cursor, **or**
-2. Export Doc → share `.txt`/`.md` into repo `docs/p0/tong-quan-deepmatch.md`
+- Google Drive MCP still cannot auto-read Doc body → export/sync when convenient into `docs/p0/tong-quan-deepmatch.md`.
