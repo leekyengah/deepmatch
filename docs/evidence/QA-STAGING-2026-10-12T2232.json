@@ -1,0 +1,132 @@
+{
+  "runId": "QA-STAGING-2026-10-12T2232",
+  "timestampUtc": "2026-10-12T22:32:56.587Z",
+  "environment": "https://datingvn.com",
+  "commit": "faa7f6d",
+  "personas": [
+    "QA_ADULT_A",
+    "QA_ADULT_B",
+    "QA_ADULT_C"
+  ],
+  "executed": 23,
+  "pass": 23,
+  "fail": 0,
+  "results": [
+    {
+      "id": "QA-REL-013",
+      "status": "PASS",
+      "note": "needs PUT 200"
+    },
+    {
+      "id": "QA-REL-014",
+      "status": "PASS",
+      "note": "C own answers isolated"
+    },
+    {
+      "id": "QA-REL-003",
+      "status": "PASS",
+      "note": "guest needs 401"
+    },
+    {
+      "id": "QA-REL-005",
+      "status": "PASS",
+      "note": "A/B login JWT issued"
+    },
+    {
+      "id": "QA-REL-028",
+      "status": "PASS",
+      "note": "list=200 detail=200 top=200 nTop=3"
+    },
+    {
+      "id": "QA-REL-069",
+      "status": "PASS",
+      "note": "venue report=200 staffGET=403"
+    },
+    {
+      "id": "QA-REL-016",
+      "status": "PASS",
+      "note": "prefs PUT 200"
+    },
+    {
+      "id": "QA-REL-035",
+      "status": "PASS",
+      "note": "checkout→entitlement paid=200/paid ent=true"
+    },
+    {
+      "id": "QA-REL-010",
+      "status": "PASS",
+      "note": "C cannot read A order (400)"
+    },
+    {
+      "id": "QA-REL-030",
+      "status": "PASS",
+      "note": "invite create=200 accept=true denySelf=true"
+    },
+    {
+      "id": "QA-REL-037",
+      "status": "PASS",
+      "note": "orders history 200 n=20"
+    },
+    {
+      "id": "QA-REL-036",
+      "status": "PASS",
+      "note": "meeting create=200 confirmed=true"
+    },
+    {
+      "id": "QA-REL-009",
+      "status": "PASS",
+      "note": "media gate 200"
+    },
+    {
+      "id": "QA-REL-031",
+      "status": "PASS",
+      "note": "bookings 200"
+    },
+    {
+      "id": "QA-REL-040",
+      "status": "PASS",
+      "note": "wh first=200 replayDedupe=true badSig=400 amt=400 ent=7"
+    },
+    {
+      "id": "QA-REL-018",
+      "status": "PASS",
+      "note": "likeAB=200 mutual=true cChat=403"
+    },
+    {
+      "id": "QA-REL-020",
+      "status": "PASS",
+      "note": "chatAccess deny status=403 allowed=false"
+    },
+    {
+      "id": "QA-REL-021",
+      "status": "PASS",
+      "note": "conv=true sent=true read=true dedupe=true"
+    },
+    {
+      "id": "QA-REL-022",
+      "status": "PASS",
+      "note": "block=200 chatDenied=true report=200"
+    },
+    {
+      "id": "QA-REL-025",
+      "status": "PASS",
+      "note": "path=existing pair=true cPins=denied"
+    },
+    {
+      "id": "QA-REL-026",
+      "status": "PASS",
+      "note": "pinCreate=true partnerSees=true"
+    },
+    {
+      "id": "QA-REL-027",
+      "status": "PASS",
+      "note": "disc=true revoke=true repair=true"
+    },
+    {
+      "id": "QA-REL-029",
+      "status": "PASS",
+      "note": "export=200 pins=0"
+    }
+  ],
+  "recommendation": "STAGING PARTIAL GO — continue autonomous QA-REL matrix; Store/LIVE still NO GO"
+}

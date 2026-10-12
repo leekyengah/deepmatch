@@ -1,21 +1,20 @@
 ﻿# NEXT ACTION
 
-Staging https://datingvn.com · `cae384d`
+Staging https://datingvn.com · `faa7f6d`
 
 ## Last QA
-- Run `QA-STAGING-20261012T2224` — **23/23 PASS**
-- Evidence: `docs/evidence/QA_RUN_LATEST.json`
-- Master tabs 00/01/34/35/36 synced
+- API `QA-STAGING-20261012T2232` — **23/23 PASS**
+- Visual smoke — **5/5 PASS** (LM-01..04 + PAY login gate)
+- Evidence: `docs/evidence/QA_RUN_LATEST.json`, `VISUAL_SMOKE_LATEST.json`, `docs/evidence/visual/`
 
 ## Shipped latest
-- Couple pins/disconnect/export Bearer
-- Love Map places list+detail+top QA
-- Couple pin create, disconnect revoke, re-pair, export
+- Editorial SVG pin canvas on `/places/map` (no paid map key)
+- Visual smoke script + 4 Love Map screenshots
 
 ## Open next
-1. Love Map visual 4-screen fidelity (DM-166/232-style)
-2. Push notifications (native BLOCKED)
-3. Pixel checkout compare (DM-232)
+1. Checkout 6-panel pixel overlay vs mockup (DM-232) — needs logged-in screenshots
+2. Human Drive mockup overlay for Love Map
+3. Push (native BLOCKED)
 
 ## Still NO GO
 - G-QA-STORE / G-QA-LIVE / real PSP / Google Cloud Maps keys / TestFlight
