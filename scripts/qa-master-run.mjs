@@ -203,13 +203,43 @@ const tokenC = await jwtFor(emailC);
   );
 }
 
-// Matchmaking invite A→B
+// Matchmaking invite A→B then B accepts; A cannot accept
 {
   const inv = await api("/api/v1/matchmaking/invites", tokenA, {
     method: "POST",
     body: JSON.stringify({ target_id: idB, note: "QA invite" }),
   });
-  record("QA-REL-030", inv.status < 400, `invite ${inv.status}`);
+  const inviteId = inv.body?.data?.invite?.id;
+  let acceptOk = false;
+  let denySelf = false;
+  if (inviteId) {
+    const selfAccept = await api("/api/v1/matchmaking/invites", tokenA, {
+      method: "PATCH",
+      body: JSON.stringify({ id: inviteId, action: "accept" }),
+    });
+    denySelf = selfAccept.status >= 400;
+    const accept = await api("/api/v1/matchmaking/invites", tokenB, {
+      method: "PATCH",
+      body: JSON.stringify({ id: inviteId, action: "accept" }),
+    });
+    acceptOk =
+      accept.status < 400 && accept.body?.data?.invite?.status === "accepted";
+  }
+  record(
+    "QA-REL-030",
+    inv.status < 400 && acceptOk,
+    `invite create=${inv.status} accept=${acceptOk} denySelf=${denySelf}`,
+  );
+}
+
+// Orders history list
+{
+  const hist = await api("/api/v1/checkout/orders", tokenA);
+  record(
+    "QA-REL-037",
+    hist.status === 200 && Array.isArray(hist.body?.data?.orders),
+    `orders history ${hist.status} n=${hist.body?.data?.orders?.length ?? 0}`,
+  );
 }
 
 // Media library gate

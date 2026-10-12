@@ -108,6 +108,7 @@ export default async function MePage() {
     [t("profile.mediaGateTitle"), "/me/media"],
     [t("booking.journeyTitle"), "/me/journey"],
     [t("commerce.checkoutTitle"), "/checkout/confirm"],
+    [t("commerce.ordersTitle"), "/me/orders"],
     [t("profile.deep"), "/me/deep"],
     [t("profile.privacy"), "/me/privacy"],
     [t("profile.history"), "/me/history"],

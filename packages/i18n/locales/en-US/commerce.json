@@ -130,5 +130,12 @@
   "checkoutStepQr": "3. QR",
   "checkoutStepProcessing": "4. Processing",
   "checkoutStepSuccess": "5. Success",
-  "checkoutStepFailed": "6. Incomplete"
+  "checkoutStepFailed": "6. Incomplete",
+  "ordersTitle": "Payments & entitlements",
+  "ordersIntro": "Sandbox order history and active package rights. Not a tax invoice.",
+  "ordersHistory": "Order history",
+  "ordersEmpty": "No sandbox orders yet.",
+  "ordersReceipt": "Sandbox receipt ref {id}",
+  "entitlementsTitle": "Active entitlements",
+  "entitlementsEmpty": "No active entitlements."
 }

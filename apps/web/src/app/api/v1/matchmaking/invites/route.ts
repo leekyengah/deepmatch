@@ -80,6 +80,31 @@ export async function PATCH(req: NextRequest) {
     return jsonError("VALIDATION_ERROR", "bookingActionInvalid", requestId);
   }
 
+  const { data: existing, error: loadErr } = await supabase
+    .from("matchmaking_invites")
+    .select("id, requester_id, target_id, status")
+    .eq("id", body.id)
+    .or(`requester_id.eq.${user.id},target_id.eq.${user.id}`)
+    .maybeSingle();
+  if (loadErr || !existing) {
+    return jsonError("VALIDATION_ERROR", "bookingNotFound", requestId);
+  }
+  if (existing.status !== "proposed") {
+    return jsonError("VALIDATION_ERROR", "bookingActionInvalid", requestId);
+  }
+
+  const isRequester = existing.requester_id === user.id;
+  const isTarget = existing.target_id === user.id;
+  if (body.action === "accept" || body.action === "decline") {
+    if (!isTarget) {
+      return jsonError("FORBIDDEN", null, requestId);
+    }
+  } else if (body.action === "withdraw") {
+    if (!isRequester) {
+      return jsonError("FORBIDDEN", null, requestId);
+    }
+  }
+
   const status =
     body.action === "accept"
       ? "accepted"
@@ -91,8 +116,8 @@ export async function PATCH(req: NextRequest) {
     .from("matchmaking_invites")
     .update({ status })
     .eq("id", body.id)
-    .or(`requester_id.eq.${user.id},target_id.eq.${user.id}`)
-    .select("id, status")
+    .eq("status", "proposed")
+    .select("id, status, requester_id, target_id")
     .maybeSingle();
   if (error || !data) {
     return jsonError("VALIDATION_ERROR", "bookingNotFound", requestId);

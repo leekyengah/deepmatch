@@ -52,6 +52,8 @@
     "mePrivacy": "Privacy",
     "meAccount": "Account & devices",
     "meHistory": "Connection history",
+    "meOrders": "Payments & entitlements",
+    "meMedia": "Photos & videos",
     "mePremium": "Premium",
     "onboarding": "Get started"
   }

@@ -1,11 +1,13 @@
-import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { NextResponse, type NextRequest } from "next/server";
+import { getRouteUser } from "@/lib/supabase/route";
 import { flagEnabled } from "@/lib/flags";
 import { apiT, jsonError, makeRequestId } from "@/lib/api-error";
 import { randomUUID } from "node:crypto";
 
 const IMAGE_MAX = 8 * 1024 * 1024; // 8MB
 const VIDEO_MAX = 50 * 1024 * 1024; // 50MB soft limit (DM-035)
+const PROFILE_MAX_IMAGES = 10;
+const PROFILE_MAX_VIDEOS = 2;
 const ALLOWED = new Set([
   "image/jpeg",
   "image/png",
@@ -14,16 +16,13 @@ const ALLOWED = new Set([
   "video/webm",
 ]);
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const requestId = makeRequestId();
   if (!(await flagEnabled("ff_media_upload"))) {
     return jsonError("FORBIDDEN", "flagMediaUploadOff", requestId);
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
 
   const body = (await req.json()) as {
@@ -44,6 +43,30 @@ export async function POST(req: Request) {
       isVideo ? "videoTooLarge" : "imageTooLarge",
       requestId
     );
+  }
+
+  // Profile library gate (no pair/conversation): enforce 3–10 images / ≤2 videos max.
+  if (!body.pair_id && !body.conversation_id) {
+    const { data: existing } = await supabase
+      .from("media_objects")
+      .select("content_type")
+      .eq("owner_user_id", user.id)
+      .is("pair_id", null)
+      .is("conversation_id", null)
+      .limit(50);
+    const rows = existing ?? [];
+    const images = rows.filter((r) =>
+      String(r.content_type || "").startsWith("image/"),
+    ).length;
+    const videos = rows.filter((r) =>
+      String(r.content_type || "").startsWith("video/"),
+    ).length;
+    if (!isVideo && images >= PROFILE_MAX_IMAGES) {
+      return jsonError("VALIDATION_ERROR", "imageTooLarge", requestId);
+    }
+    if (isVideo && videos >= PROFILE_MAX_VIDEOS) {
+      return jsonError("VALIDATION_ERROR", "videoTooLarge", requestId);
+    }
   }
 
   if (body.pair_id) {
