@@ -1,15 +1,15 @@
 {
-  "runId": "QA-STAGING-2026-10-12T2219",
-  "timestampUtc": "2026-10-12T22:19:36.867Z",
+  "runId": "QA-STAGING-2026-10-12T2224",
+  "timestampUtc": "2026-10-12T22:24:21.385Z",
   "environment": "https://datingvn.com",
-  "commit": "30ccca1",
+  "commit": "cae384d",
   "personas": [
     "QA_ADULT_A",
     "QA_ADULT_B",
     "QA_ADULT_C"
   ],
-  "executed": 20,
-  "pass": 20,
+  "executed": 23,
+  "pass": 23,
   "fail": 0,
   "results": [
     {
@@ -35,7 +35,7 @@
     {
       "id": "QA-REL-028",
       "status": "PASS",
-      "note": "places list 200 n=5"
+      "note": "list=200 detail=200 top=200 nTop=3"
     },
     {
       "id": "QA-REL-069",
@@ -85,7 +85,7 @@
     {
       "id": "QA-REL-040",
       "status": "PASS",
-      "note": "wh first=200 replayDedupe=true badSig=400 amt=400 ent=5"
+      "note": "wh first=200 replayDedupe=true badSig=400 amt=400 ent=6"
     },
     {
       "id": "QA-REL-018",
@@ -111,6 +111,21 @@
       "id": "QA-REL-025",
       "status": "PASS",
       "note": "path=existing pair=true cPins=denied"
+    },
+    {
+      "id": "QA-REL-026",
+      "status": "PASS",
+      "note": "pinCreate=true partnerSees=true"
+    },
+    {
+      "id": "QA-REL-027",
+      "status": "PASS",
+      "note": "disc=true revoke=true repair=true"
+    },
+    {
+      "id": "QA-REL-029",
+      "status": "PASS",
+      "note": "export=200 pins=0"
     }
   ],
   "recommendation": "STAGING PARTIAL GO — continue autonomous QA-REL matrix; Store/LIVE still NO GO"
