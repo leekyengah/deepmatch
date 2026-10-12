@@ -44,5 +44,10 @@
   "completionNeeds": "Hiểu mình",
   "completionMedia": "Ảnh đã duyệt",
   "completionFresh": "Cập nhật gần đây",
-  "completionNoTrust": "Không có điểm uy tín tổng hay huy hiệu giả."
+  "completionNoTrust": "Không có điểm uy tín tổng hay huy hiệu giả.",
+  "refreshTitle": "Điều này vẫn đúng với bạn?",
+  "refreshIntro": "Rà soát theo mốc 30/90 ngày. Không phạt nếu bỏ qua.",
+  "refreshDue": "Nên xem lại",
+  "refreshOk": "Còn mới",
+  "refreshNoPenalty": "Bỏ qua không ảnh hưởng điểm uy tín — hệ thống không có điểm uy tín tổng."
 }

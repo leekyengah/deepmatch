@@ -89,5 +89,9 @@
   "journeyPackagesBody": "LIVE quota/advisor unlock after sandbox payment snapshots. For now browse catalog and submitted requests.",
   "journeyRequests": "Requests & status",
   "journeyRequestsHint": "Only your bookings. Switching accounts never shows another user’s cache.",
-  "journeyNoFake": "No fake match-success percentages or invented progress."
+  "journeyNoFake": "No fake match-success percentages or invented progress.",
+  "providersTitle": "Provider profiles",
+  "providersIntro": "Staging sample list — not LIVE-verified, no fake availability.",
+  "providersSample": "Staging sample",
+  "providersCapacity": "Capacity"
 }

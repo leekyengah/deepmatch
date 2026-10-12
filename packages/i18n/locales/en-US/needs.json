@@ -44,5 +44,10 @@
   "completionNeeds": "Understand",
   "completionMedia": "Approved photos",
   "completionFresh": "Recently updated",
-  "completionNoTrust": "No aggregate trust score or fake badges."
+  "completionNoTrust": "No aggregate trust score or fake badges.",
+  "refreshTitle": "Is this still true for you?",
+  "refreshIntro": "Review on 30/90-day cadence. Skipping is never penalized.",
+  "refreshDue": "Review suggested",
+  "refreshOk": "Still fresh",
+  "refreshNoPenalty": "Skipping does not affect trust — there is no aggregate trust score."
 }

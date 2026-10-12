@@ -89,5 +89,9 @@
   "journeyPackagesBody": "Quota/chuyên viên LIVE mở sau thanh toán sandbox có snapshot. Hiện xem catalog và yêu cầu đã gửi.",
   "journeyRequests": "Yêu cầu & trạng thái",
   "journeyRequestsHint": "Chỉ hiện đơn của bạn. Đổi tài khoản không giữ cache đơn người khác.",
-  "journeyNoFake": "Không hiển thị % thành công ghép đôi hay tiến độ giả."
+  "journeyNoFake": "Không hiển thị % thành công ghép đôi hay tiến độ giả.",
+  "providersTitle": "Hồ sơ nhà cung cấp",
+  "providersIntro": "Danh sách mẫu staging — chưa xác minh LIVE, không giả availability.",
+  "providersSample": "Mẫu staging",
+  "providersCapacity": "Khả dụng"
 }
