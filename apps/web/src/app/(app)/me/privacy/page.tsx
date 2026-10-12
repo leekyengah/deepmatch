@@ -33,8 +33,16 @@ export default async function MePrivacyPage({
 
   return (
     <main className="mx-auto max-w-lg px-6 py-12">
-      <h1 className="text-3xl font-semibold">{t("profile.privacy")}</h1>
-      <form action={savePrivacyAction} className="mt-6 space-y-4 rounded-3xl bg-white/80 p-6">
+      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
+        {t("profile.eyebrow")}
+      </p>
+      <h1 className="mt-2 font-display text-4xl font-semibold text-dm-ink">
+        {t("profile.privacy")}
+      </h1>
+      <form
+        action={savePrivacyAction}
+        className="mt-6 space-y-4 rounded-[20px] border border-dm-line bg-dm-panel p-6 shadow-dm"
+      >
         <label className="flex gap-2 text-sm">
           <input
             type="checkbox"
@@ -60,8 +68,10 @@ export default async function MePrivacyPage({
         </button>
       </form>
 
-      <section className="mt-8 space-y-3 rounded-3xl bg-white/80 p-6">
-        <h2 className="text-lg font-semibold">{t("profile.aiConsentTitle")}</h2>
+      <section className="mt-8 space-y-3 rounded-[20px] border border-dm-line bg-dm-surface p-6">
+        <h2 className="font-display text-xl font-semibold text-dm-ink">
+          {t("profile.aiConsentTitle")}
+        </h2>
         <p className="text-sm opacity-70">{t("profile.aiConsentHint")}</p>
         {sp.ai === "revoked" ? (
           <p className="text-sm text-[var(--dm-primary)]">

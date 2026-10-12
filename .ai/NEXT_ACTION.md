@@ -1,23 +1,24 @@
 ﻿# NEXT ACTION
 
-## Status 2026-10-12 — Master EXT wave closed (sandbox)
+## Status 2026-10-13 — Visual Reference Rebuild in progress
 
 Branch: `feat/ext-lifestyle-ai-commerce` · Staging: https://datingvn.com
 
-### Done this session
+### Active program
 
-Persona home web+mobile, AI quota/circuit/revoke, admin catalog CMS, couple DEMO CTAs, catalog E2E, ranking/security/analytics/deep-link docs, staging deploys.
+VISUAL-REFERENCE-REBUILD / sheet 26 · EXT-079..084 · DM-103..108
 
-### Remaining (not Chưa bắt đầu)
+### Done
 
-| Item | Status |
-|---|---|
-| EXT-040 LIVE providers | **BLOCKED_EXTERNAL** |
-| EXT-062 Lighthouse numbers | Đang nghiệm thu — measure in browser (Protection) |
-| TestFlight | BLOCKED_FOUNDER |
-| Founder human review of Đang nghiệm thu rows | accept → Hoàn thành |
+- Brand kit v3 + homepage REF-WEB
+- Onboarding values, Discover editorial, Chat wine UI
+- Couple map / services DEMO / privacy restyle
+- Mobile ADR-11 5 tabs
+- Manifest + AS-IS audit docs
 
-### Do not
+### Next
 
-- Enable LIVE / real provider settlement
-- Production charge outside sandbox flags
+1. Founder visual compare 9/9 (G-VISUAL-FIDELITY) — no self-PASS
+2. Couple memory gallery polish (COUPLE-02) if needed
+3. EXT-068 brand content spec sign-off
+4. EXT-040 LIVE remains BLOCKED_EXTERNAL

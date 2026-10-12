@@ -355,16 +355,16 @@ export function ChatShell({ chatEnabled }: { chatEnabled: boolean }) {
 
   return (
     <div>
-      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
+      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
         {t("chat.title")}
       </p>
-      <h1 className="mt-2 font-display text-4xl font-medium text-dm-raspberry">
+      <h1 className="mt-2 font-display text-4xl font-semibold text-dm-ink">
         {t("chat.heading")}
       </h1>
-      <p className="mt-2 text-sm text-dm-muted">{t("chat.subtitle")}</p>
+      <p className="mt-2 font-editorial text-sm text-dm-muted">{t("chat.subtitle")}</p>
 
       <div className="mt-6 flex min-h-[480px] flex-col gap-4 md:flex-row">
-        <aside className="w-full shrink-0 rounded-dm-lg border border-dm-line bg-dm-panel p-3 shadow-dm md:w-72">
+        <aside className="w-full shrink-0 rounded-[18px] border border-dm-line bg-dm-panel p-3 shadow-dm md:w-72">
           <ul className="space-y-1">
             {matches.length === 0 && (
               <li>
@@ -418,44 +418,56 @@ export function ChatShell({ chatEnabled }: { chatEnabled: boolean }) {
           </ul>
         </aside>
 
-        <section className="flex min-h-[420px] flex-1 flex-col rounded-dm-lg border border-dm-line bg-dm-panel shadow-dm">
+        <section className="flex min-h-[420px] flex-1 flex-col rounded-[18px] border border-dm-line bg-dm-surface shadow-dm">
           {!activeConversationId ? (
             <p className="m-auto px-6 text-center text-sm text-dm-muted">
               {t("chat.emptySelect")}
             </p>
           ) : (
             <>
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-dm-line px-4 py-2">
-                <p className="text-sm font-semibold text-dm-raspberry">
-                  {activePeer?.peer_name ?? t("chat.peerDefault")}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Button
-                    type="button"
-                    size="sm"
-                    variant="outline"
-                    onClick={() => setReportOpen(true)}
-                  >
-                    {t("chat.report")}
-                  </Button>
-                  <Button
-                    type="button"
-                    size="sm"
-                    variant="danger"
-                    onClick={() => void blockPeer()}
-                  >
-                    {t("chat.block")}
-                  </Button>
-                  <Link href="/couple/invite">
-                    <Button type="button" size="sm" variant="secondary">
-                      {t("chat.inviteCouple")}
-                    </Button>
-                  </Link>
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-dm-line bg-dm-panel px-4 py-3">
+                <div>
+                  <p className="font-display text-base font-semibold text-dm-ink">
+                    {activePeer?.peer_name ?? t("chat.peerDefault")}
+                  </p>
+                  <p className="text-xs text-dm-muted">{t("chat.mutualOnlyHint")}</p>
                 </div>
+                <details className="relative">
+                  <summary className="cursor-pointer list-none rounded-full border border-dm-line px-3 py-1.5 text-sm font-semibold text-dm-ink">
+                    ⋯
+                  </summary>
+                  <div className="absolute right-0 z-10 mt-2 w-48 rounded-dm border border-dm-line bg-dm-panel p-2 shadow-dm">
+                    <button
+                      type="button"
+                      className="block w-full rounded-dm px-3 py-2 text-left text-sm hover:bg-dm-blush"
+                      onClick={() => setReportOpen(true)}
+                    >
+                      {t("chat.report")}
+                    </button>
+                    <button
+                      type="button"
+                      className="block w-full rounded-dm px-3 py-2 text-left text-sm text-dm-danger hover:bg-dm-blush"
+                      onClick={() => void blockPeer()}
+                    >
+                      {t("chat.block")}
+                    </button>
+                    <Link
+                      href="/couple/invite"
+                      className="block rounded-dm px-3 py-2 text-sm hover:bg-dm-blush"
+                    >
+                      {t("chat.inviteCouple")}
+                    </Link>
+                  </div>
+                </details>
               </div>
               {safetyNote ? (
                 <p className="px-4 pt-2 text-sm text-dm-muted" role="status">
                   {safetyNote}
+                </p>
+              ) : null}
+              {messages.length === 0 ? (
+                <p className="mx-4 mt-3 rounded-dm border border-dm-line bg-dm-panel px-3 py-2 text-sm text-dm-muted">
+                  💡 {t("chat.starterHint")}
                 </p>
               ) : null}
               <div className="flex-1 space-y-2 overflow-y-auto px-4 py-4">
@@ -468,10 +480,10 @@ export function ChatShell({ chatEnabled }: { chatEnabled: boolean }) {
                     >
                       <div
                         className={cn(
-                          "max-w-[80%] rounded-[14px] px-3 py-2 text-sm leading-relaxed",
+                          "max-w-[80%] rounded-[18px] px-3.5 py-2.5 text-sm leading-relaxed",
                           mine
-                            ? "rounded-br-sm bg-dm-primary text-white"
-                            : "rounded-bl-sm bg-dm-surface text-dm-ink",
+                            ? "rounded-br-md bg-dm-primary text-white"
+                            : "rounded-bl-md bg-[#EFEAE6] text-dm-ink",
                         )}
                       >
                         {m.media_url ? (

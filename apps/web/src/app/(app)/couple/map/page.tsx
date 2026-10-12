@@ -22,13 +22,15 @@ export default async function CoupleMapPage() {
 
   return (
     <div className="max-w-3xl">
-      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
+      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
         {t("couple.title")}
       </p>
-      <h1 className="mt-2 font-display text-4xl font-medium text-dm-raspberry">
-        {t("couple.map")}
+      <h1 className="mt-2 font-display text-4xl font-semibold text-dm-ink">
+        {t("couple.mapSanhDoi")}
       </h1>
-      <p className="mt-2 text-sm text-dm-muted">{t("couple.mapIntro")}</p>
+      <p className="mt-2 font-editorial text-sm text-dm-muted">
+        {t("couple.mapIntro")}
+      </p>
       <div className="mt-8">
         <CoupleMapClient coupleId={coupleId} />
       </div>

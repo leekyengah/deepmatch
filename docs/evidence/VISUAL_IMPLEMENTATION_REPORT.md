@@ -18,8 +18,12 @@
 | Fonts Playfair + Lora + Be Vietnam Pro | Done |
 | Marketing homepage WEB-01..06 | Done (`/`) |
 | Onboarding values (DATING-01) | Done |
+| Discover feed + detail (DATING-02/03) | Done |
+| Chat wine bubbles + safety menu (DATING-04) | Done |
+| Couple map title + services DEMO + privacy | Done |
 | ADR-11 mobile 5 tabs | Done |
-| App shell / Button recolor | Done |
+| App shell / Button / Badge recolor | Done |
+| EXT-079 manifest + EXT-067 AS-IS audit | Done |
 
 ## Pending human visual sign-off
 

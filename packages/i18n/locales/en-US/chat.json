@@ -1,7 +1,9 @@
 {
   "title": "Chat",
   "heading": "Conversations",
-  "subtitle": "Realtime · only after a mutual match · does not create Our Space",
+  "subtitle": "Realtime · only after a mutual match · does not create Couple Space",
+  "mutualOnlyHint": "Mutual match only",
+  "starterHint": "What usually inspires you in everyday life?",
   "loading": "Loading conversations…",
   "loadingMessages": "Loading messages…",
   "loadError": "Could not load conversations.",

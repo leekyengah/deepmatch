@@ -1,7 +1,9 @@
 {
   "title": "Trò chuyện",
   "heading": "Hội thoại",
-  "subtitle": "Realtime · chỉ sau cùng thích · không tự tạo Chúng mình",
+  "subtitle": "Realtime · chỉ sau cùng thích · không tự tạo Sánh đôi",
+  "mutualOnlyHint": "Chỉ sau mutual match",
+  "starterHint": "Bạn thường tìm cảm hứng từ điều gì trong cuộc sống hàng ngày?",
   "loading": "Đang tải hội thoại…",
   "loadingMessages": "Đang tải tin nhắn…",
   "loadError": "Không tải được hội thoại.",

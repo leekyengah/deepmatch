@@ -4,9 +4,9 @@ import { cn } from "./cn";
 type Tone = "default" | "good" | "warn";
 
 const tones: Record<Tone, string> = {
-  default: "bg-[#FFF0F5] text-[#A63A63]",
-  good: "bg-[#e4f7ef] text-[#18755b]",
-  warn: "bg-[#fff6d9] text-[#906619]",
+  default: "bg-dm-blush text-dm-primary",
+  good: "bg-[#e4f0e8] text-[#2f7d4a]",
+  warn: "bg-[#f7efe3] text-[#96734b]",
 };
 
 export function Badge({
