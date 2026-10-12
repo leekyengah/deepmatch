@@ -10,7 +10,6 @@ export const primaryNav: NavItem[] = [
   { href: "/likes", labelKey: "nav.likes", match: "prefix" },
   { href: "/chat", labelKey: "nav.chat", match: "prefix" },
   { href: "/couple", labelKey: "nav.couple", match: "prefix" },
-  { href: "/lifestyle", labelKey: "nav.lifestyle", match: "prefix" },
   { href: "/services", labelKey: "nav.services", match: "prefix" },
   { href: "/me", labelKey: "nav.me", match: "prefix" },
 ];

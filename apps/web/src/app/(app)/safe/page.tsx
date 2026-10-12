@@ -7,8 +7,8 @@ export default async function DeepSafePage() {
   const { t } = await getServerTranslator();
   return (
     <div className="max-w-2xl">
-      <Link href="/lifestyle" className="text-sm text-dm-muted underline">
-        {t("safety.backLifestyle")}
+      <Link href="/me" className="text-sm text-dm-muted underline">
+        {t("safety.backMe")}
       </Link>
       <h1 className="mt-4 font-display text-4xl font-medium text-dm-raspberry">
         {t("safety.deepSafe")}

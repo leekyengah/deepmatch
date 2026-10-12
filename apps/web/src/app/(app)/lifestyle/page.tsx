@@ -75,7 +75,7 @@ export default async function LifestyleHomePage() {
               </p>
               <p className="mt-1 text-dm-muted">{t(p.descKey)}</p>
               <p className="mt-3 text-[11px] font-semibold text-dm-champagne">
-                DEMO
+                {t("common.optional")}
               </p>
             </Card>
           </Link>

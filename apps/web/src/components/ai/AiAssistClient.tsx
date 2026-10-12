@@ -116,7 +116,7 @@ export function AiAssistClient() {
           <Card key={s.title} className="text-sm">
             <p className="font-semibold text-dm-raspberry">
               {s.title}
-              {s.demo ? " · DEMO" : ""}
+              {s.demo ? ` · ${t("common.optional")}` : ""}
             </p>
             <p className="mt-1 text-dm-ink">{s.body}</p>
           </Card>

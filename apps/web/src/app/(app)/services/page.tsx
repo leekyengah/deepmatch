@@ -29,9 +29,6 @@ export default async function ServicesPage() {
           <p className="mt-2 max-w-xl font-editorial text-sm text-dm-muted">
             {t("booking.servicesIntro")}
           </p>
-          <p className="mt-3 inline-flex rounded-full border border-dm-line bg-dm-blush px-3 py-1 text-xs font-semibold text-dm-primary">
-            {t("marketing.lifestyleDemoBadge")}
-          </p>
         </div>
         <Link href="/bookings">
           <Button type="button" variant="outline" size="sm">

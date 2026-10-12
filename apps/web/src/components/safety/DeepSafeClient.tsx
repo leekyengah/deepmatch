@@ -162,16 +162,6 @@ export function DeepSafeClient() {
         </ul>
       </Card>
 
-      <Card className="text-sm">
-        <p className="font-semibold text-dm-raspberry">
-          {t("safety.demoCoordTitle")}
-        </p>
-        <p className="mt-1 text-xs text-dm-muted">{t("safety.demoCoordBody")}</p>
-        <a href="/lifestyle/safety" className="mt-2 inline-block text-sm underline">
-          {t("safety.demoCatalogLink")}
-        </a>
-      </Card>
-
       <p className="text-xs text-dm-muted">{t("safety.noGuarantee")}</p>
 
       {msg ? <p className="text-xs text-dm-muted">{msg}</p> : null}

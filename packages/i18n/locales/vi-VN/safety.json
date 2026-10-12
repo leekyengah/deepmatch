@@ -20,12 +20,13 @@
   "noGuarantee": "Chúng tôi hỗ trợ báo cáo và công cụ bảo vệ, nhưng không thể bảo đảm tuyệt đối mọi tình huống ngoài nền tảng.",
   "reportReceived": "Đã nhận báo cáo. Nội dung sẽ được xem xét theo quy trình kiểm duyệt.",
   "moderationPending": "Đang chờ kiểm duyệt",
-  "demoCoordTitle": "Điều phối mẫu (DEMO)",
-  "demoCoordBody": "Không có nhân viên, xe hoặc hộ tống thật. Dùng catalog An toàn trong Lifestyle để xem quy trình mẫu DEMO.",
-  "demoCatalogLink": "Xem mẫu DeepSafe catalog →",
+  "demoCoordTitle": "Điều phối bên ngoài",
+  "demoCoordBody": "DeepSafe không điều phối nhân viên, xe hoặc hộ tống. Dùng báo cáo, chặn và check-in tự nguyện trong trung tâm an toàn.",
+  "demoCatalogLink": "Xem trung tâm an toàn →",
   "genericError": "Không thực hiện được thao tác.",
   "pageIntro": "Trung tâm an toàn cơ bản — luôn miễn phí. Không thay thế số khẩn cấp địa phương.",
-  "badgeFree": "Core free",
-  "badgeNotDispatch": "Không phải dịch vụ điều phối thật",
-  "backLifestyle": "← Lifestyle"
+  "badgeFree": "Miễn phí",
+  "badgeNotDispatch": "Không phải dịch vụ điều phối khẩn cấp",
+  "backLifestyle": "← Cá nhân",
+  "backMe": "← Cá nhân"
 }

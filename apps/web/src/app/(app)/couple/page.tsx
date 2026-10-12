@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveCoupleId } from "@/lib/couple";
 import { getServerTranslator } from "@/lib/i18n/server";
+import { flagEnabled } from "@/lib/flags";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -14,6 +15,8 @@ export default async function CoupleHomePage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
   const { t } = await getServerTranslator();
+  const commerceBridgeOn =
+    (await flagEnabled("ff_lifestyle")) || (await flagEnabled("ff_ai"));
 
   const coupleId = await getActiveCoupleId(user.id);
   let pinCount = 0;
@@ -70,7 +73,7 @@ export default async function CoupleHomePage() {
         ))}
       </div>
 
-      {coupleId ? (
+      {coupleId && commerceBridgeOn ? (
         <section className="mt-10">
           <h2 className="font-display text-2xl text-dm-raspberry">
             {t("couple.commerceBridgeTitle")}

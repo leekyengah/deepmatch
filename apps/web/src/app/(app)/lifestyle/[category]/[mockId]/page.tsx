@@ -50,7 +50,7 @@ export default async function ProductDetailPage({
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Badge tone="warn">{product.demo_banner}</Badge>
-        <Badge tone="default">{prov?.status ?? "DEMO"}</Badge>
+        <Badge tone="default">{prov?.status ?? t("common.optional")}</Badge>
       </div>
       <Card className="mt-8 space-y-3 text-sm">
         <p>{product.description}</p>

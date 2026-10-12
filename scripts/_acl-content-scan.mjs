@@ -19,6 +19,8 @@ const FORBIDDEN = [
   /DM-\d{3}/i,
   /BLOCKED_EXTERNAL/i,
   /SANDBOX_ONLY/i,
+  /\bDEMO\b/,
+  /sandbox/i,
   /Stripe keys/i,
   /Founder/i,
   /Cursor Agent/i,
@@ -71,10 +73,11 @@ async function scan(label, path) {
   await page.waitForTimeout(600);
   const text = await page.locator("body").innerText();
   const html = await page.content();
-  const hits = FORBIDDEN.filter((re) => re.test(text) || re.test(html)).map(
-    (re) => re.toString(),
+  // Visible copy + HTML; ignore Next.js/flight payloads that may embed dead i18n keys
+  const surface = `${text}\n${html.replace(/<script[\s\S]*?<\/script>/gi, "")}`;
+  const hits = FORBIDDEN.filter((re) => re.test(surface)).map((re) =>
+    re.toString(),
   );
-  // Ignore legitimate DEMO labels and Vietnamese "sandbox" already cleaned
   const filtered = hits.filter((h) => {
     if (/staging/i.test(h) && !/staging/i.test(text) && !/Staging/i.test(text))
       return false;
@@ -83,9 +86,12 @@ async function scan(label, path) {
   const stagingVisible =
     /\bStaging\b/i.test(text) || /môi trường staging/i.test(text);
   if (stagingVisible) filtered.push("/Staging badge or copy/");
+  if (/\bDEMO\b/.test(text) || /sandbox/i.test(text)) {
+    filtered.push("/DEMO or sandbox visible/");
+  }
   if (filtered.length) {
-    findings.push({ path, label, hits: filtered, snippet: text.slice(0, 240) });
-    console.log("LEAK", path, filtered.join(", "));
+    findings.push({ path, label, hits: [...new Set(filtered)], snippet: text.slice(0, 240) });
+    console.log("LEAK", path, [...new Set(filtered)].join(", "));
   } else {
     console.log("OK", path, page.url());
   }

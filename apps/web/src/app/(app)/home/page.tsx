@@ -99,7 +99,6 @@ export default async function PersonaHomePage() {
         {profile?.fuzzy_region ? (
           <Badge tone="good">{profile.fuzzy_region}</Badge>
         ) : null}
-        {lifestyleOn ? <Badge tone="warn">DEMO Lifestyle</Badge> : null}
       </div>
 
       <div className="mt-6">

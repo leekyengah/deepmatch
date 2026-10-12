@@ -78,15 +78,14 @@ export default async function LifestyleCategoryPage({
       {category === "venue" ? (
         <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold text-dm-primary">
           <Link href="/lifestyle/venue">Tất cả</Link>
-          <Link href="/lifestyle/venue?band=low">≤300k DEMO</Link>
-          <Link href="/lifestyle/venue?band=mid">300–800k DEMO</Link>
-          <Link href="/lifestyle/venue?band=high">&gt;800k DEMO</Link>
+          <Link href="/lifestyle/venue?band=low">≤300k</Link>
+          <Link href="/lifestyle/venue?band=mid">300–800k</Link>
+          <Link href="/lifestyle/venue?band=high">&gt;800k</Link>
         </div>
       ) : null}
       {category === "venue" ? (
         <p className="mt-3 text-xs text-dm-muted">
-          Tọa độ / giờ mở cửa trong catalog là mẫu DEMO — không phải đặt chỗ nhà
-          hàng thật.
+          {t("commerce.categoryDemoNote")}
         </p>
       ) : null}
 
@@ -114,8 +113,8 @@ export default async function LifestyleCategoryPage({
                           {p.title}
                         </p>
                         <p className="mt-1 text-xs text-dm-muted">
-                          {p.mock_id} · {prov?.display_name ?? "DEMO"} ·{" "}
-                          {prov?.status ?? "DEMO"}
+                          {p.mock_id} · {prov?.display_name ?? t("common.optional")} ·{" "}
+                          {prov?.status ?? t("common.optional")}
                         </p>
                       </div>
                       <p className="font-bold text-dm-primary">

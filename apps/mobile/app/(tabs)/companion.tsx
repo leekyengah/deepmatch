@@ -14,7 +14,7 @@ export default function CompanionTabScreen() {
     <Screen>
       <Text style={styles.eyebrow}>{t("nav.companion")}</Text>
       <Title>{t("booking.title")}</Title>
-      <Muted>{t("marketing.lifestyleDemoBadge")}</Muted>
+      <Muted>{t("booking.servicesIntro")}</Muted>
       <View style={styles.card}>
         <Text style={styles.cardTitle}>{t("marketing.pillarCompanionTitle")}</Text>
         <Text style={styles.cardBody}>{t("marketing.pillarCompanionBody")}</Text>

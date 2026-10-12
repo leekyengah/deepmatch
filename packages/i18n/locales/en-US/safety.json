@@ -20,12 +20,13 @@
   "noGuarantee": "We provide reporting and protection tools, but cannot guarantee absolute safety in every off-platform situation.",
   "reportReceived": "Report received. It will be reviewed under our moderation process.",
   "moderationPending": "Pending moderation",
-  "demoCoordTitle": "Sample coordination (DEMO)",
-  "demoCoordBody": "No real staff, vehicles, or escorts. Use the Safety catalog in Lifestyle to preview the DEMO flow.",
-  "demoCatalogLink": "View DeepSafe catalog sample →",
+  "demoCoordTitle": "External coordination",
+  "demoCoordBody": "DeepSafe does not dispatch staff, vehicles, or escorts. Use report, block, and voluntary check-in in the Safety Center.",
+  "demoCatalogLink": "Open Safety Center →",
   "genericError": "Could not complete that action.",
   "pageIntro": "Basic Safety Center — always free. Not a substitute for local emergency numbers.",
-  "badgeFree": "Core free",
-  "badgeNotDispatch": "Not a real dispatch service",
-  "backLifestyle": "← Lifestyle"
+  "badgeFree": "Free",
+  "badgeNotDispatch": "Not emergency dispatch",
+  "backLifestyle": "← Profile",
+  "backMe": "← Profile"
 }
