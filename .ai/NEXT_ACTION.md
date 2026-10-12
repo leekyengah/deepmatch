@@ -1,21 +1,33 @@
-# NEXT ACTION
+﻿# NEXT ACTION
 
-## Done
+## Status 2026-10-12 — EXT wave
 
-- [x] Supabase cloud project `deepmatch` (`zzqpvjdyvjarpphqhaze`, ap-southeast-1)
-- [x] Linked + `db push` migrations
-- [x] Local `.env.local` written (gitignored) for root/web/admin
+Branch: `feat/ext-lifestyle-ai-commerce`  
+Gap: `docs/audits/DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md`  
+Evidence: `docs/evidence/EXT-S0-S1-2026-10-12.md`
 
-## Need Founder (1 phút)
+### Staging DB
 
-Vercel CLI token hiện invalid / login cần TTY. Làm **một** trong hai:
+- Migration `20261012180000_commerce_catalog_ai` **pushed**
+- Seed **60** DEMO products OK (`npm run seed:catalog`)
 
-1. Trong terminal repo: `npx vercel login` → Continue with GitHub → rồi báo mình  
-2. Hoặc tạo token tại https://vercel.com/account/tokens → gửi token (hoặc set `$env:VERCEL_TOKEN`) — mình sẽ tạo `deepmatch-web` + `deepmatch-admin` và gắn env
+### App surfaces (code ready; deploy branch next)
 
-## After Vercel login
+| Path | Flag |
+|---|---|
+| `/lifestyle` + `/lifestyle/{gift\|fashion\|beauty\|venue\|travel\|safety}` | `ff_lifestyle` |
+| `/ai` | `ff_ai` |
+| `GET /api/v1/catalog/*` | `ff_lifestyle` |
+| `POST /api/v1/ai/assist` | `ff_ai` (stub adapter) |
 
-```bash
-npx vercel --cwd apps/web --yes
-npx vercel --cwd apps/admin --yes
-```
+### Next P0
+
+1. Deploy web staging from this branch  
+2. EXT-008/029 DeepMind questionnaire UI  
+3. EXT-016 demo booking reserve/cancel  
+4. Admin providers list (UX-25)
+
+### Blocked (Founder)
+
+- LIVE partners / real PSP / production commerce GO  
+- Hosted LLM spend (see DECISION-AI-01)
