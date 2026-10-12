@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PlacesSubnav } from "@/components/places/PlacesSubnav";
+import { SampleMapCanvas } from "@/components/places/SampleMapCanvas";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { LOVE_PLACES, LOVE_PLACE_CATEGORIES } from "@/lib/love-places";
@@ -72,15 +73,12 @@ export default async function PlacesMapPage({
       </div>
 
       <Card className="mt-6 overflow-hidden p-0">
-        <div className="grid min-h-[280px] place-items-center bg-[linear-gradient(160deg,#f7f3ee_0%,#e8dfd4_55%,#d4c4b0_100%)] px-6 py-10 text-center">
-          <div>
-            <p className="font-display text-2xl text-dm-ink">{t("places.mapCanvasTitle")}</p>
-            <p className="mt-2 max-w-md text-sm text-dm-muted">
-              {t("places.mapCanvasBody", { count: places.length, city })}
-            </p>
-            <p className="mt-4 text-xs text-dm-muted">{t("places.mapFallbackNote")}</p>
-          </div>
-        </div>
+        <SampleMapCanvas
+          places={places}
+          title={t("places.mapCanvasTitle")}
+          body={t("places.mapCanvasBody", { count: places.length, city })}
+          note={t("places.mapFallbackNote")}
+        />
       </Card>
 
       <ul className="mt-6 space-y-3">
