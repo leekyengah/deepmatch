@@ -5,6 +5,7 @@ export type NavItem = {
 };
 
 export const primaryNav: NavItem[] = [
+  { href: "/home", labelKey: "nav.home", match: "exact" },
   { href: "/discover", labelKey: "nav.discover", match: "prefix" },
   { href: "/likes", labelKey: "nav.likes", match: "prefix" },
   { href: "/chat", labelKey: "nav.chat", match: "prefix" },
@@ -35,6 +36,7 @@ export function isNavActive(pathname: string, item: NavItem) {
 
 /** Maps pathname → message key under nav.titles.* */
 const titleKeys: Record<string, string> = {
+  "/home": "nav.home",
   "/discover": "nav.titles.discover",
   "/likes": "nav.titles.likes",
   "/chat": "nav.titles.chat",

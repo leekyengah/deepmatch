@@ -65,6 +65,34 @@ export default async function CoupleHomePage() {
         ))}
       </div>
 
+      {coupleId ? (
+        <section className="mt-10">
+          <h2 className="font-display text-2xl text-dm-raspberry">
+            {t("couple.commerceBridgeTitle")}
+          </h2>
+          <p className="mt-2 text-sm text-dm-muted">
+            {t("couple.commerceBridgeBody")}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href="/lifestyle/gift">
+              <Button type="button" variant="secondary">
+                {t("couple.ctaGiftIdeas")}
+              </Button>
+            </Link>
+            <Link href="/lifestyle/venue">
+              <Button type="button" variant="secondary">
+                {t("couple.ctaDatePlan")}
+              </Button>
+            </Link>
+            <Link href="/ai">
+              <Button type="button" variant="secondary">
+                {t("couple.ctaAiHub")}
+              </Button>
+            </Link>
+          </div>
+        </section>
+      ) : null}
+
       {!coupleId ? (
         <div className="mt-8">
           <EmptyState

@@ -22,6 +22,7 @@ import marketingVi from "../locales/vi-VN/marketing.json";
 import memoriesVi from "../locales/vi-VN/memories.json";
 import legalVi from "../locales/vi-VN/legal.json";
 import faqVi from "../locales/vi-VN/faq.json";
+import homeVi from "../locales/vi-VN/home.json";
 
 import commonEn from "../locales/en-US/common.json";
 import navEn from "../locales/en-US/nav.json";
@@ -44,6 +45,7 @@ import marketingEn from "../locales/en-US/marketing.json";
 import memoriesEn from "../locales/en-US/memories.json";
 import legalEn from "../locales/en-US/legal.json";
 import faqEn from "../locales/en-US/faq.json";
+import homeEn from "../locales/en-US/home.json";
 
 export const NAMESPACES = [
   "common",
@@ -67,6 +69,7 @@ export const NAMESPACES = [
   "memories",
   "legal",
   "faq",
+  "home",
 ] as const;
 
 export type Namespace = (typeof NAMESPACES)[number];
@@ -98,6 +101,7 @@ export const messages: MessagesByLocale = {
     memories: memoriesVi,
     legal: legalVi,
     faq: faqVi,
+    home: homeVi,
   }),
   "en-US": bundle({
     common: commonEn,
@@ -121,6 +125,7 @@ export const messages: MessagesByLocale = {
     memories: memoriesEn,
     legal: legalEn,
     faq: faqEn,
+    home: homeEn,
   }),
 };
 

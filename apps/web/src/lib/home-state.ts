@@ -83,7 +83,7 @@ export async function resolveHomeState(
 
   return {
     state: "dating",
-    redirectTo: "/discover",
+    redirectTo: "/home",
     hasMutualMatch: false,
     coupleId: null,
   };

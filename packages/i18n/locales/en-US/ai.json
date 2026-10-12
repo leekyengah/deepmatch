@@ -55,5 +55,17 @@
   "hubEyebrow": "AI Hub",
   "backLifestyle": "← Lifestyle",
   "backAiHub": "← AI Hub",
-  "coachTitle": "Profile Coach"
+  "coachTitle": "Profile Coach",
+  "quotaBadge": "Today {used}/{quota}",
+  "circuitOpen": "AI paused (circuit open)",
+  "taskPicker": "Choose a task",
+  "taskPickerHint": "Each run needs consent. You can dismiss anytime.",
+  "entryCoachBody": "Profile drafts — you preview before saving.",
+  "entryDeepmindBody": "Voluntary questions, not a diagnosis.",
+  "entryGiftBody": "Gift ideas tied to DEMO catalog.",
+  "entryStyleBody": "Outfit / moodboard DEMO ideas.",
+  "entryBeautyBody": "Makeup ideas — not medical advice.",
+  "entryDateBody": "Sample date plan — no real booking.",
+  "entryTravelBody": "DEMO itinerary ideas.",
+  "entrySafeBody": "Safety tips + free DeepSafe."
 }

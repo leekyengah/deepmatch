@@ -23,6 +23,14 @@ export async function POST(req: NextRequest) {
     return jsonError("RESOURCE_NOT_ACCESSIBLE", "flagAiOff");
   }
 
+  // EXT-041 circuit breaker — hard off without deleting code
+  if (
+    process.env.AI_DISABLED === "true" ||
+    process.env.AI_ADAPTER === "off"
+  ) {
+    return jsonError("RESOURCE_NOT_ACCESSIBLE", "aiCircuitOpen");
+  }
+
   const supabase = await createClient();
   const {
     data: { user },

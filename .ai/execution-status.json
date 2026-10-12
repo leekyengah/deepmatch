@@ -1,13 +1,27 @@
 ﻿{
   "project": "DeepMatch",
-  "updatedAt": "2026-10-12T15:20:00+07:00",
-  "state": "Staging+prod web live; mobile App Store MVP scaffolded; TestFlight awaits Apple Developer",
-  "mobile": {
-    "app": "apps/mobile",
-    "bundleId": "com.datingvn.deepmatch",
-    "iapProduct": "premium_monthly",
-    "testFlight": "BLOCKED_FOUNDER",
-    "evidence": "docs/evidence/MOBILE-APPSTORE-MVP-2026-10-12.md",
-    "ops": "docs/ops/APP_STORE.md"
-  }
+  "updatedAt": "2026-10-12T19:00:00+07:00",
+  "state": "Master wave: persona home + AI quota/revoke + admin catalog + catalog E2E local PASS; staging deploy next",
+  "branch": "feat/ext-lifestyle-ai-commerce",
+  "wave": {
+    "ext": [
+      "EXT-021",
+      "EXT-030",
+      "EXT-031",
+      "EXT-033",
+      "EXT-037",
+      "EXT-041",
+      "EXT-042",
+      "EXT-052",
+      "EXT-053",
+      "EXT-054",
+      "EXT-055",
+      "EXT-056"
+    ],
+    "gates": {
+      "i18nParity": "PASS",
+      "typecheck": "PASS"
+    }
+  },
+  "blocked": ["EXT-040", "TestFlight"]
 }

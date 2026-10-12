@@ -33,6 +33,13 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
+        name="index"
+        options={{
+          title: t("nav.home"),
+          tabBarIcon: ({ focused }) => <TabIcon label="⌂" focused={focused} />,
+        }}
+      />
+      <Tabs.Screen
         name="discover"
         options={{
           title: t("nav.discover"),
@@ -60,7 +67,6 @@ export default function TabsLayout() {
           tabBarIcon: ({ focused }) => <TabIcon label="●" focused={focused} />,
         }}
       />
-      <Tabs.Screen name="index" options={{ href: null }} />
       <Tabs.Screen name="two" options={{ href: null }} />
     </Tabs>
   );

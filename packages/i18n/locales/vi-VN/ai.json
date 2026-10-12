@@ -55,5 +55,17 @@
   "hubEyebrow": "AI Hub",
   "backLifestyle": "← Lifestyle",
   "backAiHub": "← AI Hub",
-  "coachTitle": "Profile Coach"
+  "coachTitle": "Profile Coach",
+  "quotaBadge": "Hôm nay {used}/{quota}",
+  "circuitOpen": "AI tạm tắt (circuit)",
+  "taskPicker": "Chọn nhiệm vụ",
+  "taskPickerHint": "Mỗi lần gọi cần tick đồng ý. Có thể đóng bất kỳ lúc nào.",
+  "entryCoachBody": "Gợi ý hồ sơ — bạn xem trước rồi mới lưu.",
+  "entryDeepmindBody": "Bộ câu hỏi tự nguyện, không chẩn đoán.",
+  "entryGiftBody": "Gợi ý quà gắn catalog DEMO.",
+  "entryStyleBody": "Gợi ý trang phục / moodboard DEMO.",
+  "entryBeautyBody": "Gợi ý makeup — không phải tư vấn y khoa.",
+  "entryDateBody": "Kế hoạch hẹn mẫu — không đặt chỗ thật.",
+  "entryTravelBody": "Gợi ý lịch trình DEMO.",
+  "entrySafeBody": "Mẹo an toàn + DeepSafe miễn phí."
 }
