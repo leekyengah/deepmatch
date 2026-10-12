@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Fraunces } from "next/font/google";
+import { SentryInit } from "@/components/SentryInit";
+import { I18nProvider } from "@/components/i18n/I18nProvider";
+import { getHtmlLang, getRequestLocale } from "@/lib/i18n/server";
+import { t as translate } from "@deepmatch/i18n";
 import "./globals.css";
 
 const display = Fraunces({
@@ -13,21 +17,33 @@ const body = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
 });
 
-export const metadata: Metadata = {
-  title: "DeepMatch",
-  description:
-    "Tìm nhau, chat an toàn, bản đồ cặp đôi, đồng hành và không gian cá nhân.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  return {
+    title: "DeepMatch",
+    description: translate(locale, "marketing.heroSupport"),
+    icons: {
+      icon: [{ url: "/brand/deepmatch-symbol.svg", type: "image/svg+xml" }],
+      apple: [{ url: "/brand/deepmatch-symbol.svg" }],
+    },
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getRequestLocale();
+  const lang = await getHtmlLang();
+
   return (
-    <html lang="vi">
+    <html lang={lang}>
       <body className={`${display.variable} ${body.variable} antialiased`}>
-        {children}
+        <I18nProvider locale={locale}>
+          <SentryInit />
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );

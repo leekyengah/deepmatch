@@ -6,8 +6,10 @@ import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { DemoBookingActions } from "@/components/lifestyle/DemoBookingActions";
+import { getServerTranslator } from "@/lib/i18n/server";
 
 export default async function LifestyleOrdersPage() {
+  const { t } = await getServerTranslator();
   if (!(await flagEnabled("ff_lifestyle"))) redirect("/me");
   const supabase = await createClient();
   const {
@@ -30,16 +32,16 @@ export default async function LifestyleOrdersPage() {
         ← Lifestyle
       </Link>
       <h1 className="mt-4 font-display text-4xl font-medium text-dm-raspberry">
-        Lệnh DEMO
+        {t("commerce.ordersHeading")}
       </h1>
       <div className="mt-4">
-        <Badge tone="warn">Sandbox — không thanh toán / giao hàng thật</Badge>
+        <Badge tone="warn">{t("commerce.ordersBadge")}</Badge>
       </div>
       {!bookings?.length ? (
         <div className="mt-10">
           <EmptyState
-            title="Chưa có lệnh DEMO"
-            description="Mở một sản phẩm Lifestyle và bấm Yêu cầu DEMO."
+            title={t("commerce.ordersEmptyTitle")}
+            description={t("commerce.ordersEmptyBody")}
           />
         </div>
       ) : (
@@ -54,7 +56,7 @@ export default async function LifestyleOrdersPage() {
               <li key={b.id}>
                 <Card className="text-sm">
                   <p className="font-semibold text-dm-raspberry">
-                    {p?.title ?? "Sản phẩm"}
+                    {p?.title ?? t("commerce.productDefault")}
                   </p>
                   <p className="text-xs text-dm-muted">
                     {p?.mock_id} · {b.status} ·{" "}

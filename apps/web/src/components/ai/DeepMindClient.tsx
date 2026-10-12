@@ -1,5 +1,7 @@
 "use client";
 
+import { resolveApiErrorMessage } from "@/lib/api-error-message";
+import { useT } from "@/components/i18n/I18nProvider";
 import { useEffect, useState } from "react";
 import {
   DEEPMIND_DISCLAIMER,
@@ -10,6 +12,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 
 export function DeepMindClient() {
+  const t = useT();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [insight, setInsight] = useState<string | null>(null);
   const [step, setStep] = useState(0);
@@ -45,7 +48,7 @@ export function DeepMindClient() {
       });
       const json = await res.json();
       if (!res.ok) {
-        setError(json?.error?.message ?? "Không lưu được");
+        setError(resolveApiErrorMessage(json, t, "ai.saveFailed"));
         return;
       }
       setAnswers(json.answers ?? nextAnswers);
@@ -69,7 +72,7 @@ export function DeepMindClient() {
       });
       const json = await res.json();
       if (!res.ok) {
-        setError(json?.error?.message ?? "Không tạo được gợi ý");
+        setError(resolveApiErrorMessage(json, t, "ai.insightFailed"));
         return;
       }
       const draft = (json.suggestions ?? [])
@@ -83,7 +86,7 @@ export function DeepMindClient() {
   }
 
   async function wipe() {
-    if (!confirm("Xóa toàn bộ câu trả lời DeepMind?")) return;
+    if (!confirm(t("ai.clearConfirm"))) return;
     await fetch("/api/v1/ai/deepmind", { method: "DELETE" });
     setAnswers({});
     setInsight(null);
@@ -91,7 +94,7 @@ export function DeepMindClient() {
   }
 
   if (!loaded) {
-    return <p className="text-sm text-dm-muted">Đang tải…</p>;
+    return <p className="text-sm text-dm-muted">{t("ai.loading")}</p>;
   }
 
   return (
@@ -100,7 +103,7 @@ export function DeepMindClient() {
       {q ? (
         <Card className="space-y-3 text-sm">
           <p className="text-xs font-bold text-dm-primary">
-            Câu {step + 1}/{DEEPMIND_QUESTIONS.length}
+            {t("ai.questionN", { n: step + 1, total: DEEPMIND_QUESTIONS.length })}
           </p>
           <p className="font-semibold text-dm-raspberry">{q.prompt}</p>
           <div className="flex flex-col gap-2">
@@ -131,7 +134,7 @@ export function DeepMindClient() {
               disabled={step === 0}
               onClick={() => setStep((s) => Math.max(0, s - 1))}
             >
-              Trước
+              {t("ai.prev")}
             </Button>
             <Button
               type="button"
@@ -141,7 +144,7 @@ export function DeepMindClient() {
               }
               disabled={step >= DEEPMIND_QUESTIONS.length - 1}
             >
-              Tiếp
+              {t("ai.next")}
             </Button>
             <Button
               type="button"
@@ -149,7 +152,7 @@ export function DeepMindClient() {
               disabled={saving || Object.keys(answers).length < 3}
               onClick={() => void generateInsight()}
             >
-              {saving ? "Đang tạo…" : "Tạo thẻ tự phản ánh"}
+              {saving ? t("ai.creating") : t("ai.makeCard")}
             </Button>
           </div>
         </Card>
@@ -157,7 +160,7 @@ export function DeepMindClient() {
 
       {insight ? (
         <Card className="whitespace-pre-wrap text-sm text-dm-ink">
-          <p className="font-semibold text-dm-raspberry">Thẻ tự phản ánh (có thể sửa)</p>
+          <p className="font-semibold text-dm-raspberry">{t("ai.cardTitle")}</p>
           <textarea
             className="mt-2 w-full rounded-dm border border-dm-line bg-white p-3 text-sm"
             rows={6}
@@ -175,7 +178,7 @@ export function DeepMindClient() {
       ) : null}
 
       <Button type="button" variant="ghost" size="sm" onClick={() => void wipe()}>
-        Xóa toàn bộ DeepMind
+        {t("ai.clearAll")}
       </Button>
     </div>
   );

@@ -1,6 +1,9 @@
 "use client";
 
+import { resolveApiErrorMessage } from "@/lib/api-error-message";
 import { useEffect, useState } from "react";
+import { formatDateTime } from "@deepmatch/i18n";
+import { useI18n, useT } from "@/components/i18n/I18nProvider";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
@@ -21,6 +24,8 @@ type Checkin = {
 };
 
 export function DeepSafeClient() {
+  const t = useT();
+  const { locale } = useI18n();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [checkins, setCheckins] = useState<Checkin[]>([]);
   const [name, setName] = useState("");
@@ -52,7 +57,7 @@ export function DeepSafeClient() {
     });
     const json = await res.json();
     if (!res.ok) {
-      setMsg(json?.error?.message ?? "Lỗi");
+      setMsg(resolveApiErrorMessage(json, t, "safety.genericError"));
       return;
     }
     setName("");
@@ -83,19 +88,19 @@ export function DeepSafeClient() {
   return (
     <div className="space-y-6">
       <Card className="space-y-2 text-sm">
-        <p className="font-semibold text-dm-raspberry">Người tin cậy</p>
+        <p className="font-semibold text-dm-raspberry">{t("safety.contacts")}</p>
         <Input
-          placeholder="Tên"
+          placeholder={t("safety.contactName")}
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <Input
-          placeholder="SĐT / kênh liên hệ"
+          placeholder={t("safety.contactValue")}
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
         <Button type="button" size="sm" onClick={() => void addContact()}>
-          Thêm
+          {t("safety.addContact")}
         </Button>
         <ul className="mt-3 space-y-2">
           {contacts.map((c) => (
@@ -112,7 +117,7 @@ export function DeepSafeClient() {
                   }).then(refresh)
                 }
               >
-                Xóa
+                {t("safety.removeContact")}
               </button>
             </li>
           ))}
@@ -120,23 +125,27 @@ export function DeepSafeClient() {
       </Card>
 
       <Card className="space-y-3 text-sm">
-        <p className="font-semibold text-dm-raspberry">Check-in tự nguyện</p>
-        <p className="text-xs text-dm-muted">
-          Miễn phí · cửa sổ thời gian · không GPS nền · không điều phối khẩn cấp.
+        <p className="font-semibold text-dm-raspberry">
+          {t("safety.checkInVoluntary")}
         </p>
+        <p className="text-xs text-dm-muted">{t("safety.checkInHint")}</p>
         <Button type="button" size="sm" onClick={() => void startCheckin()}>
-          Bắt đầu cửa sổ 2 giờ
+          {t("safety.startWindow")}
         </Button>
         <ul className="space-y-2">
           {checkins.map((c) => (
             <li key={c.id} className="rounded-dm border border-dm-line p-3 text-xs">
               <p>
-                Hết hạn: {new Date(c.window_ends_at).toLocaleString("vi-VN")}
+                {t("safety.expiresAt", {
+                  when: formatDateTime(c.window_ends_at, locale),
+                })}
               </p>
               <p>
                 {c.completed_at
-                  ? `Đã check-in ${new Date(c.completed_at).toLocaleString("vi-VN")}`
-                  : "Chưa hoàn tất"}
+                  ? t("safety.completedAt", {
+                      when: formatDateTime(c.completed_at, locale),
+                    })
+                  : t("safety.notCompleted")}
               </p>
               {!c.completed_at ? (
                 <Button
@@ -145,7 +154,7 @@ export function DeepSafeClient() {
                   className="mt-2"
                   onClick={() => void complete(c.id)}
                 >
-                  Tôi ổn — hoàn tất
+                  {t("safety.imOk")}
                 </Button>
               ) : null}
             </li>
@@ -154,15 +163,16 @@ export function DeepSafeClient() {
       </Card>
 
       <Card className="text-sm">
-        <p className="font-semibold text-dm-raspberry">Điều phối mẫu (DEMO)</p>
-        <p className="mt-1 text-xs text-dm-muted">
-          Không có nhân viên / xe / hộ tống thật trên staging. Dùng catalog An toàn
-          trong Lifestyle để xem quy trình mô phỏng.
+        <p className="font-semibold text-dm-raspberry">
+          {t("safety.demoCoordTitle")}
         </p>
+        <p className="mt-1 text-xs text-dm-muted">{t("safety.demoCoordBody")}</p>
         <a href="/lifestyle/safety" className="mt-2 inline-block text-sm underline">
-          Xem mẫu DeepSafe catalog →
+          {t("safety.demoCatalogLink")}
         </a>
       </Card>
+
+      <p className="text-xs text-dm-muted">{t("safety.noGuarantee")}</p>
 
       {msg ? <p className="text-xs text-dm-muted">{msg}</p> : null}
     </div>

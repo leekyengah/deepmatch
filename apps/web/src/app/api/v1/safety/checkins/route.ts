@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { jsonError } from "@/lib/api-error";
+import { apiT, jsonError } from "@/lib/api-error";
 
 /** Voluntary check-in window — no continuous GPS (EXT-019). */
 
@@ -9,7 +9,7 @@ export async function GET() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return jsonError("UNAUTHENTICATED", "Sign in required");
+  if (!user) return jsonError("UNAUTHENTICATED");
 
   const { data, error } = await supabase
     .from("safety_checkins")
@@ -19,12 +19,12 @@ export async function GET() {
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
     .limit(20);
-  if (error) return jsonError("INTERNAL", error.message);
+  if (error) return jsonError("INTERNAL");
   return NextResponse.json({
     ok: true,
     free: true,
     disclaimer:
-      "Không phải dịch vụ khẩn cấp. Không theo dõi GPS nền. Check-in tự nguyện.",
+      await apiT("safetyDisclaimer"),
     checkins: data ?? [],
   });
 }
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return jsonError("UNAUTHENTICATED", "Sign in required");
+  if (!user) return jsonError("UNAUTHENTICATED");
 
   let body: {
     minutes?: number;
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return jsonError("VALIDATION_ERROR", "Invalid JSON");
+    return jsonError("VALIDATION_ERROR", "invalidJson");
   }
 
   const minutes = Math.min(Math.max(Number(body.minutes ?? 120) || 120, 15), 720);
@@ -60,13 +60,13 @@ export async function POST(req: NextRequest) {
     })
     .select("id, window_ends_at, share_approx_location, note")
     .single();
-  if (error) return jsonError("INTERNAL", error.message);
+  if (error) return jsonError("INTERNAL");
 
   return NextResponse.json({
     ok: true,
     free: true,
     checkin: data,
-    note: "Cửa sổ check-in đã tạo. Hết hạn tự động — không theo dõi liên tục.",
+    note: await apiT("safetyCheckinNote"),
   });
 }
 
@@ -75,15 +75,15 @@ export async function PATCH(req: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return jsonError("UNAUTHENTICATED", "Sign in required");
+  if (!user) return jsonError("UNAUTHENTICATED");
 
   let body: { id?: string };
   try {
     body = await req.json();
   } catch {
-    return jsonError("VALIDATION_ERROR", "Invalid JSON");
+    return jsonError("VALIDATION_ERROR", "invalidJson");
   }
-  if (!body.id) return jsonError("VALIDATION_ERROR", "id required");
+  if (!body.id) return jsonError("VALIDATION_ERROR", "idRequired");
 
   const { data, error } = await supabase
     .from("safety_checkins")
@@ -92,7 +92,7 @@ export async function PATCH(req: NextRequest) {
     .eq("user_id", user.id)
     .select("id, completed_at")
     .maybeSingle();
-  if (error) return jsonError("INTERNAL", error.message);
-  if (!data) return jsonError("VALIDATION_ERROR", "Not found");
+  if (error) return jsonError("INTERNAL");
+  if (!data) return jsonError("VALIDATION_ERROR", "notFound");
   return NextResponse.json({ ok: true, checkin: data });
 }

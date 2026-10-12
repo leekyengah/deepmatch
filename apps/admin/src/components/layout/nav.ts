@@ -1,20 +1,20 @@
 export type NavItem = {
   href: string;
-  label: string;
+  labelKey: string;
 };
 
 export const adminNav: NavItem[] = [
-  { href: "/", label: "Tổng quan" },
-  { href: "/users", label: "Người dùng" },
-  { href: "/moderation", label: "Kiểm duyệt" },
-  { href: "/matching", label: "Ghép đôi" },
-  { href: "/safety", label: "An toàn chat" },
-  { href: "/services", label: "Dịch vụ" },
-  { href: "/billing", label: "Thanh toán CK" },
-  { href: "/catalog", label: "Catalog DEMO" },
-  { href: "/cms", label: "Nội dung" },
-  { href: "/analytics", label: "KPI" },
-  { href: "/flags", label: "Cấu hình" },
+  { href: "/", labelKey: "admin.overview" },
+  { href: "/users", labelKey: "admin.users" },
+  { href: "/moderation", labelKey: "admin.moderation" },
+  { href: "/matching", labelKey: "admin.matching" },
+  { href: "/safety", labelKey: "admin.safety" },
+  { href: "/services", labelKey: "admin.services" },
+  { href: "/billing", labelKey: "admin.billing" },
+  { href: "/catalog", labelKey: "admin.catalog" },
+  { href: "/cms", labelKey: "admin.cms" },
+  { href: "/analytics", labelKey: "admin.analytics" },
+  { href: "/flags", labelKey: "admin.flags" },
 ];
 
 export function isAdminNavActive(pathname: string, href: string) {
@@ -22,20 +22,20 @@ export function isAdminNavActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export const adminTitles: Record<string, string> = {
-  "/": "Bảng điều hành",
-  "/users": "Người dùng",
-  "/moderation": "Kiểm duyệt",
-  "/matching": "Vận hành ghép đôi",
-  "/safety": "An toàn trò chuyện",
-  "/services": "Dịch vụ & chuyên viên",
-  "/billing": "Thanh toán chuyển khoản",
-  "/catalog": "Catalog DEMO",
-  "/cms": "Quản lý nội dung",
-  "/analytics": "Báo cáo KPI",
-  "/flags": "Cờ tính năng",
+const titleKeys: Record<string, string> = {
+  "/": "admin.dashboard",
+  "/users": "admin.users",
+  "/moderation": "admin.moderation",
+  "/matching": "admin.matchingOps",
+  "/safety": "admin.safetyFull",
+  "/services": "admin.servicesFull",
+  "/billing": "admin.billingFull",
+  "/catalog": "admin.catalog",
+  "/cms": "admin.cmsFull",
+  "/analytics": "admin.analyticsFull",
+  "/flags": "admin.flagsFull",
 };
 
-export function adminPageTitle(pathname: string) {
-  return adminTitles[pathname] ?? "DeepMatch Admin";
+export function adminPageTitleKey(pathname: string) {
+  return titleKeys[pathname] ?? "admin.title";
 }

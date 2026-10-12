@@ -1,0 +1,15 @@
+{
+  "title": "Bắt đầu",
+  "welcome": "Chào mừng đến DeepMatch",
+  "chooseJourney": "Chọn hành trình",
+  "subtitle": "Hoàn thiện vài bước để tìm kết nối có chọn lọc — bạn luôn kiểm soát điều gì được chia sẻ.",
+  "partnerNote": "Hồ sơ hẹn hò không bắt buộc nếu bạn vào Chúng mình bằng lời mời.",
+  "modeLegend": "Chế độ",
+  "modeSolo": "Độc thân / đang tìm hiểu — Tìm nhau",
+  "modePartner": "Đã có người yêu — vào Chúng mình",
+  "fuzzyRegion": "Khu vực tương đối (Tìm nhau)",
+  "fuzzyRegionPlaceholder": "Ví dụ: Hà Nội, TP.HCM",
+  "discoveryOptIn": "Bật khám phá hồ sơ. Có thể tắt sau trong quyền riêng tư. Chỉ hiện khu vực tương đối — không theo dõi GPS nền.",
+  "continue": "Tiếp tục",
+  "finish": "Hoàn tất"
+}

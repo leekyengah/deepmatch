@@ -6,13 +6,13 @@ import { jsonError } from "@/lib/api-error";
 
 export async function GET() {
   if (!(await flagEnabled("ff_ai"))) {
-    return jsonError("RESOURCE_NOT_ACCESSIBLE", "AI is off");
+    return jsonError("RESOURCE_NOT_ACCESSIBLE", "flagAiOff");
   }
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return jsonError("UNAUTHENTICATED", "Sign in required");
+  if (!user) return jsonError("UNAUTHENTICATED");
 
   const { data } = await supabase
     .from("ai_deepmind_answers")
@@ -31,19 +31,19 @@ export async function GET() {
 
 export async function PUT(req: NextRequest) {
   if (!(await flagEnabled("ff_ai"))) {
-    return jsonError("RESOURCE_NOT_ACCESSIBLE", "AI is off");
+    return jsonError("RESOURCE_NOT_ACCESSIBLE", "flagAiOff");
   }
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return jsonError("UNAUTHENTICATED", "Sign in required");
+  if (!user) return jsonError("UNAUTHENTICATED");
 
   let body: { answers?: Record<string, string>; insight_draft?: string | null };
   try {
     body = await req.json();
   } catch {
-    return jsonError("VALIDATION_ERROR", "Invalid JSON");
+    return jsonError("VALIDATION_ERROR", "invalidJson");
   }
 
   const allowed = new Set(DEEPMIND_QUESTIONS.map((q) => q.id));
@@ -65,7 +65,7 @@ export async function PUT(req: NextRequest) {
           : null,
     updated_at: new Date().toISOString(),
   });
-  if (error) return jsonError("INTERNAL", error.message);
+  if (error) return jsonError("INTERNAL");
 
   await supabase.from("ai_consents").upsert({
     user_id: user.id,
@@ -80,13 +80,13 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE() {
   if (!(await flagEnabled("ff_ai"))) {
-    return jsonError("RESOURCE_NOT_ACCESSIBLE", "AI is off");
+    return jsonError("RESOURCE_NOT_ACCESSIBLE", "flagAiOff");
   }
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return jsonError("UNAUTHENTICATED", "Sign in required");
+  if (!user) return jsonError("UNAUTHENTICATED");
 
   await supabase.from("ai_deepmind_answers").delete().eq("user_id", user.id);
   return NextResponse.json({ ok: true });

@@ -11,6 +11,8 @@ export type ApiErrorBody = {
   error: {
     code: ApiErrorCode;
     message: string;
+    /** i18n key (e.g. errors.flagChatOff) for client re-translation */
+    key?: string;
     request_id: string;
   };
 };
@@ -28,8 +30,16 @@ export function apiError(
   code: ApiErrorCode,
   message: string,
   requestId = makeRequestId(),
+  key?: string,
 ): ApiErrorBody {
-  return { error: { code, message, request_id: requestId } };
+  return {
+    error: {
+      code,
+      message,
+      request_id: requestId,
+      ...(key ? { key } : {}),
+    },
+  };
 }
 
 export function httpStatusFor(code: ApiErrorCode): number {

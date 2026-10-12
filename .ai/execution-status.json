@@ -1,15 +1,13 @@
-{
+﻿{
   "project": "DeepMatch",
-  "updatedAt": "2026-10-11T19:45:00+07:00",
-  "state": "G0 GO by Founder (đồng ý hết); await staging Supabase credentials for DM-022+",
-  "gates": {
-    "G0": "GO",
-    "G1": "Pending",
-    "G6": "NO-GO until Founder+Safety"
-  },
-  "blockerIds": ["B1-soft", "B5", "B6"],
-  "nextReady": [
-    "Provide staging Supabase env",
-    "DM-022 Authentication & consent"
-  ]
+  "updatedAt": "2026-10-12T15:20:00+07:00",
+  "state": "Staging+prod web live; mobile App Store MVP scaffolded; TestFlight awaits Apple Developer",
+  "mobile": {
+    "app": "apps/mobile",
+    "bundleId": "com.datingvn.deepmatch",
+    "iapProduct": "premium_monthly",
+    "testFlight": "BLOCKED_FOUNDER",
+    "evidence": "docs/evidence/MOBILE-APPSTORE-MVP-2026-10-12.md",
+    "ops": "docs/ops/APP_STORE.md"
+  }
 }

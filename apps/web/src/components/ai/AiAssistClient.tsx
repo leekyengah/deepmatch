@@ -1,24 +1,37 @@
 "use client";
 
+import { resolveApiErrorMessage } from "@/lib/api-error-message";
+import { useT } from "@/components/i18n/I18nProvider";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 
-const TASKS = [
-  { id: "deepmind", label: "Tự khám phá" },
-  { id: "profile_coach", label: "Profile Coach" },
-  { id: "gift", label: "Quà tặng" },
-  { id: "style", label: "Style" },
-  { id: "beauty", label: "Beauty" },
-  { id: "date_plan", label: "Date plan" },
-  { id: "travel", label: "Travel" },
-  { id: "safety_tips", label: "An toàn" },
+const TASK_IDS = [
+  "deepmind",
+  "profile_coach",
+  "gift",
+  "style",
+  "beauty",
+  "date_plan",
+  "travel",
+  "safety_tips",
 ] as const;
 
 type Suggestion = { title: string; body: string; demo?: boolean };
 
 export function AiAssistClient() {
-  const [task, setTask] = useState<(typeof TASKS)[number]["id"]>("gift");
+  const t = useT();
+  const tasks = [
+    { id: "deepmind" as const, label: t("ai.taskDeepmind") },
+    { id: "profile_coach" as const, label: t("ai.taskProfileCoach") },
+    { id: "gift" as const, label: t("ai.taskGift") },
+    { id: "style" as const, label: t("ai.taskStyle") },
+    { id: "beauty" as const, label: t("ai.taskBeauty") },
+    { id: "date_plan" as const, label: t("ai.taskDatePlan") },
+    { id: "travel" as const, label: t("ai.taskTravel") },
+    { id: "safety_tips" as const, label: t("ai.taskSafety") },
+  ];
+  const [task, setTask] = useState<(typeof TASK_IDS)[number]>("gift");
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,13 +48,13 @@ export function AiAssistClient() {
         body: JSON.stringify({
           task,
           consent,
-          input: { occasion: "buổi hẹn", budget: "vừa phải" },
+          input: { occasion: t("ai.giftOccasion"), budget: t("ai.giftBudget") },
         }),
       });
       const json = await res.json();
       if (!res.ok) {
         setError(
-          json?.error?.message ?? json?.message ?? "Không gọi được AI",
+          resolveApiErrorMessage(json, t, "ai.callFailed"),
         );
         setSuggestions([]);
         return;
@@ -49,7 +62,7 @@ export function AiAssistClient() {
       setDisclaimer(json.disclaimer ?? null);
       setSuggestions(json.suggestions ?? []);
     } catch {
-      setError("Lỗi mạng");
+      setError(t("ai.networkError"));
     } finally {
       setLoading(false);
     }
@@ -58,18 +71,18 @@ export function AiAssistClient() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-2">
-        {TASKS.map((t) => (
+        {tasks.map((item) => (
           <button
-            key={t.id}
+            key={item.id}
             type="button"
-            onClick={() => setTask(t.id)}
+            onClick={() => setTask(item.id)}
             className={
-              task === t.id
+              task === item.id
                 ? "rounded-dm bg-dm-primary px-3 py-2 text-xs font-semibold text-white"
                 : "rounded-dm bg-dm-surface px-3 py-2 text-xs font-semibold text-dm-raspberry"
             }
           >
-            {t.label}
+            {item.label}
           </button>
         ))}
       </div>
@@ -80,11 +93,10 @@ export function AiAssistClient() {
           onChange={(e) => setConsent(e.target.checked)}
           className="mt-1"
         />
-        Tôi đồng ý dùng AI cho mục đích đã chọn (có thể thu hồi sau). Không dùng
-        nhật ký riêng / chat thô mặc định.
+        {t("ai.consentText")}
       </label>
       <Button type="button" disabled={!consent || loading} onClick={run}>
-        {loading ? "Đang tạo…" : "Nhận gợi ý"}
+        {loading ? t("ai.creating") : t("ai.getSuggestions")}
       </Button>
       {error ? (
         <p className="text-sm text-dm-danger" role="alert">

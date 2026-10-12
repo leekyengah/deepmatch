@@ -22,3 +22,12 @@ test-results
 tools/
 .vercel
 
+
+.ai/rls-test.env.ps1
+.ai/*.env*
+.ai/*password*
+.ai/prod*
+
+
+.ai/e2e.env.ps1
+

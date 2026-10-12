@@ -3,8 +3,10 @@
 import { redirect } from "next/navigation";
 import { isAgeEligible } from "@deepmatch/shared";
 import { createClient } from "@/lib/supabase/server";
+import { getServerTranslator } from "@/lib/i18n/server";
 
 export async function signupAction(formData: FormData) {
+  const { t } = await getServerTranslator();
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
   const displayName = String(formData.get("display_name") ?? "").trim();
@@ -13,13 +15,13 @@ export async function signupAction(formData: FormData) {
   const tos = formData.get("tos");
 
   if (!ageConfirm || !tos) {
-    redirect(`/signup?error=${encodeURIComponent("Cần xác nhận tuổi và điều khoản")}`);
+    redirect(`/signup?error=${encodeURIComponent(t("auth.needAgeTos"))}`);
   }
   if (!isAgeEligible(birthDate, Number(process.env.MIN_AGE ?? 18))) {
-    redirect(`/signup?error=${encodeURIComponent("Chỉ dành cho người từ 18 tuổi")}`);
+    redirect(`/signup?error=${encodeURIComponent(t("auth.ageGate"))}`);
   }
   if (password.length < 8) {
-    redirect(`/signup?error=${encodeURIComponent("Mật khẩu tối thiểu 8 ký tự")}`);
+    redirect(`/signup?error=${encodeURIComponent(t("auth.passwordMinError"))}`);
   }
 
   const supabase = await createClient();

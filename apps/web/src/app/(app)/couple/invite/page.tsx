@@ -1,0 +1,127 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useT } from "@/components/i18n/I18nProvider";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { Input } from "@/components/ui/Input";
+
+export default function CoupleInvitePage() {
+  const t = useT();
+  const router = useRouter();
+  const [code, setCode] = useState<string | null>(null);
+  const [acceptCode, setAcceptCode] = useState("");
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  async function createInvite() {
+    setBusy(true);
+    setMessage("");
+    try {
+      const res = await fetch("/api/v1/couple-invitations", { method: "POST" });
+      const json = (await res.json()) as {
+        error?: string | { message?: string };
+        code?: string;
+        expires_at?: string;
+      };
+      if (!res.ok) {
+        setMessage(
+          typeof json.error === "string"
+            ? json.error
+            : (json.error?.message ?? t("couple.createFailed")),
+        );
+        return;
+      }
+      setCode(json.code ?? null);
+      setMessage(
+        json.expires_at
+          ? t("couple.codeExpires", { when: json.expires_at })
+          : t("couple.createdCode"),
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function acceptInvite() {
+    setBusy(true);
+    setMessage("");
+    try {
+      const res = await fetch("/api/v1/couple-invitations/accept", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: acceptCode }),
+      });
+      const json = (await res.json()) as {
+        error?: string | { message?: string };
+        pairId?: string;
+      };
+      if (!res.ok) {
+        setMessage(
+          typeof json.error === "string"
+            ? json.error
+            : (json.error?.message ?? t("couple.acceptFailed")),
+        );
+        return;
+      }
+      setMessage(t("couple.acceptedSpace"));
+      router.push("/couple/map");
+      router.refresh();
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="max-w-lg">
+      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
+        {t("couple.title")}
+      </p>
+      <h1 className="mt-2 font-display text-4xl font-medium text-dm-raspberry">
+        {t("couple.inviteHeading")}
+      </h1>
+      <p className="mt-2 text-sm text-dm-muted">{t("couple.inviteIntro")}</p>
+
+      <Card className="mt-6 space-y-3">
+        <h2 className="text-lg font-semibold text-dm-raspberry">
+          {t("couple.createInvite")}
+        </h2>
+        <Button type="button" onClick={createInvite} disabled={busy}>
+          {t("couple.createCode")}
+        </Button>
+        {code ? (
+          <p className="break-all rounded-dm bg-dm-surface p-3 text-sm">
+            {t("couple.codeOnce")} <strong>{code}</strong>
+          </p>
+        ) : null}
+      </Card>
+
+      <Card className="mt-4 space-y-3">
+        <h2 className="text-lg font-semibold text-dm-raspberry">
+          {t("couple.acceptInvite")}
+        </h2>
+        <Input
+          value={acceptCode}
+          onChange={(e) => setAcceptCode(e.target.value)}
+          placeholder={t("couple.acceptCodeLabel")}
+          aria-label={t("couple.acceptCodeLabel")}
+        />
+        <Button
+          type="button"
+          variant="outline"
+          onClick={acceptInvite}
+          disabled={busy || !acceptCode.trim()}
+        >
+          {t("couple.acceptInvite")}
+        </Button>
+      </Card>
+
+      {message ? (
+        <p className="mt-4 text-sm text-dm-muted" role="status">
+          {message}
+        </p>
+      ) : null}
+    </div>
+  );
+}

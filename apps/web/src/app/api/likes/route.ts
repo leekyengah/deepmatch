@@ -1,14 +1,19 @@
 import { NextResponse } from "next/server";
 import { isMutual, mutualCreatesPairSpace } from "@deepmatch/shared";
-import { createClient } from "@/lib/supabase/server";
+import { getRouteUser } from "@/lib/supabase/route";
+import { takeToken } from "@/lib/rate-limit";
+import { jsonError, makeRequestId } from "@/lib/api-error";
 
 export async function POST(req: Request) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const requestId = makeRequestId();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) {
-    return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
+    return jsonError("UNAUTHENTICATED", null, requestId);
+  }
+
+  const rl = takeToken(`likes:${user.id}`, 60, 60_000);
+  if (!rl.ok) {
+    return jsonError("RATE_LIMITED", null, requestId);
   }
 
   const body = (await req.json()) as {
@@ -16,10 +21,10 @@ export async function POST(req: Request) {
     action?: "like" | "pass";
   };
   if (!body.targetId || !body.action) {
-    return NextResponse.json({ error: "invalid_body" }, { status: 400 });
+    return jsonError("VALIDATION_ERROR", "invalidJson", requestId);
   }
   if (body.targetId === user.id) {
-    return NextResponse.json({ error: "self" }, { status: 400 });
+    return jsonError("VALIDATION_ERROR", null, requestId);
   }
 
   const { error } = await supabase.from("likes").upsert(
@@ -31,7 +36,7 @@ export async function POST(req: Request) {
     { onConflict: "actor_id,target_id" },
   );
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return jsonError("VALIDATION_ERROR", null, requestId);
   }
 
   let mutual = false;
@@ -63,6 +68,11 @@ export async function POST(req: Request) {
           { mutual_match_id: matchId },
           { onConflict: "mutual_match_id" },
         );
+        await supabase.rpc("enqueue_outbox", {
+          p_event_id: `match.mutual:${matchId}`,
+          p_event_type: "match.mutual",
+          p_payload: { match_id: matchId, user_a: a, user_b: b },
+        });
       }
     }
   }

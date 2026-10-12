@@ -11,29 +11,28 @@
 | Dashboard | https://supabase.com/dashboard/project/zzqpvjdyvjarpphqhaze |
 | Migrations | Pushed |
 
-## Vercel (web)
+## Auth URL configuration (pushed via `supabase config push`)
 
-| Field | Value |
-|---|---|
-| Team | `tradingbase` |
-| Project | `deepmatch` |
-| Production URL | https://deepmatch-eight.vercel.app |
-| Inspect | https://vercel.com/tradingbase/deepmatch |
-| Note | Deployment Protection may require Vercel login to view |
+- Site URL: `https://datingvn.com`
+- Redirect allowlist includes:
+  - `https://datingvn.com/**`
+  - `https://datingvn.com/auth/callback`
+  - `https://www.datingvn.com/**`
+  - `https://deepmatch-eight.vercel.app/**`
+  - `https://deepmatch-admin.vercel.app/**`
+  - `http://localhost:3000/**`
+  - `http://127.0.0.1:3000/**`
+- Email confirmations: ON · MFA TOTP enroll: ON
 
-### Auth redirect (do in Supabase Dashboard → Authentication → URL configuration)
+## Vercel
 
-Add:
+| App | Project | URL |
+|---|---|---|
+| Web | `deepmatch` | https://datingvn.com |
+| Admin | `deepmatch-admin` | https://deepmatch-admin.vercel.app |
 
-- `https://deepmatch-eight.vercel.app/**`
-- `http://localhost:3000/**`
-
-Site URL: `https://deepmatch-eight.vercel.app`
-
-## Admin
-
-Create/link `deepmatch-admin` with root deploy config for `apps/admin` (pending second project).
+Deploy web from repo root (`vercel.json` = web). Admin: swap `vercel.admin.json` → `vercel.json`, link `deepmatch-admin`, deploy, restore.
 
 ## Production GO
 
-Still **NO-GO** for public launch until G5/G6 Founder + Safety signoff. Current URL is staging under tradingbase.
+Still **NO-GO** for public launch until G5/G6/G7 Founder + Safety signoff.

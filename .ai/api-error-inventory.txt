@@ -1,0 +1,293 @@
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/ai/assist/route.ts
+  RESOURCE_NOT_ACCESSIBLE | AI assist is off
+  UNAUTHENTICATED | Sign in required
+  VALIDATION_ERROR | Invalid JSON
+  VALIDATION_ERROR | Unknown AI task
+  FORBIDDEN | Explicit consent required for this AI purpose
+  FORBIDDEN | Explicit consent required for this AI purpose
+  L57: `Đã hết hạn mức AI trong ngày (${quota}). Thử lại ngày mai hoặc dùng stub.`,
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/ai/deepmind/route.ts
+  RESOURCE_NOT_ACCESSIBLE | AI is off
+  UNAUTHENTICATED | Sign in required
+  RESOURCE_NOT_ACCESSIBLE | AI is off
+  UNAUTHENTICATED | Sign in required
+  VALIDATION_ERROR | Invalid JSON
+  RESOURCE_NOT_ACCESSIBLE | AI is off
+  UNAUTHENTICATED | Sign in required
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/blocks/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  VALIDATION_ERROR | Đối tượng chặn không hợp lệ.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  L8: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L12: return jsonError("VALIDATION_ERROR", "Đối tượng chặn không hợp lệ.", requestId);
+  L30: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/catalog/bookings/route.ts
+  RESOURCE_NOT_ACCESSIBLE | Lifestyle off
+  UNAUTHENTICATED | Sign in required
+  RESOURCE_NOT_ACCESSIBLE | Lifestyle off
+  UNAUTHENTICATED | Sign in required
+  VALIDATION_ERROR | Invalid JSON
+  VALIDATION_ERROR | product_id required
+  VALIDATION_ERROR | Product not found
+  FORBIDDEN | Only SANDBOX_ONLY products for demo booking
+  RESOURCE_NOT_ACCESSIBLE | Lifestyle off
+  UNAUTHENTICATED | Sign in required
+  VALIDATION_ERROR | Invalid JSON
+  VALIDATION_ERROR | id and action required
+  VALIDATION_ERROR | Invalid action
+  VALIDATION_ERROR | Booking not found
+  L31: banner: "BẢN MẪU / KHÔNG CÓ ĐẶT CHỖ HOẶC THANH TOÁN THẬT",
+  L90: receipt: `DEMO_RESERVED · ${product.title} · không phải xác nhận thật`,
+  L112: receipt: `DEMO_RESERVED · ${product.title} · ${product.price_vnd.toLocaleString("vi-VN")}₫ · KHÔNG THANH TOÁN THẬT`,
+  L160: ? "Xác nhận DEMO — không phải đặt chỗ nhà cung cấp thật"
+  L161: : "Đã hủy lệnh DEMO",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/catalog/cart/checkout/route.ts
+  RESOURCE_NOT_ACCESSIBLE | Lifestyle off
+  UNAUTHENTICATED | Sign in required
+  VALIDATION_ERROR | Invalid JSON
+  VALIDATION_ERROR | Cart empty
+  VALIDATION_ERROR | Too many lines
+  FORBIDDEN | Only SANDBOX_ONLY products
+  L82: "DEMO_CHECKOUT_OK — không có thanh toán thật / không phải hóa đơn thương mại",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/catalog/categories/route.ts
+  RESOURCE_NOT_ACCESSIBLE | Lifestyle catalog is off
+  L19: banner: "BẢN MẪU / KHÔNG CÓ ĐẶT CHỖ HOẶC THANH TOÁN THẬT",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/catalog/products/route.ts
+  RESOURCE_NOT_ACCESSIBLE | Lifestyle catalog is off
+  L36: banner: "BẢN MẪU / KHÔNG CÓ ĐẶT CHỖ HOẶC THANH TOÁN THẬT",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/chat/read/route.ts
+  FORBIDDEN | Chat đang tắt.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  VALIDATION_ERROR | Thiếu conversation_id.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  L9: return jsonError("FORBIDDEN", "Chat đang tắt.", requestId);
+  L13: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L17: return jsonError("VALIDATION_ERROR", "Thiếu conversation_id.", requestId);
+  L36: "Không thể truy cập tài nguyên.",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/couples/[id]/disconnect/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  CONFLICT | Không gian cặp đôi không còn active.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  L15: return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L27: "Không thể truy cập tài nguyên.",
+  L34: "Không thể truy cập tài nguyên.",
+  L39: return jsonError("CONFLICT", "Không gian cặp đôi không còn active.", requestId);
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/couples/[id]/export/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  L15: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L26: "Không thể truy cập tài nguyên.",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/couples/[id]/journals/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  VALIDATION_ERROR | Thiếu pin_id hoặc nội dung.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  L30: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L34: "Không thể truy cập tài nguyên.",
+  L71: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L75: "Không thể truy cập tài nguyên.",
+  L86: return jsonError("VALIDATION_ERROR", "Thiếu pin_id hoặc nội dung.", requestId);
+  L98: "Không thể truy cập tài nguyên.",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/couples/[id]/pins/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  VALIDATION_ERROR | Thiếu title hoặc layer.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  VALIDATION_ERROR | Thiếu pin_id.
+  VALIDATION_ERROR | Không có trường cập nhật.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  VALIDATION_ERROR | Thiếu pin_id.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  L29: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L33: "Không thể truy cập tài nguyên.",
+  L57: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L61: "Không thể truy cập tài nguyên.",
+  L74: return jsonError("VALIDATION_ERROR", "Thiếu title hoặc layer.", requestId);
+  L104: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L108: "Không thể truy cập tài nguyên.",
+  L121: return jsonError("VALIDATION_ERROR", "Thiếu pin_id.", requestId);
+  L131: return jsonError("VALIDATION_ERROR", "Không có trường cập nhật.", requestId);
+  L153: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L157: "Không thể truy cập tài nguyên.",
+  L164: return jsonError("VALIDATION_ERROR", "Thiếu pin_id.", requestId);
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/discovery/candidates/route.ts
+  FORBIDDEN | Discovery đang tắt.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  FORBIDDEN | Chưa bật discovery.
+  L13: return jsonError("FORBIDDEN", "Discovery đang tắt.", requestId);
+  L17: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L49: return jsonError("FORBIDDEN", "Chưa bật discovery.", requestId);
+  L123: displayName: p?.displayName ?? "Thành viên",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/geocode/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  VALIDATION_ERROR | Thiếu từ khóa địa điểm.
+  VALIDATION_ERROR | Geocode upstream lỗi.
+  L12: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L16: return jsonError("VALIDATION_ERROR", "Thiếu từ khóa địa điểm.", requestId);
+  L28: return jsonError("VALIDATION_ERROR", "Geocode upstream lỗi.", requestId);
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/matches/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  L8: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L70: peer_name: nameMap.get(peerId) ?? "Đối phương",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/me/consents/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  VALIDATION_ERROR | Thiếu consent_key hoặc version.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  L11: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L19: return jsonError("VALIDATION_ERROR", "Thiếu consent_key hoặc version.", requestId);
+  L46: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/me/delete/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  INTERNAL | Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY.
+  INTERNAL | Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY.
+  L12: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L18: 'Gửi { "confirm": "DELETE" } để xác nhận xóa tài khoản.',
+  L29: "Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY.",
+  L38: display_name: "Đã xóa",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/me/home-state/route.ts
+  UNAUTHENTICATED | Sign in required
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/me/profile/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  RESOURCE_NOT_ACCESSIBLE | Không tìm thấy hồ sơ.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  L8: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L18: return jsonError("RESOURCE_NOT_ACCESSIBLE", "Không tìm thấy hồ sơ.", requestId);
+  L36: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/media/export/route.ts
+  FORBIDDEN | Media đang tắt.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  L10: return jsonError("FORBIDDEN", "Media đang tắt.", requestId);
+  L17: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L48: "URL ký ngắn hạn 5 phút. Sau unpair, truy cập pair media bị thu hồi theo RLS.",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/media/upload-intents/route.ts
+  FORBIDDEN | Tải media đang tắt.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  VALIDATION_ERROR | Loại file không được hỗ trợ.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  L20: return jsonError("FORBIDDEN", "Tải media đang tắt.", requestId);
+  L27: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L37: return jsonError("VALIDATION_ERROR", "Loại file không được hỗ trợ.", requestId);
+  L45: ? "Video vượt hạn mức 50MB hoặc kích thước không hợp lệ."
+  L46: : "Kích thước ảnh không hợp lệ (tối đa 8MB).",
+  L61: "Không thể truy cập tài nguyên.",
+  L96: note: "Signed upload unavailable — tạo bucket private `media` trên Supabase Storage.",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/payments/apple/verify/route.ts
+  FORBIDDEN | Thanh toán đang tắt (ff_billing).
+  UNAUTHENTICATED | Chưa đăng nhập.
+  VALIDATION_ERROR | Thiếu signedTransaction (StoreKit 2 JWS).
+  VALIDATION_ERROR | JWS không hợp lệ.
+  INTERNAL | Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY.
+  VALIDATION_ERROR | Thiếu signedTransaction (StoreKit 2 JWS).
+  INTERNAL | Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY.
+  L20: return jsonError("FORBIDDEN", "Thanh toán đang tắt (ff_billing).", requestId);
+  L24: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L34: "Thiếu signedTransaction (StoreKit 2 JWS).",
+  L41: return jsonError("VALIDATION_ERROR", "JWS không hợp lệ.", requestId);
+  L62: "Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY.",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/payments/bank-transfer/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  FORBIDDEN | Thanh toán đang tắt (ff_billing).
+  FORBIDDEN | Gói Premium đang tắt.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  L13: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L45: return jsonError("FORBIDDEN", "Thanh toán đang tắt (ff_billing).", requestId);
+  L48: return jsonError("FORBIDDEN", "Gói Premium đang tắt.", requestId);
+  L55: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/payments/checkout/route.ts
+  FORBIDDEN | Thanh toán đang tắt (ff_billing).
+  VALIDATION_ERROR | Chưa cấu hình STRIPE_SECRET_KEY / STRIPE_PRICE_ID_PREMIUM trên production.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  VALIDATION_ERROR | Chưa cấu hình STRIPE_SECRET_KEY / STRIPE_PRICE_ID_PREMIUM trên production.
+  L13: return jsonError("FORBIDDEN", "Thanh toán đang tắt (ff_billing).", requestId);
+  L25: "Chưa cấu hình STRIPE_SECRET_KEY / STRIPE_PRICE_ID_PREMIUM trên production.",
+  L34: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L65: session.error?.message ?? "Stripe checkout thất bại.",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/reports/route.ts
+  UNAUTHENTICATED | Chưa đăng nhập.
+  VALIDATION_ERROR | Thiếu lý do báo cáo.
+  L9: return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L19: return jsonError("VALIDATION_ERROR", "Thiếu lý do báo cáo.", requestId);
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/safety/checkins/route.ts
+  UNAUTHENTICATED | Sign in required
+  UNAUTHENTICATED | Sign in required
+  VALIDATION_ERROR | Invalid JSON
+  UNAUTHENTICATED | Sign in required
+  VALIDATION_ERROR | Invalid JSON
+  VALIDATION_ERROR | id required
+  VALIDATION_ERROR | Not found
+  L27: "Không phải dịch vụ khẩn cấp. Không theo dõi GPS nền. Check-in tự nguyện.",
+  L69: note: "Cửa sổ check-in đã tạo. Hết hạn tự động — không theo dõi liên tục.",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/safety/contacts/route.ts
+  UNAUTHENTICATED | Sign in required
+  UNAUTHENTICATED | Sign in required
+  VALIDATION_ERROR | Invalid JSON
+  VALIDATION_ERROR | display_name and contact_value required
+  UNAUTHENTICATED | Sign in required
+  VALIDATION_ERROR | id required
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/services/bookings/route.ts
+  FORBIDDEN | Đồng hành đang tắt.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  FORBIDDEN | Đồng hành đang tắt.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  VALIDATION_ERROR | Thiếu offering_id.
+  VALIDATION_ERROR | Dịch vụ không khả dụng.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  RESOURCE_NOT_ACCESSIBLE | Không thể truy cập tài nguyên.
+  L9: return jsonError("FORBIDDEN", "Đồng hành đang tắt.", requestId);
+  L16: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L53: return jsonError("FORBIDDEN", "Đồng hành đang tắt.", requestId);
+  L60: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);
+  L69: return jsonError("VALIDATION_ERROR", "Thiếu offering_id.", requestId);
+  L79: return jsonError("VALIDATION_ERROR", "Dịch vụ không khả dụng.", requestId);
+  L92: "Không thể truy cập tài nguyên.",
+
+=== D:/DỰ ÁN CÔNG NGHỆ/DEEPMATCH/apps/web/src/app/api/v1/services/offerings/route.ts
+  FORBIDDEN | Đồng hành đang tắt.
+  UNAUTHENTICATED | Chưa đăng nhập.
+  L9: return jsonError("FORBIDDEN", "Đồng hành đang tắt.", requestId);
+  L16: if (!user) return jsonError("UNAUTHENTICATED", "Chưa đăng nhập.", requestId);

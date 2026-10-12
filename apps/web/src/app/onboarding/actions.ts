@@ -14,8 +14,18 @@ export async function saveModeAction(formData: FormData) {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  await supabase.from("profiles").update({ mode }).eq("id", user.id);
+  const fuzzy_region = String(formData.get("fuzzy_region") ?? "").trim();
+  const discovery_opt_in = formData.get("discovery_opt_in") === "on";
 
-  if (mode === "has_partner") redirect("/couple");
+  const patch: Record<string, unknown> = { mode };
+  if (mode === "solo") {
+    patch.discovery_opt_in = discovery_opt_in;
+    if (fuzzy_region) patch.fuzzy_region = fuzzy_region;
+  }
+
+  await supabase.from("profiles").update(patch).eq("id", user.id);
+
+  if (mode === "has_partner") redirect("/couple/invite");
+  if (discovery_opt_in) redirect("/discover");
   redirect("/me");
 }

@@ -1,11 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { flagEnabled } from "@/lib/flags";
-import { jsonError } from "@/lib/api-error";
+import { apiT, jsonError } from "@/lib/api-error";
 
 export async function GET(req: NextRequest) {
   if (!(await flagEnabled("ff_lifestyle"))) {
-    return jsonError("RESOURCE_NOT_ACCESSIBLE", "Lifestyle catalog is off");
+    return jsonError("RESOURCE_NOT_ACCESSIBLE", "flagLifestyleOff");
   }
   const sp = req.nextUrl.searchParams;
   const category = sp.get("category");
@@ -28,12 +28,12 @@ export async function GET(req: NextRequest) {
   if (q) query = query.ilike("title", `%${q}%`);
 
   const { data, error, count } = await query;
-  if (error) return jsonError("INTERNAL", error.message);
+  if (error) return jsonError("INTERNAL");
 
   return NextResponse.json({
     ok: true,
     demo: true,
-    banner: "BẢN MẪU / KHÔNG CÓ ĐẶT CHỖ HOẶC THANH TOÁN THẬT",
+    banner: await apiT("demoBanner"),
     total: count ?? 0,
     offset,
     limit,

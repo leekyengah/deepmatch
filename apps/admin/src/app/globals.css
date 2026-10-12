@@ -7,13 +7,36 @@
   --dm-blush: #f6c1d2;
   --dm-canvas: #fff8fa;
   --dm-deep: #822d4c;
-  --background: #f7f2f4;
-  --foreground: #822d4c;
+  --dm-raspberry: #822d4c;
+  --dm-ink: #382735;
+  --dm-muted: #927a8a;
+  --dm-line: #f0dfe7;
+  --dm-panel: #ffffff;
+  --dm-surface: #fff2f6;
+  --dm-good: #18806b;
+  --dm-danger: #a63e52;
+  --dm-radius-sm: 9px;
+  --dm-radius-md: 12px;
+  --dm-radius-lg: 20px;
+  --dm-radius-xl: 26px;
+  --dm-shadow: 0 14px 46px rgba(91, 38, 62, 0.07);
+  --background: var(--dm-canvas);
+  --foreground: var(--dm-ink);
 }
 
 body {
   color: var(--foreground);
   background: linear-gradient(180deg, #fff8fa, #f3e6eb 40%, #f7f2f4);
   min-height: 100vh;
-  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  font-family: var(--font-body), "Be Vietnam Pro", system-ui, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--dm-primary);
+  outline-offset: 2px;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useT } from "@/components/i18n/I18nProvider";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
@@ -11,6 +12,7 @@ export function DemoBookingActions({
   id: string;
   status: string;
 }) {
+  const t = useT();
   const router = useRouter();
   const [busy, setBusy] = useState(false);
 
@@ -29,7 +31,7 @@ export function DemoBookingActions({
   }
 
   if (status === "CANCELLED") {
-    return <p className="mt-2 text-xs text-dm-muted">Đã hủy</p>;
+    return <p className="mt-2 text-xs text-dm-muted">{t("commerce.demoCancelled")}</p>;
   }
 
   return (
@@ -41,7 +43,7 @@ export function DemoBookingActions({
           disabled={busy}
           onClick={() => void act("confirm")}
         >
-          Xác nhận DEMO
+          {t("commerce.demoConfirm")}
         </Button>
       ) : null}
       <Button
@@ -51,7 +53,7 @@ export function DemoBookingActions({
         disabled={busy}
         onClick={() => void act("cancel")}
       >
-        Hủy
+        {t("common.cancel")}
       </Button>
     </div>
   );

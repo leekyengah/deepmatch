@@ -1,5 +1,7 @@
 /** AI Gateway types + stub adapter (EXT-006). No clinical claims; no auto-send. */
 
+import { DEFAULT_LOCALE, resolveLocale, t, type Locale } from "@deepmatch/i18n";
+
 export type AiTask =
   | "profile_coach"
   | "match_hints"
@@ -30,8 +32,12 @@ export type AiAssistResponse = {
   fallbackFrom?: AiAdapterName;
 };
 
-export const AI_DISCLAIMER =
-  "Gợi ý mang tính tham khảo. Không phải chẩn đoán y khoa/tâm lý. Không tự gửi tin nhắn. Mục catalog gắn DEMO không phải giao dịch thật.";
+export function getAiDisclaimer(locale: Locale = DEFAULT_LOCALE): string {
+  return t(locale, "ai.disclaimer");
+}
+
+/** @deprecated Prefer getAiDisclaimer(locale). Kept for backward-compatible imports. */
+export const AI_DISCLAIMER = getAiDisclaimer("vi-VN");
 
 /** DECISION-AI-01 C: stub default; openai only when AI_ADAPTER=openai (+ key). */
 export function resolveAiAdapter(
@@ -59,81 +65,120 @@ export function redactedInput(
   return out;
 }
 
+function localeFromInput(input: Record<string, unknown>): Locale {
+  return resolveLocale(
+    typeof input.locale === "string" ? input.locale : DEFAULT_LOCALE,
+  );
+}
+
 export function stubAssist(
   task: AiTask,
   input: Record<string, unknown> = {},
 ): AiAssistResponse {
-  const occasion = String(input.occasion ?? "buổi hẹn");
-  const budget = String(input.budget ?? "vừa phải");
+  const locale = localeFromInput(input);
+  const occasion = String(
+    input.occasion ?? (locale === "en-US" ? "a date" : "buổi hẹn"),
+  );
+  const budget = String(
+    input.budget ?? (locale === "en-US" ? "moderate" : "vừa phải"),
+  );
 
   const templates: Record<AiTask, AiSuggestion[]> = {
     profile_coach: [
       {
-        title: "Bản nháp bio",
-        body: "Mình thích trò chuyện sâu, cà phê chậm và khám phá góc phố yên. Đang tìm người cùng tôn trọng ranh giới và lịch trình.",
+        title: t(locale, "ai.stubProfileDraft"),
+        body: t(locale, "ai.stubProfileBody"),
       },
       {
-        title: "Lưu ý",
-        body: "Chỉ lưu khi bạn bấm duyệt — AI không tự đăng hồ sơ.",
+        title: t(locale, "ai.stubProfileNoteTitle"),
+        body: t(locale, "ai.stubProfileNoteBody"),
       },
     ],
     match_hints: [
       {
-        title: "Điểm chung có thể hỏi",
-        body: "Hỏi về sở thích đã hiển thị công khai (ví dụ ẩm thực / dạo phố), tránh đoán cảm xúc riêng tư.",
+        title: t(locale, "ai.stubMatchHintsTitle"),
+        body: t(locale, "ai.stubMatchHintsBody"),
       },
     ],
     style: [
       {
-        title: `Phong cách cho ${occasion}`,
-        body: `Ưu tiên lớp trung tính, ngân sách ${budget}. Xem mục Thời trang DEMO trong Lifestyle.`,
+        title:
+          locale === "en-US"
+            ? `Style ideas for ${occasion}`
+            : `Phong cách cho ${occasion}`,
+        body:
+          locale === "en-US"
+            ? `Prefer neutral layers, budget ${budget}. See Fashion DEMO in Lifestyle.`
+            : `Ưu tiên lớp trung tính, ngân sách ${budget}. Xem mục Thời trang DEMO trong Lifestyle.`,
         demo: true,
       },
     ],
     beauty: [
       {
-        title: "Look nhẹ cho buổi hẹn",
-        body: "Ưu tiên lớp nền mỏng + son tự nhiên. Đây không phải tư vấn y khoa; làm patch-test nếu da nhạy.",
+        title:
+          locale === "en-US" ? "Light look for a date" : "Look nhẹ cho buổi hẹn",
+        body:
+          locale === "en-US"
+            ? "Prefer a sheer base and natural lip color. Not medical advice; patch-test if sensitive."
+            : "Ưu tiên lớp nền mỏng + son tự nhiên. Đây không phải tư vấn y khoa; làm patch-test nếu da nhạy.",
         demo: true,
       },
     ],
     gift: [
       {
-        title: "Gợi ý quà DEMO",
-        body: `Dịp ${occasion}, ngân sách ${budget}: xem Hoa theo dịp / Hộp trà và bánh (SANDBOX_ONLY).`,
+        title: locale === "en-US" ? "DEMO gift ideas" : "Gợi ý quà DEMO",
+        body:
+          locale === "en-US"
+            ? `For ${occasion}, budget ${budget}: see Seasonal flowers / Tea & treats (SANDBOX_ONLY).`
+            : `Dịp ${occasion}, ngân sách ${budget}: xem Hoa theo dịp / Hộp trà và bánh (SANDBOX_ONLY).`,
         demo: true,
       },
     ],
     date_plan: [
       {
-        title: "Kế hoạch mẫu",
-        body: "Café yên tĩnh → dạo ngắn → trà chiều. Giờ/giá/chỗ trống là DEMO — chưa đặt chỗ thật.",
+        title: t(locale, "ai.stubDatePlanTitle"),
+        body: t(locale, "ai.stubDatePlanBody"),
         demo: true,
       },
     ],
     travel: [
       {
-        title: "Ý tưởng chuyến đi",
-        body: "Staycation 1 đêm hoặc City walk cuối tuần (DEMO). Không có vé/phòng thật.",
+        title: locale === "en-US" ? "Trip ideas" : "Ý tưởng chuyến đi",
+        body:
+          locale === "en-US"
+            ? "A one-night staycation or weekend city walk (DEMO). No real tickets or rooms."
+            : "Staycation 1 đêm hoặc City walk cuối tuần (DEMO). Không có vé/phòng thật.",
         demo: true,
       },
     ],
     story: [
       {
-        title: "Nháp kỷ niệm",
-        body: "Chỉ dùng khoảnh khắc bạn chọn và đã đồng ý hai phía. Không đọc nhật ký riêng mặc định.",
+        title: locale === "en-US" ? "Memory draft" : "Nháp kỷ niệm",
+        body:
+          locale === "en-US"
+            ? "Use only moments you choose and both agreed to share. Private journals are not read by default."
+            : "Chỉ dùng khoảnh khắc bạn chọn và đã đồng ý hai phía. Không đọc nhật ký riêng mặc định.",
       },
     ],
     safety_tips: [
       {
-        title: "An toàn cơ bản (miễn phí)",
-        body: "Chia sẻ lịch trình với người tin cậy, hẹn nơi công cộng, check-in theo cửa sổ thời gian. Không phải dịch vụ khẩn cấp / điều phối thật.",
+        title:
+          locale === "en-US"
+            ? "Basic safety (free)"
+            : "An toàn cơ bản (miễn phí)",
+        body:
+          locale === "en-US"
+            ? "Share plans with someone you trust, meet in public, use timed check-ins. Not emergency dispatch."
+            : "Chia sẻ lịch trình với người tin cậy, hẹn nơi công cộng, check-in theo cửa sổ thời gian. Không phải dịch vụ khẩn cấp / điều phối thật.",
       },
     ],
     deepmind: [
       {
-        title: "Tự phản ánh",
-        body: "Bạn đang tìm sự đồng điệu về giá trị nào nhất tuần này? Câu trả lời chỉ bạn chỉnh sửa/xóa được — không phải nhãn tính cách lâm sàng.",
+        title: t(locale, "ai.selfReflection"),
+        body:
+          locale === "en-US"
+            ? "Which value matters most to you this week? Only you can edit or delete the answer — this is not a clinical personality label."
+            : "Bạn đang tìm sự đồng điệu về giá trị nào nhất tuần này? Câu trả lời chỉ bạn chỉnh sửa/xóa được — không phải nhãn tính cách lâm sàng.",
       },
     ],
   };
@@ -141,7 +186,7 @@ export function stubAssist(
   return {
     adapter: "stub",
     task,
-    disclaimer: AI_DISCLAIMER,
+    disclaimer: getAiDisclaimer(locale),
     suggestions: templates[task],
     catalogHints:
       task === "gift" ||
@@ -166,13 +211,18 @@ export function catalogHintsFor(task: AiTask): string[] | undefined {
   return undefined;
 }
 
-export function systemPromptFor(task: AiTask): string {
+export function systemPromptFor(
+  task: AiTask,
+  locale: Locale = DEFAULT_LOCALE,
+): string {
+  const lang = locale === "en-US" ? "English" : "Vietnamese";
   return [
-    "You are DeepMatch AI assist. Reply in Vietnamese.",
-    "Return ONLY valid JSON: {\"suggestions\":[{\"title\":\"...\",\"body\":\"...\",\"demo\":true|false}]}",
+    `You are DeepMatch AI assist. Reply in ${lang}.`,
+    'Return ONLY valid JSON: {"suggestions":[{"title":"...","body":"...","demo":true|false}]}',
     "2-4 suggestions. No medical/mental diagnosis. No auto-send chat. No invented real bookings/prices as live.",
+    "Do not claim mind-reading, guaranteed compatibility, or create purchase urgency.",
     "Mark demo:true when referring to catalog sandbox items.",
     `Task: ${task}`,
-    AI_DISCLAIMER,
+    getAiDisclaimer(locale),
   ].join("\n");
 }

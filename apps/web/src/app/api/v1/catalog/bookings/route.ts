@@ -1,19 +1,19 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { flagEnabled } from "@/lib/flags";
-import { jsonError } from "@/lib/api-error";
+import { apiT, jsonError } from "@/lib/api-error";
 
 /** EXT-016 — DEMO booking lifecycle only (no real provider / payment). */
 
 export async function GET() {
   if (!(await flagEnabled("ff_lifestyle"))) {
-    return jsonError("RESOURCE_NOT_ACCESSIBLE", "Lifestyle off");
+    return jsonError("RESOURCE_NOT_ACCESSIBLE", "flagLifestyleOff");
   }
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return jsonError("UNAUTHENTICATED", "Sign in required");
+  if (!user) return jsonError("UNAUTHENTICATED");
 
   const { data, error } = await supabase
     .from("commerce_demo_bookings")
@@ -23,25 +23,25 @@ export async function GET() {
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
     .limit(50);
-  if (error) return jsonError("INTERNAL", error.message);
+  if (error) return jsonError("INTERNAL");
 
   return NextResponse.json({
     ok: true,
     demo: true,
-    banner: "BẢN MẪU / KHÔNG CÓ ĐẶT CHỖ HOẶC THANH TOÁN THẬT",
+    banner: await apiT("demoBanner"),
     bookings: data ?? [],
   });
 }
 
 export async function POST(req: NextRequest) {
   if (!(await flagEnabled("ff_lifestyle"))) {
-    return jsonError("RESOURCE_NOT_ACCESSIBLE", "Lifestyle off");
+    return jsonError("RESOURCE_NOT_ACCESSIBLE", "flagLifestyleOff");
   }
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return jsonError("UNAUTHENTICATED", "Sign in required");
+  if (!user) return jsonError("UNAUTHENTICATED");
 
   let body: {
     product_id?: string;
@@ -51,11 +51,11 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return jsonError("VALIDATION_ERROR", "Invalid JSON");
+    return jsonError("VALIDATION_ERROR", "invalidJson");
   }
 
   if (!body.product_id) {
-    return jsonError("VALIDATION_ERROR", "product_id required");
+    return jsonError("VALIDATION_ERROR", "productIdRequired");
   }
 
   const { data: product, error: pErr } = await supabase
@@ -65,10 +65,10 @@ export async function POST(req: NextRequest) {
     .eq("active", true)
     .maybeSingle();
   if (pErr || !product) {
-    return jsonError("VALIDATION_ERROR", "Product not found");
+    return jsonError("VALIDATION_ERROR", "productNotFound");
   }
   if (product.fulfillment !== "SANDBOX_ONLY") {
-    return jsonError("FORBIDDEN", "Only SANDBOX_ONLY products for demo booking");
+    return jsonError("FORBIDDEN", "sandboxOnly");
   }
 
   const key =
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
       demo: true,
       replay: true,
       booking: existing,
-      receipt: `DEMO_RESERVED · ${product.title} · không phải xác nhận thật`,
+      receipt: await apiT("demoReceiptReserved", { title: product.title }),
     });
   }
 
@@ -103,34 +103,34 @@ export async function POST(req: NextRequest) {
     })
     .select("id, status, quote_vnd, created_at, idempotency_key")
     .single();
-  if (error) return jsonError("INTERNAL", error.message);
+  if (error) return jsonError("INTERNAL");
 
   return NextResponse.json({
     ok: true,
     demo: true,
     booking,
-    receipt: `DEMO_RESERVED · ${product.title} · ${product.price_vnd.toLocaleString("vi-VN")}₫ · KHÔNG THANH TOÁN THẬT`,
+    receipt: await apiT("demoReceiptPriced", { title: product.title, price: `${product.price_vnd}₫` }),
   });
 }
 
 export async function PATCH(req: NextRequest) {
   if (!(await flagEnabled("ff_lifestyle"))) {
-    return jsonError("RESOURCE_NOT_ACCESSIBLE", "Lifestyle off");
+    return jsonError("RESOURCE_NOT_ACCESSIBLE", "flagLifestyleOff");
   }
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return jsonError("UNAUTHENTICATED", "Sign in required");
+  if (!user) return jsonError("UNAUTHENTICATED");
 
   let body: { id?: string; action?: "confirm" | "cancel" };
   try {
     body = await req.json();
   } catch {
-    return jsonError("VALIDATION_ERROR", "Invalid JSON");
+    return jsonError("VALIDATION_ERROR", "invalidJson");
   }
   if (!body.id || !body.action) {
-    return jsonError("VALIDATION_ERROR", "id and action required");
+    return jsonError("VALIDATION_ERROR", "bookingActionInvalid");
   }
 
   const next =
@@ -139,7 +139,7 @@ export async function PATCH(req: NextRequest) {
       : body.action === "cancel"
         ? "CANCELLED"
         : null;
-  if (!next) return jsonError("VALIDATION_ERROR", "Invalid action");
+  if (!next) return jsonError("VALIDATION_ERROR", "bookingActionInvalid");
 
   const { data, error } = await supabase
     .from("commerce_demo_bookings")
@@ -148,8 +148,8 @@ export async function PATCH(req: NextRequest) {
     .eq("user_id", user.id)
     .select("id, status, quote_vnd")
     .maybeSingle();
-  if (error) return jsonError("INTERNAL", error.message);
-  if (!data) return jsonError("VALIDATION_ERROR", "Booking not found");
+  if (error) return jsonError("INTERNAL");
+  if (!data) return jsonError("VALIDATION_ERROR", "bookingNotFound");
 
   return NextResponse.json({
     ok: true,
@@ -157,7 +157,7 @@ export async function PATCH(req: NextRequest) {
     booking: data,
     note:
       next === "DEMO_CONFIRMED"
-        ? "Xác nhận DEMO — không phải đặt chỗ nhà cung cấp thật"
-        : "Đã hủy lệnh DEMO",
+        ? await apiT("demoConfirmed")
+        : await apiT("demoCancelled"),
   });
 }

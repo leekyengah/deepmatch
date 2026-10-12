@@ -1,0 +1,15 @@
+{
+  "title": "Get started",
+  "welcome": "Welcome to DeepMatch",
+  "chooseJourney": "Choose your journey",
+  "subtitle": "A few steps to find selective connections — you always control what you share.",
+  "partnerNote": "A dating profile is optional if you enter Our Space with an invitation.",
+  "modeLegend": "Mode",
+  "modeSolo": "Single / exploring — Discover",
+  "modePartner": "Already with a partner — enter Our Space",
+  "fuzzyRegion": "Approximate area (Discover)",
+  "fuzzyRegionPlaceholder": "Example: Hanoi, Ho Chi Minh City",
+  "discoveryOptIn": "Turn on profile discovery. You can turn it off later in Privacy. Only an approximate area is shown — no background GPS tracking.",
+  "continue": "Continue",
+  "finish": "Finish"
+}

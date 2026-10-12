@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHash, randomBytes } from "crypto";
 import { createClient } from "@/lib/supabase/server";
+import { jsonError, makeRequestId } from "@/lib/api-error";
 
 function hashCode(code: string) {
   return createHash("sha256").update(code).digest("hex");
@@ -11,8 +12,9 @@ export async function POST() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const requestId = makeRequestId();
   if (!user) {
-    return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
+    return jsonError("UNAUTHENTICATED", null, requestId);
   }
 
   const code = randomBytes(16).toString("base64url");
@@ -26,7 +28,7 @@ export async function POST() {
   });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return jsonError("VALIDATION_ERROR", null, requestId);
   }
 
   // Return plaintext code once; only hash is stored (anti-enumeration of DB).

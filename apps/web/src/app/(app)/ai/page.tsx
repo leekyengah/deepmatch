@@ -3,33 +3,35 @@ import { redirect } from "next/navigation";
 import { flagEnabled } from "@/lib/flags";
 import { Badge } from "@/components/ui/Badge";
 import { AiAssistClient } from "@/components/ai/AiAssistClient";
+import { getServerTranslator } from "@/lib/i18n/server";
 
 export default async function AiHubPage() {
+  const { t } = await getServerTranslator();
   if (!(await flagEnabled("ff_ai"))) redirect("/me");
 
   return (
     <div className="max-w-2xl">
       <Link href="/lifestyle" className="text-sm text-dm-muted underline">
-        ← Lifestyle
+        {t("ai.backLifestyle")}
       </Link>
       <p className="mt-4 text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
-        AI Hub
+        {t("ai.hubEyebrow")}
       </p>
       <h1 className="mt-2 font-display text-4xl font-medium text-dm-raspberry">
-        Trợ lý có chọn lọc
+        {t("ai.hubHeading")}
       </h1>
       <p className="mt-2 text-sm text-dm-muted">
-        Mỗi lần gọi cần đồng ý mục đích. Không tự gửi tin · không chẩn đoán lâm sàng.
+        {t("ai.hubIntro")}
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Badge tone="warn">
-          Adapter mặc định: stub · LLM khi AI_ADAPTER=openai
+          {t("ai.adapterBadge")}
         </Badge>
-        <Badge tone="good">Consent bắt buộc</Badge>
+        <Badge tone="good">{t("ai.consentBadge")}</Badge>
       </div>
       <p className="mt-6 text-sm">
         <Link href="/ai/deepmind" className="font-semibold text-dm-primary underline">
-          DeepMind — bộ câu hỏi tự nguyện →
+          {t("ai.deepmindLink")}
         </Link>
       </p>
       <div className="mt-8">

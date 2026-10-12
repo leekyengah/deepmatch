@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-10-12T10:12:29.284Z",
+  "passwordHint": "see qa-matrix.env.ps1 (gitignored)",
+  "accounts": [
+    {
+      "id": "QA-USER-01",
+      "email": "qa_user01@deepmatch.test",
+      "userId": "a8c6540a-dd33-4b32-88fe-6017d9a09355",
+      "suspended": false
+    },
+    {
+      "id": "QA-USER-02",
+      "email": "qa_user02@deepmatch.test",
+      "userId": "badc012c-8106-4952-ac9e-c953bd60e90f",
+      "suspended": false
+    },
+    {
+      "id": "QA-USER-03",
+      "email": "qa_user03@deepmatch.test",
+      "userId": "93d33085-547a-495b-aece-bbfcc35bdebb",
+      "suspended": false
+    },
+    {
+      "id": "QA-COUPLE-A",
+      "email": "qa_couple_a@deepmatch.test",
+      "userId": "f1aa1b87-fd62-449d-9f17-8b707b2161f5",
+      "suspended": false
+    },
+    {
+      "id": "QA-COUPLE-B",
+      "email": "qa_couple_b@deepmatch.test",
+      "userId": "2b71ea20-af74-472b-9f40-a3d5a3bc0578",
+      "suspended": false
+    },
+    {
+      "id": "QA-EX-PARTNER",
+      "email": "qa_ex@deepmatch.test",
+      "userId": "72405bcb-a168-4617-8a12-e837d0862c07",
+      "suspended": false
+    },
+    {
+      "id": "QA-PREMIUM",
+      "email": "qa_premium@deepmatch.test",
+      "userId": "b25f9e71-a219-464e-ad01-942de7bbdcfc",
+      "suspended": false
+    },
+    {
+      "id": "QA-SUSPENDED",
+      "email": "qa_suspended@deepmatch.test",
+      "userId": "128f3561-d809-4f55-864a-b39481eff36f",
+      "suspended": true
+    }
+  ]
+}

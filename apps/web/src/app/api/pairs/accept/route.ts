@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHash } from "crypto";
 import { createClient } from "@/lib/supabase/server";
+import { jsonError, makeRequestId } from "@/lib/api-error";
 
 function hashCode(code: string) {
   return createHash("sha256").update(code).digest("hex");
@@ -11,14 +12,15 @@ export async function POST(req: Request) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const requestId = makeRequestId();
   if (!user) {
-    return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
+    return jsonError("UNAUTHENTICATED", null, requestId);
   }
 
   const body = (await req.json()) as { code?: string };
   const code = body.code?.trim();
   if (!code) {
-    return NextResponse.json({ error: "code_required" }, { status: 400 });
+    return jsonError("VALIDATION_ERROR", null, requestId);
   }
 
   const { data: pairId, error } = await supabase.rpc("accept_pair_invite", {
@@ -26,7 +28,7 @@ export async function POST(req: Request) {
   });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return jsonError("VALIDATION_ERROR", null, requestId);
   }
 
   return NextResponse.json({ pairId, mutualCreatesPair: false });

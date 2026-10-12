@@ -1,8 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { getServerTranslator } from "@/lib/i18n/server";
 
 export default async function AdminCatalogPage() {
+  const { t } = await getServerTranslator();
   const supabase = await createClient();
   const [{ data: providers }, { count: products }, { data: bookings }] =
     await Promise.all([
@@ -25,11 +27,10 @@ export default async function AdminCatalogPage() {
     <div>
       <h1 className="text-3xl font-bold text-dm-raspberry">Catalog DEMO</h1>
       <p className="mt-2 text-sm text-dm-muted">
-        Providers status DEMO only · LIVE bị chặn ở DB. Không bật đối tác thật từ
-        đây.
+        {t("admin.catalogIntro")}
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Badge tone="good">{products ?? 0} sản phẩm</Badge>
+        <Badge tone="good">{t("admin.productsCount", { n: products ?? 0 })}</Badge>
         <Badge tone="warn">LIVE gate: OFF</Badge>
       </div>
 
@@ -48,7 +49,7 @@ export default async function AdminCatalogPage() {
       </div>
 
       <h2 className="mt-8 text-lg font-semibold text-dm-raspberry">
-        Booking DEMO gần đây
+        {t("admin.recentDemoBookings")}
       </h2>
       <ul className="mt-3 space-y-2">
         {(bookings ?? []).map((b) => (
