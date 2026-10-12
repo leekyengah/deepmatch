@@ -26,10 +26,19 @@
 
 ### Tests run
 
-- `i18n:parity` PASS (888 keys × 2)
-- `@deepmatch/web` typecheck — fix Modal `useT`; re-run
-- `test:no-leak` + Playwright no-leak — see evidence section after run
+- `i18n:parity` PASS (977 keys × 2)
+- `@deepmatch/web` typecheck PASS
+- `test:no-leak` PASS (local `127.0.0.1:3000`)
+- Playwright `no-leak-public.spec.ts` 6/6 PASS (`E2E_BASE_URL=http://127.0.0.1:3000`)
 - QA matrix seed — PASS on staging Supabase
+
+### Commit
+
+`3cf1b2b` — feat(home): public homepage, no-leak gate, DEMO cart, home-state routing
+
+### Sheets
+
+Master Tracker tab 16/20 updated successfully via Google Sheets API (verified read-back).
 
 ### Blocked / deferred
 

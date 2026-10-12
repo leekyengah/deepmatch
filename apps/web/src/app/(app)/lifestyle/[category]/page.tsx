@@ -5,6 +5,7 @@ import { flagEnabled } from "@/lib/flags";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { getServerTranslator } from "@/lib/i18n/server";
 
 const SLUGS = new Set([
   "gift",
@@ -26,15 +27,19 @@ const titles: Record<string, string> = {
 
 export default async function LifestyleCategoryPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ category: string }>;
+  searchParams: Promise<{ band?: string }>;
 }) {
+  const { t } = await getServerTranslator();
   if (!(await flagEnabled("ff_lifestyle"))) redirect("/me");
   const { category } = await params;
+  const { band } = await searchParams;
   if (!SLUGS.has(category)) notFound();
 
   const supabase = await createClient();
-  const { data: products } = await supabase
+  let query = supabase
     .from("commerce_products")
     .select(
       "id, mock_id, title, price_vnd, unit, demo_banner, commerce_providers(display_name, status)",
@@ -42,6 +47,17 @@ export default async function LifestyleCategoryPage({
     .eq("category", category)
     .eq("active", true)
     .order("price_vnd", { ascending: true });
+
+  // DeepDate (venue) DEMO price bands — sample inventory only
+  if (category === "venue" && band === "low") {
+    query = query.lte("price_vnd", 300000);
+  } else if (category === "venue" && band === "mid") {
+    query = query.gt("price_vnd", 300000).lte("price_vnd", 800000);
+  } else if (category === "venue" && band === "high") {
+    query = query.gt("price_vnd", 800000);
+  }
+
+  const { data: products } = await query;
 
   return (
     <div className="max-w-3xl">
@@ -52,19 +68,33 @@ export default async function LifestyleCategoryPage({
         {titles[category]}
       </h1>
       <p className="mt-2 text-sm text-dm-muted">
-        Nhà cung cấp trạng thái DEMO · SANDBOX_ONLY
+        {t("commerce.categoryDemoNote")}
       </p>
       <div className="mt-4">
         <Badge tone="warn">
-          BẢN MẪU / KHÔNG CÓ ĐẶT CHỖ HOẶC THANH TOÁN THẬT
+          {t("commerce.lifestyleBadge")}
         </Badge>
       </div>
+      {category === "venue" ? (
+        <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold text-dm-primary">
+          <Link href="/lifestyle/venue">Tất cả</Link>
+          <Link href="/lifestyle/venue?band=low">≤300k DEMO</Link>
+          <Link href="/lifestyle/venue?band=mid">300–800k DEMO</Link>
+          <Link href="/lifestyle/venue?band=high">&gt;800k DEMO</Link>
+        </div>
+      ) : null}
+      {category === "venue" ? (
+        <p className="mt-3 text-xs text-dm-muted">
+          Tọa độ / giờ mở cửa trong catalog là mẫu DEMO — không phải đặt chỗ nhà
+          hàng thật.
+        </p>
+      ) : null}
 
       {!products?.length ? (
         <div className="mt-10">
           <EmptyState
-            title="Chưa có mẫu"
-            description="Chạy seed catalog trên staging hoặc thử lại sau."
+            title={t("commerce.categoryEmptyTitle")}
+            description={t("commerce.categoryEmptyBody")}
           />
         </div>
       ) : (

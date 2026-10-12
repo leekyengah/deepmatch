@@ -31,3 +31,17 @@ jobs:
           FF_MEDIA_UPLOAD: "true"
           FF_CONCIERGE: "false"
           FF_DISCOVERY: "true"
+      - name: Public no-leak smoke (G-HOME-SEC)
+        working-directory: apps/web
+        env:
+          NEXT_PUBLIC_APP_ENV: ci
+          PORT: "3000"
+        run: |
+          npm run start -- --port 3000 &
+          for i in $(seq 1 60); do
+            if curl -sf http://127.0.0.1:3000/api/v1/health >/dev/null; then break; fi
+            sleep 2
+          done
+          cd ../..
+          npm run test:no-leak -- http://127.0.0.1:3000
+
