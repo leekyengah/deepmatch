@@ -31,6 +31,8 @@
   "taskGift": "Gifts",
   "taskSafety": "Safety",
   "consentText": "I agree to use AI for the selected purpose (revocable later). Private journals / raw chat are not used by default.",
+  "consentRequired": "You must confirm consent before sending data to AI.",
+  "policyLink": "AI assistant policy",
   "getSuggestions": "Get suggestions",
   "creating": "Creating…",
   "callFailed": "Could not call AI",

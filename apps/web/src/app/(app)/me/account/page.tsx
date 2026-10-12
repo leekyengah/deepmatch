@@ -86,9 +86,14 @@ export default async function MeAccountPage({
                 {t("profile.deleteAccount")}
               </Button>
             </Link>
-            <Link href="/privacy">
+            <Link href="/legal">
               <Button type="button" size="sm" variant="secondary">
-                {t("profile.privacyPublic")}
+                {t("profile.legalCenter")}
+              </Button>
+            </Link>
+            <Link href="/support">
+              <Button type="button" size="sm" variant="outline">
+                {t("profile.supportLink")}
               </Button>
             </Link>
           </div>

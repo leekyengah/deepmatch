@@ -39,6 +39,7 @@
   "renewal": "Renewal",
   "cancel": "Cancel plan",
   "refundPolicy": "Refunds follow the published terms.",
+  "subscriptionsPolicyLink": "Subscriptions, payments & refunds",
   "requestBooking": "Request booking",
   "bookingPending": "Request sent. The provider has not confirmed yet.",
   "premiumIapTitle": "Premium (Apple IAP)",

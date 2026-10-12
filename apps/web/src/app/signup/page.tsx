@@ -71,9 +71,25 @@ export default async function SignupPage({
           {t("auth.ageConfirm")}
         </label>
         <label className="flex items-start gap-2 text-sm">
-          <input required type="checkbox" name="tos" className="mt-1" />
-          {t("auth.tosConfirm")}
+          <input required type="checkbox" name="accept_terms" className="mt-1" />
+          <span>
+            {t("auth.acceptTermsPrefix")}{" "}
+            <Link href="/legal/terms" className="font-semibold underline" target="_blank">
+              {t("auth.termsLink")}
+            </Link>
+          </span>
         </label>
+        <label className="flex items-start gap-2 text-sm">
+          <input required type="checkbox" name="ack_privacy" className="mt-1" />
+          <span>
+            {t("auth.ackPrivacyPrefix")}{" "}
+            <Link href="/legal/privacy" className="font-semibold underline" target="_blank">
+              {t("auth.privacyLink")}
+            </Link>
+            {t("auth.ackPrivacySuffix")}
+          </span>
+        </label>
+        <p className="text-xs text-dm-muted">{t("auth.consentNotBundledHint")}</p>
         {sp.error && (
           <p className="text-sm text-red-700" role="alert">
             {sp.error}

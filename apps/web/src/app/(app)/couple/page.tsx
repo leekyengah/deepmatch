@@ -42,6 +42,11 @@ export default async function CoupleHomePage() {
         {t("couple.spaceHeading")}
       </h1>
       <p className="mt-2 text-sm text-dm-muted">{t("couple.spaceIntro")}</p>
+      <p className="mt-2 text-sm">
+        <Link href="/legal/couple-data" className="text-dm-primary underline">
+          {t("couple.dataPolicyLink")}
+        </Link>
+      </p>
 
       {coupleId ? (
         <p className="mt-4 rounded-dm bg-dm-surface px-3 py-2 text-sm text-dm-raspberry">

@@ -31,6 +31,8 @@
   "taskGift": "Quà tặng",
   "taskSafety": "An toàn",
   "consentText": "Tôi đồng ý dùng AI cho mục đích đã chọn (có thể thu hồi sau). Không dùng nhật ký riêng / chat thô mặc định.",
+  "consentRequired": "Bạn cần xác nhận đồng ý trước khi gửi dữ liệu cho AI.",
+  "policyLink": "Chính sách trợ lý AI",
   "getSuggestions": "Nhận gợi ý",
   "creating": "Đang tạo…",
   "callFailed": "Không gọi được AI",

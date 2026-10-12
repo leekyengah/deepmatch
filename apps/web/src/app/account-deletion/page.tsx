@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const { t } = await getServerTranslator();
   return {
     title: t("legal.deleteMetaTitle"),
-    description: "How to delete your DeepMatch account",
+    description: "Yêu cầu xóa tài khoản DeepMatch",
   };
 }
 
@@ -20,6 +20,17 @@ export default async function AccountDeletionPage() {
       <h1 className="font-display text-4xl text-dm-raspberry">
         {t("legal.deleteTitle")}
       </h1>
+      <p className="mt-3 text-sm text-dm-muted">
+        Chính sách đầy đủ:{" "}
+        <Link href="/legal/delete-account" className="text-dm-primary underline">
+          /legal/delete-account
+        </Link>
+        . Xóa tài khoản không tự hủy thuê bao tại cửa hàng ứng dụng — xem{" "}
+        <Link href="/legal/subscriptions" className="text-dm-primary underline">
+          Thuê bao & hoàn tiền
+        </Link>
+        .
+      </p>
       <ol className="mt-6 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
         <li>{t("legal.deleteStep1")}</li>
         <li>{t("legal.deleteStep2")}</li>
@@ -34,14 +45,14 @@ export default async function AccountDeletionPage() {
       </form>
       <p className="mt-4 text-sm text-dm-muted">
         {t("legal.deleteSupport")}{" "}
-        <a className="text-dm-primary underline" href="mailto:leekyengah@gmail.com">
-          leekyengah@gmail.com
-        </a>
+        <Link href="/support" className="text-dm-primary underline">
+          /support
+        </Link>
+        . Không gửi mật khẩu, OTP hoặc số thẻ qua hỗ trợ.
       </p>
-      <Link href="/privacy" className="mt-8 inline-block text-sm text-dm-primary">
+      <Link href="/legal/privacy" className="mt-8 inline-block text-sm text-dm-primary">
         {t("legal.deletePrivacyLink")}
       </Link>
-      <p className="mt-6 text-xs text-dm-muted">{t("legal.humanReview")}</p>
     </main>
   );
 }

@@ -9,6 +9,10 @@ import { useT } from "../../lib/i18n/I18nProvider";
 import { purchasePremium, restorePremium } from "../../lib/iap";
 import { colors, LEGAL_URLS } from "../../constants/theme";
 
+async function openLegal(url: string) {
+  await WebBrowser.openBrowserAsync(url);
+}
+
 export default function MeScreen() {
   const { user, signOut } = useAuth();
   const t = useT();
@@ -83,27 +87,28 @@ export default function MeScreen() {
           variant="outline"
           disabled={busy}
         />
+        <Text style={{ height: 10 }} />
+        <Button
+          label={t("commerce.subscriptionsPolicyLink")}
+          variant="outline"
+          onPress={() => openLegal(LEGAL_URLS.subscriptions)}
+        />
 
-        <Text style={styles.h2}>{t("profile.legalSection")}</Text>
-        <Button
-          label={t("marketing.privacy")}
-          variant="outline"
-          onPress={() => WebBrowser.openBrowserAsync(LEGAL_URLS.privacy)}
-        />
-        <Text style={{ height: 10 }} />
-        <Button
-          label={t("marketing.terms")}
-          variant="outline"
-          onPress={() => WebBrowser.openBrowserAsync(LEGAL_URLS.terms)}
-        />
-        <Text style={{ height: 10 }} />
-        <Button
-          label={t("profile.deleteAccountWeb")}
-          variant="outline"
-          onPress={() =>
-            WebBrowser.openBrowserAsync(LEGAL_URLS.accountDeletion)
-          }
-        />
+        <Text style={styles.h2}>{t("profile.legalPrivacyHub")}</Text>
+        <Muted>{t("profile.legalHubHint")}</Muted>
+        {(
+          [
+            [t("profile.legalCenter"), LEGAL_URLS.hub],
+            [t("marketing.terms"), LEGAL_URLS.terms],
+            [t("marketing.privacy"), LEGAL_URLS.privacy],
+            [t("profile.privacy"), LEGAL_URLS.privacySettings],
+            [t("profile.supportLink"), LEGAL_URLS.support],
+            [t("commerce.subscriptionsPolicyLink"), LEGAL_URLS.subscriptions],
+            [t("profile.deleteAccountWeb"), LEGAL_URLS.accountDeletion],
+          ] as const
+        ).map(([label, url]) => (
+          <ViewButton key={url} label={label} onPress={() => openLegal(url)} />
+        ))}
 
         <Text style={styles.h2}>{t("profile.account")}</Text>
         <Button
@@ -117,8 +122,24 @@ export default function MeScreen() {
           variant="danger"
           onPress={onDelete}
         />
+        <Muted>{t("profile.deleteSubscriptionNote")}</Muted>
       </ScrollView>
     </Screen>
+  );
+}
+
+function ViewButton({
+  label,
+  onPress,
+}: {
+  label: string;
+  onPress: () => void;
+}) {
+  return (
+    <>
+      <Text style={{ height: 10 }} />
+      <Button label={label} variant="outline" onPress={onPress} />
+    </>
   );
 }
 
@@ -126,7 +147,7 @@ const styles = StyleSheet.create({
   h2: {
     marginTop: 28,
     marginBottom: 8,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "700",
     color: colors.raspberry,
   },

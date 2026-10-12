@@ -1,9 +1,26 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@deepmatch/shared"],
+  transpilePackages: [
+    "@deepmatch/shared",
+    "@deepmatch/i18n",
+    "@deepmatch/legal-content",
+  ],
   eslint: { ignoreDuringBuilds: true },
-  // Sentry webpack plugin optional — enable when NEXT_PUBLIC_SENTRY_DSN + auth token set in CI
+  async redirects() {
+    return [
+      {
+        source: "/terms",
+        destination: "/legal/terms",
+        permanent: true,
+      },
+      {
+        source: "/privacy",
+        destination: "/legal/privacy",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

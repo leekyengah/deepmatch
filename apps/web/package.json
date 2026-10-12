@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@deepmatch/i18n": "*",
+    "@deepmatch/legal-content": "*",
     "@deepmatch/shared": "*",
     "@sentry/conventions": "^0.26.0",
     "@sentry/nextjs": "^11.6.0",

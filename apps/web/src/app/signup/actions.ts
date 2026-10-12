@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { isAgeEligible } from "@deepmatch/shared";
 import { createClient } from "@/lib/supabase/server";
+import { LEGAL_CONSENT_KEYS } from "@deepmatch/legal-content";
 import { getServerTranslator } from "@/lib/i18n/server";
 import { safeNextPath } from "@/lib/safe-next";
 
@@ -19,10 +20,11 @@ export async function signupAction(formData: FormData) {
   const displayName = String(formData.get("display_name") ?? "").trim();
   const birthDate = String(formData.get("birth_date") ?? "");
   const ageConfirm = formData.get("age_confirm");
-  const tos = formData.get("tos");
+  const acceptTerms = formData.get("accept_terms");
+  const ackPrivacy = formData.get("ack_privacy");
   const next = safeNextPath(String(formData.get("next") ?? ""), "/onboarding");
 
-  if (!ageConfirm || !tos) {
+  if (!ageConfirm || !acceptTerms || !ackPrivacy) {
     redirect(signupErrorUrl(t("auth.needAgeTos"), next));
   }
   if (!isAgeEligible(birthDate, Number(process.env.MIN_AGE ?? 18))) {
@@ -57,14 +59,20 @@ export async function signupAction(formData: FormData) {
     await supabase.from("consent_events").insert([
       {
         user_id: userId,
-        consent_key: "age_eligible",
-        version: "v1",
+        consent_key: LEGAL_CONSENT_KEYS.ageEligible,
+        version: LEGAL_CONSENT_KEYS.version,
         granted: true,
       },
       {
         user_id: userId,
-        consent_key: "tos_privacy",
-        version: "v1",
+        consent_key: LEGAL_CONSENT_KEYS.termsAccept,
+        version: LEGAL_CONSENT_KEYS.version,
+        granted: true,
+      },
+      {
+        user_id: userId,
+        consent_key: LEGAL_CONSENT_KEYS.privacyNoticeAck,
+        version: LEGAL_CONSENT_KEYS.version,
         granted: true,
       },
     ]);

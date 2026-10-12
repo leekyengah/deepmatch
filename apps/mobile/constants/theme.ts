@@ -13,10 +13,25 @@ export const colors = {
   danger: "#C23B4A",
 } as const;
 
+const LEGAL_BASE = (
+  process.env.EXPO_PUBLIC_API_URL ?? "https://datingvn.com"
+).replace(/\/$/, "");
+
 export const LEGAL_URLS = {
-  privacy: "https://datingvn.com/privacy",
-  terms: "https://datingvn.com/terms",
-  accountDeletion: "https://datingvn.com/account-deletion",
+  hub: `${LEGAL_BASE}/legal`,
+  privacy: `${LEGAL_BASE}/legal/privacy`,
+  terms: `${LEGAL_BASE}/legal/terms`,
+  community: `${LEGAL_BASE}/legal/community`,
+  childSafety: `${LEGAL_BASE}/legal/child-safety`,
+  coupleData: `${LEGAL_BASE}/legal/couple-data`,
+  subscriptions: `${LEGAL_BASE}/legal/subscriptions`,
+  ai: `${LEGAL_BASE}/legal/ai`,
+  services: `${LEGAL_BASE}/legal/services`,
+  deleteAccountPolicy: `${LEGAL_BASE}/legal/delete-account`,
+  accountDeletion: `${LEGAL_BASE}/account-deletion`,
+  support: `${LEGAL_BASE}/support`,
+  privacySettings: `${LEGAL_BASE}/me/privacy`,
+  premium: `${LEGAL_BASE}/me/premium`,
 } as const;
 
 export const IAP_PRODUCT_ID =

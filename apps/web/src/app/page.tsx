@@ -316,8 +316,10 @@ export default async function HomePage() {
           <p>{t("marketing.footerTagline")}</p>
           <div className="flex flex-wrap gap-4">
             <Link href="/faq">{t("marketing.faq")}</Link>
-            <Link href="/privacy">{t("marketing.footerPrivacy")}</Link>
-            <Link href="/terms">{t("marketing.footerLegal")}</Link>
+            <Link href="/legal">{t("marketing.footerLegal")}</Link>
+            <Link href="/legal/privacy">{t("marketing.footerPrivacy")}</Link>
+            <Link href="/legal/terms">{t("marketing.footerTerms")}</Link>
+            <Link href="/support">{t("marketing.footerSupport")}</Link>
           </div>
         </div>
       </footer>

@@ -28,6 +28,11 @@ export default async function PremiumPage() {
         {t("commerce.premiumIntro", { price: priceLabel })}
       </p>
       <p className="mt-2 text-sm text-dm-muted">{t("commerce.noFalseUrgency")}</p>
+      <p className="mt-2 text-sm">
+        <Link href="/legal/subscriptions" className="text-dm-primary underline">
+          {t("commerce.subscriptionsPolicyLink")}
+        </Link>
+      </p>
 
       <div className="mt-6 flex flex-wrap gap-2">
         <Badge tone="good">{priceLabel}</Badge>

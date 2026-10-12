@@ -93,7 +93,12 @@ export function AiAssistClient() {
           onChange={(e) => setConsent(e.target.checked)}
           className="mt-1"
         />
-        {t("ai.consentText")}
+        <span>
+          {t("ai.consentText")}{" "}
+          <a href="/legal/ai" className="underline" target="_blank" rel="noreferrer">
+            {t("ai.policyLink")}
+          </a>
+        </span>
       </label>
       <Button type="button" disabled={!consent || loading} onClick={run}>
         {loading ? t("ai.creating") : t("ai.getSuggestions")}

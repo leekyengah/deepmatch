@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { resolveApiErrorMessage } from "@/lib/api-error-message";
 import { useT } from "@/components/i18n/I18nProvider";
 import { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ export function DeepMindClient() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   useEffect(() => {
     void (async () => {
@@ -58,6 +60,10 @@ export function DeepMindClient() {
   }
 
   async function generateInsight() {
+    if (!consent) {
+      setError(t("ai.consentRequired"));
+      return;
+    }
     setSaving(true);
     setError(null);
     try {
@@ -66,7 +72,7 @@ export function DeepMindClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           task: "deepmind",
-          consent: true,
+          consent,
           input: { answers },
         }),
       });
@@ -149,12 +155,26 @@ export function DeepMindClient() {
             <Button
               type="button"
               size="sm"
-              disabled={saving || Object.keys(answers).length < 3}
+              disabled={!consent || saving || Object.keys(answers).length < 3}
               onClick={() => void generateInsight()}
             >
               {saving ? t("ai.creating") : t("ai.makeCard")}
             </Button>
           </div>
+          <label className="flex items-start gap-2 text-sm text-dm-ink">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-1"
+            />
+            <span>
+              {t("ai.consentText")}{" "}
+              <Link href="/legal/ai" className="underline" target="_blank">
+                {t("ai.policyLink")}
+              </Link>
+            </span>
+          </label>
         </Card>
       ) : null}
 
