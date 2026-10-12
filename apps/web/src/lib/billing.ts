@@ -1,4 +1,4 @@
-/** Public receiving account for manual bank transfer (Founder). */
+/** Public receiving account for manual bank transfer. */
 export const PREMIUM_PRICE_VND = Number(
   process.env.NEXT_PUBLIC_PREMIUM_PRICE_VND ?? "99000",
 );

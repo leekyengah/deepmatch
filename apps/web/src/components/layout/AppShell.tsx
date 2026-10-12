@@ -65,9 +65,6 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
-            <span className="hidden rounded-full border border-dm-line bg-dm-panel px-3 py-2 text-[11px] font-bold text-dm-primary sm:inline">
-              {t("common.staging")}
-            </span>
             <Link href="/me" aria-label={t("nav.meAria")}>
               <Avatar label={t("nav.avatarMe")} />
             </Link>

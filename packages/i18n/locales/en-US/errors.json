@@ -51,7 +51,7 @@
   "contactFieldsRequired": "display_name and contact_value are required.",
   "productIdRequired": "product_id is required.",
   "productNotFound": "Product not found.",
-  "sandboxOnly": "Only SANDBOX_ONLY demo products are allowed.",
+  "sandboxOnly": "Only DEMO sample products are allowed.",
   "bookingActionInvalid": "Booking id or action is invalid.",
   "bookingNotFound": "DEMO booking not found.",
   "cartEmpty": "DEMO cart is empty.",

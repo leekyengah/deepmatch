@@ -5,7 +5,7 @@
   "concierge": "Dịch vụ đồng hành",
   "eyebrow": "Đồng hành",
   "flagOffTitle": "Đồng hành đang tắt",
-  "flagOffBody": "Feature flag ff_concierge đang tắt.",
+  "flagOffBody": "Dịch vụ Đồng hành tạm thời chưa mở. Vui lòng thử lại sau."
   "request": "Yêu cầu đặt lịch",
   "confirmed": "Đã xác nhận",
   "pending": "Chờ xác nhận",
@@ -38,5 +38,5 @@
   "registerConsult": "Đăng ký tư vấn",
   "servicesHeading": "Dịch vụ tư vấn",
   "servicesIntro": "Bốn dịch vụ tùy chọn. Phí, phạm vi và điều kiện hủy được công khai trước khi xác nhận. Không hứa kết quả ghép đôi.",
-  "flagOffBodyStaging": "Feature flag ff_concierge đang tắt (mặc định staging an toàn)."
+  "flagOffBodyStaging": "Dịch vụ Đồng hành tạm thời chưa mở."
 }

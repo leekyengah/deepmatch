@@ -51,7 +51,7 @@
   "contactFieldsRequired": "Cần tên hiển thị và thông tin liên hệ.",
   "productIdRequired": "Thiếu mã sản phẩm.",
   "productNotFound": "Không tìm thấy sản phẩm.",
-  "sandboxOnly": "Chỉ sản phẩm sandbox DEMO được phép.",
+  "sandboxOnly": "Chỉ sản phẩm mẫu DEMO được phép.",
   "bookingActionInvalid": "Thiếu mã lệnh hoặc hành động không hợp lệ.",
   "bookingNotFound": "Không tìm thấy lệnh DEMO.",
   "cartEmpty": "Giỏ DEMO trống.",

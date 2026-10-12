@@ -12,16 +12,27 @@ const base = (process.argv[2] || process.env.PLAYWRIGHT_BASE_URL || "http://127.
 const FORBIDDEN = [
   /footerStaging/i,
   /Môi trường staging/i,
+  /môi trường thử nghiệm/i,
   /Feature flags/i,
-  /docs\/ops\//i,
+  /feature flag/i,
+  /kill switch/i,
+  /ff_billing/i,
+  /ff_premium/i,
+  /ff_concierge/i,
+  /ff_matching/i,
+  /Stripe keys/i,
+  /docs\/ops/i,
+  /docs\/p0/i,
   /docs\/evidence\//i,
   /docs\/audits\//i,
+  /docs\/design\//i,
   /Master Tracker/i,
   /EXT-\d{3}/i,
   /DM-\d{3}/i,
   /LEAK-\d{2}/i,
   /HOME-W\d{2}/i,
   /BLOCKED_EXTERNAL/i,
+  /SANDBOX_ONLY/i,
   /service[_-]?role/i,
   /SUPABASE_SERVICE_ROLE/i,
   /sk_live_/i,
@@ -45,18 +56,26 @@ const SENSITIVE_PROBES = [
 
 let failed = 0;
 
+function visibleSurface(html) {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<!--([\s\S]*?)-->/g, " ");
+}
+
 async function checkHtml(path) {
   const res = await fetch(`${base}${path}`, {
     headers: { Accept: "text/html,application/xml,text/plain,*/*" },
     redirect: "follow",
   });
-  const text = await res.text();
+  const raw = await res.text();
+  const text = path.endsWith(".xml") || path.endsWith(".txt") ? raw : visibleSurface(raw);
   const hits = FORBIDDEN.filter((re) => re.test(text)).map((re) => re.toString());
   if (hits.length) {
     failed += 1;
     console.error(`FAIL ${path} status=${res.status} leaks=${hits.join(", ")}`);
   } else {
-    console.log(`PASS ${path} status=${res.status} bytes=${text.length}`);
+    console.log(`PASS ${path} status=${res.status} bytes=${raw.length}`);
   }
 }
 

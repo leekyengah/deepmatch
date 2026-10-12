@@ -21,7 +21,7 @@
   "reportReceived": "Đã nhận báo cáo. Nội dung sẽ được xem xét theo quy trình kiểm duyệt.",
   "moderationPending": "Đang chờ kiểm duyệt",
   "demoCoordTitle": "Điều phối mẫu (DEMO)",
-  "demoCoordBody": "Không có nhân viên, xe hoặc hộ tống thật trên staging. Dùng catalog An toàn trong Lifestyle để xem quy trình mô phỏng.",
+  "demoCoordBody": "Không có nhân viên, xe hoặc hộ tống thật. Dùng catalog An toàn trong Lifestyle để xem quy trình mẫu DEMO.",
   "demoCatalogLink": "Xem mẫu DeepSafe catalog →",
   "genericError": "Không thực hiện được thao tác.",
   "pageIntro": "Trung tâm an toàn cơ bản — luôn miễn phí. Không thay thế số khẩn cấp địa phương.",
