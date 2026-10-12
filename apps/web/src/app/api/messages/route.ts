@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { canAccessChat } from "@deepmatch/shared";
-import { getRouteUser } from "@/lib/supabase/route";
+import { createServiceClient, getRouteUser } from "@/lib/supabase/route";
 import { flagEnabled } from "@/lib/flags";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 
@@ -159,7 +159,9 @@ async function assertChatAccess(
 
   let blocked = false;
   if (otherId) {
-    const { data: blocks } = await supabase
+    // Service role: blocked party cannot see blocker-owned rows under blocks_self RLS
+    const admin = createServiceClient();
+    const { data: blocks } = await admin
       .from("blocks")
       .select("blocker_id")
       .or(
