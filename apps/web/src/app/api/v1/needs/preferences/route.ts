@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { NEEDS_QUESTION_BANK_VI } from "@deepmatch/shared";
-import { createClient } from "@/lib/supabase/server";
+import { getRouteUser } from "@/lib/supabase/route";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 
 const ALLOWED = new Set(NEEDS_QUESTION_BANK_VI.map((q) => q.id));
@@ -30,12 +30,9 @@ function sanitizePrefs(
   return out;
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const requestId = makeRequestId();
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
 
   const full = await supabase
@@ -68,10 +65,7 @@ export async function GET() {
 
 export async function PUT(req: NextRequest) {
   const requestId = makeRequestId();
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
 
   let body: { preferences?: Record<string, unknown>; consent?: boolean };

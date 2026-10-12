@@ -114,5 +114,16 @@
   "dashJourneyMessages": "Messages",
   "dashJourneyMessagesBody": "Chat after a mutual match — Couple Space stays separate.",
   "dashSettingsTitle": "Profile & settings",
-  "dashSettingsHint": "Edit, privacy, history, and account — not a duplicate of primary navigation."
+  "dashSettingsHint": "Edit, privacy, history, and account — not a duplicate of primary navigation.",
+  "mediaGateTitle": "My photos & videos",
+  "mediaGateIntro": "Gate: 3–10 photos + up to 2 videos. Under 3 approved photos hides discovery.",
+  "mediaGateImages": "Photos",
+  "mediaGateVideos": "Videos",
+  "mediaGateEligible": "Discovery eligible",
+  "mediaGateBlocked": "Media gate not met",
+  "mediaGateRule": "3–10 photos · ≤2 videos · no trust score.",
+  "mediaGateUploadCta": "Manage profile photos",
+  "mediaGateNeedMin": "Need at least 3 photos",
+  "mediaGateOverMax": "More than 10 photos",
+  "mediaGateOverVideos": "More than 2 videos"
 }

@@ -114,5 +114,16 @@
   "dashJourneyMessages": "Tin nhắn",
   "dashJourneyMessagesBody": "Trò chuyện sau khi cùng thích — không tự mở Sánh đôi.",
   "dashSettingsTitle": "Hồ sơ & cài đặt",
-  "dashSettingsHint": "Chỉnh sửa, quyền riêng tư, lịch sử và tài khoản — không trùng thanh điều hướng chính."
+  "dashSettingsHint": "Chỉnh sửa, quyền riêng tư, lịch sử và tài khoản — không trùng thanh điều hướng chính.",
+  "mediaGateTitle": "Ảnh & video của tôi",
+  "mediaGateIntro": "Cổng 3–10 ảnh + tối đa 2 video. Dưới 3 ảnh approved ẩn khám phá.",
+  "mediaGateImages": "Ảnh",
+  "mediaGateVideos": "Video",
+  "mediaGateEligible": "Đủ điều kiện khám phá",
+  "mediaGateBlocked": "Chưa đủ cổng media",
+  "mediaGateRule": "3–10 ảnh · ≤2 video · không % uy tín.",
+  "mediaGateUploadCta": "Quản lý ảnh hồ sơ",
+  "mediaGateNeedMin": "Cần tối thiểu 3 ảnh",
+  "mediaGateOverMax": "Vượt quá 10 ảnh",
+  "mediaGateOverVideos": "Vượt quá 2 video"
 }
