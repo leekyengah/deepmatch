@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { flagEnabled } from "@/lib/flags";
-import {
-  companionBySlug,
-  formatVnd,
-} from "@/lib/companion-packages";
+import { companionBySlug, formatVnd } from "@/lib/companion-packages";
 import { getRequestLocale, getServerTranslator } from "@/lib/i18n/server";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ErrorState } from "@/components/ui/ErrorState";
 import { PackageBookButton } from "@/components/services/PackageBookButton";
+
+function processSteps(raw: string): string[] {
+  return raw
+    .split(/\s*→\s*/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
 
 export default async function ServicePackagePage({
   params,
@@ -34,9 +38,24 @@ export default async function ServicePackagePage({
 
   const vi = locale.startsWith("vi");
   const title = vi ? pkg.titleVi : pkg.titleEn;
+  const steps = processSteps(vi ? pkg.processVi : pkg.processEn);
+  const faq = [
+    {
+      q: t("booking.faqPriceQ"),
+      a: t("booking.faqPriceA", { price: formatVnd(pkg.salePriceVnd) }),
+    },
+    {
+      q: t("booking.faqSandboxQ"),
+      a: t("booking.sandboxPaymentNote"),
+    },
+    {
+      q: t("booking.faqLimitsQ"),
+      a: vi ? pkg.limitsVi : pkg.limitsEn,
+    },
+  ];
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className="mx-auto max-w-3xl pb-28">
       <Link href="/services" className="text-sm text-dm-muted underline">
         {t("booking.backToServices")}
       </Link>
@@ -75,9 +94,19 @@ export default async function ServicePackagePage({
         </section>
         <section>
           <h2 className="font-semibold text-dm-ink">{t("booking.process")}</h2>
-          <p className="mt-1 text-dm-muted">
-            {vi ? pkg.processVi : pkg.processEn}
-          </p>
+          <ol className="mt-3 space-y-2">
+            {steps.map((step, i) => (
+              <li
+                key={`${i}-${step}`}
+                className="flex gap-3 rounded-dm border border-dm-line bg-dm-surface px-3 py-2"
+              >
+                <span className="font-display text-lg font-semibold text-dm-champagne">
+                  {i + 1}
+                </span>
+                <span className="text-dm-ink">{step}</span>
+              </li>
+            ))}
+          </ol>
         </section>
         <section>
           <h2 className="font-semibold text-dm-ink">{t("booking.howToUse")}</h2>
@@ -93,15 +122,45 @@ export default async function ServicePackagePage({
         </section>
       </Card>
 
+      <section className="mt-8">
+        <h2 className="font-display text-2xl font-semibold text-dm-ink">
+          {t("booking.faqTitle")}
+        </h2>
+        <div className="mt-3 space-y-2">
+          {faq.map((item) => (
+            <details
+              key={item.q}
+              className="rounded-dm border border-dm-line bg-dm-panel px-4 py-3 text-sm"
+            >
+              <summary className="cursor-pointer font-semibold text-dm-ink">
+                {item.q}
+              </summary>
+              <p className="mt-2 text-dm-muted leading-relaxed">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
       <p className="mt-4 text-xs text-dm-muted">{t("booking.sandboxPaymentNote")}</p>
 
-      <div className="mt-6 flex flex-wrap gap-3">
-        <PackageBookButton packageCode={pkg.code} slug={pkg.slug} />
-        <Link href="/bookings">
-          <Button type="button" variant="outline">
-            {t("booking.viewBookings")}
-          </Button>
-        </Link>
+      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-dm-line bg-dm-panel/95 px-4 py-3 backdrop-blur">
+        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3">
+          <div className="text-sm">
+            <p className="font-semibold text-dm-ink">{formatVnd(pkg.salePriceVnd)}</p>
+            <p className="text-xs text-dm-muted">{t("booking.stickySandbox")}</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link href={`/services/${pkg.slug}/request`}>
+              <Button type="button">{t("booking.openIntake")}</Button>
+            </Link>
+            <PackageBookButton packageCode={pkg.code} slug={pkg.slug} />
+            <Link href="/bookings">
+              <Button type="button" variant="outline">
+                {t("booking.viewBookings")}
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
