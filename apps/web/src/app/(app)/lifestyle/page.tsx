@@ -53,22 +53,30 @@ export default async function LifestyleHomePage() {
 
   return (
     <div className="max-w-3xl">
-      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
+      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
         {t("commerce.lifestyleEyebrow")}
       </p>
-      <h1 className="mt-2 font-display text-4xl font-medium text-dm-raspberry">
+      <h1 className="mt-2 font-display text-4xl font-semibold text-dm-ink">
         {t("commerce.lifestyleHeading")}
       </h1>
-      <p className="mt-2 text-sm text-dm-muted">{t("commerce.lifestyleIntro")}</p>
-      <div className="mt-4">
+      <p className="mt-2 font-editorial text-sm text-dm-muted">
+        {t("commerce.lifestyleIntro")}
+      </p>
+      <div className="mt-4 flex flex-wrap gap-2">
         <Badge tone="warn">{t("commerce.lifestyleBadge")}</Badge>
+        <Badge>{t("marketing.lifestyleDemoBadge")}</Badge>
       </div>
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         {pillars.map((p) => (
           <Link key={p.href} href={p.href}>
-            <Card className="h-full text-sm transition hover:border-dm-primary">
-              <p className="font-semibold text-dm-raspberry">{p.label}</p>
+            <Card className="h-full border-dm-line text-sm transition hover:border-dm-primary">
+              <p className="font-display text-lg font-semibold text-dm-ink">
+                {p.label}
+              </p>
               <p className="mt-1 text-dm-muted">{t(p.descKey)}</p>
+              <p className="mt-3 text-[11px] font-semibold text-dm-champagne">
+                DEMO
+              </p>
             </Card>
           </Link>
         ))}

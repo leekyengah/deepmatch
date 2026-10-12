@@ -29,13 +29,13 @@ export default async function AiHubPage() {
       <Link href="/home" className="text-sm text-dm-muted underline">
         {t("home.eyebrow")}
       </Link>
-      <p className="mt-4 text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
+      <p className="mt-4 text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
         {t("ai.hubEyebrow")}
       </p>
-      <h1 className="mt-2 font-display text-4xl font-medium text-dm-raspberry">
+      <h1 className="mt-2 font-display text-4xl font-semibold text-dm-ink">
         {t("ai.hubHeading")}
       </h1>
-      <p className="mt-2 text-sm text-dm-muted">{t("ai.hubIntro")}</p>
+      <p className="mt-2 font-editorial text-sm text-dm-muted">{t("ai.hubIntro")}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Badge tone="warn">{t("ai.adapterBadge")}</Badge>
         <Badge tone="good">{t("ai.consentBadge")}</Badge>
@@ -45,15 +45,17 @@ export default async function AiHubPage() {
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         {ENTRIES.map((e) => (
           <Link key={e.href} href={e.href}>
-            <Card className="h-full text-sm transition hover:border-dm-primary">
-              <p className="font-semibold text-dm-raspberry">{t(e.titleKey)}</p>
+            <Card className="h-full border-dm-line text-sm transition hover:border-dm-primary">
+              <p className="font-display font-semibold text-dm-ink">
+                {t(e.titleKey)}
+              </p>
               <p className="mt-1 text-dm-muted">{t(e.bodyKey)}</p>
             </Card>
           </Link>
         ))}
       </div>
 
-      <h2 className="mt-10 font-display text-2xl text-dm-raspberry">
+      <h2 className="mt-10 font-display text-2xl font-semibold text-dm-ink">
         {t("ai.taskPicker")}
       </h2>
       <p className="mt-2 text-sm text-dm-muted">{t("ai.taskPickerHint")}</p>

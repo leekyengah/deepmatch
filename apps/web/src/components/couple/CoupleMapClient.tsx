@@ -187,7 +187,21 @@ export function CoupleMapClient({ coupleId }: { coupleId: string | null }) {
 
   return (
     <div className="space-y-6">
-      <Card className="flex h-64 flex-col overflow-hidden p-0">
+      <div className="inline-flex rounded-full border border-dm-line bg-dm-panel p-1 text-sm font-semibold">
+        <button
+          type="button"
+          className="rounded-full bg-dm-primary px-4 py-1.5 text-white"
+        >
+          {t("couple.tabMap")}
+        </button>
+        <Link
+          href="/couple/memories"
+          className="rounded-full px-4 py-1.5 text-dm-muted hover:text-dm-ink"
+        >
+          {t("couple.tabList")}
+        </Link>
+      </div>
+      <Card className="flex h-72 flex-col overflow-hidden border-dm-line p-0">
         {mapbox ? (
           <CoupleMapCanvas token={mapbox} pins={pins} />
         ) : (
@@ -200,7 +214,12 @@ export function CoupleMapClient({ coupleId }: { coupleId: string | null }) {
         </p>
       ) : null}
 
-      <form onSubmit={addPin} className="grid gap-3 rounded-dm border border-dm-line bg-dm-panel p-4 sm:grid-cols-2">
+      <div className="flex flex-wrap gap-2">
+        <Link href="/couple/add">
+          <Button type="button">+ {t("couple.addMemoryCta")}</Button>
+        </Link>
+      </div>
+      <form onSubmit={addPin} className="grid gap-3 rounded-[16px] border border-dm-line bg-dm-panel p-4 sm:grid-cols-2">
         <Input
           placeholder={t("couple.pinTitlePh")}
           value={title}
@@ -225,7 +244,7 @@ export function CoupleMapClient({ coupleId }: { coupleId: string | null }) {
           inputMode="decimal"
         />
         <select
-          className="rounded-dm border border-[#efcfda] bg-white px-3 py-2 text-sm"
+          className="rounded-dm border border-dm-line bg-dm-surface px-3 py-2 text-sm"
           value={layer}
           onChange={(e) => setLayer(e.target.value as Pin["layer"])}
         >

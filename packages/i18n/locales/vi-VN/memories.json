@@ -11,5 +11,10 @@
   "emptySpaceBody": "Cần lời mời hai phía trước khi xem dòng thời gian.",
   "inviteCta": "Lời mời",
   "addCta": "Thêm mới",
-  "emptyTimelineBody": "Tạo ghim đầu tiên để bắt đầu dòng thời gian."
+  "emptyTimelineBody": "Tạo ghim đầu tiên để bắt đầu dòng thời gian.",
+  "momentsHeading": "Khoảnh khắc đáng nhớ",
+  "privateBadge": "Chỉ hai người",
+  "privateHint": "Nội dung cặp — RLS sau khi ngắt kết nối không chuyển sang không gian mới.",
+  "addPhoto": "Thêm ảnh",
+  "addVideo": "Thêm video"
 }

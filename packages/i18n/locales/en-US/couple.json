@@ -45,6 +45,9 @@
 
   "map": "Memory Map",
   "mapSanhDoi": "Couple Map",
+  "tabMap": "Map",
+  "tabList": "List",
+  "addMemoryCta": "Add memory",
   "memories": "Memories",
   "addMemory": "Add a memory",
   "addPin": "Add a pin",
