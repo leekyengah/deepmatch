@@ -17,19 +17,35 @@ export function BrandLogo({
   priority?: boolean;
 }) {
   const isSymbol = variant === "symbol";
+  if (isSymbol) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element -- brand SVG from /public
+      <img
+        src={srcs.symbol}
+        alt="DeepMatch"
+        width={40}
+        height={40}
+        decoding="async"
+        className={cn("h-10 w-10 object-contain", className)}
+      />
+    );
+  }
   return (
-    // eslint-disable-next-line @next/next/no-img-element -- brand SVG from /public
-    <img
-      src={srcs[variant]}
-      alt="DeepMatch"
-      width={isSymbol ? 40 : 160}
-      height={isSymbol ? 40 : 53}
-      decoding="async"
-      className={cn(
-        "h-auto w-auto object-contain",
-        isSymbol ? "h-10 w-10" : "h-9 w-auto",
-        className,
-      )}
-    />
+    <span
+      className={cn("inline-flex items-center gap-2.5 text-dm-ink", className)}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={srcs.symbol}
+        alt=""
+        width={28}
+        height={28}
+        decoding="async"
+        className="h-7 w-7 object-contain"
+      />
+      <span className="font-display text-xl font-semibold tracking-tight">
+        DeepMatch
+      </span>
+    </span>
   );
 }
