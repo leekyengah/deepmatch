@@ -38,7 +38,7 @@
       "autoIncrement": true,
       "env": {
         "EXPO_PUBLIC_APP_ENV": "production",
-        "EXPO_PUBLIC_API_URL": "https://deepmatch-prod.vercel.app",
+        "EXPO_PUBLIC_API_URL": "https://datingvn.com",
         "EXPO_PUBLIC_IAP_PRODUCT_ID": "premium_monthly"
       }
     }

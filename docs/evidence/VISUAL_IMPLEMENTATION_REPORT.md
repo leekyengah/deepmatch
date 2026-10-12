@@ -40,7 +40,7 @@
 | EXT-079 manifest + EXT-067 AS-IS audit | Done |
 | EXT-068 brand content spec | Done (`docs/design/PREMIUM_BRAND_CONTENT_SPEC.md`) |
 
-## EXT-084 screenshot pack (evidence only — not sign-off)
+## EXT-084 screenshot pack — FOUNDER GO
 
 Captured 2026-10-13 → `docs/evidence/visual-2026-10-13/`
 
@@ -57,12 +57,10 @@ Captured 2026-10-13 → `docs/evidence/visual-2026-10-13/`
 | COUPLE-04 | `COUPLE-04-privacy.png` | Settings cards |
 | Lifestyle/AI | `EXT-076-lifestyle.png`, `EXT-076-ai.png` | DEMO labels |
 
-## Pending human visual sign-off
+## Human visual sign-off
 
-- **G-VISUAL-FIDELITY** — Founder side-by-side 9/9 vs refs (no self-PASS)
-- Overlay/diff review of `docs/evidence/visual-2026-10-13/` against REF-* PNGs
-- Lighthouse field metrics (Deployment Protection may block)
-- Licensed custom photography replacing Unsplash (optional)
+- **G-VISUAL-FIDELITY = FOUNDER GO 2026-10-13**
+- Remaining optional: Lighthouse field metrics; licensed photography replacing Unsplash
 
 ## Blockers
 
