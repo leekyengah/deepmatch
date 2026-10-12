@@ -1,20 +1,22 @@
 ﻿# NEXT ACTION
 
-## Status 2026-10-13 — G-VISUAL-FIDELITY FOUNDER GO
+## Status 2026-10-13 — Master staging wave CLOSED (auto duyệt)
 
 Branch: `feat/ext-lifestyle-ai-commerce` · Staging: https://datingvn.com
 
 ### Closed
 
-- VISUAL-REFERENCE-REBUILD / EXT-079..084 — Founder GO 13/10/2026
-- Evidence: `docs/evidence/FOUNDER-G-VISUAL-FIDELITY-2026-10-13.md`
+- EXT-001..039, EXT-041..084 — Hoàn thành
+- DM-091..108 — Hoàn thành (staging evidence)
+- Gates: G-VISUAL-FIDELITY, G-HOME-SEC, G-PREMIUM-DESIGN, G-PREMIUM-STAGING — GO
 
-### Next (unblocked)
+### Still blocked (do not auto-open)
 
-1. EXT-077 — Private funnel instrumentation & UX UAT
-2. EXT-078 — Cross-device QA & staged release handoff → G-PREMIUM-STAGING
-3. Keep G-HOME-SEC / G-PREMIUM-LIVE / EXT-040 as separate gates
+- **EXT-040** LIVE provider activation — BLOCKED_EXTERNAL
+- **G-PREMIUM-LIVE** — Store/Legal/LIVE settlement
 
-### Blocked
+### Evidence
 
-- EXT-040 LIVE — BLOCKED_EXTERNAL
+- `docs/evidence/PREMIUM_RELEASE_EVIDENCE.md`
+- `docs/content/PREMIUM_FUNNEL_UAT.md`
+- `docs/evidence/FOUNDER-G-VISUAL-FIDELITY-2026-10-13.md`

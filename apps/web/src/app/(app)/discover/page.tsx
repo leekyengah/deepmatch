@@ -1,4 +1,5 @@
 import { flagEnabled } from "@/lib/flags";
+import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
 import { DiscoverClient } from "@/components/discover/DiscoverClient";
 import { ErrorState } from "@/components/ui/ErrorState";
 import { getServerTranslator } from "@/lib/i18n/server";
@@ -10,6 +11,7 @@ export default async function DiscoverPage() {
 
   return (
     <div>
+      <AnalyticsBeacon event="discover_view" />
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
         {t("discovery.title")}
       </p>

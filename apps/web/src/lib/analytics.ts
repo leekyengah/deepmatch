@@ -6,11 +6,17 @@ export const ANALYTICS_EVENTS = [
   "signup_start",
   "login_ok",
   "home_state_view",
+  "onboarding_complete",
+  "discover_view",
+  "discover_like",
+  "discover_pass",
+  "chat_open",
   "ai_hub_open",
   "ai_assist_request",
   "lifestyle_browse",
   "cart_checkout_demo",
   "couple_invite_create",
+  "couple_map_view",
 ] as const;
 
 export type AnalyticsEvent = (typeof ANALYTICS_EVENTS)[number];

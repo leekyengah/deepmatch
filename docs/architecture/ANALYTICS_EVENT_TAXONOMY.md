@@ -16,6 +16,11 @@ Privacy-first. **Never** send chat text, journals, emails, phone, precise GPS, o
 | `signup_start` | `/signup` | `locale` |
 | `login_ok` | auth | none |
 | `home_state_view` | `/home` | `state` ∈ onboarding/dating/matched/couple |
+| `onboarding_complete` | onboarding | `locale` |
+| `discover_view` | `/discover` | none |
+| `discover_like` / `discover_pass` | discover | none (no target id) |
+| `chat_open` | `/chat` | none |
+| `couple_map_view` | `/couple/map` | none |
 | `ai_hub_open` | `/ai` | none |
 | `ai_assist_request` | AI | `task` only |
 | `lifestyle_browse` | catalog | `category` |

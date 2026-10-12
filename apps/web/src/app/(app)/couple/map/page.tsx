@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { getServerTranslator } from "@/lib/i18n/server";
+import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
 import { CoupleMapClient } from "@/components/couple/CoupleMapClient";
 
 export default async function CoupleMapPage() {
@@ -22,6 +23,7 @@ export default async function CoupleMapPage() {
 
   return (
     <div className="max-w-3xl">
+      <AnalyticsBeacon event="couple_map_view" />
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
         {t("couple.title")}
       </p>

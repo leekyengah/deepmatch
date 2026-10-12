@@ -4,6 +4,7 @@ import { resolveApiErrorMessage } from "@/lib/api-error-message";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useT } from "@/components/i18n/I18nProvider";
+import { track } from "@/lib/analytics";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -100,6 +101,7 @@ export function DiscoverClient({ flagsOn }: { flagsOn: boolean }) {
         );
         return;
       }
+      void track(action === "like" ? "discover_like" : "discover_pass");
       if (action === "like" && json.mutual) {
         setToast(t("discovery.mutualToast"));
       } else if (action === "like") {
