@@ -28,5 +28,9 @@
   "intentLongTerm": "A long-term relationship",
   "intentLongTermHint": "Build and grow together over time",
   "intentCompanion": "A suitable companion",
-  "intentTalks": "Meaningful conversations"
+  "intentTalks": "Meaningful conversations",
+  "needsProgress": "Step 3/4 · Understand",
+  "needsTitle": "7 goal-based questions",
+  "needsHint": "Six shared questions plus one based on the connection type you choose. You can skip or edit later.",
+  "needsSkip": "Skip for now →"
 }

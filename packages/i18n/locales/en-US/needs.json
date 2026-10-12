@@ -15,5 +15,13 @@
   "saved": "Saved.",
   "saveError": "Could not save answers.",
   "revoke": "Delete all Understand answers",
-  "revoked": "Understand answers deleted."
+  "revoked": "Understand answers deleted.",
+  "tabRun": "Answer",
+  "tabReview": "Review",
+  "reviewTitle": "Answered questions",
+  "reviewEmpty": "No answers to review yet.",
+  "editAnswer": "Edit",
+  "deleteAnswer": "Delete this answer",
+  "deletedOne": "Answer deleted.",
+  "finishOnboarding": "Finish 7 questions →"
 }

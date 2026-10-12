@@ -38,7 +38,6 @@ export async function saveModeAction(formData: FormData) {
     });
   }
 
-  if (mode === "has_partner") redirect("/couple/invite");
-  if (discovery_opt_in) redirect("/discover");
-  redirect("/me");
+  // QX-01: continue to 7-question needs onboarding (skip-able).
+  redirect("/onboarding/needs");
 }

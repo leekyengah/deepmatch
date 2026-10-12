@@ -22,5 +22,10 @@
   "noReviews": "No reviews yet.",
   "directions": "Open in OpenStreetMap",
   "addPrivateMemory": "Add Couple memory",
-  "detailDisclaimer": "No fake booking or provider checkout. Real public reviews come after schema + moderation."
+  "detailDisclaimer": "No fake booking or provider checkout. Real public reviews come after schema + moderation.",
+  "publicReviewsTitle": "Public reviews (sample)",
+  "publicReviewsIntro": "Illustrative copy for layout testing — not real user reviews.",
+  "reviewAuthor": "Sample member",
+  "hoursLabel": "Suggested hours",
+  "tagsLabel": "Good for"
 }

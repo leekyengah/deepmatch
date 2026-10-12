@@ -15,5 +15,13 @@
   "saved": "Đã lưu.",
   "saveError": "Không lưu được câu trả lời.",
   "revoke": "Xóa toàn bộ câu trả lời Hiểu mình",
-  "revoked": "Đã xóa câu trả lời Hiểu mình."
+  "revoked": "Đã xóa câu trả lời Hiểu mình.",
+  "tabRun": "Trả lời",
+  "tabReview": "Xem lại",
+  "reviewTitle": "Câu đã trả lời",
+  "reviewEmpty": "Chưa có câu trả lời để xem lại.",
+  "editAnswer": "Sửa",
+  "deleteAnswer": "Xóa câu này",
+  "deletedOne": "Đã xóa câu trả lời.",
+  "finishOnboarding": "Hoàn tất 7 câu →"
 }

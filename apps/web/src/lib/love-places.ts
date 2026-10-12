@@ -1,5 +1,13 @@
 /** Editorial sample places for Love Map staging — not verified partner listings. */
 
+export type LovePlaceReview = {
+  id: string;
+  rating: number;
+  body: string;
+  authorLabel: string;
+  createdAt: string;
+};
+
 export type LovePlace = {
   id: string;
   name: string;
@@ -14,6 +22,9 @@ export type LovePlace = {
   sample: true;
   ratingMean: number | null;
   ratingCount: number;
+  hoursHint?: string;
+  tags?: string[];
+  reviews?: LovePlaceReview[];
 };
 
 export const LOVE_PLACE_CATEGORIES = [
@@ -40,6 +51,24 @@ export const LOVE_PLACES: LovePlace[] = [
     sample: true,
     ratingMean: 4.6,
     ratingCount: 28,
+    hoursHint: "09:00–22:00",
+    tags: ["yên tĩnh", "hẹn đầu", "trà"],
+    reviews: [
+      {
+        id: "r1",
+        rating: 5,
+        body: "Ánh sáng dịu, bàn không quá sát — dễ nói chuyện lần đầu.",
+        authorLabel: "Thành viên mẫu A",
+        createdAt: "2026-09-12",
+      },
+      {
+        id: "r2",
+        rating: 4,
+        body: "Đồ uống ổn, cuối tuần hơi đông. Phù hợp buổi chiều.",
+        authorLabel: "Thành viên mẫu B",
+        createdAt: "2026-08-03",
+      },
+    ],
   },
   {
     id: "hn-cafe-02",
@@ -85,6 +114,17 @@ export const LOVE_PLACES: LovePlace[] = [
     sample: true,
     ratingMean: 4.7,
     ratingCount: 52,
+    hoursHint: "08:00–21:30",
+    tags: ["trung tâm", "hẹn đầu"],
+    reviews: [
+      {
+        id: "r3",
+        rating: 5,
+        body: "Ổn định, dễ tìm — tốt cho lần gặp đầu ở Q1.",
+        authorLabel: "Thành viên mẫu C",
+        createdAt: "2026-09-28",
+      },
+    ],
   },
   {
     id: "hcm-rest-01",

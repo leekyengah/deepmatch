@@ -22,5 +22,10 @@
   "noReviews": "Chưa có đánh giá.",
   "directions": "Xem trên OpenStreetMap",
   "addPrivateMemory": "Thêm kỷ niệm Sánh đôi",
-  "detailDisclaimer": "Không giả đặt bàn / thanh toán nhà cung cấp. Review công khai thật sẽ mở sau schema + kiểm duyệt."
+  "detailDisclaimer": "Không giả đặt bàn / thanh toán nhà cung cấp. Review công khai thật sẽ mở sau schema + kiểm duyệt.",
+  "publicReviewsTitle": "Đánh giá công khai (mẫu)",
+  "publicReviewsIntro": "Nội dung minh họa để kiểm thử layout — không phải review người dùng thật.",
+  "reviewAuthor": "Thành viên mẫu",
+  "hoursLabel": "Giờ gợi ý",
+  "tagsLabel": "Phù hợp"
 }

@@ -94,13 +94,40 @@ export async function PUT(req: NextRequest) {
   });
 }
 
-export async function DELETE() {
+export async function DELETE(req: NextRequest) {
   const requestId = makeRequestId();
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
+
+  const id = new URL(req.url).searchParams.get("id");
+  if (id) {
+    if (!ALLOWED.has(id)) return jsonError("VALIDATION_ERROR", "invalidId", requestId);
+    const { data: existing } = await supabase
+      .from("needs_answers")
+      .select("answers, consent_at")
+      .eq("user_id", user.id)
+      .maybeSingle();
+    if (!existing) {
+      return NextResponse.json({
+        data: { ok: true, answers: {} },
+        meta: { request_id: requestId },
+      });
+    }
+    const answers = { ...((existing.answers as Record<string, string>) ?? {}) };
+    delete answers[id];
+    const { error } = await supabase
+      .from("needs_answers")
+      .update({ answers, updated_at: new Date().toISOString() })
+      .eq("user_id", user.id);
+    if (error) return jsonError("INTERNAL", null, requestId);
+    return NextResponse.json({
+      data: { ok: true, answers },
+      meta: { request_id: requestId },
+    });
+  }
 
   await supabase.from("needs_answers").delete().eq("user_id", user.id);
   return NextResponse.json({

@@ -28,5 +28,9 @@
   "intentLongTerm": "Mối quan hệ lâu dài",
   "intentLongTermHint": "Cùng đồng hành và vun đắp trong tương lai",
   "intentCompanion": "Bạn đồng hành phù hợp",
-  "intentTalks": "Những cuộc trò chuyện ý nghĩa"
+  "intentTalks": "Những cuộc trò chuyện ý nghĩa",
+  "needsProgress": "Bước 3/4 · Hiểu mình",
+  "needsTitle": "7 câu theo mục tiêu",
+  "needsHint": "Sáu câu chung và một câu theo kiểu kết nối bạn chọn. Có thể bỏ qua hoặc quay lại sửa sau.",
+  "needsSkip": "Bỏ qua tạm thời →"
 }
