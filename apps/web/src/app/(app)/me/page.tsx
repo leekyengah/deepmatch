@@ -103,6 +103,7 @@ export default async function MePage() {
 
   const settings: Array<[string, string]> = [
     [t("profile.edit"), "/me/edit"],
+    [t("needs.title"), "/me/understand"],
     [t("profile.deep"), "/me/deep"],
     [t("profile.privacy"), "/me/privacy"],
     [t("profile.history"), "/me/history"],

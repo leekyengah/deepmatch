@@ -1,0 +1,19 @@
+{
+  "eyebrow": "Hiểu mình",
+  "title": "Trung tâm Hiểu mình",
+  "intro": "100 câu hỏi tự nguyện từ Master. Riêng tư mặc định — chỉ dùng ghép đôi sau khi bạn đồng ý. Không chẩn đoán lâm sàng, không % uy tín.",
+  "backMe": "← Cá nhân",
+  "loading": "Đang tải câu hỏi…",
+  "loadError": "Không tải được ngân hàng câu hỏi.",
+  "empty": "Chưa có câu hỏi.",
+  "consentLabel": "Tôi đồng ý lưu câu trả lời riêng tư để cải thiện gợi ý kết nối khi tôi bật discovery.",
+  "consentRequired": "Cần đồng ý trước khi lưu.",
+  "privacyNote": "Bạn có thể bỏ qua, sửa hoặc xóa toàn bộ câu trả lời bất cứ lúc nào.",
+  "openPlaceholder": "Viết câu trả lời của bạn…",
+  "skipAnswer": "Chưa rõ / Không muốn trả lời",
+  "saveProgress": "Lưu tiến độ",
+  "saved": "Đã lưu.",
+  "saveError": "Không lưu được câu trả lời.",
+  "revoke": "Xóa toàn bộ câu trả lời Hiểu mình",
+  "revoked": "Đã xóa câu trả lời Hiểu mình."
+}

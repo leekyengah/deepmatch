@@ -1,0 +1,19 @@
+{
+  "eyebrow": "Understand yourself",
+  "title": "Understand hub",
+  "intro": "100 voluntary questions from Master. Private by default — used for matching only after you consent. No clinical diagnosis, no trust score.",
+  "backMe": "← Profile",
+  "loading": "Loading questions…",
+  "loadError": "Could not load the question bank.",
+  "empty": "No questions yet.",
+  "consentLabel": "I agree to store private answers to improve connection suggestions when discovery is on.",
+  "consentRequired": "Consent is required before saving.",
+  "privacyNote": "You can skip, edit, or delete all answers anytime.",
+  "openPlaceholder": "Write your answer…",
+  "skipAnswer": "Not sure / Prefer not to say",
+  "saveProgress": "Save progress",
+  "saved": "Saved.",
+  "saveError": "Could not save answers.",
+  "revoke": "Delete all Understand answers",
+  "revoked": "Understand answers deleted."
+}
