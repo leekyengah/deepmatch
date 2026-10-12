@@ -78,5 +78,16 @@
   "intakeUseNeeds": "Cho phép chuyên viên xem tiến độ Hiểu mình đã đồng ý (không tự lộ câu sâu).",
   "intakeConsent": "Tôi đồng ý gửi nhu cầu này để đội ngũ tiếp nhận trên môi trường thử nghiệm. Có thể rút yêu cầu sau.",
   "intakeConsentRequired": "Cần đồng ý trước khi gửi.",
-  "submitIntake": "Gửi form tiếp nhận (sandbox)"
+  "submitIntake": "Gửi form tiếp nhận (sandbox)",
+  "journeyEyebrow": "Đồng hành",
+  "journeyTitle": "Hành trình của tôi",
+  "journeyIntro": "Theo dõi yêu cầu dịch vụ và tiến độ Hiểu mình từ dữ liệu thật — không thanh tiến độ giả.",
+  "journeyNeedsConsented": "Đã đồng ý lưu câu trả lời riêng tư.",
+  "journeyNeedsNoConsent": "Chưa đồng ý lưu — runner vẫn mở.",
+  "journeyOpenNeeds": "Mở Hiểu mình",
+  "journeyPackages": "Gói & quyền lợi",
+  "journeyPackagesBody": "Quota/chuyên viên LIVE mở sau thanh toán sandbox có snapshot. Hiện xem catalog và yêu cầu đã gửi.",
+  "journeyRequests": "Yêu cầu & trạng thái",
+  "journeyRequestsHint": "Chỉ hiện đơn của bạn. Đổi tài khoản không giữ cache đơn người khác.",
+  "journeyNoFake": "Không hiển thị % thành công ghép đôi hay tiến độ giả."
 }

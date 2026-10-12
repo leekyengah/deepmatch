@@ -78,5 +78,16 @@
   "intakeUseNeeds": "Allow staff to see consented Understand progress (not deep answers by default).",
   "intakeConsent": "I agree to send this needs form for staging intake. I can withdraw the request later.",
   "intakeConsentRequired": "Consent is required before sending.",
-  "submitIntake": "Submit intake (sandbox)"
+  "submitIntake": "Submit intake (sandbox)",
+  "journeyEyebrow": "Companion",
+  "journeyTitle": "My journey",
+  "journeyIntro": "Track service requests and Understand progress from real data — no fake progress bars.",
+  "journeyNeedsConsented": "Consent given to store private answers.",
+  "journeyNeedsNoConsent": "No consent yet — runner still available.",
+  "journeyOpenNeeds": "Open Understand",
+  "journeyPackages": "Packages & benefits",
+  "journeyPackagesBody": "LIVE quota/advisor unlock after sandbox payment snapshots. For now browse catalog and submitted requests.",
+  "journeyRequests": "Requests & status",
+  "journeyRequestsHint": "Only your bookings. Switching accounts never shows another user’s cache.",
+  "journeyNoFake": "No fake match-success percentages or invented progress."
 }
