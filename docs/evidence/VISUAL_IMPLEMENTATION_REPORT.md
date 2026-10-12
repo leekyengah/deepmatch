@@ -3,6 +3,7 @@
 ## Approvals received
 
 - A2 full 9 frames · B1 5-tab nav · C1 Playfair/Lora/Be Vietnam Pro · D2 refs in chat
+- **G-VISUAL-FIDELITY FOUNDER GO — 2026-10-13** (see `FOUNDER-G-VISUAL-FIDELITY-2026-10-13.md`)
 
 ## References
 
@@ -28,7 +29,7 @@
 | Fonts Playfair + Lora + Be Vietnam Pro | Done |
 | Marketing homepage WEB-01..06 | Done (`/`) |
 | Onboarding values (DATING-01) | Done |
-| Discover feed + detail (DATING-02/03) | Done (ff_matching may be off on staging) |
+| Discover feed + detail (DATING-02/03) | Done (`ff_matching` ON via service-role flags) |
 | Chat wine bubbles + safety menu (DATING-04) | Done (`/chat`) |
 | Couple map Map/List + memories hero (COUPLE-01/02) | Done |
 | Companion services DEMO (COUPLE-03) | Done (`/services`) |

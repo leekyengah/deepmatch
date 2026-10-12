@@ -1,22 +1,20 @@
 ﻿# NEXT ACTION
 
-## Status 2026-10-13 — Staging visual + flags healthy; Founder review
+## Status 2026-10-13 — G-VISUAL-FIDELITY FOUNDER GO
 
 Branch: `feat/ext-lifestyle-ai-commerce` · Staging: https://datingvn.com
 
-### Active program
+### Closed
 
-VISUAL-REFERENCE-REBUILD · G-VISUAL-FIDELITY **chờ Founder**
+- VISUAL-REFERENCE-REBUILD / EXT-079..084 — Founder GO 13/10/2026
+- Evidence: `docs/evidence/FOUNDER-G-VISUAL-FIDELITY-2026-10-13.md`
 
-### Just shipped
+### Next (unblocked)
 
-- `26ad8ec` brand v3 in `/api/v1/health` + service-role `getFlags` (ff_matching now true)
-- Pink leftovers cleared (map markers, DeepMind, demo cart)
-- Founder checklist: `docs/evidence/visual-2026-10-13/FOUNDER_VISUAL_REVIEW.md`
+1. EXT-077 — Private funnel instrumentation & UX UAT
+2. EXT-078 — Cross-device QA & staged release handoff → G-PREMIUM-STAGING
+3. Keep G-HOME-SEC / G-PREMIUM-LIVE / EXT-040 as separate gates
 
-### Next
+### Blocked
 
-1. **Founder** 9/9 visual compare (checklist above) — no self-PASS
-2. Recapture DATING-02/03 with live feed if candidates exist
-3. EXT-077 analytics dictionary / EXT-078 release handoff after visual GO
-4. EXT-040 LIVE remains BLOCKED_EXTERNAL
+- EXT-040 LIVE — BLOCKED_EXTERNAL
