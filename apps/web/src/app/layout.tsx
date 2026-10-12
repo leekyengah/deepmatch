@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Fraunces } from "next/font/google";
+import { Be_Vietnam_Pro, Lora, Playfair_Display } from "next/font/google";
 import { SentryInit } from "@/components/SentryInit";
 import { I18nProvider } from "@/components/i18n/I18nProvider";
 import { getHtmlLang, getRequestLocale } from "@/lib/i18n/server";
 import { t as translate } from "@deepmatch/i18n";
 import "./globals.css";
 
-const display = Fraunces({
+const display = Playfair_Display({
   variable: "--font-display",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700"],
+});
+
+const editorial = Lora({
+  variable: "--font-editorial",
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600"],
 });
 
 const body = Be_Vietnam_Pro({
@@ -39,7 +46,9 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
-      <body className={`${display.variable} ${body.variable} antialiased`}>
+      <body
+        className={`${display.variable} ${editorial.variable} ${body.variable} antialiased`}
+      >
         <I18nProvider locale={locale}>
           <SentryInit />
           {children}

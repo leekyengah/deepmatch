@@ -17,7 +17,11 @@
   "homeAria": "DeepMatch — home",
   "meAria": "Your account",
   "avatarMe": "Me",
-  "coupleNote": "A mutual match opens chat only. Our Space is created after a couple invitation and both people agree.",
+  "coupleNote": "A mutual match opens chat only. Couple Space opens after a two-sided invitation.",
+  "explore": "Explore",
+  "memories": "Couple",
+  "companion": "Companion",
+  "messages": "Messages",
   "titles": {
     "discover": "Discover",
     "likes": "Matches",

@@ -4,10 +4,21 @@ import { redirect } from "next/navigation";
 import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 import { PublicNav } from "@/components/marketing/PublicNav";
-import { Button } from "@/components/ui/Button";
 import { createClient } from "@/lib/supabase/server";
 import { resolveHomeState } from "@/lib/home-state";
 import { getServerTranslator } from "@/lib/i18n/server";
+
+/** Licensed Unsplash lifestyle imagery — see docs/design/IMAGE_ASSET_REGISTER.md */
+const IMG = {
+  hero:
+    "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1600&q=80",
+  find:
+    "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=900&q=80",
+  map:
+    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80",
+  care:
+    "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80",
+} as const;
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t } = await getServerTranslator();
@@ -38,28 +49,32 @@ export default async function HomePage() {
   }
 
   const { t } = await getServerTranslator();
+  const year = new Date().getFullYear();
 
-  const pillars = [
+  const proofs = [
+    [t("marketing.proofIntentTitle"), t("marketing.proofIntentBody")],
+    [t("marketing.proofPrivacyTitle"), t("marketing.proofPrivacyBody")],
+    [t("marketing.proofCompanionTitle"), t("marketing.proofCompanionBody")],
+  ] as const;
+
+  const journeys = [
     {
-      id: "find",
-      title: t("marketing.pillarFindTitle"),
-      body: t("marketing.pillarFindBody"),
-      cta: t("marketing.pillarFindCta"),
       href: "/signup",
+      title: t("marketing.journeyFindTitle"),
+      body: t("marketing.journeyFindBody"),
+      img: IMG.find,
     },
     {
-      id: "couple",
-      title: t("marketing.pillarCoupleTitle"),
-      body: t("marketing.pillarCoupleBody"),
-      cta: t("marketing.pillarCoupleCta"),
-      href: "/signup",
+      href: "/couple",
+      title: t("marketing.journeyMapTitle"),
+      body: t("marketing.journeyMapBody"),
+      img: IMG.map,
     },
     {
-      id: "companion",
-      title: t("marketing.pillarCompanionTitle"),
-      body: t("marketing.pillarCompanionBody"),
-      cta: t("marketing.pillarCompanionCta"),
       href: "/services",
+      title: t("marketing.journeyCareTitle"),
+      body: t("marketing.journeyCareBody"),
+      img: IMG.care,
     },
   ] as const;
 
@@ -67,261 +82,182 @@ export default async function HomePage() {
     [t("marketing.howStep1Title"), t("marketing.howStep1Body")],
     [t("marketing.howStep2Title"), t("marketing.howStep2Body")],
     [t("marketing.howStep3Title"), t("marketing.howStep3Body")],
-    [t("marketing.howStep4Title"), t("marketing.howStep4Body")],
-  ] as const;
-
-  const aiCards = [
-    [t("marketing.aiCoach"), t("marketing.aiCoachBody")],
-    [t("marketing.aiDate"), t("marketing.aiDateBody")],
-    [t("marketing.aiGift"), t("marketing.aiGiftBody")],
-  ] as const;
-
-  const lifestyle = [
-    t("marketing.lifestyleGift"),
-    t("marketing.lifestyleStyle"),
-    t("marketing.lifestyleBeauty"),
-    t("marketing.lifestyleDate"),
-    t("marketing.lifestyleTravel"),
-    t("marketing.lifestyleSafe"),
-  ] as const;
-
-  const trust = [
-    [t("marketing.trustBlock"), t("marketing.trustBlockBody")],
-    [t("marketing.trustPrivacy"), t("marketing.trustPrivacyBody")],
-    [t("marketing.trustAdult"), t("marketing.trustAdultBody")],
   ] as const;
 
   return (
-    <main className="min-h-screen text-dm-ink">
+    <main className="min-h-screen bg-dm-canvas text-dm-ink">
       <AnalyticsBeacon event="home_view" props={{ path: "/" }} />
       <PublicNav />
 
-      <section className="relative isolate min-h-[min(92vh,880px)] overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_10%,#ffd0e0_0%,transparent_45%),radial-gradient(ellipse_at_90%_20%,#f6c1d2_0%,transparent_40%),linear-gradient(165deg,#fff8fa_0%,#ffe8f0_45%,#ffd4e4_100%)]"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-dm-canvas to-transparent"
-        />
-        <div className="relative z-10 mx-auto flex min-h-[min(92vh,880px)] max-w-6xl flex-col justify-center px-6 pb-20 pt-8">
-          <BrandLogo
-            variant="full"
-            className="h-14 w-auto max-w-[280px] md:h-16 md:max-w-[340px]"
-          />
-          <h1 className="mt-8 max-w-2xl font-display text-4xl font-medium leading-tight tracking-tight text-dm-raspberry md:text-5xl lg:text-6xl">
+      {/* WEB-02 Hero */}
+      <section
+        id="explore"
+        className="mx-auto grid max-w-6xl items-center gap-10 px-6 pb-16 pt-10 lg:grid-cols-2 lg:gap-14 lg:pb-24 lg:pt-14"
+      >
+        <div>
+          <h1 className="font-display text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-dm-ink md:text-5xl lg:text-[3.4rem]">
             {t("marketing.heroHeadline")}
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-dm-ink/75 md:text-lg">
+          <p className="mt-5 max-w-md font-editorial text-base leading-relaxed text-dm-muted md:text-lg">
             {t("marketing.heroSupport")}
           </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Link href="/signup">
-              <Button type="button">{t("marketing.ctaDiscover")}</Button>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/signup"
+              className="inline-flex items-center gap-2 rounded-dm bg-dm-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--dm-primary-hover)]"
+            >
+              {t("marketing.ctaDiscover")}
+              <span aria-hidden>→</span>
             </Link>
-            <Link href="/signup">
-              <Button type="button" variant="outline">
-                {t("marketing.ctaCoupleMap")}
-              </Button>
-            </Link>
+            <a
+              href="#how"
+              className="inline-flex items-center rounded-dm border border-dm-line bg-dm-panel px-5 py-3 text-sm font-semibold text-dm-ink"
+            >
+              {t("marketing.ctaLearn")}
+            </a>
+          </div>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-3">
+            {proofs.map(([title, body]) => (
+              <li key={title} className="text-sm">
+                <p className="font-semibold text-dm-ink">{title}</p>
+                <p className="mt-1 text-dm-muted">{body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <figure className="relative overflow-hidden rounded-[22px] shadow-dm">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={IMG.hero}
+            alt=""
+            className="aspect-[4/5] w-full object-cover object-center md:aspect-[5/6]"
+            width={900}
+            height={1080}
+          />
+          <figcaption className="sr-only">{t("marketing.photoCredit")}</figcaption>
+        </figure>
+      </section>
+
+      {/* WEB-04 Journeys */}
+      <section id="stories" className="bg-dm-panel px-6 py-20">
+        <div className="mx-auto max-w-6xl text-center">
+          <h2 className="font-display text-3xl font-semibold text-dm-ink md:text-4xl">
+            {t("marketing.journeysTitle")}
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl font-editorial text-dm-muted">
+            {t("marketing.journeysSupport")}
+          </p>
+          <div className="mt-12 grid gap-6 text-left md:grid-cols-3">
+            {journeys.map((j) => (
+              <Link
+                key={j.href + j.title}
+                href={j.href}
+                className="group overflow-hidden rounded-[18px] border border-dm-line bg-dm-surface shadow-sm transition hover:shadow-dm"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={j.img}
+                  alt=""
+                  className="aspect-[16/11] w-full object-cover"
+                  width={640}
+                  height={440}
+                />
+                <div className="relative p-5">
+                  <h3 className="font-display text-xl font-semibold text-dm-ink">
+                    {j.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-dm-muted">
+                    {j.body}
+                  </p>
+                  <span
+                    aria-hidden
+                    className="absolute bottom-5 right-5 flex h-9 w-9 items-center justify-center rounded-full border border-dm-line text-dm-champagne transition group-hover:border-dm-primary group-hover:text-dm-primary"
+                  >
+                    →
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="pillars" className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="font-display text-3xl font-medium text-dm-raspberry md:text-4xl">
-          {t("marketing.pillarsTitle")}
-        </h2>
-        <p className="mt-3 max-w-2xl text-dm-ink/70">
-          {t("marketing.pillarsSupport")}
-        </p>
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {pillars.map((p) => (
-            <div key={p.id} id={p.id === "companion" ? "companion" : undefined}>
-              <h3 className="font-display text-2xl text-dm-raspberry">{p.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-dm-ink/75">{p.body}</p>
-              <Link
-                href={p.href}
-                className="mt-5 inline-block text-sm font-semibold text-dm-primary underline-offset-4 hover:underline"
-              >
-                {p.cta}
-              </Link>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="how" className="border-y border-dm-line/80 bg-dm-surface/50 py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="font-display text-3xl font-medium text-dm-raspberry md:text-4xl">
-            {t("marketing.howTitle")}
-          </h2>
-          <p className="mt-3 max-w-2xl text-dm-ink/70">{t("marketing.howSupport")}</p>
-          <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {/* WEB-05 How */}
+      <section id="how" className="px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-3xl font-semibold text-dm-ink md:text-4xl">
+              {t("marketing.howTitle")}
+            </h2>
+            <p className="mt-3 font-editorial text-dm-muted">
+              {t("marketing.howSupport")}
+            </p>
+          </div>
+          <ol className="mt-12 grid gap-8 md:grid-cols-3">
             {steps.map(([title, body], i) => (
-              <li key={title}>
-                <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
+              <li key={title} className="border-t border-dm-line pt-6">
+                <p className="text-xs font-bold tracking-[0.2em] text-dm-champagne">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-2 font-display text-xl text-dm-raspberry">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-dm-ink/75">{body}</p>
+                <h3 className="mt-3 font-display text-xl font-semibold text-dm-ink">
+                  {title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-dm-muted">
+                  {body}
+                </p>
               </li>
             ))}
           </ol>
-          <div className="mt-10">
-            <Link href="/signup">
-              <Button type="button">{t("marketing.ctaStart")}</Button>
-            </Link>
-          </div>
         </div>
       </section>
 
-      <section id="ai" className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="font-display text-3xl font-medium text-dm-raspberry md:text-4xl">
-          {t("marketing.aiTitle")}
-        </h2>
-        <p className="mt-3 max-w-2xl text-dm-ink/70">{t("marketing.aiSupport")}</p>
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {aiCards.map(([title, body]) => (
-            <div key={title}>
-              <h3 className="font-display text-xl text-dm-raspberry">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-dm-ink/75">{body}</p>
-            </div>
-          ))}
-        </div>
-        <Link
-          href="/signup"
-          className="mt-8 inline-block text-sm font-semibold text-dm-primary underline-offset-4 hover:underline"
-        >
-          {t("marketing.aiCta")}
-        </Link>
-      </section>
-
-      <section
-        id="couple"
-        className="relative overflow-hidden border-y border-dm-line/80 bg-gradient-to-br from-[#FFF3F7] via-[#FFE0EB] to-[#FFB4CC] py-20"
-      >
-        <div className="relative mx-auto max-w-6xl px-6">
-          <h2 className="max-w-xl font-display text-3xl font-medium text-dm-raspberry md:text-4xl">
-            {t("marketing.couplePreviewTitle")}
+      {/* WEB-06 Final CTA */}
+      <section className="bg-dm-deep px-6 py-20 text-center text-white">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
+            {t("marketing.finalCtaTitle")}
           </h2>
-          <p className="mt-3 max-w-xl text-dm-ink/75">
-            {t("marketing.couplePreviewSupport")}
+          <p className="mt-3 font-editorial text-white/80">
+            {t("marketing.finalCtaSupport")}
           </p>
-          <div
-            aria-hidden
-            className="mt-10 h-48 max-w-xl rounded-dm-xl border border-white/50 bg-[radial-gradient(circle_at_30%_40%,#e95383_0%,transparent_35%),radial-gradient(circle_at_70%_60%,#822d4c_0%,transparent_40%),linear-gradient(135deg,#fff8fa,#f6c1d2)] opacity-90 shadow-dm"
-          />
-          <div className="mt-8">
-            <Link href="/signup">
-              <Button type="button" variant="outline">
-                {t("marketing.couplePreviewCta")}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section id="lifestyle" className="mx-auto max-w-6xl px-6 py-20">
-        <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
-          {t("marketing.lifestyleDemoBadge")}
-        </p>
-        <h2 className="mt-3 font-display text-3xl font-medium text-dm-raspberry md:text-4xl">
-          {t("marketing.lifestyleTitle")}
-        </h2>
-        <p className="mt-3 max-w-2xl text-dm-ink/70">
-          {t("marketing.lifestyleSupport")}
-        </p>
-        <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-dm-raspberry">
-          {lifestyle.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        <Link
-          href="/signup"
-          className="mt-8 inline-block text-sm font-semibold text-dm-primary underline-offset-4 hover:underline"
-        >
-          {t("marketing.lifestyleCta")}
-        </Link>
-      </section>
-
-      <section id="safety" className="border-y border-dm-line/80 bg-dm-surface/40 py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="font-display text-3xl font-medium text-dm-raspberry md:text-4xl">
-            {t("marketing.trustTitle")}
-          </h2>
-          <p className="mt-3 max-w-2xl text-dm-ink/70">{t("marketing.trustSupport")}</p>
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
-            {trust.map(([title, body]) => (
-              <div key={title}>
-                <h3 className="font-display text-xl text-dm-raspberry">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-dm-ink/75">{body}</p>
-              </div>
-            ))}
-          </div>
           <Link
-            href="/faq"
-            className="mt-8 inline-block text-sm font-semibold text-dm-primary underline-offset-4 hover:underline"
+            href="/signup"
+            className="mt-8 inline-flex items-center gap-2 rounded-dm bg-white px-6 py-3 text-sm font-semibold text-dm-deep transition hover:bg-dm-blush"
           >
-            {t("marketing.trustCta")}
+            {t("marketing.ctaDiscover")}
+            <span aria-hidden>→</span>
           </Link>
         </div>
       </section>
 
-      <section id="faq" className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="font-display text-3xl font-medium text-dm-raspberry md:text-4xl">
-          {t("marketing.faqTitle")}
-        </h2>
-        <p className="mt-3 max-w-2xl text-dm-ink/70">{t("marketing.faqSupport")}</p>
-        <Link href="/faq" className="mt-6 inline-block">
-          <Button type="button" variant="outline">
-            {t("marketing.faqCta")}
-          </Button>
-        </Link>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        <div className="rounded-dm-xl bg-gradient-to-br from-dm-primary to-dm-deep px-8 py-12 text-white shadow-dm md:px-12">
-          <h2 className="font-display text-3xl font-medium md:text-4xl">
-            {t("marketing.finalCtaTitle")}
-          </h2>
-          <p className="mt-3 max-w-xl text-white/85">
-            {t("marketing.finalCtaSupport")}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/signup">
-              <Button
-                type="button"
-                className="!bg-white !text-dm-raspberry hover:!bg-dm-canvas"
-              >
-                {t("marketing.ctaSignup")}
-              </Button>
-            </Link>
-            <Link href="/login">
-              <Button
-                type="button"
-                variant="outline"
-                className="!border-white/60 !text-white hover:!bg-white/10"
-              >
-                {t("marketing.ctaLogin")}
-              </Button>
-            </Link>
+      <footer className="border-t border-dm-line bg-dm-canvas px-6 py-12">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:justify-between">
+          <div className="max-w-sm">
+            <BrandLogo variant="full" className="h-8" />
+            <p className="mt-3 text-sm text-dm-muted">
+              {t("marketing.footerTagline")}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-8 text-sm text-dm-ink/80 sm:grid-cols-3">
+            <div className="flex flex-col gap-2">
+              <a href="#explore">{t("marketing.navExplore")}</a>
+              <a href="#how">{t("marketing.navHow")}</a>
+              <a href="#stories">{t("marketing.navStories")}</a>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Link href="/privacy">{t("marketing.footerPrivacy")}</Link>
+              <Link href="/terms">{t("marketing.footerTerms")}</Link>
+              <Link href="/safe">{t("marketing.footerSafety")}</Link>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Link href="/faq">{t("marketing.faq")}</Link>
+              <Link href="/support">{t("marketing.footerSupport")}</Link>
+            </div>
           </div>
         </div>
-      </section>
-
-      <footer className="border-t border-dm-line/80 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 text-sm text-dm-muted md:flex-row md:items-center md:justify-between">
-          <p>{t("marketing.footerTagline")}</p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="/faq">{t("marketing.faq")}</Link>
-            <Link href="/legal">{t("marketing.footerLegal")}</Link>
-            <Link href="/legal/privacy">{t("marketing.footerPrivacy")}</Link>
-            <Link href="/legal/terms">{t("marketing.footerTerms")}</Link>
-            <Link href="/support">{t("marketing.footerSupport")}</Link>
-          </div>
-        </div>
+        <p className="mx-auto mt-10 max-w-6xl text-xs text-dm-muted">
+          {t("marketing.footerCopyright", { year })}
+        </p>
       </footer>
     </main>
   );

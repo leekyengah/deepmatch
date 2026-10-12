@@ -6,15 +6,15 @@ type Size = "md" | "sm";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-dm-primary text-white shadow-[0_5px_12px_#e9538320] hover:brightness-105",
-  secondary: "bg-[#FFF0F5] text-dm-raspberry",
-  outline: "border border-[#efcfda] bg-dm-panel text-dm-raspberry",
-  ghost: "bg-transparent text-dm-raspberry",
+    "bg-dm-primary text-white shadow-[0_6px_16px_rgba(107,45,60,0.22)] hover:bg-[var(--dm-primary-hover)]",
+  secondary: "bg-dm-blush text-dm-primary",
+  outline: "border border-dm-line bg-dm-panel text-dm-primary",
+  ghost: "bg-transparent text-dm-primary",
   danger: "bg-dm-danger text-white",
 };
 
 const sizes: Record<Size, string> = {
-  md: "px-4 py-3 text-sm rounded-dm",
+  md: "px-5 py-3 text-sm rounded-dm",
   sm: "px-3 py-2 text-xs rounded-[9px]",
 };
 

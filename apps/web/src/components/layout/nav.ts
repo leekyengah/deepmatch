@@ -15,11 +15,12 @@ export const primaryNav: NavItem[] = [
   { href: "/me", labelKey: "nav.me", match: "prefix" },
 ];
 
+/** ADR-11 — 5-tab mobile: Khám phá · Sánh đôi · Đồng hành · Tin nhắn · Cá nhân */
 export const mobileNav: NavItem[] = [
-  { href: "/discover", labelKey: "nav.discover", match: "prefix" },
-  { href: "/chat", labelKey: "nav.chat", match: "prefix" },
-  { href: "/lifestyle", labelKey: "nav.lifestyle", match: "prefix" },
-  { href: "/couple", labelKey: "nav.coupleShort", match: "prefix" },
+  { href: "/discover", labelKey: "nav.explore", match: "prefix" },
+  { href: "/couple", labelKey: "nav.memories", match: "prefix" },
+  { href: "/services", labelKey: "nav.companion", match: "prefix" },
+  { href: "/chat", labelKey: "nav.messages", match: "prefix" },
   { href: "/me", labelKey: "nav.me", match: "prefix" },
 ];
 

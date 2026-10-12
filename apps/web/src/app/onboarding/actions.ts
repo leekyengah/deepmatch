@@ -16,6 +16,11 @@ export async function saveModeAction(formData: FormData) {
 
   const fuzzy_region = String(formData.get("fuzzy_region") ?? "").trim();
   const discovery_opt_in = formData.get("discovery_opt_in") === "on";
+  const values = formData
+    .getAll("values")
+    .map((v) => String(v))
+    .filter(Boolean);
+  const intent = String(formData.get("intent") ?? "long_term");
 
   const patch: Record<string, unknown> = { mode };
   if (mode === "solo") {
@@ -24,6 +29,14 @@ export async function saveModeAction(formData: FormData) {
   }
 
   await supabase.from("profiles").update(patch).eq("id", user.id);
+
+  if (values.length || intent) {
+    await supabase.from("profile_deep").upsert({
+      user_id: user.id,
+      values: values.length ? values : [],
+      goals: intent ? [intent] : [],
+    });
+  }
 
   if (mode === "has_partner") redirect("/couple/invite");
   if (discovery_opt_in) redirect("/discover");

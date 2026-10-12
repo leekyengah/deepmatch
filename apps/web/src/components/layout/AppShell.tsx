@@ -29,7 +29,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </span>
         </Link>
 
-        <p className="px-3.5 pb-2 pt-4 text-[10px] font-extrabold uppercase tracking-[1.6px] text-[#B49FAC]">
+        <p className="px-3.5 pb-2 pt-4 text-[10px] font-extrabold uppercase tracking-[1.6px] text-dm-champagne">
           {t("nav.journey")}
         </p>
         <nav aria-label={t("nav.primaryAria")} className="flex flex-col">
@@ -40,9 +40,9 @@ export function AppShell({ children }: { children: ReactNode }) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "my-0.5 rounded-dm px-3.5 py-3 text-[13px] font-semibold text-[#6E5363] transition hover:bg-[#FFE9F0] hover:text-dm-raspberry",
+                  "my-0.5 rounded-dm px-3.5 py-3 text-[13px] font-semibold text-dm-muted transition hover:bg-dm-blush hover:text-dm-primary",
                   active &&
-                    "bg-[#FFE9F0] text-dm-raspberry shadow-[inset_3px_0_0_var(--dm-primary)]",
+                    "bg-dm-blush text-dm-primary shadow-[inset_3px_0_0_var(--dm-primary)]",
                 )}
                 aria-current={active ? "page" : undefined}
               >
@@ -52,20 +52,20 @@ export function AppShell({ children }: { children: ReactNode }) {
           })}
         </nav>
 
-        <div className="mt-8 rounded-2xl border border-[#F9DDE8] bg-gradient-to-br from-[#FFF0F5] to-[#FFF9FB] p-4 text-xs leading-relaxed text-dm-raspberry">
+        <div className="mt-8 rounded-2xl border border-dm-line bg-dm-surface p-4 text-xs leading-relaxed text-dm-ink">
           {t("nav.coupleNote")}
         </div>
       </aside>
 
       <div className="min-w-0 pb-20 md:pb-0">
-        <header className="sticky top-0 z-10 flex h-[72px] items-center justify-between border-b border-dm-line bg-[#fff9]/backdrop-blur-md px-5 md:px-10">
+        <header className="sticky top-0 z-10 flex h-[72px] items-center justify-between border-b border-dm-line bg-dm-canvas/90 backdrop-blur-md px-5 md:px-10">
           <div>
             <p className="text-xs text-dm-muted">{t("common.brand")}</p>
-            <p className="text-sm font-semibold text-dm-raspberry">{title}</p>
+            <p className="text-sm font-semibold text-dm-primary">{title}</p>
           </div>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
-            <span className="hidden rounded-full border border-dm-line bg-dm-panel px-3 py-2 text-[11px] font-bold text-dm-raspberry sm:inline">
+            <span className="hidden rounded-full border border-dm-line bg-dm-panel px-3 py-2 text-[11px] font-bold text-dm-primary sm:inline">
               {t("common.staging")}
             </span>
             <Link href="/me" aria-label={t("nav.meAria")}>

@@ -17,13 +17,14 @@ function TabIcon({ label, focused }: { label: string; focused: boolean }) {
   );
 }
 
+/** ADR-11: Khám phá · Sánh đôi · Đồng hành · Tin nhắn · Cá nhân */
 export default function TabsLayout() {
   const t = useT();
   return (
     <Tabs
       screenOptions={{
         headerStyle: { backgroundColor: colors.canvas },
-        headerTintColor: colors.raspberry,
+        headerTintColor: colors.ink,
         tabBarStyle: {
           backgroundColor: colors.panel,
           borderTopColor: colors.line,
@@ -33,30 +34,30 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
-        options={{
-          title: t("nav.home"),
-          tabBarIcon: ({ focused }) => <TabIcon label="⌂" focused={focused} />,
-        }}
-      />
-      <Tabs.Screen
         name="discover"
         options={{
-          title: t("nav.discover"),
+          title: t("nav.explore"),
           tabBarIcon: ({ focused }) => <TabIcon label="◇" focused={focused} />,
         }}
       />
       <Tabs.Screen
-        name="likes"
+        name="couple"
         options={{
-          title: t("nav.likes"),
-          tabBarIcon: ({ focused }) => <TabIcon label="♡" focused={focused} />,
+          title: t("nav.memories"),
+          tabBarIcon: ({ focused }) => <TabIcon label="◎" focused={focused} />,
+        }}
+      />
+      <Tabs.Screen
+        name="companion"
+        options={{
+          title: t("nav.companion"),
+          tabBarIcon: ({ focused }) => <TabIcon label="✦" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="chat"
         options={{
-          title: t("nav.chat"),
+          title: t("nav.messages"),
           tabBarIcon: ({ focused }) => <TabIcon label="✉" focused={focused} />,
         }}
       />
@@ -67,6 +68,8 @@ export default function TabsLayout() {
           tabBarIcon: ({ focused }) => <TabIcon label="●" focused={focused} />,
         }}
       />
+      <Tabs.Screen name="index" options={{ href: null }} />
+      <Tabs.Screen name="likes" options={{ href: null }} />
       <Tabs.Screen name="two" options={{ href: null }} />
     </Tabs>
   );

@@ -17,6 +17,8 @@ export default {
           canvas: "var(--dm-canvas)",
           deep: "var(--dm-deep)",
           raspberry: "var(--dm-raspberry)",
+          champagne: "var(--dm-champagne)",
+          gold: "var(--dm-gold)",
           ink: "var(--dm-ink)",
           muted: "var(--dm-muted)",
           line: "var(--dm-line)",
@@ -36,6 +38,7 @@ export default {
       },
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],
+        editorial: ["var(--font-editorial)", "Georgia", "serif"],
         body: ["var(--font-body)", "Be Vietnam Pro", "sans-serif"],
       },
     },

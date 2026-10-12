@@ -2,36 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Visual Standard v3 — wine / ivory / champagne (sheet 26). Legacy pink archived. */
 :root {
-  --dm-primary: #e95383;
-  --dm-blush: #f6c1d2;
-  --dm-canvas: #fff8fa;
-  --dm-deep: #822d4c;
-  --dm-raspberry: #822d4c;
-  --dm-ink: #382735;
-  --dm-muted: #927a8a;
-  --dm-line: #f0dfe7;
-  --dm-panel: #ffffff;
-  --dm-surface: #fff2f6;
-  --dm-good: #18806b;
+  --dm-primary: #6b2d3c;
+  --dm-primary-hover: #54212f;
+  --dm-blush: #f4e9e4;
+  --dm-canvas: #f7f3ee;
+  --dm-deep: #472025;
+  --dm-raspberry: #6b2d3c;
+  --dm-champagne: #a88a62;
+  --dm-gold: #96734b;
+  --dm-ink: #241a1c;
+  --dm-muted: #706763;
+  --dm-line: #e8dcd4;
+  --dm-panel: #faf6f3;
+  --dm-surface: #fffcf9;
+  --dm-good: #2f7d4a;
   --dm-danger: #a63e52;
-  --dm-radius-sm: 9px;
+  --dm-radius-sm: 8px;
   --dm-radius-md: 12px;
-  --dm-radius-lg: 20px;
-  --dm-radius-xl: 26px;
-  --dm-shadow: 0 14px 46px rgba(91, 38, 62, 0.07);
+  --dm-radius-lg: 16px;
+  --dm-radius-xl: 22px;
+  --dm-shadow: 0 12px 40px rgba(36, 26, 28, 0.08);
   --background: var(--dm-canvas);
   --foreground: var(--dm-ink);
+  /* legacy aliases (rollback reference only — active UI uses v3) */
+  --dm-legacy-peony: #e95383;
+  --dm-legacy-petal: #f6c1d2;
 }
 
 body {
   color: var(--foreground);
-  background:
-    radial-gradient(1200px 600px at 10% -10%, var(--dm-blush), transparent 55%),
-    radial-gradient(900px 500px at 100% 0%, #ffd6e4, transparent 50%),
-    var(--dm-canvas);
+  background: var(--dm-canvas);
   min-height: 100vh;
-  font-family: var(--font-body), "Be Vietnam Pro", sans-serif;
+  font-family: var(--font-body), "Be Vietnam Pro", system-ui, sans-serif;
 }
 
 a {
@@ -42,4 +46,13 @@ a {
 :focus-visible {
   outline: 2px solid var(--dm-primary);
   outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

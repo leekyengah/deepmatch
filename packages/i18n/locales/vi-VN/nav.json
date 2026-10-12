@@ -17,7 +17,11 @@
   "homeAria": "DeepMatch — trang chủ",
   "meAria": "Bảng cá nhân",
   "avatarMe": "Tôi",
-  "coupleNote": "Cùng thích chỉ mở trò chuyện. Không gian của chúng mình chỉ sau lời mời và đồng ý hai phía.",
+  "coupleNote": "Cùng thích chỉ mở trò chuyện. Không gian Sánh đôi chỉ sau lời mời và đồng ý hai phía.",
+  "explore": "Khám phá",
+  "memories": "Sánh đôi",
+  "companion": "Đồng hành",
+  "messages": "Tin nhắn",
   "titles": {
     "discover": "Tìm nhau",
     "likes": "Kết nối",
