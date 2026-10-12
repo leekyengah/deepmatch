@@ -5,7 +5,7 @@
   "concierge": "Concierge",
   "eyebrow": "Concierge",
   "flagOffTitle": "Concierge is off",
-  "flagOffBody": "Companion services are temporarily unavailable. Please try again later."
+  "flagOffBody": "Companion services are temporarily unavailable. Please try again later.",
   "request": "Request booking",
   "confirmed": "Confirmed",
   "pending": "Pending confirmation",

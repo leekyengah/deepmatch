@@ -62,9 +62,9 @@
   "cmsTitle": "Nội dung & CMS",
   "cmsIntro": "Bản tối giản: trỏ nguồn nội dung hiện có. Không giả CMS đầy đủ.",
   "cmsFaq": "FAQ / Hỗ trợ",
-  "cmsFaqDesc": "Nội dung tĩnh — chỉnh qua quy trình nội dung khi chưa có CMS"
+  "cmsFaqDesc": "Nội dung tĩnh — chỉnh qua quy trình nội dung khi chưa có CMS",
   "cmsPrivacy": "Chính sách riêng tư",
-  "cmsPrivacyDesc": "Chính sách quyền riêng tư + trang /me/privacy"
+  "cmsPrivacyDesc": "Chính sách quyền riêng tư + trang /me/privacy",
   "cmsNotify": "Thông báo hệ thống",
   "cmsNotifyDesc": "Chưa có broadcast table — đề xuất thêm",
   "usersTitle": "Quản lý người dùng",

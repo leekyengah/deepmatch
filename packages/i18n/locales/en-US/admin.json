@@ -62,9 +62,9 @@
   "cmsTitle": "Content & CMS",
   "cmsIntro": "Minimal view: points to existing content sources. Not a full CMS.",
   "cmsFaq": "FAQ / Support",
-  "cmsFaqDesc": "Static content — edit via the content workflow until a CMS exists"
+  "cmsFaqDesc": "Static content — edit via the content workflow until a CMS exists",
   "cmsPrivacy": "Privacy policy",
-  "cmsPrivacyDesc": "Privacy policy + /me/privacy page"
+  "cmsPrivacyDesc": "Privacy policy + /me/privacy page",
   "cmsNotify": "System notices",
   "cmsNotifyDesc": "No broadcast table yet — proposed later",
   "usersTitle": "User management",
