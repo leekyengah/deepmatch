@@ -516,6 +516,35 @@ let conversationId = null;
   );
 }
 
+// Couple invite A→B accept; C denied private pins (QA-REL-025/026 partial)
+{
+  const inv = await api("/api/v1/couple-invitations", tokenA, {
+    method: "POST",
+    body: JSON.stringify({}),
+  });
+  const code = inv.body?.code;
+  let pairId = null;
+  let acceptOk = false;
+  if (code) {
+    const acc = await api("/api/v1/couple-invitations/accept", tokenB, {
+      method: "POST",
+      body: JSON.stringify({ code }),
+    });
+    pairId = acc.body?.pairId ?? null;
+    acceptOk = acc.status < 400 && Boolean(pairId);
+  }
+  let cDenied = true;
+  if (pairId) {
+    const steal = await api(`/api/v1/couples/${pairId}/pins`, tokenC);
+    cDenied = steal.status >= 400;
+  }
+  record(
+    "QA-REL-025",
+    inv.status < 400 && acceptOk && cDenied,
+    `invite=${inv.status} accept=${acceptOk} cPins=${cDenied ? "denied" : "leaked"}`,
+  );
+}
+
 const pass = results.filter((r) => r.status === "PASS").length;
 const fail = results.filter((r) => r.status === "FAIL").length;
 let commit = "unknown";

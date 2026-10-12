@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createHash } from "crypto";
-import { createClient } from "@/lib/supabase/server";
+import { getRouteUser } from "@/lib/supabase/route";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 
 function hashCode(code: string) {
@@ -8,11 +8,8 @@ function hashCode(code: string) {
 }
 
 export async function POST(req: Request) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
   const requestId = makeRequestId();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) {
     return jsonError("UNAUTHENTICATED", null, requestId);
   }

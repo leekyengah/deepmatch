@@ -1,15 +1,15 @@
 {
-  "runId": "QA-STAGING-2026-10-12T2208",
-  "timestampUtc": "2026-10-12T22:08:29.030Z",
+  "runId": "QA-STAGING-2026-10-12T2215",
+  "timestampUtc": "2026-10-12T22:15:17.775Z",
   "environment": "https://datingvn.com",
-  "commit": "e3b43ed",
+  "commit": "7a14b1b",
   "personas": [
     "QA_ADULT_A",
     "QA_ADULT_B",
     "QA_ADULT_C"
   ],
-  "executed": 17,
-  "pass": 17,
+  "executed": 19,
+  "pass": 19,
   "fail": 0,
   "results": [
     {
@@ -65,7 +65,7 @@
     {
       "id": "QA-REL-037",
       "status": "PASS",
-      "note": "orders history 200 n=14"
+      "note": "orders history 200 n=20"
     },
     {
       "id": "QA-REL-036",
@@ -85,7 +85,7 @@
     {
       "id": "QA-REL-040",
       "status": "PASS",
-      "note": "wh first=200 replayDedupe=true badSig=400 amt=400 ent=1"
+      "note": "wh first=200 replayDedupe=true badSig=400 amt=400 ent=3"
     },
     {
       "id": "QA-REL-018",
@@ -96,6 +96,16 @@
       "id": "QA-REL-020",
       "status": "PASS",
       "note": "chatAccess deny status=403 allowed=false"
+    },
+    {
+      "id": "QA-REL-021",
+      "status": "PASS",
+      "note": "conv=true sent=true read=true dedupe=true"
+    },
+    {
+      "id": "QA-REL-022",
+      "status": "PASS",
+      "note": "block=200 chatDenied=true report=200"
     }
   ],
   "recommendation": "STAGING PARTIAL GO — continue autonomous QA-REL matrix; Store/LIVE still NO GO"

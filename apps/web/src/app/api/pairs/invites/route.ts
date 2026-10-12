@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createHash, randomBytes } from "crypto";
-import { createClient } from "@/lib/supabase/server";
+import { getRouteUser } from "@/lib/supabase/route";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 import {
   coupleJoinUrl,
@@ -17,11 +17,8 @@ function isEmail(v: string) {
 }
 
 export async function POST(req: NextRequest) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
   const requestId = makeRequestId();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) {
     return jsonError("UNAUTHENTICATED", null, requestId);
   }
