@@ -1,11 +1,12 @@
-import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { NextResponse, type NextRequest } from "next/server";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { getRouteUser } from "@/lib/supabase/route";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 
 type Ctx = { params: Promise<{ id: string }> };
 
 async function assertPairMember(
-  supabase: Awaited<ReturnType<typeof createClient>>,
+  supabase: SupabaseClient,
   userId: string,
   coupleId: string,
 ) {
@@ -19,13 +20,10 @@ async function assertPairMember(
   return data.user_a === userId || data.user_b === userId;
 }
 
-export async function GET(_req: Request, ctx: Ctx) {
+export async function GET(req: NextRequest, ctx: Ctx) {
   const requestId = makeRequestId();
   const { id: coupleId } = await ctx.params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
   if (!(await assertPairMember(supabase, user.id, coupleId))) {
     return jsonError("RESOURCE_NOT_ACCESSIBLE", null, requestId);
@@ -40,16 +38,16 @@ export async function GET(_req: Request, ctx: Ctx) {
     .order("created_at", { ascending: false });
 
   if (error) return jsonError("VALIDATION_ERROR", null, requestId);
-  return NextResponse.json({ data: { pins: data }, meta: { request_id: requestId } });
+  return NextResponse.json({
+    data: { pins: data },
+    meta: { request_id: requestId },
+  });
 }
 
-export async function POST(req: Request, ctx: Ctx) {
+export async function POST(req: NextRequest, ctx: Ctx) {
   const requestId = makeRequestId();
   const { id: coupleId } = await ctx.params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
   if (!(await assertPairMember(supabase, user.id, coupleId))) {
     return jsonError("RESOURCE_NOT_ACCESSIBLE", null, requestId);
@@ -83,16 +81,16 @@ export async function POST(req: Request, ctx: Ctx) {
     .single();
 
   if (error) return jsonError("VALIDATION_ERROR", null, requestId);
-  return NextResponse.json({ data: { pin: data }, meta: { request_id: requestId } });
+  return NextResponse.json({
+    data: { pin: data },
+    meta: { request_id: requestId },
+  });
 }
 
-export async function PATCH(req: Request, ctx: Ctx) {
+export async function PATCH(req: NextRequest, ctx: Ctx) {
   const requestId = makeRequestId();
   const { id: coupleId } = await ctx.params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
   if (!(await assertPairMember(supabase, user.id, coupleId))) {
     return jsonError("RESOURCE_NOT_ACCESSIBLE", null, requestId);
@@ -128,16 +126,16 @@ export async function PATCH(req: Request, ctx: Ctx) {
     .single();
 
   if (error) return jsonError("VALIDATION_ERROR", null, requestId);
-  return NextResponse.json({ data: { pin: data }, meta: { request_id: requestId } });
+  return NextResponse.json({
+    data: { pin: data },
+    meta: { request_id: requestId },
+  });
 }
 
-export async function DELETE(req: Request, ctx: Ctx) {
+export async function DELETE(req: NextRequest, ctx: Ctx) {
   const requestId = makeRequestId();
   const { id: coupleId } = await ctx.params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
   if (!(await assertPairMember(supabase, user.id, coupleId))) {
     return jsonError("RESOURCE_NOT_ACCESSIBLE", null, requestId);
@@ -156,5 +154,8 @@ export async function DELETE(req: Request, ctx: Ctx) {
     .eq("created_by", user.id);
 
   if (error) return jsonError("VALIDATION_ERROR", null, requestId);
-  return NextResponse.json({ data: { deleted: true }, meta: { request_id: requestId } });
+  return NextResponse.json({
+    data: { deleted: true },
+    meta: { request_id: requestId },
+  });
 }

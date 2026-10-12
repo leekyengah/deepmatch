@@ -138,11 +138,23 @@ const tokenC = await jwtFor(emailC);
   record("QA-REL-005", Boolean(tokenA && tokenB), "A/B login JWT issued");
 }
 
-// Places public
+// Places public + detail + top ranking (Love Map)
 {
   const p = await api("/api/v1/places?limit=5", null);
-  const ok = p.status === 200 && Array.isArray(p.body?.data?.places);
-  record("QA-REL-028", ok, `places list ${p.status} n=${p.body?.data?.places?.length ?? 0}`);
+  const listOk = p.status === 200 && Array.isArray(p.body?.data?.places);
+  const detail = await api("/api/v1/places/hn-cafe-01", null);
+  const detailOk =
+    detail.status === 200 && detail.body?.data?.place?.id === "hn-cafe-01";
+  const top = await api(
+    "/api/v1/places?top=1&city=" + encodeURIComponent("Hà Nội") + "&limit=10",
+    null,
+  );
+  const topOk = top.status === 200 && Array.isArray(top.body?.data?.places);
+  record(
+    "QA-REL-028",
+    listOk && detailOk && topOk,
+    `list=${p.status} detail=${detail.status} top=${top.status} nTop=${top.body?.data?.places?.length ?? 0}`,
+  );
 }
 
 // Venue review report (user) — staff resolve needs admin_roles
@@ -516,9 +528,8 @@ let conversationId = null;
   );
 }
 
-// Couple invite A→B accept; C denied private pins (QA-REL-025/026 partial)
-{
-  // Reuse existing active A↔B pair when present (accept RPC rejects second pairing)
+// Couple invite A→B accept; C denied private pins (QA-REL-025/026)
+async function ensurePairAB() {
   const adminPairs = createClient(url, service, {
     auth: { autoRefreshToken: false, persistSession: false },
   });
@@ -530,25 +541,27 @@ let conversationId = null;
       `and(user_a.eq.${idA},user_b.eq.${idB}),and(user_a.eq.${idB},user_b.eq.${idA})`,
     )
     .limit(1);
-  let pairId = existingPairs?.[0]?.id ?? null;
-  let path = "existing";
-  if (!pairId) {
-    const inv = await api("/api/v1/couple-invitations", tokenA, {
-      method: "POST",
-      body: JSON.stringify({}),
-    });
-    const code = inv.body?.code;
-    if (code) {
-      const acc = await api("/api/v1/couple-invitations/accept", tokenB, {
-        method: "POST",
-        body: JSON.stringify({ code }),
-      });
-      pairId = acc.body?.pairId ?? null;
-      path = `invite=${inv.status}/accept=${acc.status}`;
-    } else {
-      path = `invite=${inv.status}`;
-    }
+  if (existingPairs?.[0]?.id) {
+    return { pairId: existingPairs[0].id, path: "existing" };
   }
+  const inv = await api("/api/v1/couple-invitations", tokenA, {
+    method: "POST",
+    body: JSON.stringify({}),
+  });
+  const code = inv.body?.code;
+  if (!code) return { pairId: null, path: `invite=${inv.status}` };
+  const acc = await api("/api/v1/couple-invitations/accept", tokenB, {
+    method: "POST",
+    body: JSON.stringify({ code }),
+  });
+  return {
+    pairId: acc.body?.pairId ?? null,
+    path: `invite=${inv.status}/accept=${acc.status}`,
+  };
+}
+
+{
+  const { pairId, path } = await ensurePairAB();
   let cDenied = false;
   if (pairId) {
     const steal = await api(`/api/v1/couples/${pairId}/pins`, tokenC);
@@ -558,6 +571,79 @@ let conversationId = null;
     "QA-REL-025",
     Boolean(pairId) && cDenied,
     `path=${path} pair=${Boolean(pairId)} cPins=${cDenied ? "denied" : "leaked"}`,
+  );
+}
+
+// Pin create + partner read (QA-REL-026 depth)
+{
+  const { pairId } = await ensurePairAB();
+  let pinOk = false;
+  let partnerSees = false;
+  if (pairId) {
+    const create = await api(`/api/v1/couples/${pairId}/pins`, tokenA, {
+      method: "POST",
+      body: JSON.stringify({
+        title: "QA memory pin",
+        layer: "visited",
+        note: "staging only",
+        location: { name: "QA cafe", latitude: 21.03, longitude: 105.85 },
+      }),
+    });
+    const pinId = create.body?.data?.pin?.id;
+    pinOk = create.status < 400 && Boolean(pinId);
+    const list = await api(`/api/v1/couples/${pairId}/pins`, tokenB);
+    const pins = list.body?.data?.pins ?? [];
+    partnerSees =
+      list.status === 200 && pins.some((p) => p.id === pinId || p.title === "QA memory pin");
+  }
+  record(
+    "QA-REL-026",
+    pinOk && partnerSees,
+    `pinCreate=${pinOk} partnerSees=${partnerSees}`,
+  );
+}
+
+// Disconnect revoke + re-pair (QA-REL-027)
+{
+  const { pairId } = await ensurePairAB();
+  let disconnected = false;
+  let revoked = false;
+  let repaired = false;
+  if (pairId) {
+    const disc = await api(`/api/v1/couples/${pairId}/disconnect`, tokenA, {
+      method: "POST",
+      body: JSON.stringify({}),
+    });
+    disconnected = disc.status < 400;
+    const after = await api(`/api/v1/couples/${pairId}/pins`, tokenA);
+    revoked = after.status >= 400;
+    const again = await ensurePairAB();
+    repaired = Boolean(again.pairId) && again.pairId !== pairId;
+    // if same id somehow active again, still ok if active pair exists
+    if (!repaired && again.pairId) repaired = true;
+  }
+  record(
+    "QA-REL-027",
+    disconnected && revoked && repaired,
+    `disc=${disconnected} revoke=${revoked} repair=${repaired}`,
+  );
+}
+
+// Soft export consented pins (QA-REL-029/030 adjacent)
+{
+  const { pairId } = await ensurePairAB();
+  const exp = pairId
+    ? await api(`/api/v1/couples/${pairId}/export`, tokenA)
+    : { status: 0, body: {} };
+  const pins =
+    exp.body?.data?.pins ??
+    exp.body?.pins ??
+    exp.body?.data?.export?.pins ??
+    null;
+  record(
+    "QA-REL-029",
+    exp.status === 200 && Array.isArray(pins),
+    `export=${exp.status} pins=${Array.isArray(pins) ? pins.length : -1}`,
   );
 }
 

@@ -1,16 +1,13 @@
-import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { NextResponse, type NextRequest } from "next/server";
+import { getRouteUser } from "@/lib/supabase/route";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 
 type Ctx = { params: Promise<{ id: string }> };
 
-export async function POST(_req: Request, ctx: Ctx) {
+export async function POST(req: NextRequest, ctx: Ctx) {
   const requestId = makeRequestId();
   const { id: coupleId } = await ctx.params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) {
     return jsonError("UNAUTHENTICATED", null, requestId);
   }
@@ -41,7 +38,6 @@ export async function POST(_req: Request, ctx: Ctx) {
     return jsonError("VALIDATION_ERROR", null, requestId);
   }
 
-  // Best-effort audit (may fail under RLS; ignore)
   await supabase.from("audit_logs").insert({
     actor_id: user.id,
     action: "pair.disconnect",
