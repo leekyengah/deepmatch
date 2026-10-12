@@ -1,33 +1,23 @@
 ﻿# NEXT ACTION
 
-## Status 2026-10-12 — Persona home + AI + catalog wave
+## Status 2026-10-12 — Master EXT wave closed (sandbox)
 
-Branch: `feat/ext-lifestyle-ai-commerce`
+Branch: `feat/ext-lifestyle-ai-commerce` · Staging: https://datingvn.com
 
-### Just shipped (local verified)
+### Done this session
 
-| Item | Evidence |
+Persona home web+mobile, AI quota/circuit/revoke, admin catalog CMS, couple DEMO CTAs, catalog E2E, ranking/security/analytics/deep-link docs, staging deploys.
+
+### Remaining (not Chưa bắt đầu)
+
+| Item | Status |
 |---|---|
-| EXT-030 AI hub + task picker | `/ai` + `AiUsageBadge` |
-| EXT-041 quota + circuit | `/api/v1/ai/usage`, `AI_ADAPTER=off` |
-| EXT-042 AI consent revoke | `/me/privacy` revoke action |
-| EXT-021 admin catalog CMS | `/catalog` status + product toggle |
-| EXT-031 couple commerce bridge | CTAs on `/couple` |
-| EXT-033 ranking docs | `docs/architecture/CATALOG_RANKING.md` |
-| EXT-037 catalog E2E | `tests/e2e/catalog-journeys.spec.ts` |
-| EXT-052–056 persona home | web `/home` + mobile tab Home |
-| i18n parity | 1046 keys × 2 locales PASS |
-| typecheck | web/admin/i18n/shared PASS |
+| EXT-040 LIVE providers | **BLOCKED_EXTERNAL** |
+| EXT-062 Lighthouse numbers | Đang nghiệm thu — measure in browser (Protection) |
+| TestFlight | BLOCKED_FOUNDER |
+| Founder human review of Đang nghiệm thu rows | accept → Hoàn thành |
 
-### Next P0
+### Do not
 
-1. Staging deploy this wave (EXT-065 handoff refresh)
-2. EXT-038 security QA report
-3. EXT-062 a11y/perf measured
-4. EXT-064 state-matrix E2E
-5. EXT-040 LIVE — remain BLOCKED_EXTERNAL
-
-### Blocked
-
-- EXT-040 LIVE providers / real payment — Founder authorization only
-- Mobile TestFlight — Apple Developer
+- Enable LIVE / real provider settlement
+- Production charge outside sandbox flags
