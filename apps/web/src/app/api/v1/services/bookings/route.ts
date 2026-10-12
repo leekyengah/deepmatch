@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { getRouteUser } from "@/lib/supabase/route";
 import { flagEnabled } from "@/lib/flags";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 import {
@@ -8,16 +8,13 @@ import {
   type CompanionPackage,
 } from "@/lib/companion-packages";
 
-export async function GET() {
+export async function GET(req: Request) {
   const requestId = makeRequestId();
   if (!(await flagEnabled("ff_concierge"))) {
     return jsonError("FORBIDDEN", "flagConciergeOff", requestId);
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
 
   const { data, error } = await supabase
@@ -86,10 +83,7 @@ export async function POST(req: Request) {
     return jsonError("FORBIDDEN", "flagConciergeOff", requestId);
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
 
   const body = (await req.json()) as {
@@ -219,10 +213,7 @@ export async function PATCH(req: Request) {
   if (!(await flagEnabled("ff_concierge"))) {
     return jsonError("FORBIDDEN", "flagConciergeOff", requestId);
   }
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
 
   let body: { id?: string; action?: string };

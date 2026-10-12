@@ -164,18 +164,26 @@ const tokenC = await jwtFor(emailC);
   });
   const orderId = create.body?.data?.order?.id;
   let paidOk = false;
+  let paidNote = "";
   if (orderId) {
     const paid = await api(`/api/v1/checkout/orders/${orderId}`, tokenA, {
       method: "PATCH",
       body: JSON.stringify({ action: "sandbox_succeed" }),
     });
     paidOk = paid.status < 400 && paid.body?.data?.order?.status === "paid";
+    paidNote = `paid=${paid.status}/${paid.body?.data?.order?.status}`;
+  } else {
+    paidNote = `create=${create.status} ${JSON.stringify(create.body?.error || create.body).slice(0, 120)}`;
   }
   const ent = await api("/api/v1/entitlements", tokenA);
   const hasEnt =
     Array.isArray(ent.body?.data?.entitlements) &&
     ent.body.data.entitlements.some((e) => e.package_code === "CMP-01");
-  record("QA-REL-035", create.status < 400 && paidOk && hasEnt, "checkout→entitlement sandbox");
+  record(
+    "QA-REL-035",
+    create.status < 400 && paidOk && hasEnt,
+    `checkout→entitlement ${paidNote} ent=${hasEnt}`,
+  );
 }
 
 // Cross-user order deny
