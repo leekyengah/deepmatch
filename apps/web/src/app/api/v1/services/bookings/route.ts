@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { flagEnabled } from "@/lib/flags";
 import { jsonError, makeRequestId } from "@/lib/api-error";
+import {
+  COMPANION_PACKAGES,
+  offeringTitleForDb,
+} from "@/lib/companion-packages";
 
 export async function GET() {
   const requestId = makeRequestId();
@@ -61,18 +65,44 @@ export async function POST(req: Request) {
 
   const body = (await req.json()) as {
     offering_id?: string;
+    package_code?: string;
+    package_slug?: string;
     pair_id?: string | null;
     note?: string;
   };
 
-  if (!body.offering_id) {
+  let offeringId = body.offering_id ?? null;
+
+  if (!offeringId && (body.package_code || body.package_slug)) {
+    const pkg = COMPANION_PACKAGES.find(
+      (p) =>
+        p.code === body.package_code || p.slug === body.package_slug,
+    );
+    if (!pkg) {
+      return jsonError("VALIDATION_ERROR", "offeringUnavailable", requestId);
+    }
+    const title = offeringTitleForDb(pkg);
+    const { data: existing } = await supabase
+      .from("service_offerings")
+      .select("id, active")
+      .eq("title", title)
+      .eq("active", true)
+      .maybeSingle();
+
+    if (!existing?.id) {
+      return jsonError("VALIDATION_ERROR", "offeringUnavailable", requestId);
+    }
+    offeringId = existing.id;
+  }
+
+  if (!offeringId) {
     return jsonError("VALIDATION_ERROR", "missingOfferingId", requestId);
   }
 
   const { data: offering } = await supabase
     .from("service_offerings")
     .select("id, active")
-    .eq("id", body.offering_id)
+    .eq("id", offeringId)
     .eq("active", true)
     .maybeSingle();
   if (!offering) {
@@ -94,7 +124,7 @@ export async function POST(req: Request) {
   const { data, error } = await supabase
     .from("service_bookings")
     .insert({
-      offering_id: body.offering_id,
+      offering_id: offeringId,
       requester_id: user.id,
       pair_id: body.pair_id ?? null,
       status: "requested",

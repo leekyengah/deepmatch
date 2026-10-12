@@ -38,5 +38,18 @@
   "registerConsult": "Request consultation",
   "servicesHeading": "Consultation services",
   "servicesIntro": "Four optional services. Fees, scope, and cancel terms are shown before confirmation. No promised matching outcomes.",
-  "flagOffBodyStaging": "Companion services are temporarily unavailable."
+  "servicesIntroSeven": "Seven Companion and Matchmaking packages. Prices, benefits, and limits are public before you request. Sandbox payment only — no live charge yet. No promise of match or marriage outcomes.",
+  "flagOffBodyStaging": "Companion services are temporarily unavailable.",
+  "groupCompanion": "Companion",
+  "groupMatchmaking": "Personal matchmaking",
+  "viewPackage": "View package details",
+  "backToServices": "← All packages",
+  "listPrice": "List price",
+  "suitableFor": "Who it is for",
+  "benefits": "Benefits",
+  "process": "Process",
+  "howToUse": "How to use",
+  "limits": "Limits / rules",
+  "sandboxPaymentNote": "Prices are shown for transparency. Requests are sandbox only — live PSP charge is not enabled.",
+  "requestSandbox": "Send request (sandbox)"
 }

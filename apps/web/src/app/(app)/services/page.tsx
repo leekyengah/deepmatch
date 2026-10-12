@@ -27,7 +27,7 @@ export default async function ServicesPage() {
             {t("booking.servicesHeading")}
           </h1>
           <p className="mt-2 max-w-xl font-editorial text-sm text-dm-muted">
-            {t("booking.servicesIntro")}
+            {t("booking.servicesIntroSeven")}
           </p>
         </div>
         <Link href="/bookings">

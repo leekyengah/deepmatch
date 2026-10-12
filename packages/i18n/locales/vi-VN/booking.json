@@ -38,5 +38,18 @@
   "registerConsult": "Đăng ký tư vấn",
   "servicesHeading": "Dịch vụ tư vấn",
   "servicesIntro": "Bốn dịch vụ tùy chọn. Phí, phạm vi và điều kiện hủy được công khai trước khi xác nhận. Không hứa kết quả ghép đôi.",
-  "flagOffBodyStaging": "Dịch vụ Đồng hành tạm thời chưa mở."
+  "servicesIntroSeven": "Bảy gói Đồng hành và Mai mối. Giá, quyền lợi và giới hạn công khai trước khi gửi yêu cầu. Thanh toán sandbox — chưa thu tiền thật. Không hứa kết quả ghép đôi hay hôn nhân.",
+  "flagOffBodyStaging": "Dịch vụ Đồng hành tạm thời chưa mở.",
+  "groupCompanion": "Đồng hành",
+  "groupMatchmaking": "Mai mối cá nhân",
+  "viewPackage": "Xem chi tiết gói",
+  "backToServices": "← Tất cả gói",
+  "listPrice": "Niêm yết",
+  "suitableFor": "Phù hợp với ai",
+  "benefits": "Quyền lợi",
+  "process": "Quy trình",
+  "howToUse": "Cách sử dụng",
+  "limits": "Giới hạn / quy định",
+  "sandboxPaymentNote": "Giá hiển thị để minh bạch. Yêu cầu hiện là sandbox — chưa kích hoạt thu tiền / PSP thật.",
+  "requestSandbox": "Gửi yêu cầu (sandbox)"
 }
