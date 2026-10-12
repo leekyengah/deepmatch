@@ -10,8 +10,11 @@ const pillars = [
   { href: "/lifestyle/beauty", label: "DeepBeauty", desc: "Makeup mẫu DEMO" },
   { href: "/lifestyle/venue", label: "DeepDate", desc: "Địa điểm hẹn mẫu" },
   { href: "/lifestyle/travel", label: "DeepTravel", desc: "Du lịch mẫu DEMO" },
-  { href: "/lifestyle/safety", label: "DeepSafe", desc: "An toàn — không phải SOS thật" },
+  { href: "/safe", label: "DeepSafe", desc: "Check-in & người tin cậy (miễn phí)" },
+  { href: "/lifestyle/safety", label: "DeepSafe catalog", desc: "Quy trình mẫu DEMO" },
+  { href: "/lifestyle/orders", label: "Lệnh DEMO", desc: "Reserve / confirm / cancel sandbox" },
   { href: "/ai", label: "AI Hub", desc: "Gợi ý có đồng ý rõ ràng" },
+  { href: "/ai/deepmind", label: "DeepMind", desc: "Tự phản ánh tự nguyện" },
 ];
 
 export default async function LifestyleHomePage() {

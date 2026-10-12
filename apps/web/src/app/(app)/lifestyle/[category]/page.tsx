@@ -76,28 +76,30 @@ export default async function LifestyleCategoryPage({
             } | null;
             return (
               <li key={p.id}>
-                <Card className="text-sm">
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <div>
-                      <p className="font-semibold text-dm-raspberry">
-                        {p.title}
-                      </p>
-                      <p className="mt-1 text-xs text-dm-muted">
-                        {p.mock_id} · {prov?.display_name ?? "DEMO"} ·{" "}
-                        {prov?.status ?? "DEMO"}
+                <Link href={`/lifestyle/${category}/${p.mock_id}`}>
+                  <Card className="text-sm transition hover:border-dm-primary">
+                    <div className="flex flex-wrap items-start justify-between gap-2">
+                      <div>
+                        <p className="font-semibold text-dm-raspberry">
+                          {p.title}
+                        </p>
+                        <p className="mt-1 text-xs text-dm-muted">
+                          {p.mock_id} · {prov?.display_name ?? "DEMO"} ·{" "}
+                          {prov?.status ?? "DEMO"}
+                        </p>
+                      </div>
+                      <p className="font-bold text-dm-primary">
+                        {p.price_vnd.toLocaleString("vi-VN")}₫
+                        <span className="ml-1 text-xs font-normal text-dm-muted">
+                          / {p.unit}
+                        </span>
                       </p>
                     </div>
-                    <p className="font-bold text-dm-primary">
-                      {p.price_vnd.toLocaleString("vi-VN")}₫
-                      <span className="ml-1 text-xs font-normal text-dm-muted">
-                        / {p.unit}
-                      </span>
+                    <p className="mt-2 text-[11px] font-semibold text-[#9a4a2a]">
+                      {p.demo_banner}
                     </p>
-                  </div>
-                  <p className="mt-2 text-[11px] font-semibold text-[#9a4a2a]">
-                    {p.demo_banner}
-                  </p>
-                </Card>
+                  </Card>
+                </Link>
               </li>
             );
           })}

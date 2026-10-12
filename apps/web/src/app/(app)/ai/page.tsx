@@ -27,6 +27,11 @@ export default async function AiHubPage() {
         </Badge>
         <Badge tone="good">Consent bắt buộc</Badge>
       </div>
+      <p className="mt-6 text-sm">
+        <Link href="/ai/deepmind" className="font-semibold text-dm-primary underline">
+          DeepMind — bộ câu hỏi tự nguyện →
+        </Link>
+      </p>
       <div className="mt-8">
         <AiAssistClient />
       </div>

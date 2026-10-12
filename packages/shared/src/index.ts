@@ -8,3 +8,4 @@ export * from "./brand";
 export * from "./http/errors";
 export * from "./outbox/worker";
 export * from "./ai/gateway";
+export * from "./ai/deepmind";

@@ -47,6 +47,17 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const quota = Number(process.env.AI_DAILY_QUOTA ?? "40") || 40;
+  const { data: usedToday } = await supabase.rpc("ai_usage_count_today", {
+    p_user: user.id,
+  });
+  if (typeof usedToday === "number" && usedToday >= quota) {
+    return jsonError(
+      "RATE_LIMITED",
+      `Đã hết hạn mức AI trong ngày (${quota}). Thử lại ngày mai hoặc dùng stub.`,
+    );
+  }
+
   await supabase.from("ai_consents").upsert({
     user_id: user.id,
     purpose: task,
