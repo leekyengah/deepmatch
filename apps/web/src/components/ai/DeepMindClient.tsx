@@ -119,7 +119,7 @@ export function DeepMindClient() {
                 type="button"
                 className={
                   answers[q.id] === opt
-                    ? "rounded-dm border border-dm-primary bg-[#FFE9F0] px-3 py-2 text-left text-dm-raspberry"
+                    ? "rounded-dm border border-dm-primary bg-dm-blush px-3 py-2 text-left text-dm-ink"
                     : "rounded-dm border border-dm-line bg-dm-panel px-3 py-2 text-left"
                 }
                 onClick={() => {

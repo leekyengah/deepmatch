@@ -5,6 +5,7 @@ import {
   type FeatureFlagName,
 } from "@deepmatch/shared";
 import { createClient } from "@/lib/supabase/server";
+import { createServiceClient } from "@/lib/supabase/route";
 
 export function envFlags(): FlagMap {
   const read = (name: string, fallback: boolean) => {
@@ -25,14 +26,23 @@ export function envFlags(): FlagMap {
   };
 }
 
-/** DB flags win when readable; env is fallback / bootstrap. */
+/**
+ * DB flags win when readable. feature_flags is staff-RLS, so prefer
+ * service-role read so kill switches apply for anonymous/SSR too.
+ */
 export const getFlags = cache(async (): Promise<FlagMap> => {
   const base = envFlags();
   try {
-    const supabase = await createClient();
-    const { data } = await supabase
-      .from("feature_flags")
-      .select("name, enabled");
+    let data: { name: string; enabled: boolean }[] | null = null;
+    try {
+      const service = createServiceClient();
+      const res = await service.from("feature_flags").select("name, enabled");
+      data = res.data;
+    } catch {
+      const supabase = await createClient();
+      const res = await supabase.from("feature_flags").select("name, enabled");
+      data = res.data;
+    }
     if (!data?.length) return base;
     const next = { ...base };
     for (const row of data) {

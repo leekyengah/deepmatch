@@ -71,7 +71,7 @@ export function DemoCartClient() {
 
   return (
     <div className="space-y-6">
-      <p className="rounded-dm border border-[#efcfda] bg-[#FFF0F5] px-3 py-2 text-xs font-semibold text-[#9a4a2a]">
+      <p className="rounded-dm border border-dm-line bg-dm-blush px-3 py-2 text-xs font-semibold text-dm-deep">
         {t("commerce.cartBanner")}
       </p>
       <ul className="space-y-3">

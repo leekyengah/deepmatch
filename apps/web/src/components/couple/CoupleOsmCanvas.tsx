@@ -63,8 +63,8 @@ export function CoupleOsmCanvas({ pins }: { pins: Pin[] }) {
         for (const p of points) {
           L.circleMarker([p.lat, p.lng], {
             radius: 8,
-            color: "#E95383",
-            fillColor: "#E95383",
+            color: "#6B2D3C",
+            fillColor: "#6B2D3C",
             fillOpacity: 0.85,
           })
             .addTo(instance)

@@ -58,7 +58,7 @@ export function CoupleMapCanvas({
 
         instance.on("load", () => {
           for (const p of points) {
-            new mapboxgl.Marker({ color: "#E95383" })
+            new mapboxgl.Marker({ color: "#6B2D3C" })
               .setLngLat([p.lng, p.lat])
               .setPopup(
                 new mapboxgl.Popup({ offset: 16 }).setText(p.title),
