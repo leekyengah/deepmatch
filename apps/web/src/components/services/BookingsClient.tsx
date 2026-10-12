@@ -56,6 +56,15 @@ export function BookingsClient() {
     void load();
   }, [load]);
 
+  async function cancel(id: string) {
+    const res = await fetch("/api/v1/services/bookings", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, action: "cancel" }),
+    });
+    if (res.ok) void load();
+  }
+
   if (loading) return <LoadingState label={t("booking.loading")} />;
 
   if (error) {
@@ -103,6 +112,17 @@ export function BookingsClient() {
             <p className="mt-2 text-xs text-dm-muted">
               {formatDateTime(b.created_at, locale)}
             </p>
+            {b.status === "requested" || b.status === "assigned" ? (
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                className="mt-3"
+                onClick={() => void cancel(b.id)}
+              >
+                {t("booking.cancelRequest")}
+              </Button>
+            ) : null}
           </Card>
         </li>
       ))}

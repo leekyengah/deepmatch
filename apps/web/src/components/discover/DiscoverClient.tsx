@@ -125,6 +125,18 @@ export function DiscoverClient({ flagsOn }: { flagsOn: boolean }) {
   if (state.kind === "loading") {
     return <LoadingState label={t("discovery.loading")} />;
   }
+
+  const nudge = (
+    <div className="mb-4 rounded-dm border border-dm-line bg-dm-panel px-4 py-3 text-sm">
+      <p className="text-dm-muted">{t("needs.discoverNudge")}</p>
+      <Link
+        href="/me/preferences"
+        className="mt-1 inline-block font-semibold text-dm-primary underline"
+      >
+        {t("needs.discoverNudgeCta")}
+      </Link>
+    </div>
+  );
   if (state.kind === "need_auth") {
     return (
       <EmptyState
@@ -161,6 +173,7 @@ export function DiscoverClient({ flagsOn }: { flagsOn: boolean }) {
 
   return (
     <div>
+      {nudge}
       {toast ? (
         <p
           className="mb-4 rounded-dm bg-dm-surface px-3 py-2 text-sm text-dm-primary"

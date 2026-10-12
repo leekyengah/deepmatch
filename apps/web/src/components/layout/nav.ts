@@ -64,6 +64,7 @@ const titleKeys: Record<string, string> = {
   "/me/edit": "nav.titles.meEdit",
   "/me/understand": "nav.titles.meUnderstand",
   "/me/journey": "nav.titles.meJourney",
+  "/me/preferences": "nav.titles.mePreferences",
   "/me/deep": "nav.titles.meDeep",
   "/me/privacy": "nav.titles.mePrivacy",
   "/me/account": "nav.titles.meAccount",

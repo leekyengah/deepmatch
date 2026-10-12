@@ -400,14 +400,8 @@ export function NeedsRunnerClient({
 }
 
 function FinishLink({ href, label }: { href: string; label: string }) {
-  // Avoid expo-router in Next web — use plain navigation.
   return (
-    <Button
-      type="button"
-      onClick={() => {
-        window.location.href = href;
-      }}
-    >
+    <Button type="button" onClick={() => { window.location.href = href; }}>
       {label}
     </Button>
   );
