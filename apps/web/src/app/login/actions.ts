@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { safeNextPath } from "@/lib/safe-next";
 
 const OWNER_EMAILS = new Set(
   (process.env.ADMIN_OWNER_EMAILS ?? "leekyengah@gmail.com")
@@ -17,13 +18,16 @@ const ADMIN_APP_URL = (
 export async function loginAction(formData: FormData) {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
+  const next = safeNextPath(String(formData.get("next") ?? ""), "/me");
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
   if (error) {
-    redirect(`/login?error=${encodeURIComponent(error.message)}`);
+    const q = new URLSearchParams({ error: error.message });
+    if (next !== "/me") q.set("next", next);
+    redirect(`/login?${q.toString()}`);
   }
 
   const user = data.user;
@@ -39,8 +43,12 @@ export async function loginAction(formData: FormData) {
       roleRow?.role === "owner" || roleRow?.role === "admin";
   }
 
+  // Couple join takes priority over admin board redirect
+  if (next.startsWith("/couple/join")) {
+    redirect(next);
+  }
   if (staff) {
     redirect(`${ADMIN_APP_URL}/`);
   }
-  redirect("/me");
+  redirect(next);
 }

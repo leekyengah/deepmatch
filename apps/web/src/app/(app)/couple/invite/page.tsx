@@ -11,19 +11,28 @@ export default function CoupleInvitePage() {
   const t = useT();
   const router = useRouter();
   const [code, setCode] = useState<string | null>(null);
+  const [inviteUrl, setInviteUrl] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
   const [acceptCode, setAcceptCode] = useState("");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
 
-  async function createInvite() {
+  async function createInvite(withEmail: boolean) {
     setBusy(true);
     setMessage("");
     try {
-      const res = await fetch("/api/v1/couple-invitations", { method: "POST" });
+      const res = await fetch("/api/v1/couple-invitations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(withEmail ? { email: email.trim() } : {}),
+      });
       const json = (await res.json()) as {
         error?: string | { message?: string };
         code?: string;
         expires_at?: string;
+        inviteUrl?: string;
+        emailOk?: boolean | null;
+        emailDelivery?: string;
       };
       if (!res.ok) {
         setMessage(
@@ -34,11 +43,20 @@ export default function CoupleInvitePage() {
         return;
       }
       setCode(json.code ?? null);
-      setMessage(
-        json.expires_at
-          ? t("couple.codeExpires", { when: json.expires_at })
-          : t("couple.createdCode"),
-      );
+      setInviteUrl(json.inviteUrl ?? null);
+      if (withEmail) {
+        if (json.emailOk === false) {
+          setMessage(t("couple.emailSendFailed"));
+        } else if (json.emailDelivery === "stub") {
+          setMessage(t("couple.emailStubSent"));
+        } else {
+          setMessage(t("couple.emailSent"));
+        }
+      } else if (json.expires_at) {
+        setMessage(t("couple.codeExpires", { when: json.expires_at }));
+      } else {
+        setMessage(t("couple.createdCode"));
+      }
     } finally {
       setBusy(false);
     }
@@ -73,6 +91,16 @@ export default function CoupleInvitePage() {
     }
   }
 
+  async function copyLink() {
+    if (!inviteUrl) return;
+    try {
+      await navigator.clipboard.writeText(inviteUrl);
+      setMessage(t("couple.linkCopied"));
+    } catch {
+      setMessage(inviteUrl);
+    }
+  }
+
   return (
     <div className="max-w-lg">
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
@@ -85,15 +113,52 @@ export default function CoupleInvitePage() {
 
       <Card className="mt-6 space-y-3">
         <h2 className="text-lg font-semibold text-dm-raspberry">
+          {t("couple.inviteByEmail")}
+        </h2>
+        <p className="text-xs text-dm-muted">{t("couple.inviteByEmailHint")}</p>
+        <Input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={t("couple.inviteEmailPlaceholder")}
+          aria-label={t("couple.inviteEmailPlaceholder")}
+          autoComplete="email"
+        />
+        <Button
+          type="button"
+          onClick={() => void createInvite(true)}
+          disabled={busy || !email.trim()}
+        >
+          {t("couple.sendInviteEmail")}
+        </Button>
+      </Card>
+
+      <Card className="mt-4 space-y-3">
+        <h2 className="text-lg font-semibold text-dm-raspberry">
           {t("couple.createInvite")}
         </h2>
-        <Button type="button" onClick={createInvite} disabled={busy}>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => void createInvite(false)}
+          disabled={busy}
+        >
           {t("couple.createCode")}
         </Button>
         {code ? (
           <p className="break-all rounded-dm bg-dm-surface p-3 text-sm">
             {t("couple.codeOnce")} <strong>{code}</strong>
           </p>
+        ) : null}
+        {inviteUrl ? (
+          <div className="space-y-2">
+            <p className="break-all rounded-dm bg-dm-surface p-3 text-xs text-dm-muted">
+              {inviteUrl}
+            </p>
+            <Button type="button" variant="ghost" size="sm" onClick={() => void copyLink()}>
+              {t("couple.copyLink")}
+            </Button>
+          </div>
         ) : null}
       </Card>
 
@@ -110,7 +175,7 @@ export default function CoupleInvitePage() {
         <Button
           type="button"
           variant="outline"
-          onClick={acceptInvite}
+          onClick={() => void acceptInvite()}
           disabled={busy || !acceptCode.trim()}
         >
           {t("couple.acceptInvite")}

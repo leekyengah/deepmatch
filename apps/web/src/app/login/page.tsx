@@ -1,14 +1,21 @@
 import Link from "next/link";
 import { getServerTranslator } from "@/lib/i18n/server";
+import { safeNextPath } from "@/lib/safe-next";
 import { loginAction } from "./actions";
 
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; next?: string }>;
 }) {
   const sp = await searchParams;
   const { t } = await getServerTranslator();
+  const next = safeNextPath(sp.next, "/me");
+  const signupHref =
+    next !== "/me"
+      ? `/signup?next=${encodeURIComponent(next)}`
+      : "/signup";
+
   return (
     <main className="mx-auto max-w-md px-6 py-12">
       <Link href="/" className="text-sm opacity-60">
@@ -17,7 +24,11 @@ export default async function LoginPage({
       <h1 className="mt-6 font-[family-name:var(--font-display)] text-4xl text-[var(--dm-deep)]">
         {t("auth.login")}
       </h1>
+      {next.startsWith("/couple/join") ? (
+        <p className="mt-2 text-sm text-dm-muted">{t("couple.joinLoginHint")}</p>
+      ) : null}
       <form action={loginAction} className="mt-8 space-y-4 rounded-3xl bg-white/80 p-6">
+        <input type="hidden" name="next" value={next} />
         <label className="block text-sm">
           {t("auth.email")}
           <input
@@ -56,7 +67,7 @@ export default async function LoginPage({
       </p>
       <p className="mt-4 text-sm">
         {t("auth.noAccount")}{" "}
-        <Link href="/signup" className="font-semibold underline">
+        <Link href={signupHref} className="font-semibold underline">
           {t("auth.signupShort")}
         </Link>
       </p>
