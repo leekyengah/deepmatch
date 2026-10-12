@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { redactedInput, stubAssist } from "./gateway";
+import { redactedInput, resolveAiAdapter, stubAssist } from "./gateway";
 
 describe("ai gateway stub", () => {
   it("redacts private keys", () => {
@@ -25,5 +25,13 @@ describe("ai gateway stub", () => {
     const res = stubAssist("deepmind");
     const blob = JSON.stringify(res).toLowerCase();
     assert.equal(/diagnos|bipolar|schizo|depression disorder/.test(blob), false);
+  });
+
+  it("resolveAiAdapter defaults to stub (DECISION-AI-01 C)", () => {
+    assert.equal(resolveAiAdapter({}), "stub");
+    assert.equal(resolveAiAdapter({ AI_ADAPTER: "stub" }), "stub");
+    assert.equal(resolveAiAdapter({ AI_ADAPTER: "openai" }), "openai");
+    assert.equal(resolveAiAdapter({ AI_ADAPTER: "OPENAI" }), "openai");
+    assert.equal(resolveAiAdapter({ AI_ADAPTER: "anthropic" }), "stub");
   });
 });

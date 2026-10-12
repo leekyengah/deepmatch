@@ -1,12 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
-import {
-  redactedInput,
-  stubAssist,
-  type AiTask,
-} from "@deepmatch/shared";
+import { redactedInput, resolveAiAdapter, type AiTask } from "@deepmatch/shared";
 import { createClient } from "@/lib/supabase/server";
 import { flagEnabled } from "@/lib/flags";
 import { jsonError } from "@/lib/api-error";
+import { runAssist } from "@/lib/ai/run-assist";
 
 const TASKS = new Set<AiTask>([
   "profile_coach",
@@ -59,16 +56,20 @@ export async function POST(req: NextRequest) {
   });
 
   const safe = redactedInput(body.input);
-  const result = stubAssist(task, safe);
+  const configured = resolveAiAdapter();
+  const result = await runAssist(task, safe);
 
   await supabase.from("ai_usage_events").insert({
     user_id: user.id,
     task,
-    adapter: "stub",
+    adapter: result.adapter,
     tokens_in: JSON.stringify(safe).length,
     tokens_out: JSON.stringify(result.suggestions).length,
     ok: true,
-    metadata: { path: "stubAssist" },
+    metadata: {
+      configured,
+      fallbackFrom: result.fallbackFrom ?? null,
+    },
   });
 
   return NextResponse.json({ ok: true, ...result });

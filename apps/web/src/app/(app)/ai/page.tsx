@@ -22,7 +22,9 @@ export default async function AiHubPage() {
         Mỗi lần gọi cần đồng ý mục đích. Không tự gửi tin · không chẩn đoán lâm sàng.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Badge tone="warn">Adapter: stub (chưa LLM trả phí)</Badge>
+        <Badge tone="warn">
+          Adapter mặc định: stub · LLM khi AI_ADAPTER=openai
+        </Badge>
         <Badge tone="good">Consent bắt buộc</Badge>
       </div>
       <div className="mt-8">

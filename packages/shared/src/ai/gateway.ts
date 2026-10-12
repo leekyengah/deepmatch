@@ -12,21 +12,35 @@ export type AiTask =
   | "safety_tips"
   | "deepmind";
 
+export type AiAdapterName = "stub" | "openai";
+
 export type AiAssistRequest = {
   task: AiTask;
   input?: Record<string, unknown>;
 };
 
+export type AiSuggestion = { title: string; body: string; demo?: boolean };
+
 export type AiAssistResponse = {
-  adapter: "stub";
+  adapter: AiAdapterName;
   task: AiTask;
   disclaimer: string;
-  suggestions: Array<{ title: string; body: string; demo?: boolean }>;
+  suggestions: AiSuggestion[];
   catalogHints?: string[];
+  fallbackFrom?: AiAdapterName;
 };
 
-const DISCLAIMER =
+export const AI_DISCLAIMER =
   "Gợi ý mang tính tham khảo. Không phải chẩn đoán y khoa/tâm lý. Không tự gửi tin nhắn. Mục catalog gắn DEMO không phải giao dịch thật.";
+
+/** DECISION-AI-01 C: stub default; openai only when AI_ADAPTER=openai (+ key). */
+export function resolveAiAdapter(
+  env: NodeJS.ProcessEnv | Record<string, string | undefined> = process.env,
+): AiAdapterName {
+  const raw = (env.AI_ADAPTER ?? "stub").trim().toLowerCase();
+  if (raw === "openai") return "openai";
+  return "stub";
+}
 
 export function redactedInput(
   input: Record<string, unknown> | undefined,
@@ -52,7 +66,7 @@ export function stubAssist(
   const occasion = String(input.occasion ?? "buổi hẹn");
   const budget = String(input.budget ?? "vừa phải");
 
-  const templates: Record<AiTask, AiAssistResponse["suggestions"]> = {
+  const templates: Record<AiTask, AiSuggestion[]> = {
     profile_coach: [
       {
         title: "Bản nháp bio",
@@ -127,11 +141,38 @@ export function stubAssist(
   return {
     adapter: "stub",
     task,
-    disclaimer: DISCLAIMER,
+    disclaimer: AI_DISCLAIMER,
     suggestions: templates[task],
     catalogHints:
-      task === "gift" || task === "style" || task === "beauty" || task === "date_plan"
+      task === "gift" ||
+      task === "style" ||
+      task === "beauty" ||
+      task === "date_plan"
         ? ["/lifestyle"]
         : undefined,
   };
+}
+
+export function catalogHintsFor(task: AiTask): string[] | undefined {
+  if (
+    task === "gift" ||
+    task === "style" ||
+    task === "beauty" ||
+    task === "date_plan" ||
+    task === "travel"
+  ) {
+    return ["/lifestyle"];
+  }
+  return undefined;
+}
+
+export function systemPromptFor(task: AiTask): string {
+  return [
+    "You are DeepMatch AI assist. Reply in Vietnamese.",
+    "Return ONLY valid JSON: {\"suggestions\":[{\"title\":\"...\",\"body\":\"...\",\"demo\":true|false}]}",
+    "2-4 suggestions. No medical/mental diagnosis. No auto-send chat. No invented real bookings/prices as live.",
+    "Mark demo:true when referring to catalog sandbox items.",
+    `Task: ${task}`,
+    AI_DISCLAIMER,
+  ].join("\n");
 }

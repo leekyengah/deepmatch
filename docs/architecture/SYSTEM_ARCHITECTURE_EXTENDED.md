@@ -69,10 +69,10 @@ Hard rules: no auto-send messages; no clinical diagnosis; no private journal/cha
 **Why:** One auth identity; lower ops cost.  
 **Rollback:** Drop migrations `20261012180000_*` onward.
 
-### ADR-X02 — Staging AI uses stub adapter by default
-**Decision:** Deterministic template recommendations until DECISION-AI-01 chooses hosted LLM.  
-**Why:** Zero spend, reproducible E2E, no PII leaving VPC.  
-**Rollback:** Flip adapter env `AI_ADAPTER=stub|openai`.
+### ADR-X02 — Staging AI uses stub adapter by default (DECISION-AI-01 **C**)
+**Decision:** `AI_ADAPTER=stub` (default). When `AI_ADAPTER=openai` **and** `OPENAI_API_KEY` set, call OpenAI; on failure/missing key → stub fallback (`fallbackFrom: openai`).  
+**Why:** Zero spend by default; optional LLM without code rewrite; reproducible E2E.  
+**Rollback:** Set `AI_ADAPTER=stub` or unset `OPENAI_API_KEY`.
 
 ### ADR-X03 — All tab-17 seeds are DEMO forever
 **Decision:** Seed script sets `provider_status=DEMO`, `fulfillment=SANDBOX_ONLY`, banner copy mandatory.  
