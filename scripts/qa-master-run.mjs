@@ -518,30 +518,46 @@ let conversationId = null;
 
 // Couple invite A→B accept; C denied private pins (QA-REL-025/026 partial)
 {
-  const inv = await api("/api/v1/couple-invitations", tokenA, {
-    method: "POST",
-    body: JSON.stringify({}),
+  // Reuse existing active A↔B pair when present (accept RPC rejects second pairing)
+  const adminPairs = createClient(url, service, {
+    auth: { autoRefreshToken: false, persistSession: false },
   });
-  const code = inv.body?.code;
-  let pairId = null;
-  let acceptOk = false;
-  if (code) {
-    const acc = await api("/api/v1/couple-invitations/accept", tokenB, {
+  const { data: existingPairs } = await adminPairs
+    .from("pairs")
+    .select("id, status, user_a, user_b")
+    .eq("status", "active")
+    .or(
+      `and(user_a.eq.${idA},user_b.eq.${idB}),and(user_a.eq.${idB},user_b.eq.${idA})`,
+    )
+    .limit(1);
+  let pairId = existingPairs?.[0]?.id ?? null;
+  let path = "existing";
+  if (!pairId) {
+    const inv = await api("/api/v1/couple-invitations", tokenA, {
       method: "POST",
-      body: JSON.stringify({ code }),
+      body: JSON.stringify({}),
     });
-    pairId = acc.body?.pairId ?? null;
-    acceptOk = acc.status < 400 && Boolean(pairId);
+    const code = inv.body?.code;
+    if (code) {
+      const acc = await api("/api/v1/couple-invitations/accept", tokenB, {
+        method: "POST",
+        body: JSON.stringify({ code }),
+      });
+      pairId = acc.body?.pairId ?? null;
+      path = `invite=${inv.status}/accept=${acc.status}`;
+    } else {
+      path = `invite=${inv.status}`;
+    }
   }
-  let cDenied = true;
+  let cDenied = false;
   if (pairId) {
     const steal = await api(`/api/v1/couples/${pairId}/pins`, tokenC);
     cDenied = steal.status >= 400;
   }
   record(
     "QA-REL-025",
-    inv.status < 400 && acceptOk && cDenied,
-    `invite=${inv.status} accept=${acceptOk} cPins=${cDenied ? "denied" : "leaked"}`,
+    Boolean(pairId) && cDenied,
+    `path=${path} pair=${Boolean(pairId)} cPins=${cDenied ? "denied" : "leaked"}`,
   );
 }
 
