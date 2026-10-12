@@ -52,6 +52,7 @@
   "productIdRequired": "product_id is required.",
   "productNotFound": "Product not found.",
   "internalOnly": "Only sample products are allowed.",
+  "sandboxOnly": "Only sample products are allowed.",
   "bookingActionInvalid": "Booking id or action is invalid.",
   "bookingNotFound": "booking not found.",
   "cartEmpty": "cart is empty.",

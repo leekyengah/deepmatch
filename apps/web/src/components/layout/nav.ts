@@ -10,6 +10,7 @@ export const primaryNav: NavItem[] = [
   { href: "/likes", labelKey: "nav.likes", match: "prefix" },
   { href: "/chat", labelKey: "nav.chat", match: "prefix" },
   { href: "/couple", labelKey: "nav.couple", match: "prefix" },
+  { href: "/places/map", labelKey: "nav.places", match: "prefix" },
   { href: "/services", labelKey: "nav.services", match: "prefix" },
   { href: "/me", labelKey: "nav.me", match: "prefix" },
 ];
@@ -49,6 +50,9 @@ const titleKeys: Record<string, string> = {
   "/couple/invite": "nav.titles.coupleInvite",
   "/services": "nav.titles.services",
   "/bookings": "nav.titles.bookings",
+  "/places/map": "nav.titles.placesMap",
+  "/places/top": "nav.titles.placesTop",
+  "/places": "nav.titles.placesMap",
   "/lifestyle": "nav.titles.lifestyle",
   "/lifestyle/orders": "nav.titles.lifestyleOrders",
   "/ai": "nav.titles.ai",
