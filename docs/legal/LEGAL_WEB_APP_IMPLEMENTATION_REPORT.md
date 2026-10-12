@@ -51,7 +51,9 @@ Primary paths:
 - `packages/i18n/locales/*/auth|marketing|ai|commerce|profile|couple.json`
 - `docs/legal/LEGAL_WEB_APP_IMPLEMENTATION_REPORT.md`
 
-Commit/PR: created in same session after tests (see git log).
+Commits:
+- `2d3c40c` feat(legal): ship user policy pack v1.1 Legal Center on web and app
+- `3ceb3ae` fix(web): align react and react-dom to 19.3.0 for Vercel build
 
 ---
 
@@ -78,7 +80,7 @@ Commit/PR: created in same session after tests (see git log).
 | `npm run typecheck -w @deepmatch/legal-content` | PASS |
 | `npm run typecheck -w @deepmatch/web` | PASS |
 | `npm run i18n:parity` | PASS (1064 keys × 2 locales) |
-| Live unauthenticated GET legal URLs | after staging deploy |
+| Live unauthenticated GET legal URLs | PASS 200 on `/legal*` + `/support` (datingvn.com); v1.1 present; no placeholder/HUMAN_REVIEW/Legal Master in HTML |
 | Placeholder / internal label scan in pack | PASS (integrity test) |
 
 Do not mark PASS for checks not executed.
