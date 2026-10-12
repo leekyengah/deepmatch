@@ -1,15 +1,15 @@
 {
-  "runId": "QA-STAGING-2026-10-12T2144",
-  "timestampUtc": "2026-10-12T21:44:09.060Z",
+  "runId": "QA-STAGING-2026-10-12T2150",
+  "timestampUtc": "2026-10-12T21:50:21.344Z",
   "environment": "https://datingvn.com",
-  "commit": "ac3ec5c",
+  "commit": "250aad2",
   "personas": [
     "QA_ADULT_A",
     "QA_ADULT_B",
     "QA_ADULT_C"
   ],
-  "executed": 12,
-  "pass": 12,
+  "executed": 13,
+  "pass": 13,
   "fail": 0,
   "results": [
     {
@@ -60,7 +60,12 @@
     {
       "id": "QA-REL-037",
       "status": "PASS",
-      "note": "orders history 200 n=6"
+      "note": "orders history 200 n=8"
+    },
+    {
+      "id": "QA-REL-036",
+      "status": "PASS",
+      "note": "meeting create=200 confirmed=true"
     },
     {
       "id": "QA-REL-009",
