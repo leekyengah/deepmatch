@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { flagEnabled } from "@/lib/flags";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
 import { AiAssistClient } from "@/components/ai/AiAssistClient";
 import { AiUsageBadge } from "@/components/ai/AiUsageBadge";
 import { getServerTranslator } from "@/lib/i18n/server";
@@ -24,6 +25,7 @@ export default async function AiHubPage() {
 
   return (
     <div className="max-w-2xl">
+      <AnalyticsBeacon event="ai_hub_open" />
       <Link href="/home" className="text-sm text-dm-muted underline">
         {t("home.eyebrow")}
       </Link>

@@ -22,6 +22,7 @@
   "flagLifestyleOff": "Lifestyle đang tắt.",
   "flagAiOff": "Trợ lý AI đang tắt.",
   "aiCircuitOpen": "Trợ lý AI tạm tắt để kiểm soát chi phí/an toàn. Thử lại sau.",
+  "invalidAnalyticsEvent": "Sự kiện phân tích không hợp lệ.",
   "missingConversationId": "Thiếu mã hội thoại.",
   "missingPinId": "Thiếu mã ghim.",
   "missingPinFields": "Thiếu tiêu đề hoặc lớp ghim.",

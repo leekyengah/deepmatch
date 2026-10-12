@@ -22,6 +22,7 @@
   "flagLifestyleOff": "Lifestyle is turned off.",
   "flagAiOff": "AI assistant is turned off.",
   "aiCircuitOpen": "AI is temporarily paused for cost/safety controls. Try again later.",
+  "invalidAnalyticsEvent": "Invalid analytics event.",
   "missingConversationId": "conversation_id is required.",
   "missingPinId": "pin_id is required.",
   "missingPinFields": "title or layer is missing.",

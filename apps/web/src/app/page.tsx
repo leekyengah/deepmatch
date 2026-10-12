@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 import { PublicNav } from "@/components/marketing/PublicNav";
 import { Button } from "@/components/ui/Button";
@@ -92,6 +93,7 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen text-dm-ink">
+      <AnalyticsBeacon event="home_view" props={{ path: "/" }} />
       <PublicNav />
 
       <section className="relative isolate min-h-[min(92vh,880px)] overflow-hidden">
