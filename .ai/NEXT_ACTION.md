@@ -1,23 +1,22 @@
 ﻿# NEXT ACTION
 
-Staging https://datingvn.com · `250aad2`
+Staging https://datingvn.com · `e3b43ed`
 
 ## Last QA
-- Run `QA-STAGING-20261012T2150` — **13/13 PASS**
+- Run `QA-STAGING-20261012T2208` — **17/17 PASS**
 - Evidence: `docs/evidence/QA_RUN_LATEST.json`
 - Master tabs 00/01/34/35/36 synced
 
-## Shipped this session
-- Invite accept/decline/withdraw role rules
-- Media upload max 10 images / 2 videos
-- `/me/orders` payment + entitlements history
-- Dual-consent `matchmaking_meetings` + journey list
+## Shipped latest
+- Sandbox checkout webhook HMAC + replay dedupe + amount/currency checks (DM-226)
+- Exactly-once entitlement per `source_order_id`
+- QA: mutual like A↔B + chat deny (DM-192 partial)
 
-## Open next (not BLOCKED_EXTERNAL)
-1. DM-163 admin venue + review moderation
-2. DM-226 webhook/idempotency deepen (sandbox)
-3. Expand QA-REL matching/chat/couple (DM-192..)
-4. Love Map visual E2E (DM-166)
+## Open next
+1. Chat delivery / block-report E2E (DM-192 remainder)
+2. Love Map visual E2E (DM-166)
+3. Venue merge/appeal depth
+4. Pixel checkout compare (DM-232)
 
 ## Still NO GO
 - G-QA-STORE / G-QA-LIVE / real PSP / Google Cloud Maps keys / TestFlight
