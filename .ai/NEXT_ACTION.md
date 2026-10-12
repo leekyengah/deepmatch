@@ -1,22 +1,27 @@
 ﻿# NEXT ACTION
 
-## Status 2026-10-13 — Full UX wave IN PROGRESS (Founder wait skipped per user)
+## Status 2026-10-13 evening — Full UX + Companion + Love Map wave
 
-Branch: `feat/ext-lifestyle-ai-commerce` · Staging: https://datingvn.com  
-Deploy: `b986f27` (/me dashboard + 7 companion packages)
+Staging: https://datingvn.com · branch `feat/ext-lifestyle-ai-commerce`  
+Latest deploy: `2a7bd17` (Love Map places) after `b986f27` (/me + 7 packages)
 
-### Done this session
-- Hide DEMO sandbox (ff_lifestyle/ff_ai OFF, no-leak+ACL PASS)
-- Master updates: ops, matrix Lifestyle/AI ẩn, G-UX-BASELINE GO
-- DM-109 FULL_UX_ROUTE_AUDIT · DM-110 UX-STATE-CONTRACT · DM-113 /me dashboard
-- DM-168..173 companion: 7 packages tab32, `/services` + `/services/[slug]`, seed DB, sandbox request
+### Master updated
+- Hide-sandbox reflected (Lifestyle/AI ẩn)
+- DM-109/110/113/150/154/156–158 + companion 168–173 (+172 partial)
+- G-UX-BASELINE → ĐƯỢC PHÉP TIẾP TỤC (Founder wait skipped per user)
 
-### Still open (do next)
-- DM-111/112 shell + DS sweep; DM-114..133 remaining Full UX
-- DM-134..149 Hiểu mình / 100 câu
-- DM-150..167 Love Map 4 screens (audit first)
-- DM-174..187 companion ops depth (journey, cancel, admin CMS)
-- Gates: G-UX-CORE / G-UX-WEBAPP / G-LOVE-MAP / G-COMPANION-STAGING / G-NEEDS-PROFILE
+### Shipped
+- `/me` Personal Relationship Dashboard
+- `/services` 7 packages + `/services/[slug]` + DB seed (sandbox request)
+- `/places/map`, `/places/top`, `/places/[id]` editorial samples
+- Audits: FULL_UX_ROUTE, COMPANION_MODULE, LOVE_MAP_MODULE, UX-STATE-CONTRACT
 
-### Still blocked (do not fake)
-- EXT-040 LIVE provider · G-PREMIUM-LIVE · G-COMPANION-LIVE · real PSP charge
+### Still open (continue next)
+- DM-111/112/114–133 Full UX polish
+- DM-134–149 Hiểu mình 100 câu
+- DM-151–153/159–167 Love Map depth (reviews DB, Mapbox, private memory polish)
+- DM-174–187 companion journey/ops
+- Gates G-UX-CORE / G-UX-WEBAPP / G-LOVE-MAP / G-COMPANION-STAGING / G-NEEDS-PROFILE
+
+### Blocked (do not fake)
+- EXT-040 · G-PREMIUM-LIVE · G-COMPANION-LIVE · real PSP
