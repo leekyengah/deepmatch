@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 
 const ALLOWED = new Set<string>(ANALYTICS_EVENTS);
 const PROP_KEY = /^[a-z_]{1,32}$/;
-const PROP_VAL = /^[\w.\-]{0,64}$/;
+const PROP_VAL = /^[\w./\-]{0,64}$/;
 
 /** EXT-036 — privacy-safe event sink (no-op when ANALYTICS_SINK=off). */
 export async function POST(req: NextRequest) {
