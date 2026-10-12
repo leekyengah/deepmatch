@@ -377,6 +377,18 @@ const tokenC = await jwtFor(emailC);
   }
 }
 
+// Clear prior A↔B blocks so chat suite is repeatable
+{
+  await api("/api/v1/blocks", tokenA, {
+    method: "DELETE",
+    body: JSON.stringify({ blocked_user_id: idB }),
+  });
+  await api("/api/v1/blocks", tokenB, {
+    method: "DELETE",
+    body: JSON.stringify({ blocked_user_id: idA }),
+  });
+}
+
 // Mutual like A↔B + chat deny for C (DM-192)
 {
   const likeAB = await api("/api/v1/likes", tokenA, {
@@ -417,6 +429,90 @@ const tokenC = await jwtFor(emailC);
     "QA-REL-020",
     denied.status === 403 || denied.body?.allowed === false,
     `chatAccess deny status=${denied.status} allowed=${denied.body?.allowed}`,
+  );
+}
+
+// Chat delivery + dedupe after mutual match (QA-REL-021)
+let conversationId = null;
+{
+  const matches = await api("/api/v1/matches", tokenA);
+  const row = (matches.body?.data?.matches ?? []).find(
+    (m) => m.peer_id === idB && m.conversation_id,
+  );
+  conversationId = row?.conversation_id ?? null;
+  const dedupe = `qa-msg-${randomUUID()}`;
+  let sentOk = false;
+  let readOk = false;
+  let dedupeOk = false;
+  if (conversationId) {
+    const send1 = await api("/api/v1/messages", tokenA, {
+      method: "POST",
+      body: JSON.stringify({
+        conversationId,
+        text: "QA hello from A",
+        clientDedupeKey: dedupe,
+      }),
+    });
+    const send2 = await api("/api/v1/messages", tokenA, {
+      method: "POST",
+      body: JSON.stringify({
+        conversationId,
+        text: "QA hello from A",
+        clientDedupeKey: dedupe,
+      }),
+    });
+    sentOk = send1.status < 400;
+    const list = await api(
+      `/api/v1/messages?conversationId=${conversationId}`,
+      tokenB,
+    );
+    const msgs = list.body?.messages ?? list.body?.data?.messages ?? [];
+    const hits = msgs.filter((m) => m.client_dedupe_key === dedupe);
+    readOk = list.status === 200 && msgs.some((m) => m.body === "QA hello from A");
+    dedupeOk = hits.length === 1 && send2.status < 400;
+  }
+  record(
+    "QA-REL-021",
+    Boolean(conversationId) && sentOk && readOk && dedupeOk,
+    `conv=${Boolean(conversationId)} sent=${sentOk} read=${readOk} dedupe=${dedupeOk}`,
+  );
+}
+
+// Block then chat denied + report (QA-REL-022)
+{
+  const block = await api("/api/v1/blocks", tokenA, {
+    method: "POST",
+    body: JSON.stringify({ blocked_user_id: idB }),
+  });
+  let postBlockDenied = false;
+  if (conversationId) {
+    const trySend = await api("/api/v1/messages", tokenB, {
+      method: "POST",
+      body: JSON.stringify({
+        conversationId,
+        text: "should fail after block",
+        clientDedupeKey: `qa-block-${randomUUID()}`,
+      }),
+    });
+    postBlockDenied = trySend.status >= 400;
+  }
+  const report = await api("/api/v1/reports", tokenA, {
+    method: "POST",
+    body: JSON.stringify({
+      target_user_id: idB,
+      conversation_id: conversationId,
+      reason: "QA synthetic abuse report — staging only",
+    }),
+  });
+  // cleanup block for next runs
+  await api("/api/v1/blocks", tokenA, {
+    method: "DELETE",
+    body: JSON.stringify({ blocked_user_id: idB }),
+  });
+  record(
+    "QA-REL-022",
+    block.status < 400 && postBlockDenied && report.status < 400,
+    `block=${block.status} chatDenied=${postBlockDenied} report=${report.status}`,
   );
 }
 
