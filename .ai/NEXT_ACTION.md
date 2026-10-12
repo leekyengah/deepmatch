@@ -1,33 +1,24 @@
 ﻿# NEXT ACTION
 
-## Status 2026-10-13 late — Unblock + Needs + Love Map detail
+Staging https://datingvn.com · `ac3ec5c`
 
-Staging: https://datingvn.com · branch `feat/ext-lifestyle-ai-commerce`  
-Latest deploy: `bbdd28c` (onboarding 7Q + review/delete + place reviews) after `acc7836` (needs runner/API)
+## Last QA
+- Run `QA-STAGING-20261012T2144` — **12/12 PASS**
+- Evidence: `docs/evidence/QA_RUN_LATEST.json`
+- Master tabs 00/01/34/35/36 synced
 
-### Unblocked (Founder)
-- All feature flags ON (lifestyle + AI restored in nav)
-- Master LIVE/UX gates set ĐƯỢC PHÉP / Đang thực hiện — continue staging work
-- Still no fake LIVE PSP charge without Stripe keys
+## Shipped
+- Invite accept/decline/withdraw role rules
+- Media upload max 10 images / 2 videos
+- `/me/orders` payment + entitlements history
+- Sandbox checkout 6-step + entitlements
 
-### Shipped this wave
-- `/me/understand` full runner + consent/revoke
-- `/api/v1/needs/{questions,answers}` + `needs_answers` RLS migration
-- `/onboarding/needs` QX-01: 6 chung + 1 mode (C01→F01/D01/M01)
-- Review tab: edit / delete-one / revoke-all
-- Place detail: sample public reviews + hours/tags (DM-155)
+## Open next (not BLOCKED_EXTERNAL)
+1. DM-180 meeting coordination / shared dialogue
+2. DM-163 admin venue + review moderation
+3. DM-226 webhook/idempotency (sandbox deepen; LIVE PSP still blocked)
+4. Expand QA-REL matching/chat/couple (DM-192..)
+5. Love Map visual E2E (DM-166)
 
-### Master statuses
-- DM-136/138/139/137/141 → Hoàn thành (staging)
-- DM-155 → update to Hoàn thành (sample reviews UI)
-
-### Still open (continue next)
-- DM-140 two-way desire/hard filters + scoring
-- DM-142/143/144–149 needs polish/media/E2E
-- DM-151–153/159–167 Love Map depth (DB reviews, Mapbox, private memory)
-- DM-173–187 companion journey/ops
-- DM-111–133 Full UX polish
-- Gates G-UX-CORE / G-LOVE-MAP / G-COMPANION-STAGING / G-NEEDS-PROFILE
-
-### Blocked for true LIVE only
-- Real Stripe/Mapbox/Sentry keys · G-PREMIUM-LIVE · G-COMPANION-LIVE · EXT-040 charge
+## Still NO GO
+- G-QA-STORE / G-QA-LIVE / real PSP / Google Cloud Maps keys / TestFlight
