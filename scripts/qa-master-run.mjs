@@ -242,6 +242,39 @@ const tokenC = await jwtFor(emailC);
   );
 }
 
+// Dual-consent meeting after accepted invite
+{
+  const invList = await api("/api/v1/matchmaking/invites", tokenA);
+  const accepted = (invList.body?.data?.invites ?? []).find(
+    (i) => i.status === "accepted" && i.target_id === idB,
+  );
+  const create = await api("/api/v1/matchmaking/meetings", tokenA, {
+    method: "POST",
+    body: JSON.stringify({
+      invitee_id: idB,
+      invite_id: accepted?.id,
+      place_label: "QA cafe sandbox",
+      scheduled_at: new Date(Date.now() + 86400000).toISOString(),
+    }),
+  });
+  const mid = create.body?.data?.meeting?.id;
+  let confirmed = false;
+  if (mid) {
+    const consentB = await api("/api/v1/matchmaking/meetings", tokenB, {
+      method: "PATCH",
+      body: JSON.stringify({ id: mid, action: "consent" }),
+    });
+    confirmed =
+      consentB.status < 400 &&
+      consentB.body?.data?.meeting?.status === "confirmed";
+  }
+  record(
+    "QA-REL-036",
+    create.status < 400 && confirmed,
+    `meeting create=${create.status} confirmed=${confirmed}`,
+  );
+}
+
 // Media library gate
 {
   const lib = await api("/api/v1/media/library", tokenA);

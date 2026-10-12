@@ -93,5 +93,11 @@
   "providersTitle": "Provider profiles",
   "providersIntro": "Staging sample list — not LIVE-verified, no fake availability.",
   "providersSample": "Staging sample",
-  "providersCapacity": "Capacity"
+  "providersCapacity": "Capacity",
+  "meetingsTitle": "Meeting coordination",
+  "meetingsIntro": "Schedule only after both sides consent. Does not create a couple space.",
+  "meetingsEmpty": "No coordinated meetings yet.",
+  "meetingsConsentBoth": "Both consented",
+  "meetingsAwaiting": "Awaiting other consent",
+  "meetingsWithdrawn": "Consent withdrawn — related coordination paused"
 }

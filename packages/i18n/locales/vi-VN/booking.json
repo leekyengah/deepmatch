@@ -93,5 +93,11 @@
   "providersTitle": "Hồ sơ nhà cung cấp",
   "providersIntro": "Danh sách mẫu staging — chưa xác minh LIVE, không giả availability.",
   "providersSample": "Mẫu staging",
-  "providersCapacity": "Khả dụng"
+  "providersCapacity": "Khả dụng",
+  "meetingsTitle": "Điều phối gặp",
+  "meetingsIntro": "Chỉ xếp lịch khi cả hai đồng ý. Không tự tạo không gian Sánh đôi.",
+  "meetingsEmpty": "Chưa có cuộc gặp được điều phối.",
+  "meetingsConsentBoth": "Cả hai đã đồng ý",
+  "meetingsAwaiting": "Đang chờ bên kia đồng ý",
+  "meetingsWithdrawn": "Đã rút đồng ý — tạm dừng điều phối liên quan"
 }

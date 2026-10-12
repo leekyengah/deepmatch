@@ -24,6 +24,15 @@ export default async function MyJourneyPage() {
     .eq("user_id", user.id)
     .maybeSingle();
 
+  const { data: meetings } = await supabase
+    .from("matchmaking_meetings")
+    .select(
+      "id, place_label, scheduled_at, status, proposer_consent, invitee_consent, created_at",
+    )
+    .or(`proposer_id.eq.${user.id},invitee_id.eq.${user.id}`)
+    .order("created_at", { ascending: false })
+    .limit(10);
+
   const answers = (needs?.answers ?? {}) as Record<string, string>;
   const answered = Object.keys(answers).filter((k) => answers[k]?.trim()).length;
 
@@ -89,6 +98,49 @@ export default async function MyJourneyPage() {
             <Card className="text-sm text-dm-muted">
               {t("booking.flagOffBodyStaging")}
             </Card>
+          )}
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="font-display text-2xl font-semibold text-dm-ink">
+          {t("booking.meetingsTitle")}
+        </h2>
+        <p className="mt-1 text-sm text-dm-muted">{t("booking.meetingsIntro")}</p>
+        <div className="mt-4 space-y-3">
+          {!meetings?.length ? (
+            <Card className="text-sm text-dm-muted">{t("booking.meetingsEmpty")}</Card>
+          ) : (
+            meetings.map((m) => {
+              const both = m.proposer_consent && m.invitee_consent;
+              return (
+                <Card key={m.id} className="space-y-1 p-4 text-sm">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="font-medium text-dm-ink">
+                      {m.place_label || t("booking.datePlan")}
+                    </p>
+                    <Badge
+                      tone={
+                        m.status === "confirmed" || m.status === "completed"
+                          ? "good"
+                          : m.status === "withdrawn"
+                            ? "warn"
+                            : "default"
+                      }
+                    >
+                      {m.status}
+                    </Badge>
+                  </div>
+                  <p className="text-dm-muted">
+                    {both
+                      ? t("booking.meetingsConsentBoth")
+                      : m.status === "withdrawn"
+                        ? t("booking.meetingsWithdrawn")
+                        : t("booking.meetingsAwaiting")}
+                  </p>
+                </Card>
+              );
+            })
           )}
         </div>
       </section>
