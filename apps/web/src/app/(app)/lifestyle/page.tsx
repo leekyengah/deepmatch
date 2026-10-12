@@ -1,47 +1,74 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { flagEnabled } from "@/lib/flags";
+import { getServerTranslator } from "@/lib/i18n/server";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 
-const pillars = [
-  { href: "/lifestyle/gift", label: "DeepGift", desc: "Quà tặng mẫu DEMO" },
-  { href: "/lifestyle/fashion", label: "DeepStyle", desc: "Thời trang mẫu DEMO" },
-  { href: "/lifestyle/beauty", label: "DeepBeauty", desc: "Makeup mẫu DEMO" },
-  { href: "/lifestyle/venue", label: "DeepDate", desc: "Địa điểm hẹn mẫu" },
-  { href: "/lifestyle/travel", label: "DeepTravel", desc: "Du lịch mẫu DEMO" },
-  { href: "/safe", label: "DeepSafe", desc: "Check-in & người tin cậy (miễn phí)" },
-  { href: "/lifestyle/safety", label: "DeepSafe catalog", desc: "Quy trình mẫu DEMO" },
-  { href: "/lifestyle/orders", label: "Lệnh DEMO", desc: "Reserve / confirm / cancel sandbox" },
-  { href: "/ai", label: "AI Hub", desc: "Gợi ý có đồng ý rõ ràng" },
-  { href: "/ai/deepmind", label: "DeepMind", desc: "Tự phản ánh tự nguyện" },
-];
-
 export default async function LifestyleHomePage() {
   if (!(await flagEnabled("ff_lifestyle"))) redirect("/me");
+  const { t } = await getServerTranslator();
+
+  const pillars = [
+    { href: "/lifestyle/gift", label: "DeepGift", descKey: "commerce.pillarGift" },
+    {
+      href: "/lifestyle/fashion",
+      label: "DeepStyle",
+      descKey: "commerce.pillarFashion",
+    },
+    {
+      href: "/lifestyle/beauty",
+      label: "DeepBeauty",
+      descKey: "commerce.pillarBeauty",
+    },
+    { href: "/lifestyle/venue", label: "DeepDate", descKey: "commerce.pillarVenue" },
+    {
+      href: "/lifestyle/travel",
+      label: "DeepTravel",
+      descKey: "commerce.pillarTravel",
+    },
+    { href: "/safe", label: "DeepSafe", descKey: "commerce.pillarSafe" },
+    {
+      href: "/lifestyle/safety",
+      label: "DeepSafe catalog",
+      descKey: "commerce.pillarSafeCatalog",
+    },
+    {
+      href: "/lifestyle/orders",
+      label: t("commerce.ordersDemo"),
+      descKey: "commerce.pillarOrders",
+    },
+    {
+      href: "/lifestyle/cart",
+      label: t("commerce.cartDemo"),
+      descKey: "commerce.pillarOrders",
+    },
+    { href: "/ai", label: t("ai.title"), descKey: "commerce.pillarAi" },
+    {
+      href: "/ai/deepmind",
+      label: "DeepMind",
+      descKey: "commerce.pillarDeepmind",
+    },
+  ];
 
   return (
     <div className="max-w-3xl">
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
-        Lifestyle · DEMO
+        {t("commerce.lifestyleEyebrow")}
       </p>
       <h1 className="mt-2 font-display text-4xl font-medium text-dm-raspberry">
-        Không gian Lifestyle
+        {t("commerce.lifestyleHeading")}
       </h1>
-      <p className="mt-2 text-sm text-dm-muted">
-        Catalog 60 mẫu sandbox. Không đặt chỗ, giao hàng hay thanh toán thật.
-      </p>
+      <p className="mt-2 text-sm text-dm-muted">{t("commerce.lifestyleIntro")}</p>
       <div className="mt-4">
-        <Badge tone="warn">
-          BẢN MẪU / KHÔNG CÓ ĐẶT CHỖ HOẶC THANH TOÁN THẬT
-        </Badge>
+        <Badge tone="warn">{t("commerce.lifestyleBadge")}</Badge>
       </div>
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         {pillars.map((p) => (
           <Link key={p.href} href={p.href}>
             <Card className="h-full text-sm transition hover:border-dm-primary">
               <p className="font-semibold text-dm-raspberry">{p.label}</p>
-              <p className="mt-1 text-dm-muted">{p.desc}</p>
+              <p className="mt-1 text-dm-muted">{t(p.descKey)}</p>
             </Card>
           </Link>
         ))}

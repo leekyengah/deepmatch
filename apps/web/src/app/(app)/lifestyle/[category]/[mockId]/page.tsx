@@ -4,13 +4,16 @@ import { createClient } from "@/lib/supabase/server";
 import { flagEnabled } from "@/lib/flags";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { AddToCartButton } from "@/components/lifestyle/AddToCartButton";
 import { DemoBookButton } from "@/components/lifestyle/DemoBookButton";
+import { getServerTranslator } from "@/lib/i18n/server";
 
 export default async function ProductDetailPage({
   params,
 }: {
   params: Promise<{ category: string; mockId: string }>;
 }) {
+  const { t } = await getServerTranslator();
   if (!(await flagEnabled("ff_lifestyle"))) redirect("/me");
   const { category, mockId } = await params;
   const supabase = await createClient();
@@ -37,7 +40,7 @@ export default async function ProductDetailPage({
         href={`/lifestyle/${category}`}
         className="text-sm text-dm-muted underline"
       >
-        ← Danh mục
+        {t("commerce.backCategory")}
       </Link>
       <h1 className="mt-4 font-display text-4xl font-medium text-dm-raspberry">
         {product.title}
@@ -61,9 +64,22 @@ export default async function ProductDetailPage({
           </span>
         </p>
         <p className="text-xs text-dm-muted">
-          Fulfillment: {product.fulfillment} — không có giờ mở cửa / tồn kho thật.
+          {t("commerce.fulfillmentNote", { mode: product.fulfillment })}
         </p>
         <DemoBookButton productId={product.id} />
+        <AddToCartButton
+          productId={product.id}
+          mockId={product.mock_id}
+          title={product.title}
+          category={product.category}
+          priceVnd={product.price_vnd}
+        />
+        <Link
+          href="/lifestyle/cart"
+          className="inline-block text-sm font-semibold text-dm-primary underline"
+        >
+          {t("commerce.cartView")}
+        </Link>
       </Card>
     </div>
   );

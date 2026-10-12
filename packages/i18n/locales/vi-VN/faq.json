@@ -1,0 +1,18 @@
+{
+  "title": "Câu hỏi thường gặp",
+  "intro": "Thông tin công khai cho khách chưa đăng ký — không lộ dữ liệu người dùng.",
+  "createAccount": "Tạo tài khoản",
+  "backHome": "Về trang chủ",
+  "q1": "DeepMatch là gì?",
+  "a1": "Ứng dụng kết nối có chọn lọc (Tìm nhau), không gian Sánh đôi và dịch vụ tư vấn tùy chọn (Đồng hành). Không hứa “đúng người”.",
+  "q2": "Cùng thích có tạo không gian Sánh đôi không?",
+  "a2": "Không. Mutual match chỉ mở chat. Không gian Sánh đôi cần lời mời và đồng ý riêng của cả hai.",
+  "q3": "Dữ liệu bản đồ / nhật ký có bị dùng để xếp hạng không?",
+  "a3": "Không. Nhật ký riêng và GPS chính xác không đưa vào engine ghép đôi.",
+  "q4": "Đồng hành có bắt buộc không?",
+  "a4": "Không. Bốn dịch vụ tư vấn là tùy chọn; phí và phạm vi công khai trước khi xác nhận.",
+  "q5": "Gói nâng cao giá bao nhiêu?",
+  "a5": "99.000₫ / tháng. Thanh toán chuyển khoản HD Bank. Tạo lệnh tại /me/premium, ghi đúng nội dung chuyển khoản có mã.",
+  "q6": "Datingvn.com được triển khai ở đâu?",
+  "a6": "Tên miền datingvn.com đã được cấu hình DNS trỏ tới hạ tầng triển khai web được ủy quyền."
+}

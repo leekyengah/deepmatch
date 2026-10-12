@@ -1,0 +1,18 @@
+{
+  "title": "Frequently asked questions",
+  "intro": "Public information for visitors who are not signed in — no user data is exposed.",
+  "createAccount": "Create account",
+  "backHome": "Back to home",
+  "q1": "What is DeepMatch?",
+  "a1": "A selective connection app (Discover), Couple Space, and optional advisory services (Companion). We do not promise “the one”.",
+  "q2": "Does a mutual match create Couple Space?",
+  "a2": "No. A mutual match only opens chat. Couple Space requires a separate invitation and consent from both people.",
+  "q3": "Are map or journal data used for ranking?",
+  "a3": "No. Private journals and precise GPS are not used by the matching engine.",
+  "q4": "Is Companion required?",
+  "a4": "No. Advisory services are optional; fees and scope are shown before confirmation.",
+  "q5": "How much is Premium?",
+  "a5": "99,000 VND / month. Pay by HD Bank transfer. Create an order at /me/premium and include the transfer code in the payment note.",
+  "q6": "Where is Datingvn.com hosted?",
+  "a6": "The datingvn.com domain DNS points to the authorized web hosting infrastructure."
+}

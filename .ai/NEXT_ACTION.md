@@ -1,33 +1,28 @@
 ﻿# NEXT ACTION
 
-## Status 2026-10-12 — EXT wave
+## Status 2026-10-12 — Homepage + No-Leak wave
 
-Branch: `feat/ext-lifestyle-ai-commerce`  
-Gap: `docs/audits/DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md`  
-Evidence: `docs/evidence/EXT-S0-S1-2026-10-12.md`
+Branch: `feat/ext-lifestyle-ai-commerce`
 
-### Staging DB
+### Just shipped (local verified)
 
-- Migration `20261012180000_commerce_catalog_ai` **pushed**
-- Seed **60** DEMO products OK (`npm run seed:catalog`)
-
-### App surfaces (code ready; deploy branch next)
-
-| Path | Flag |
+| Item | Evidence |
 |---|---|
-| `/lifestyle` + `/lifestyle/{gift\|fashion\|beauty\|venue\|travel\|safety}` | `ff_lifestyle` |
-| `/ai` | `ff_ai` |
-| `GET /api/v1/catalog/*` | `ff_lifestyle` |
-| `POST /api/v1/ai/assist` | `ff_ai` (stub adapter) |
+| Public homepage HOME-W01–W11 | `/` hero/pillars/AI/lifestyle/trust/FAQ |
+| No staging footer / FAQ docs leak | `npm run test:no-leak` PASS |
+| SEO robots/sitemap | `apps/web/src/app/robots.ts`, `sitemap.ts` |
+| Home state router | `resolveHomeState` + `/api/v1/me/home-state` |
+| DEMO cart sandbox | `/lifestyle/cart` + checkout API |
+| QA matrix seed | `npm run seed:qa-matrix` |
 
 ### Next P0
 
-1. Deploy web staging from this branch  
-2. EXT-008/029 DeepMind questionnaire UI  
-3. EXT-016 demo booking reserve/cancel  
-4. Admin providers list (UX-25)
+1. Deploy homepage wave to staging (EXT-065) — no production
+2. Wire `test:no-leak` into CI (EXT-066)
+3. App persona homes EXT-052–056
+4. E2E catalog journeys EXT-037
+5. EXT-040 LIVE — remain BLOCKED
 
-### Blocked (Founder)
+### Blocked
 
-- LIVE partners / real PSP / production commerce GO  
-- Hosted LLM spend (see DECISION-AI-01)
+- EXT-040 LIVE providers / real payment — Founder authorization only
