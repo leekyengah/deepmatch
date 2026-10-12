@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
 import {
   LOVE_PLACES,
   lovePlacesByCity,
@@ -38,7 +39,15 @@ export async function GET(req: Request) {
   const limit = Math.min(Number(url.searchParams.get("limit") ?? "20") || 20, 50);
   const offset = Math.max(Number(url.searchParams.get("offset") ?? "0") || 0, 0);
 
+  const supabase = await createClient();
+  const { data: closedFlags } = await supabase
+    .from("venue_admin_flags")
+    .select("place_id")
+    .eq("closed", true);
+  const closedIds = new Set((closedFlags ?? []).map((f) => f.place_id));
+
   let list: LovePlace[] = city ? lovePlacesByCity(city) : [...LOVE_PLACES];
+  list = list.filter((p) => !closedIds.has(p.id));
   if (category) list = list.filter((p) => p.category === category);
   if (q) {
     list = list.filter(

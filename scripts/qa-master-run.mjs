@@ -144,6 +144,24 @@ const tokenC = await jwtFor(emailC);
   record("QA-REL-028", ok, `places list ${p.status} n=${p.body?.data?.places?.length ?? 0}`);
 }
 
+// Venue review report (user) — staff resolve needs admin_roles
+{
+  const report = await api("/api/v1/admin/venues", tokenA, {
+    method: "POST",
+    body: JSON.stringify({
+      place_id: "hn-cafe-01",
+      review_id: "r1",
+      reason: "QA sample report",
+    }),
+  });
+  const staffDeny = await api("/api/v1/admin/venues", tokenA);
+  record(
+    "QA-REL-069",
+    (report.status < 400 || report.status === 200) && staffDeny.status === 403,
+    `venue report=${report.status} staffGET=${staffDeny.status}`,
+  );
+}
+
 // Preferences
 {
   const put = await api("/api/v1/needs/preferences", tokenA, {

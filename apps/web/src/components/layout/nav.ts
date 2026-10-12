@@ -72,6 +72,7 @@ const titleKeys: Record<string, string> = {
   "/me/orders": "nav.titles.meOrders",
   "/me/media": "nav.titles.meMedia",
   "/me/premium": "nav.titles.mePremium",
+  "/ops/venues": "nav.titles.opsVenues",
   "/onboarding": "nav.titles.onboarding",
 };
 

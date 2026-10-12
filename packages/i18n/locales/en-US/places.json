@@ -27,5 +27,8 @@
   "publicReviewsIntro": "Illustrative copy for layout testing — not real user reviews.",
   "reviewAuthor": "Sample member",
   "hoursLabel": "Suggested hours",
-  "tagsLabel": "Good for"
+  "tagsLabel": "Good for",
+  "opsVenuesTitle": "Venue moderation",
+  "opsVenuesIntro": "Staff-only: flag closed editorial venues and resolve review reports. No private couple albums here.",
+  "opsVenuesLink": "Venue moderation (ops)"
 }

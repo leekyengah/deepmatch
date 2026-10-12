@@ -223,7 +223,13 @@ export default async function MePage() {
       </section>
 
       {isStaff ? (
-        <p className="mt-10 text-xs text-dm-muted">
+        <p className="mt-10 space-x-4 text-xs text-dm-muted">
+          <Link
+            href="/ops/venues"
+            className="underline underline-offset-2 hover:text-dm-primary"
+          >
+            {t("places.opsVenuesLink")}
+          </Link>
           <a
             href={adminUrl}
             className="underline underline-offset-2 hover:text-dm-primary"

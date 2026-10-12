@@ -27,5 +27,8 @@
   "publicReviewsIntro": "Nội dung minh họa để kiểm thử layout — không phải review người dùng thật.",
   "reviewAuthor": "Thành viên mẫu",
   "hoursLabel": "Giờ gợi ý",
-  "tagsLabel": "Phù hợp"
+  "tagsLabel": "Phù hợp",
+  "opsVenuesTitle": "Kiểm duyệt địa điểm",
+  "opsVenuesIntro": "Chỉ staff: đánh dấu đóng venue editorial và xử lý báo cáo review. Không có album cặp riêng tại đây.",
+  "opsVenuesLink": "Kiểm duyệt địa điểm (ops)"
 }
