@@ -1,6 +1,6 @@
 {
-  "title": "Chúng mình",
-  "spaceFull": "Không gian của chúng mình",
+  "title": "Sánh đôi",
+  "spaceFull": "Không gian Sánh đôi",
   "spaceHeading": "Không gian cặp đôi",
   "spaceIntro": "Chỉ sau lời mời và đồng ý hai phía. Cùng thích không tự tạo không gian chung.",
   "dataPolicyLink": "Chính sách dữ liệu cặp đôi",
@@ -110,7 +110,7 @@
   "mapGeocodeFailed": "Geocode thất bại.",
   "mapPlaceNotFound": "Không tìm thấy địa điểm.",
   "mapLayerFailed": "Không chuyển lớp được.",
-  "mapEmptySpaceTitle": "Chưa có không gian Chúng mình",
+  "mapEmptySpaceTitle": "Chưa có không gian Sánh đôi",
   "mapEmptySpaceBody": "Cần lời mời và đồng ý hai phía trước khi dùng bản đồ kỷ niệm.",
   "mapInviteCta": "Mời kết nối",
   "mapLoading": "Đang tải bản đồ…",

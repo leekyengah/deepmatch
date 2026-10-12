@@ -1,6 +1,6 @@
 {
-  "title": "Our Space",
-  "spaceFull": "Our Space",
+  "title": "Couple",
+  "spaceFull": "Couple space",
   "spaceHeading": "Couple space",
   "spaceIntro": "Only after an invitation and both people agree. A mutual match does not create a shared space.",
   "dataPolicyLink": "Couple data policy",
@@ -110,7 +110,7 @@
   "mapGeocodeFailed": "Geocode failed.",
   "mapPlaceNotFound": "Place not found.",
   "mapLayerFailed": "Could not change the layer.",
-  "mapEmptySpaceTitle": "No Our Space yet",
+  "mapEmptySpaceTitle": "No Couple space yet",
   "mapEmptySpaceBody": "An invitation and mutual consent are required before using the memory map.",
   "mapInviteCta": "Invite to connect",
   "mapLoading": "Loading map…",
