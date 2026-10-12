@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getRouteUser } from "@/lib/supabase/route";
+import { createServiceClient, getRouteUser } from "@/lib/supabase/route";
 import { isStaffUser } from "@/lib/staff";
 import { LOVE_PLACES } from "@/lib/love-places";
 import { jsonError, makeRequestId } from "@/lib/api-error";
@@ -133,7 +133,9 @@ export async function POST(req: NextRequest) {
     return jsonError("VALIDATION_ERROR", "productNotFound", requestId);
   }
 
-  const { data, error } = await supabase
+  // BFF insert via service role after auth — avoids JWT/RLS edge cases on report path
+  const admin = createServiceClient();
+  const { data, error } = await admin
     .from("venue_moderation_queue")
     .insert({
       place_id: body.place_id,
@@ -145,8 +147,8 @@ export async function POST(req: NextRequest) {
     .select("id, place_id, review_id, status")
     .single();
   if (error) {
-    // unique conflict on re-report of same open row — treat as ok
-    if (String(error.message || "").includes("duplicate")) {
+    const msg = String(error.message || error.code || "");
+    if (msg.includes("duplicate") || error.code === "23505") {
       return NextResponse.json({
         data: { reported: true, duplicate: true },
         meta: { request_id: requestId },
