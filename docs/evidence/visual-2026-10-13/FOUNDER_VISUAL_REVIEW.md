@@ -14,7 +14,7 @@ Open each pair side-by-side. Approve layout, color (wine/ivory/champagne), type 
 | 1 | WEB homepage | REF-WEB.png | WEB-01-full-1440.png / WEB-01-mobile-390.png | `/` |
 | 2 | Onboarding values | REF-DATING (frame 1) | DATING-01-onboarding.png | `/onboarding` |
 | 3 | Discover feed | REF-DATING (frame 2) | DATING-02-discover.png | `/discover` |
-| 4 | Profile detail | REF-DATING (frame 3) | *(recapture after ff_matching)* | `/discover/[id]` |
+| 4 | Profile detail | REF-DATING (frame 3) | DATING-02-discover.png (detail panel) | `/discover` (inline DATING-03) |
 | 5 | Chat | REF-DATING (frame 4) | DATING-04-chat.png | `/chat` |
 | 6 | Couple map | REF-COUPLE (frame 1) | COUPLE-01-map.png | `/couple/map` |
 | 7 | Memories | REF-COUPLE (frame 2) | COUPLE-02-memories.png | `/couple/memories` |

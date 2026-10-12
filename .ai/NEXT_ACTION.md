@@ -1,25 +1,22 @@
 ﻿# NEXT ACTION
 
-## Status 2026-10-13 — Visual evidence pack ready for Founder
+## Status 2026-10-13 — Staging visual + flags healthy; Founder review
 
 Branch: `feat/ext-lifestyle-ai-commerce` · Staging: https://datingvn.com
 
 ### Active program
 
-VISUAL-REFERENCE-REBUILD / sheet 26 · EXT-079..084 · DM-103..108
+VISUAL-REFERENCE-REBUILD · G-VISUAL-FIDELITY **chờ Founder**
 
-### Done this wave
+### Just shipped
 
-- Brand kit v3 + homepage REF-WEB
-- Dating / Couple / Lifestyle DEMO polish
-- Memories hero + map Map/List tabs
-- Canonical **Sánh đôi** labels (replaced residual “Chúng mình”)
-- EXT-084 screenshot pack: `docs/evidence/visual-2026-10-13/`
-- Deploy `dpl_EMYJQVSE6pgyYYHZjbkVbTN274Ev` + no-leak PASS
+- `26ad8ec` brand v3 in `/api/v1/health` + service-role `getFlags` (ff_matching now true)
+- Pink leftovers cleared (map markers, DeepMind, demo cart)
+- Founder checklist: `docs/evidence/visual-2026-10-13/FOUNDER_VISUAL_REVIEW.md`
 
 ### Next
 
-1. **Founder** visual compare 9/9 (G-VISUAL-FIDELITY) — no self-PASS
-2. Recapture DATING-03 profile detail + DATING-04 `/chat` after next deploy
-3. EXT-068 brand content Founder copy sign-off
+1. **Founder** 9/9 visual compare (checklist above) — no self-PASS
+2. Recapture DATING-02/03 with live feed if candidates exist
+3. EXT-077 analytics dictionary / EXT-078 release handoff after visual GO
 4. EXT-040 LIVE remains BLOCKED_EXTERNAL
