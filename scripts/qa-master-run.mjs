@@ -8,6 +8,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { execSync } from "node:child_process";
+import { createHmac, randomUUID } from "node:crypto";
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const service = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -310,6 +311,112 @@ const tokenC = await jwtFor(emailC);
     "QA-REL-031",
     list.status === 200 || list.status === 403,
     `bookings ${list.status}`,
+  );
+}
+
+// Sandbox webhook: HMAC + replay dedupe + amount check (DM-226)
+{
+  const secret = process.env.CHECKOUT_SANDBOX_WEBHOOK_SECRET;
+  if (!secret) {
+    record("QA-REL-040", false, "CHECKOUT_SANDBOX_WEBHOOK_SECRET missing");
+  } else {
+    const create = await api("/api/v1/checkout/orders", tokenA, {
+      method: "POST",
+      body: JSON.stringify({ package_code: "CMP-03" }),
+    });
+    const order = create.body?.data?.order;
+    const eventId = `qa-wh-${randomUUID()}`;
+    const payload = JSON.stringify({
+      event_id: eventId,
+      type: "payment.succeeded",
+      order_id: order?.id,
+      amount_vnd: order?.amount_vnd,
+      currency: order?.currency ?? "VND",
+    });
+    const sig = createHmac("sha256", secret).update(payload).digest("hex");
+    const postWh = async (body, signature) => {
+      const res = await fetch(`${base}/api/v1/checkout/webhooks/sandbox`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-deepmatch-signature": `sha256=${signature}`,
+        },
+        body,
+      });
+      const json = await res.json().catch(() => ({}));
+      return { status: res.status, body: json };
+    };
+    const first = await postWh(payload, sig);
+    const replay = await postWh(payload, sig);
+    const badSig = await postWh(payload, "deadbeef");
+    const forgedAmt = JSON.stringify({
+      event_id: `qa-wh-${randomUUID()}`,
+      type: "payment.succeeded",
+      order_id: order?.id,
+      amount_vnd: (order?.amount_vnd ?? 0) + 1,
+      currency: "VND",
+    });
+    const forgedSig = createHmac("sha256", secret)
+      .update(forgedAmt)
+      .digest("hex");
+    const mismatch = await postWh(forgedAmt, forgedSig);
+    const ent = await api("/api/v1/entitlements", tokenA);
+    const cnt = (ent.body?.data?.entitlements ?? []).filter(
+      (e) => e.source_order_id === order?.id || e.package_code === "CMP-03",
+    ).length;
+    record(
+      "QA-REL-040",
+      first.status === 200 &&
+        replay.status === 200 &&
+        replay.body?.data?.deduped === true &&
+        badSig.status === 400 &&
+        mismatch.status === 400 &&
+        cnt >= 1,
+      `wh first=${first.status} replayDedupe=${replay.body?.data?.deduped} badSig=${badSig.status} amt=${mismatch.status} ent=${cnt}`,
+    );
+  }
+}
+
+// Mutual like A↔B + chat deny for C (DM-192)
+{
+  const likeAB = await api("/api/v1/likes", tokenA, {
+    method: "POST",
+    body: JSON.stringify({ targetId: idB, action: "like" }),
+  });
+  const likeBA = await api("/api/v1/likes", tokenB, {
+    method: "POST",
+    body: JSON.stringify({ targetId: idA, action: "like" }),
+  });
+  const mutual =
+    likeBA.status < 400 &&
+    (likeBA.body?.mutual === true || likeBA.body?.ok === true);
+  const stealChat = await api(
+    `/api/v1/messages?conversationId=${randomUUID()}`,
+    tokenC,
+  );
+  record(
+    "QA-REL-018",
+    likeAB.status < 400 && mutual && stealChat.status >= 400,
+    `likeAB=${likeAB.status} mutual=${mutual} cChat=${stealChat.status}`,
+  );
+}
+
+// Chat access helper: no mutual → deny
+{
+  const denied = await api("/api/v1/chat/access", tokenA, {
+    method: "POST",
+    body: JSON.stringify({
+      isAuthenticated: true,
+      isMutualMatch: false,
+      isParticipant: false,
+      isBlockedEitherWay: false,
+      userSuspended: false,
+    }),
+  });
+  record(
+    "QA-REL-020",
+    denied.status === 403 || denied.body?.allowed === false,
+    `chatAccess deny status=${denied.status} allowed=${denied.body?.allowed}`,
   );
 }
 

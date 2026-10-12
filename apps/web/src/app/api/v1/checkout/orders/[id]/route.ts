@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getRouteUser } from "@/lib/supabase/route";
+import { getRouteUser, createServiceClient } from "@/lib/supabase/route";
+import { fulfillPaidOrder } from "@/lib/checkout-fulfillment";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 
 const ACTIONS = new Set([
@@ -77,6 +78,36 @@ export async function PATCH(
     sandbox: true,
   };
 
+  if (body.action === "sandbox_succeed") {
+    const admin = createServiceClient();
+    await admin
+      .from("checkout_orders")
+      .update({
+        price_snapshot: snapshot,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", id);
+    await fulfillPaidOrder(admin, {
+      id: order.id,
+      user_id: order.user_id,
+      sku: order.sku,
+      package_code: order.package_code,
+      amount_vnd: order.amount_vnd,
+      currency: order.currency,
+      status: order.status,
+    });
+    const { data: updated } = await supabase
+      .from("checkout_orders")
+      .select("*")
+      .eq("id", id)
+      .eq("user_id", user.id)
+      .single();
+    return NextResponse.json({
+      data: { order: updated },
+      meta: { request_id: requestId },
+    });
+  }
+
   const { data: updated, error } = await supabase
     .from("checkout_orders")
     .update({
@@ -89,20 +120,6 @@ export async function PATCH(
     .select("*")
     .single();
   if (error) return jsonError("INTERNAL", null, requestId);
-
-  if (status === "paid") {
-    await supabase.from("entitlements").insert({
-      user_id: user.id,
-      sku: order.sku,
-      package_code: order.package_code,
-      status: "active",
-      quota_total: 1,
-      quota_used: 0,
-      ends_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-      source_order_id: order.id,
-      sandbox: true,
-    });
-  }
 
   return NextResponse.json({
     data: { order: updated },
