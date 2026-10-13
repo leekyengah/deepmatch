@@ -15,7 +15,7 @@ export default async function MeAccountPage({
   const { t } = await getServerTranslator();
 
   return (
-    <div className="max-w-2xl">
+    <div className="dm-page-frame dm-page-frame--narrow">
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
         {t("profile.eyebrow")}
       </p>

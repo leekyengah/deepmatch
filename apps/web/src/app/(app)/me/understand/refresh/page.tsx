@@ -29,7 +29,7 @@ export default async function NeedsRefreshPage() {
   const updated = data?.updated_at ? new Date(data.updated_at) : null;
 
   return (
-    <main className="mx-auto max-w-lg pb-16">
+    <main className="dm-page-frame dm-page-frame--narrow pb-16">
       <Link href="/me/understand" className="text-sm text-dm-muted underline">
         {t("needs.backUnderstand")}
       </Link>

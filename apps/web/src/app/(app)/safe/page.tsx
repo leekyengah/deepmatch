@@ -6,7 +6,7 @@ import { DeepSafeClient } from "@/components/safety/DeepSafeClient";
 export default async function DeepSafePage() {
   const { t } = await getServerTranslator();
   return (
-    <div className="max-w-2xl">
+    <div className="dm-page-frame dm-page-frame--narrow">
       <Link href="/me" className="text-sm text-dm-muted underline">
         {t("safety.backMe")}
       </Link>

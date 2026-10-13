@@ -10,7 +10,7 @@ export function PublicNav() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-dm-line/80 bg-dm-canvas/95 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-6 py-4">
+      <div className="dm-page-frame mx-auto flex w-full items-center justify-between gap-4 px-dm-gutter py-4">
         <Link href="/" aria-label={t("nav.homeAria")}>
           <BrandLogo variant="full" className="h-8 w-auto max-w-[190px]" />
         </Link>

@@ -45,7 +45,7 @@ export default async function CouplePromisesPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className="dm-page-frame dm-page-frame--standard">
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
         {t("couple.title")}
       </p>

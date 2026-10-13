@@ -27,7 +27,7 @@ export function CoupleSubNav({
     <div className="flex flex-col gap-3 border-b border-dm-line/80 pb-3 sm:flex-row sm:items-center sm:justify-between">
       <nav
         aria-label={t("couple.spaceFull")}
-        className="flex gap-1 overflow-x-auto text-sm font-medium"
+        className="flex gap-1 overflow-x-auto overscroll-x-contain text-sm font-medium [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item) => {
           const active = item.exact

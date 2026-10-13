@@ -32,7 +32,7 @@ export default async function CheckoutStepPage({
   const { t } = await getServerTranslator();
 
   return (
-    <main className="mx-auto max-w-lg pb-16">
+    <main className="dm-page-frame dm-page-frame--narrow pb-16">
       <Link href="/services" className="text-sm text-dm-muted underline">
         {t("booking.backToServices")}
       </Link>

@@ -102,7 +102,7 @@ export default function CoupleInvitePage() {
   }
 
   return (
-    <div className="max-w-lg">
+    <div className="dm-page-frame dm-page-frame--narrow">
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
         {t("couple.title")}
       </p>

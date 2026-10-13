@@ -14,7 +14,7 @@ export default async function CoupleUsPage() {
   const { t } = await getServerTranslator();
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className="dm-page-frame dm-page-frame--standard">
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
         {t("couple.title")}
       </p>

@@ -34,7 +34,7 @@ export default async function ProductDetailPage({
   } | null;
 
   return (
-    <div className="mx-auto w-full max-w-[720px] pb-12">
+    <div className="dm-page-frame dm-page-frame--narrow pb-12">
       <Link
         href={`/lifestyle/${category}`}
         className="text-sm font-semibold text-dm-muted underline-offset-2 hover:text-dm-primary hover:underline"

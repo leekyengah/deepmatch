@@ -37,7 +37,7 @@ export default async function ServiceRequestPage({
   const title = vi ? pkg.titleVi : pkg.titleEn;
 
   return (
-    <div className="mx-auto max-w-lg pb-16">
+    <div className="dm-page-frame dm-page-frame--narrow pb-16">
       <Link href={`/services/${slug}`} className="text-sm text-dm-muted underline">
         {t("booking.backToPackage")}
       </Link>

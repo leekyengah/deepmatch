@@ -32,7 +32,7 @@ export default async function MePrivacyPage({
   const activeAi = (aiConsents ?? []).filter((c) => c.granted);
 
   return (
-    <main className="mx-auto max-w-lg px-6 py-12">
+    <main className="dm-page-frame dm-page-frame--narrow py-12">
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
         {t("profile.eyebrow")}
       </p>

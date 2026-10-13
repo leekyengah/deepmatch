@@ -62,7 +62,7 @@ export default async function ServicePackagePage({
   ];
 
   return (
-    <div className="mx-auto max-w-3xl pb-28">
+    <div className="dm-page-frame dm-page-frame--standard pb-28">
       <Link href="/services" className="text-sm text-dm-muted underline">
         {t("booking.backToServices")}
       </Link>
@@ -148,8 +148,8 @@ export default async function ServicePackagePage({
         </div>
       </section>
 
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-dm-line bg-dm-panel/95 px-4 py-3 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-dm-line bg-dm-panel/95 px-dm-gutter py-3 pb-[max(0.75rem,var(--dm-safe-bottom))] backdrop-blur md:pb-3">
+        <div className="dm-page-frame dm-page-frame--standard mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="text-sm">
             <p className="font-semibold text-dm-ink">{formatVnd(pkg.salePriceVnd)}</p>
             <p className="text-xs text-dm-muted">{t("booking.stickySandbox")}</p>

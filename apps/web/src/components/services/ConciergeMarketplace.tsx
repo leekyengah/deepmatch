@@ -230,7 +230,7 @@ export function ConciergeMarketplace() {
           {t("booking.compareTitle")}
         </h2>
         <p className="mt-2 text-sm text-dm-muted">{t("booking.compareHint")}</p>
-        <div className="mt-5 overflow-x-auto rounded-[18px] border border-dm-line bg-dm-panel shadow-dm">
+        <div className="dm-scroll-x mt-5 rounded-dm-xl border border-dm-line bg-dm-panel shadow-dm">
           <table className="min-w-[720px] w-full text-left text-sm">
             <thead>
               <tr className="border-b border-dm-line">

@@ -22,7 +22,7 @@ export default async function PlacesMapPage({
   const cities = ["Hà Nội", "TP. Hồ Chí Minh"];
 
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="dm-page-frame dm-page-frame--wide">
       <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
         {t("places.eyebrow")}
       </p>

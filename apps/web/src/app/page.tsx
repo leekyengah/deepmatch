@@ -92,7 +92,7 @@ export default async function HomePage() {
       {/* WEB-02 Hero */}
       <section
         id="explore"
-        className="mx-auto grid max-w-6xl items-center gap-10 px-6 pb-16 pt-10 lg:grid-cols-2 lg:gap-14 lg:pb-24 lg:pt-14"
+        className="dm-page-frame mx-auto grid items-center gap-10 px-dm-gutter pb-16 pt-10 lg:grid-cols-2 lg:gap-14 lg:pb-24 lg:pt-14"
       >
         <div>
           <h1 className="font-display text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-dm-ink md:text-5xl lg:text-[3.4rem]">
@@ -140,7 +140,7 @@ export default async function HomePage() {
 
       {/* WEB-04 Journeys */}
       <section id="stories" className="bg-dm-panel px-6 py-20">
-        <div className="mx-auto max-w-6xl text-center">
+        <div className="dm-page-frame mx-auto text-center">
           <h2 className="font-display text-3xl font-semibold text-dm-ink md:text-4xl">
             {t("marketing.journeysTitle")}
           </h2>
@@ -184,7 +184,7 @@ export default async function HomePage() {
 
       {/* WEB-05 How */}
       <section id="how" className="px-6 py-20">
-        <div className="mx-auto max-w-6xl">
+        <div className="dm-page-frame mx-auto">
           <div className="max-w-2xl">
             <h2 className="font-display text-3xl font-semibold text-dm-ink md:text-4xl">
               {t("marketing.howTitle")}
@@ -213,7 +213,7 @@ export default async function HomePage() {
 
       {/* WEB-06 Final CTA */}
       <section className="bg-dm-deep px-6 py-20 text-center text-white">
-        <div className="mx-auto max-w-3xl">
+        <div className="dm-page-frame dm-page-frame--narrow mx-auto">
           <h2 className="font-display text-3xl font-semibold md:text-4xl">
             {t("marketing.finalCtaTitle")}
           </h2>
@@ -231,7 +231,7 @@ export default async function HomePage() {
       </section>
 
       <footer className="border-t border-dm-line bg-dm-canvas px-6 py-12">
-        <div className="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:justify-between">
+        <div className="dm-page-frame mx-auto flex flex-col gap-8 md:flex-row md:justify-between">
           <div className="max-w-sm">
             <BrandLogo variant="full" className="h-8" />
             <p className="mt-3 text-sm text-dm-muted">
@@ -255,7 +255,7 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-        <p className="mx-auto mt-10 max-w-6xl text-xs text-dm-muted">
+        <p className="dm-page-frame mx-auto mt-10 text-xs text-dm-muted">
           {t("marketing.footerCopyright", { year })}
         </p>
       </footer>

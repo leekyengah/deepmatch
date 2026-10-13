@@ -572,7 +572,7 @@ export function ChatLounge({ chatEnabled }: { chatEnabled: boolean }) {
         </p>
       ) : null}
 
-      <div className="grid min-h-[70vh] gap-3 lg:grid-cols-[300px_minmax(0,1fr)_300px]">
+      <div className="grid min-h-[min(70dvh,720px)] gap-3 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)_minmax(0,280px)]">
         {/* Hub */}
         <aside
           className={cn(

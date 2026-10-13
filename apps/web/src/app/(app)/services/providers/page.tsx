@@ -36,7 +36,7 @@ export default async function ProvidersPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl pb-16">
+    <div className="dm-page-frame dm-page-frame--standard pb-16">
       <Link href="/services" className="text-sm text-dm-muted underline">
         {t("booking.backToServices")}
       </Link>

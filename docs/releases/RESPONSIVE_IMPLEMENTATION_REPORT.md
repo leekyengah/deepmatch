@@ -4,31 +4,25 @@
 |---|---|
 | Date | 2026-10-13 |
 | Branch | `feature/responsive-full-frame` |
-| Status | **P0 FOUNDATION LANDED** — not production; viewport evidence partial |
+| Status | **P0+P1 LANDED** — preview/prod deploy in progress |
 
 ## Done
 
-- [x] Source audit → `docs/audits/RESPONSIVE_AUDIT.md`
-- [x] Token proposal → `docs/design/DEEPMATCH_DESIGN_TOKENS.md`
-- [x] P0 CSS tokens v4 (`globals.css`) + Tailwind screens/maxWidth/spacing/aspect
-- [x] `PageFrame` + `MediaFrame` components
-- [x] AppShell: token colors, fluid gutters, safe-area bottom nav, no nested 1510 max-width
-- [x] Premium hubs → `dm-page-frame*` (Chat, Discover, AI, Services, Lifestyle, Me, Home)
-- [x] Portrait 3:4: Discover media, landing hero, Couple polaroid well
-- [x] Mobile: `layout` tokens + tab bar safe-area insets; Colors aligned to wine
-- [x] `viewportFit: cover` for safe-area on iOS web
-- [x] `tsc` web → PASS (`docs/evidence/tsc-responsive.txt`)
-- [ ] Full viewport screenshot matrix (before/after)
-- [ ] P1 module overflow pass (every form/modal)
-- [ ] Production deploy (after gates)
+- [x] Audit + tokens docs
+- [x] P0 CSS tokens / PageFrame / MediaFrame / AppShell safe-area
+- [x] P1 module frames: Couple, Places, Me settings, Checkout, Services detail/request, AI deepmind, Safe, Lifestyle detail, marketing landing/PublicNav
+- [x] Modal: safe-area + max-height scroll; Chat grid fluid cols; services sticky CTA above safe-area
+- [x] Compare table uses `.dm-scroll-x` (intentional horizontal scroll)
+- [x] `tsc` web PASS
+- [ ] Screenshot matrix full (browser capture flaky)
+- [ ] Production evidence after deploy
 
 ## Explicit non-claims
 
-- Not 100% overflow PASS — matrix incomplete.
-- WCAG 2.2 AA not fully verified.
-- Admin still legacy pink (P2).
-- No business logic / API / payment changes.
+- Not claiming 100% overflow PASS without full viewport screenshot suite.
+- Admin pink theme still P2.
+- WCAG 2.2 AA not fully audited.
 
 ## Rollback
 
-Revert branch or redeploy prior Vercel deployment.
+Redeploy prior Vercel production deployment / revert branch.

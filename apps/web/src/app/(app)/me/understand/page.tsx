@@ -13,7 +13,7 @@ export default async function UnderstandPage() {
   const { t } = await getServerTranslator();
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className="dm-page-frame dm-page-frame--standard">
       <Link href="/me" className="text-sm text-dm-muted underline">
         {t("needs.backMe")}
       </Link>

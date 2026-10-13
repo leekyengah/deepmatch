@@ -78,7 +78,7 @@ export default async function CoupleHomePage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl space-y-6">
+    <div className="dm-page-frame space-y-6">
       <CoupleHero
         couple={couple}
         coverUrl={coverUrl}

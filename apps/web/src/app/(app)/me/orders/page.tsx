@@ -33,7 +33,7 @@ export default async function MeOrdersPage() {
     .limit(20);
 
   return (
-    <main className="mx-auto max-w-lg pb-16">
+    <main className="dm-page-frame dm-page-frame--narrow pb-16">
       <Link href="/me" className="text-sm text-dm-muted underline">
         {t("needs.backMe")}
       </Link>

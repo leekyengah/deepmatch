@@ -118,7 +118,7 @@ export function RecommendWizard() {
 
   if (step >= steps.length) {
     return (
-      <div className="mx-auto max-w-2xl space-y-6 pb-16">
+      <div className="dm-page-frame dm-page-frame--narrow space-y-6 pb-16">
         <Link href="/services" className="text-sm text-dm-muted underline">
           {t("booking.backToServices")}
         </Link>
@@ -200,7 +200,7 @@ export function RecommendWizard() {
   const current = steps[step];
 
   return (
-    <div className="mx-auto max-w-xl space-y-6 pb-16">
+    <div className="dm-page-frame dm-page-frame--narrow space-y-6 pb-16">
       <Link href="/services" className="text-sm text-dm-muted underline">
         {t("booking.backToServices")}
       </Link>

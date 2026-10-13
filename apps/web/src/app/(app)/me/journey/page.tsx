@@ -37,7 +37,7 @@ export default async function MyJourneyPage() {
   const answered = Object.keys(answers).filter((k) => answers[k]?.trim()).length;
 
   return (
-    <div className="mx-auto max-w-3xl pb-16">
+    <div className="dm-page-frame dm-page-frame--standard pb-16">
       <Link href="/me" className="text-sm text-dm-muted underline">
         {t("needs.backMe")}
       </Link>

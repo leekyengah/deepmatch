@@ -43,7 +43,7 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(56,39,53,0.35)] p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-dm-ink/35 p-4 pb-[max(1rem,var(--dm-safe-bottom))] sm:items-center"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -56,7 +56,7 @@ export function Modal({
         aria-labelledby={titleId}
         tabIndex={-1}
         className={cn(
-          "w-full max-w-lg rounded-dm-xl border border-dm-line bg-dm-panel p-5 shadow-dm outline-none",
+          "max-h-[min(85dvh,720px)] w-full max-w-dm-narrow overflow-y-auto rounded-dm-xl border border-dm-line bg-dm-panel p-5 shadow-dm outline-none",
           className,
         )}
       >

@@ -83,7 +83,7 @@ export default async function PlaceDetailPage({
   ];
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className="dm-page-frame dm-page-frame--standard">
       <Link href="/places/map" className="text-sm text-dm-muted underline">
         {t("places.backMap")}
       </Link>

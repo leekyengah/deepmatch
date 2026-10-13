@@ -10,7 +10,7 @@ export default async function DeepMindPage() {
   if (!(await flagEnabled("ff_ai"))) redirect("/me");
 
   return (
-    <div className="max-w-2xl">
+    <div className="dm-page-frame dm-page-frame--narrow">
       <Link href="/ai" className="text-sm text-dm-muted underline">
         {t("ai.backAiHub")}
       </Link>
