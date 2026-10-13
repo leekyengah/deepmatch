@@ -14,6 +14,10 @@
     "dev:mobile:tunnel": "npm run go:tunnel -w @deepmatch/mobile",
     "dev:all": "node scripts/dev-all.mjs",
     "build": "npm run build -w @deepmatch/shared && npm run build -w @deepmatch/web && npm run build -w @deepmatch/admin",
+    "vercel-build": "npm run vercel-build:web",
+    "vercel-build:web": "node scripts/vercel-build-web.mjs",
+    "vercel-build:admin": "node scripts/vercel-build-admin.mjs",
+    "check:workspaces": "node scripts/check-workspace-resolution.mjs",
     "lint": "npm run lint -w @deepmatch/i18n && npm run lint -w @deepmatch/legal-content && npm run lint -w @deepmatch/shared && npm run lint -w @deepmatch/design-tokens && npm run lint -w @deepmatch/web && npm run lint -w @deepmatch/admin",
     "typecheck": "npm run typecheck -w @deepmatch/i18n && npm run typecheck -w @deepmatch/legal-content && npm run typecheck -w @deepmatch/shared && npm run typecheck -w @deepmatch/design-tokens && npm run typecheck -w @deepmatch/web && npm run typecheck -w @deepmatch/admin",
     "test": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content && npm run test -w @deepmatch/design-tokens",
@@ -31,7 +35,7 @@
     "grant:owner": "node --env-file=.env.local scripts/grant-admin-owner.mjs",
     "outbox:worker": "node --env-file=.env.local scripts/outbox-worker.mjs",
     "format:check": "echo \"format check placeholder — prettier optional\"",
-    "ci": "npm run lint && npm run typecheck && npm run test && npm run build"
+    "ci": "npm run check:workspaces && npm run lint && npm run typecheck && npm run test && npm run build"
   },
   "engines": {
     "node": ">=20"
