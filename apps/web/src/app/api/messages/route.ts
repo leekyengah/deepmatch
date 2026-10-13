@@ -3,6 +3,8 @@ import { canAccessChat } from "@deepmatch/shared";
 import { createServiceClient, getRouteUser } from "@/lib/supabase/route";
 import { flagEnabled } from "@/lib/flags";
 import { jsonError, makeRequestId } from "@/lib/api-error";
+import { getStorageBackend, type StorageBackend } from "@/lib/media/limits";
+import { createSignedReadUrl } from "@/lib/media/storage";
 
 export async function GET(req: Request) {
   const { supabase, user } = await getRouteUser(req);
@@ -40,30 +42,41 @@ export async function GET(req: Request) {
         .filter((id): id is string => Boolean(id)),
     ),
   ];
-  const { data: mediaRows } = mediaIds.length
-    ? await supabase
+  type MediaRow = {
+    id: string;
+    storage_path: string;
+    content_type: string;
+    storage_backend?: string;
+    processing_status?: string;
+  };
+  let rows: MediaRow[] = [];
+  if (mediaIds.length) {
+    const full = await supabase
+      .from("media_objects")
+      .select(
+        "id, storage_path, content_type, storage_backend, processing_status",
+      )
+      .in("id", mediaIds);
+    if (full.error) {
+      const legacy = await supabase
         .from("media_objects")
         .select("id, storage_path, content_type")
-        .in("id", mediaIds)
-    : {
-        data: [] as {
-          id: string;
-          storage_path: string;
-          content_type: string;
-        }[],
-      };
+        .in("id", mediaIds);
+      rows = (legacy.data ?? []) as MediaRow[];
+    } else {
+      rows = (full.data ?? []) as MediaRow[];
+    }
+  }
 
-  const mediaMeta = new Map<
-    string,
-    { url: string; content_type: string }
-  >();
-  for (const row of mediaRows ?? []) {
-    const { data: signed } = await supabase.storage
-      .from("media")
-      .createSignedUrl(row.storage_path, 600);
-    if (signed?.signedUrl) {
+  const mediaMeta = new Map<string, { url: string; content_type: string }>();
+  for (const row of rows) {
+    if (row.processing_status && row.processing_status !== "ready") continue;
+    const backend = (row.storage_backend ??
+      getStorageBackend()) as StorageBackend;
+    const signedUrl = await createSignedReadUrl(row.storage_path, backend, 600);
+    if (signedUrl) {
       mediaMeta.set(row.id, {
-        url: signed.signedUrl,
+        url: signedUrl,
         content_type: row.content_type,
       });
     }
@@ -107,12 +120,16 @@ export async function POST(req: Request) {
   if (body.mediaId) {
     const { data: media } = await supabase
       .from("media_objects")
-      .select("id, owner_user_id")
+      .select("id, owner_user_id, processing_status")
       .eq("id", body.mediaId)
       .eq("owner_user_id", user.id)
       .maybeSingle();
     if (!media) {
       return jsonError("RESOURCE_NOT_ACCESSIBLE", null, requestId);
+    }
+    const st = (media as { processing_status?: string }).processing_status;
+    if (st && st !== "ready") {
+      return jsonError("VALIDATION_ERROR", "mediaNotReady", requestId);
     }
   }
 

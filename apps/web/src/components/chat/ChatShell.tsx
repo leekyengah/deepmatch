@@ -14,6 +14,11 @@ import { LoadingState } from "@/components/ui/LoadingState";
 import { Modal } from "@/components/ui/Modal";
 import { Textarea } from "@/components/ui/Textarea";
 import { cn } from "@/components/ui/cn";
+import {
+  confirmMedia,
+  uploadWithIntent,
+  type UploadIntentResponse,
+} from "@/lib/media/client-upload";
 
 type MatchRow = {
   match_id: string;
@@ -257,7 +262,7 @@ export function ChatShell({ chatEnabled }: { chatEnabled: boolean }) {
         return;
       }
       const isVideo = file.type.startsWith("video/");
-      const max = isVideo ? 50 * 1024 * 1024 : 8 * 1024 * 1024;
+      const max = isVideo ? 50 * 1024 * 1024 : 10 * 1024 * 1024;
       if (file.size > max) {
         setError(isVideo ? t("chat.mediaVideoMax") : t("chat.mediaImageMax"));
         return;
@@ -273,11 +278,7 @@ export function ChatShell({ chatEnabled }: { chatEnabled: boolean }) {
       });
       const intent = (await intentRes.json()) as {
         error?: { message?: string };
-        data?: {
-          media_id: string;
-          upload?: { path: string; token: string } | null;
-          note?: string;
-        };
+        data?: UploadIntentResponse;
       };
       if (!intentRes.ok || !intent.data?.upload) {
         setError(
@@ -287,16 +288,23 @@ export function ChatShell({ chatEnabled }: { chatEnabled: boolean }) {
         );
         return;
       }
-      const { error: upErr } = await supabase.storage
-        .from("media")
-        .uploadToSignedUrl(
-          intent.data.upload.path,
-          intent.data.upload.token,
-          file,
-          { contentType: file.type },
-        );
-      if (upErr) {
-        setError(upErr.message);
+      const up = await uploadWithIntent(
+        intent.data,
+        file,
+        async ({ path, token, file: f, contentType }) => {
+          const { error } = await supabase.storage
+            .from("media")
+            .uploadToSignedUrl(path, token, f, { contentType });
+          return { error: error ? new Error(error.message) : null };
+        },
+      );
+      if (up.error) {
+        setError(up.error);
+        return;
+      }
+      const confirmed = await confirmMedia(intent.data.media_id);
+      if (!confirmed.ok) {
+        setError(confirmed.error ?? t("chat.mediaUploadFailed"));
         return;
       }
       const res = await fetch("/api/v1/messages", {

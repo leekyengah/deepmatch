@@ -5,6 +5,11 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useT } from "@/components/i18n/I18nProvider";
 import { Button } from "@/components/ui/Button";
+import {
+  confirmMedia,
+  uploadWithIntent,
+  type UploadIntentResponse,
+} from "@/lib/media/client-upload";
 
 export function AvatarUpload({
   currentPath,
@@ -25,7 +30,7 @@ export function AvatarUpload({
         setNote(t("profile.avatarTypeError"));
         return;
       }
-      if (file.size > 8 * 1024 * 1024) {
+      if (file.size > 10 * 1024 * 1024) {
         setNote(t("profile.avatarSizeError"));
         return;
       }
@@ -36,44 +41,44 @@ export function AvatarUpload({
         body: JSON.stringify({
           content_type: file.type,
           bytes: file.size,
+          purpose: "avatar",
         }),
       });
       const intent = (await intentRes.json()) as {
         error?: { message?: string };
-        data?: {
-          media_id: string;
-          storage_path: string;
-          upload?: { path: string; token: string } | null;
-          note?: string;
-        };
+        data?: UploadIntentResponse;
       };
       if (!intentRes.ok || !intent.data) {
         setNote(resolveApiErrorMessage(intent, t, "profile.avatarIntentFailed"));
         return;
       }
-      if (!intent.data.upload) {
-        setNote(intent.data.note ?? t("profile.avatarStorageNotReady"));
+
+      const supabase = createClient();
+      const up = await uploadWithIntent(
+        intent.data,
+        file,
+        async ({ path, token, file: f, contentType }) => {
+          const { error } = await supabase.storage
+            .from("media")
+            .uploadToSignedUrl(path, token, f, { contentType });
+          return { error: error ? new Error(error.message) : null };
+        },
+      );
+      if (up.error) {
+        setNote(up.error);
         return;
       }
 
-      const supabase = createClient();
-      const { error: upErr } = await supabase.storage
-        .from("media")
-        .uploadToSignedUrl(
-          intent.data.upload.path,
-          intent.data.upload.token,
-          file,
-          { contentType: file.type },
-        );
-      if (upErr) {
-        setNote(upErr.message);
+      const confirmed = await confirmMedia(intent.data.media_id);
+      if (!confirmed.ok || !confirmed.data) {
+        setNote(confirmed.error ?? t("profile.avatarIntentFailed"));
         return;
       }
 
       const { error: pErr } = await supabase
         .from("profiles")
         .update({
-          avatar_path: intent.data.storage_path,
+          avatar_path: confirmed.data.storage_path,
           updated_at: new Date().toISOString(),
         })
         .eq("id", (await supabase.auth.getUser()).data.user?.id ?? "");

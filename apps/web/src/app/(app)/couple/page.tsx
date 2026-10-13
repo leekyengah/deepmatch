@@ -68,10 +68,13 @@ export default async function CoupleHomePage() {
 
   let coverUrl: string | null = null;
   if (couple.cover_path) {
-    const { data: signed } = await supabase.storage
-      .from("media")
-      .createSignedUrl(couple.cover_path, 3600);
-    coverUrl = signed?.signedUrl ?? null;
+    const { createSignedReadUrl } = await import("@/lib/media/storage");
+    const { getStorageBackend } = await import("@/lib/media/limits");
+    coverUrl = await createSignedReadUrl(
+      couple.cover_path,
+      getStorageBackend(),
+      3600,
+    );
   }
 
   return (

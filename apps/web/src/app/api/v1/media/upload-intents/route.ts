@@ -2,19 +2,20 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getRouteUser } from "@/lib/supabase/route";
 import { flagEnabled } from "@/lib/flags";
 import { apiT, jsonError, makeRequestId } from "@/lib/api-error";
-import { randomUUID } from "node:crypto";
-
-const IMAGE_MAX = 8 * 1024 * 1024; // 8MB
-const VIDEO_MAX = 50 * 1024 * 1024; // 50MB soft limit (DM-035)
-const PROFILE_MAX_IMAGES = 10;
-const PROFILE_MAX_VIDEOS = 2;
-const ALLOWED = new Set([
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "video/mp4",
-  "video/webm",
-]);
+import {
+  ALLOWED_MIME,
+  IMAGE_MAX_BYTES,
+  PROFILE_MAX_IMAGES,
+  PROFILE_MAX_VIDEOS,
+  VIDEO_MAX_BYTES,
+  getStorageBackend,
+} from "@/lib/media/limits";
+import {
+  buildR2ObjectKey,
+  buildSupabaseStoragePath,
+  derivePurpose,
+} from "@/lib/media/keys";
+import { createUploadIntent } from "@/lib/media/storage";
 
 export async function POST(req: NextRequest) {
   const requestId = makeRequestId();
@@ -30,23 +31,23 @@ export async function POST(req: NextRequest) {
     bytes?: number;
     pair_id?: string;
     conversation_id?: string;
+    purpose?: string;
   };
 
-  if (!body.content_type || !ALLOWED.has(body.content_type)) {
+  if (!body.content_type || !ALLOWED_MIME.has(body.content_type)) {
     return jsonError("VALIDATION_ERROR", "unsupportedMediaType", requestId);
   }
   const isVideo = body.content_type.startsWith("video/");
-  const maxBytes = isVideo ? VIDEO_MAX : IMAGE_MAX;
+  const maxBytes = isVideo ? VIDEO_MAX_BYTES : IMAGE_MAX_BYTES;
   if (!body.bytes || body.bytes <= 0 || body.bytes > maxBytes) {
     return jsonError(
       "VALIDATION_ERROR",
       isVideo ? "videoTooLarge" : "imageTooLarge",
-      requestId
+      requestId,
     );
   }
 
-  // Profile library gate (no pair/conversation): enforce 3–10 images / ≤2 videos max.
-  if (!body.pair_id && !body.conversation_id) {
+  if (!body.pair_id && !body.conversation_id && body.purpose !== "avatar") {
     const { data: existing } = await supabase
       .from("media_objects")
       .select("content_type")
@@ -81,52 +82,119 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  const objectId = randomUUID();
-  const ext = body.content_type.split("/")[1] ?? "bin";
-  const storagePath = `${user.id}/${objectId}.${ext}`;
+  const backend = getStorageBackend();
+  const purpose = derivePurpose({
+    pairId: body.pair_id,
+    conversationId: body.conversation_id,
+    purpose: body.purpose,
+  });
+  const storagePath =
+    backend === "r2"
+      ? buildR2ObjectKey({
+          purpose,
+          userId: user.id,
+          mime: body.content_type,
+          pairId: body.pair_id,
+        })
+      : buildSupabaseStoragePath(user.id, body.content_type);
+
+  const visibility = body.pair_id ? "couple_private" : "private";
+
+  const insertRow: Record<string, unknown> = {
+    owner_user_id: user.id,
+    pair_id: body.pair_id ?? null,
+    conversation_id: body.conversation_id ?? null,
+    storage_path: storagePath,
+    content_type: body.content_type,
+    bytes: body.bytes,
+    purpose:
+      purpose === "avatar" ? "avatar" : purpose === "chat" ? "chat" : "profile",
+    storage_backend: backend,
+    processing_status: "pending_upload",
+    visibility,
+    media_type: isVideo ? "video" : "image",
+  };
 
   const { data: media, error: mediaErr } = await supabase
     .from("media_objects")
-    .insert({
-      owner_user_id: user.id,
-      pair_id: body.pair_id ?? null,
-      conversation_id: body.conversation_id ?? null,
-      storage_path: storagePath,
-      content_type: body.content_type,
-      bytes: body.bytes,
-    })
+    .insert(insertRow)
     .select("id, storage_path")
     .single();
-  if (mediaErr) return jsonError("VALIDATION_ERROR", mediaErr.message, requestId);
 
-  const { data: signed, error: signErr } = await supabase.storage
-    .from("media")
-    .createSignedUploadUrl(storagePath);
+  if (mediaErr) {
+    const { data: legacy, error: legacyErr } = await supabase
+      .from("media_objects")
+      .insert({
+        owner_user_id: user.id,
+        pair_id: body.pair_id ?? null,
+        conversation_id: body.conversation_id ?? null,
+        storage_path: storagePath,
+        content_type: body.content_type,
+        bytes: body.bytes,
+      })
+      .select("id, storage_path")
+      .single();
+    if (legacyErr || !legacy) {
+      return jsonError("VALIDATION_ERROR", "unsupportedMediaType", requestId);
+    }
+    return respondIntent(
+      legacy.id,
+      storagePath,
+      body.content_type,
+      backend,
+      requestId,
+    );
+  }
 
-  if (signErr || !signed) {
-    // Bucket may not exist yet — still return intent metadata for client
+  return respondIntent(
+    media.id,
+    storagePath,
+    body.content_type,
+    backend,
+    requestId,
+  );
+}
+
+async function respondIntent(
+  mediaId: string,
+  storagePath: string,
+  contentType: string,
+  backend: "supabase" | "r2",
+  requestId: string,
+) {
+  try {
+    const upload = await createUploadIntent({
+      storagePath,
+      contentType,
+      backend,
+    });
     return NextResponse.json({
       data: {
-        media_id: media.id,
+        media_id: mediaId,
         storage_path: storagePath,
+        backend: upload.backend,
+        upload: {
+          path: upload.path,
+          token: upload.token,
+          url: upload.url,
+          method: upload.method,
+          headers: upload.headers,
+          signed_url: upload.url,
+        },
+        expires_hint_seconds: upload.expires_in,
+      },
+      meta: { request_id: requestId },
+    });
+  } catch {
+    return NextResponse.json({
+      data: {
+        media_id: mediaId,
+        storage_path: storagePath,
+        backend,
         upload: null,
         note: await apiT("mediaUploadNote"),
       },
       meta: { request_id: requestId },
     });
   }
-
-  return NextResponse.json({
-    data: {
-      media_id: media.id,
-      storage_path: storagePath,
-      upload: {
-        path: signed.path,
-        token: signed.token,
-        signed_url: signed.signedUrl,
-      },
-      expires_hint_seconds: 120,
-    },
-    meta: { request_id: requestId },
-  });
 }

@@ -9,6 +9,12 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Modal } from "@/components/ui/Modal";
+import { createClient } from "@/lib/supabase/client";
+import {
+  confirmMedia,
+  uploadWithIntent,
+  type UploadIntentResponse,
+} from "@/lib/media/client-upload";
 
 export function CoupleUsClient({
   coupleId,
@@ -66,6 +72,74 @@ export function CoupleUsClient({
         return;
       }
       setNote(t("couple.settingsSaved"));
+      router.refresh();
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function onCover(file: File | null) {
+    if (!file || !coupleId) return;
+    setBusy(true);
+    setNote(null);
+    try {
+      if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+        setNote(t("couple.coverTypeError"));
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        setNote(t("couple.coverSizeError"));
+        return;
+      }
+      const intentRes = await fetch("/api/v1/media/upload-intents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content_type: file.type,
+          bytes: file.size,
+          pair_id: coupleId,
+          purpose: "couple",
+        }),
+      });
+      const intent = (await intentRes.json()) as {
+        error?: { message?: string };
+        data?: UploadIntentResponse;
+      };
+      if (!intentRes.ok || !intent.data) {
+        setNote(resolveApiErrorMessage(intent, t, "couple.coverFailed"));
+        return;
+      }
+      const supabase = createClient();
+      const up = await uploadWithIntent(
+        intent.data,
+        file,
+        async ({ path, token, file: f, contentType }) => {
+          const { error } = await supabase.storage
+            .from("media")
+            .uploadToSignedUrl(path, token, f, { contentType });
+          return { error: error ? new Error(error.message) : null };
+        },
+      );
+      if (up.error) {
+        setNote(up.error);
+        return;
+      }
+      const confirmed = await confirmMedia(intent.data.media_id);
+      if (!confirmed.ok || !confirmed.data) {
+        setNote(confirmed.error ?? t("couple.coverFailed"));
+        return;
+      }
+      const res = await fetch(`/api/v1/couples/${coupleId}/settings`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cover_path: confirmed.data.storage_path }),
+      });
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        setNote(resolveApiErrorMessage(json, t, "couple.coverFailed"));
+        return;
+      }
+      setNote(t("couple.coverSaved"));
       router.refresh();
     } finally {
       setBusy(false);
@@ -131,7 +205,17 @@ export function CoupleUsClient({
               placeholder={t("couple.mottoPh")}
             />
           </label>
-          <p className="text-xs text-dm-muted">{t("couple.coverHint")}</p>
+          <label className="block text-sm">
+            <span className="font-medium text-dm-ink">{t("couple.changeCover")}</span>
+            <p className="mt-1 text-xs text-dm-muted">{t("couple.coverHint")}</p>
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              disabled={busy}
+              className="mt-2 block w-full text-sm"
+              onChange={(e) => void onCover(e.target.files?.[0] ?? null)}
+            />
+          </label>
           <Button type="submit" size="sm" disabled={busy}>
             {busy ? t("common.loading") : t("couple.saveSettings")}
           </Button>
