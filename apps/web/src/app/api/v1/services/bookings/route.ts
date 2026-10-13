@@ -92,6 +92,7 @@ export async function POST(req: Request) {
     package_slug?: string;
     pair_id?: string | null;
     note?: string;
+    media_id?: string | null;
   };
 
   let offeringId = body.offering_id ?? null;
@@ -147,8 +148,21 @@ export async function POST(req: Request) {
     }
   }
 
+  if (body.media_id) {
+    const { data: media } = await supabase
+      .from("media_objects")
+      .select("id, owner_user_id, processing_status")
+      .eq("id", body.media_id)
+      .eq("owner_user_id", user.id)
+      .maybeSingle();
+    if (!media || (media.processing_status && media.processing_status !== "ready")) {
+      return jsonError("VALIDATION_ERROR", "mediaNotReady", requestId);
+    }
+  }
+
   const meta = {
     note: body.note?.slice(0, 500) ?? null,
+    media_id: body.media_id ?? null,
     price_snapshot: pkg
       ? {
           code: pkg.code,
