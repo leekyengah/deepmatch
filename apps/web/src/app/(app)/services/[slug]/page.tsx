@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { flagEnabled } from "@/lib/flags";
-import { companionBySlug, formatVnd } from "@/lib/companion-packages";
+import { redirect } from "next/navigation";
+import {
+  companionByCode,
+  companionBySlug,
+  formatVnd,
+} from "@/lib/companion-packages";
 import { getRequestLocale, getServerTranslator } from "@/lib/i18n/server";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -33,7 +38,9 @@ export default async function ServicePackagePage({
     );
   }
 
-  const pkg = companionBySlug(slug);
+  const byCode = companionByCode(slug);
+  if (byCode && byCode.slug !== slug) redirect(`/services/${byCode.slug}`);
+  const pkg = companionBySlug(slug) ?? byCode;
   if (!pkg) notFound();
 
   const vi = locale.startsWith("vi");

@@ -1,5 +1,17 @@
 /** Master tab32 — 7 companion packages (display catalog). No LIVE PSP. */
 
+export type CompanionNeedTag =
+  | "listen"
+  | "experience"
+  | "goals"
+  | "private"
+  | "match"
+  | "life_partner"
+  | "exclusive";
+
+/** 0=none, 1=basic, 2=full, 3=very full — for compare matrix (product UX). */
+export type CompareLevel = 0 | 1 | 2 | 3;
+
 export type CompanionPackage = {
   code: string;
   group: "companion" | "matchmaking";
@@ -20,6 +32,15 @@ export type CompanionPackage = {
   usageEn: string;
   limitsVi: string;
   limitsEn: string;
+  needTags: CompanionNeedTag[];
+  image: string;
+  compare: {
+    duration: CompareLevel;
+    format: CompareLevel;
+    personalization: CompareLevel;
+    coordination: CompareLevel;
+    dualSupport: CompareLevel;
+  };
 };
 
 export const COMPANION_PACKAGES: CompanionPackage[] = [
@@ -51,6 +72,15 @@ export const COMPANION_PACKAGES: CompanionPackage[] = [
       "Không bao gồm trị liệu, chẩn đoán, hỗ trợ khẩn cấp hoặc trò chuyện không giới hạn.",
     limitsEn:
       "Not therapy, diagnosis, emergency support, or unlimited chat.",
+    needTags: ["listen"],
+    image: "/fixtures/home/suggest-1.jpg",
+    compare: {
+      duration: 1,
+      format: 2,
+      personalization: 2,
+      coordination: 1,
+      dualSupport: 0,
+    },
   },
   {
     code: "CMP-02",
@@ -82,6 +112,15 @@ export const COMPANION_PACKAGES: CompanionPackage[] = [
       "Không gồm ăn uống, vé, quà, di chuyển ngoài phạm vi; không dịch vụ bảo vệ hoặc cam kết tình cảm.",
     limitsEn:
       "Excludes meals, tickets, gifts, out-of-scope travel; not security escort or romantic commitment.",
+    needTags: ["experience"],
+    image: "/fixtures/home/map-1.jpg",
+    compare: {
+      duration: 1,
+      format: 2,
+      personalization: 2,
+      coordination: 2,
+      dualSupport: 0,
+    },
   },
   {
     code: "CMP-03",
@@ -112,6 +151,15 @@ export const COMPANION_PACKAGES: CompanionPackage[] = [
     limitsVi:
       "Không cam kết đạt mục tiêu; không bao gồm chuyên môn trị liệu.",
     limitsEn: "No guaranteed outcomes; not clinical therapy.",
+    needTags: ["goals"],
+    image: "/fixtures/home/article-2.jpg",
+    compare: {
+      duration: 2,
+      format: 2,
+      personalization: 3,
+      coordination: 2,
+      dualSupport: 0,
+    },
   },
   {
     code: "CMP-04",
@@ -140,6 +188,15 @@ export const COMPANION_PACKAGES: CompanionPackage[] = [
       "See schedule, remaining hours, and coordinator. Online/in-person format is stated in the confirmation.",
     limitsVi: "Không 24/7, không độc quyền người đồng hành.",
     limitsEn: "Not 24/7 and not exclusive companionship.",
+    needTags: ["private", "goals"],
+    image: "/fixtures/home/hero-portrait.jpg",
+    compare: {
+      duration: 2,
+      format: 3,
+      personalization: 3,
+      coordination: 3,
+      dualSupport: 1,
+    },
   },
   {
     code: "MAT-01",
@@ -169,6 +226,15 @@ export const COMPANION_PACKAGES: CompanionPackage[] = [
       "Lời mời không phải kết nối thành công; không cam kết người yêu. Chỉ chia sẻ dữ liệu được chủ hồ sơ cho phép.",
     limitsEn:
       "An invite is not a successful match; no romantic guarantee. Only consented profile data is shared.",
+    needTags: ["match"],
+    image: "/fixtures/home/suggest-2.jpg",
+    compare: {
+      duration: 2,
+      format: 2,
+      personalization: 2,
+      coordination: 2,
+      dualSupport: 2,
+    },
   },
   {
     code: "MAT-02",
@@ -198,6 +264,15 @@ export const COMPANION_PACKAGES: CompanionPackage[] = [
       "Không cam kết kết hôn; không tự liên hệ gia đình; không ép tiếp tục.",
     limitsEn:
       "No marriage guarantee; no family outreach without consent; no pressure to continue.",
+    needTags: ["life_partner", "match"],
+    image: "/fixtures/home/suggest-3.jpg",
+    compare: {
+      duration: 3,
+      format: 3,
+      personalization: 3,
+      coordination: 3,
+      dualSupport: 3,
+    },
   },
   {
     code: "MAT-03",
@@ -227,11 +302,41 @@ export const COMPANION_PACKAGES: CompanionPackage[] = [
       "Hạn mức tổng, không cộng gói dưới. Không cam kết hôn nhân, độc quyền, 24/7 hoặc quyền can thiệp đối phương.",
     limitsEn:
       "Package caps do not stack with lower tiers. No marriage, exclusivity, 24/7, or right to intervene with the other person.",
+    needTags: ["exclusive", "life_partner", "match"],
+    image: "/fixtures/home/hero-city.jpg",
+    compare: {
+      duration: 3,
+      format: 3,
+      personalization: 3,
+      coordination: 3,
+      dualSupport: 3,
+    },
   },
 ];
 
+export const NEED_TAG_LABELS: Record<
+  CompanionNeedTag,
+  { vi: string; en: string }
+> = {
+  listen: { vi: "Tâm sự", en: "Listening" },
+  experience: { vi: "Trải nghiệm", en: "Experience" },
+  goals: { vi: "Mục tiêu cá nhân", en: "Personal goals" },
+  private: { vi: "Đồng hành riêng", en: "Private companion" },
+  match: { vi: "Tìm người phù hợp", en: "Find a match" },
+  life_partner: { vi: "Tìm bạn đời", en: "Life partner" },
+  exclusive: { vi: "Mai mối riêng", en: "Private matchmaking" },
+};
+
 export function companionBySlug(slug: string) {
   return COMPANION_PACKAGES.find((p) => p.slug === slug) ?? null;
+}
+
+export function companionByCode(code: string) {
+  return (
+    COMPANION_PACKAGES.find(
+      (p) => p.code.toLowerCase() === code.toLowerCase(),
+    ) ?? null
+  );
 }
 
 export function formatVnd(amount: number, locale = "vi-VN") {

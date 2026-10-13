@@ -7,6 +7,12 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
+import { createClient } from "@/lib/supabase/client";
+import {
+  confirmMedia,
+  uploadWithIntent,
+  type UploadIntentResponse,
+} from "@/lib/media/client-upload";
 
 const NEED_KEYS = [
   "needListen",
@@ -33,6 +39,7 @@ export function PackageRequestClient({
   const [note, setNote] = useState("");
   const [consent, setConsent] = useState(false);
   const [useNeedsProfile, setUseNeedsProfile] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
 
   function toggleNeed(key: string) {
     setNeeds((prev) =>
@@ -48,31 +55,91 @@ export function PackageRequestClient({
     }
     setBusy(true);
     setMessage(null);
-    const intake = {
-      needs: needs.map((k) => t(`booking.${k}`)),
-      region: region.trim().slice(0, 120),
-      schedule: schedule.trim().slice(0, 200),
-      note: note.trim().slice(0, 400),
-      use_needs_profile: useNeedsProfile,
-      consent_version: "companion-intake-v1",
-    };
-    const res = await fetch("/api/v1/services/bookings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        package_code: packageCode,
-        package_slug: slug,
-        note: JSON.stringify(intake).slice(0, 500),
-      }),
-    });
-    setBusy(false);
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      setMessage(resolveApiErrorMessage(body, t, "booking.bookRequestFailed"));
-      return;
+    try {
+      let mediaId: string | null = null;
+      if (file) {
+        const allowed = new Set([
+          "image/jpeg",
+          "image/png",
+          "image/webp",
+          "video/mp4",
+          "video/webm",
+        ]);
+        if (!allowed.has(file.type)) {
+          setMessage(t("booking.intakeMediaTypeError"));
+          return;
+        }
+        const intentRes = await fetch("/api/v1/media/upload-intents", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content_type: file.type,
+            bytes: file.size,
+            service_id: packageCode,
+            purpose: "service",
+          }),
+        });
+        const intent = (await intentRes.json()) as {
+          error?: { message?: string };
+          data?: UploadIntentResponse;
+        };
+        if (!intentRes.ok || !intent.data) {
+          setMessage(
+            resolveApiErrorMessage(intent, t, "booking.bookRequestFailed"),
+          );
+          return;
+        }
+        const supabase = createClient();
+        const up = await uploadWithIntent(
+          intent.data,
+          file,
+          async ({ path, token, file: f, contentType }) => {
+            const { error } = await supabase.storage
+              .from("media")
+              .uploadToSignedUrl(path, token, f, { contentType });
+            return { error: error ? new Error(error.message) : null };
+          },
+        );
+        if (up.error) {
+          setMessage(up.error);
+          return;
+        }
+        const confirmed = await confirmMedia(intent.data.media_id);
+        if (!confirmed.ok) {
+          setMessage(confirmed.error ?? t("booking.bookRequestFailed"));
+          return;
+        }
+        mediaId = intent.data.media_id;
+      }
+
+      const intake = {
+        needs: needs.map((k) => t(`booking.${k}`)),
+        region: region.trim().slice(0, 120),
+        schedule: schedule.trim().slice(0, 200),
+        note: note.trim().slice(0, 400),
+        use_needs_profile: useNeedsProfile,
+        consent_version: "companion-intake-v1",
+      };
+      const res = await fetch("/api/v1/services/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          package_code: packageCode,
+          package_slug: slug,
+          note: JSON.stringify(intake).slice(0, 500),
+          media_id: mediaId,
+        }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setMessage(resolveApiErrorMessage(body, t, "booking.bookRequestFailed"));
+        return;
+      }
+      setOk(true);
+      setMessage(t("booking.bookRequestSent"));
+    } finally {
+      setBusy(false);
     }
-    setOk(true);
-    setMessage(t("booking.bookRequestSent"));
   }
 
   if (ok) {
@@ -141,6 +208,20 @@ export function PackageRequestClient({
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder={t("booking.intakeNotePh")}
+          />
+        </label>
+
+        <label className="block">
+          <span className="font-semibold text-dm-ink">
+            {t("booking.intakeMedia")}
+          </span>
+          <p className="mt-1 text-xs text-dm-muted">{t("booking.intakeMediaHint")}</p>
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp,video/mp4,video/webm"
+            disabled={busy}
+            className="mt-2 block w-full text-sm"
+            onChange={(e) => setFile(e.target.files?.[0] ?? null)}
           />
         </label>
 
