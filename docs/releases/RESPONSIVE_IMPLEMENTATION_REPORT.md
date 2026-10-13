@@ -4,7 +4,7 @@
 |---|---|
 | Date | 2026-10-13 |
 | Branch | `feature/responsive-full-frame` |
-| Status | **P0+P1 LANDED** — preview/prod deploy in progress |
+| Status | **P0+P1 LIVE** · prod `dpl_HPScT8Y5fyiDEPn8QDq8ekurFeGE` · commit `4b4f7fa` |
 
 ## Done
 
@@ -14,8 +14,9 @@
 - [x] Modal: safe-area + max-height scroll; Chat grid fluid cols; services sticky CTA above safe-area
 - [x] Compare table uses `.dm-scroll-x` (intentional horizontal scroll)
 - [x] `tsc` web PASS
-- [ ] Screenshot matrix full (browser capture flaky)
-- [ ] Production evidence after deploy
+- [x] Preview deploy `dpl_F8sLBFGaSkGEG9sj26Uaao6yBWa8`
+- [x] Production deploy + alias datingvn.com (`docs/evidence/responsive-prod-*.txt`)
+- [ ] Screenshot matrix full (browser capture flaky — visual PARTIAL)
 
 ## Explicit non-claims
 
