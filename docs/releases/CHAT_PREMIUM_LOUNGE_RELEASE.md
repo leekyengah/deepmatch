@@ -1,6 +1,7 @@
 # CHAT PREMIUM PRIVATE LOUNGE — Release Readiness
 
 **Branch:** `feature/chat-premium-lounge`  
+**Commit:** `cb458f8`  
 **Date:** 2026-10-13
 
 | Gate | Status | Notes |
