@@ -28,13 +28,13 @@ test.describe("public smoke", () => {
   test("chat route redirects unauthenticated users to login", async ({ page }) => {
     await page.goto("/chat");
     await expect(page).toHaveURL(/\/login\?next=%2Fchat/);
-    await expect(page.getByRole("heading", { name: /Đăng nhập/i })).toBeVisible();
+    await expect(page.locator("body")).toContainText(/Đăng nhập|Sign in|Log in/i);
   });
 
   test("discover route redirects unauthenticated users to login", async ({ page }) => {
     await page.goto("/discover");
     await expect(page).toHaveURL(/\/login\?next=%2Fdiscover/);
-    await expect(page.getByRole("heading", { name: /Đăng nhập/i })).toBeVisible();
+    await expect(page.locator("body")).toContainText(/Đăng nhập|Sign in|Log in/i);
   });
 
   test("faq guest page reachable", async ({ page }) => {

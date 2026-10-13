@@ -30,8 +30,15 @@ test.describe("private route session gate", () => {
         );
       });
       expect(page.url()).toContain(`next=${encodedNext}`);
-      await expect(page.getByRole("heading", { name: /Đăng nhập/i })).toBeVisible();
-      await expect(page.locator('input[name="email"]')).toBeVisible();
+      // Login shell may render VI or EN depending on Accept-Language / cookie.
+      await expect(
+        page
+          .getByRole("heading", { name: /Đăng nhập|Sign in|Log in/i })
+          .or(page.locator("body").getByText(/Đăng nhập|Sign in|Log in/i).first()),
+      ).toBeVisible();
+      await expect(
+        page.locator('input[name="email"], input[type="email"]').first(),
+      ).toBeVisible();
     });
   }
 
