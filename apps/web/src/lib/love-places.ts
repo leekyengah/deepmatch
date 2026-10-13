@@ -19,12 +19,22 @@ export type LovePlace = {
   lng: number;
   blurb: string;
   priceHint: string;
+  /** Estimated VND total for two people — editorial estimate only when set */
+  budgetCoupleMinVnd?: number | null;
+  budgetCoupleMaxVnd?: number | null;
+  quietness?: number | null; // 0–100 editorial signal
+  privacy?: number | null;
+  outdoor?: boolean;
+  parking?: boolean;
+  photoFriendly?: boolean;
   sample?: boolean;
   ratingMean: number | null;
   ratingCount: number;
   hoursHint?: string;
   tags?: string[];
   reviews?: LovePlaceReview[];
+  /** 0–100 — how trustworthy editorial attributes are */
+  dataConfidence?: number | null;
 };
 
 export const LOVE_PLACE_CATEGORIES = [
@@ -46,7 +56,15 @@ export const LOVE_PLACES: LovePlace[] = [
     lat: 21.033,
     lng: 105.85,
     blurb: "Không gian yên, ánh sáng dịu — phù hợp trò chuyện lần đầu.",
-    priceHint: "120–180k / người",
+    priceHint: "240–360k / 2 người (ước tính biên tập)",
+    budgetCoupleMinVnd: 240_000,
+    budgetCoupleMaxVnd: 360_000,
+    quietness: 82,
+    privacy: 78,
+    outdoor: false,
+    parking: false,
+    photoFriendly: true,
+    dataConfidence: 55,
     ratingMean: 4.6,
     ratingCount: 28,
     hoursHint: "09:00–22:00",
@@ -78,10 +96,18 @@ export const LOVE_PLACES: LovePlace[] = [
     lat: 21.058,
     lng: 105.823,
     blurb: "View hồ, không khí ấm — lý tưởng cho buổi chiều cuối tuần.",
-    priceHint: "150–220k / người",
+    priceHint: "300–440k / 2 người (ước tính biên tập)",
+    budgetCoupleMinVnd: 300_000,
+    budgetCoupleMaxVnd: 440_000,
+    quietness: 70,
+    privacy: 65,
+    outdoor: true,
+    parking: true,
+    photoFriendly: true,
+    dataConfidence: 50,
     ratingMean: 4.4,
     ratingCount: 19,
-    tags: ["view hồ", "hẹn đầu"],
+    tags: ["view hồ", "hẹn đầu", "ngoài trời"],
   },
   {
     id: "hn-rest-01",
@@ -93,10 +119,18 @@ export const LOVE_PLACES: LovePlace[] = [
     lat: 21.035,
     lng: 105.814,
     blurb: "Bàn đôi riêng, menu rõ giá — phù hợp bữa tối ý nghĩa.",
-    priceHint: "350–600k / người",
+    priceHint: "700–1.200k / 2 người (ước tính biên tập)",
+    budgetCoupleMinVnd: 700_000,
+    budgetCoupleMaxVnd: 1_200_000,
+    quietness: 75,
+    privacy: 85,
+    outdoor: false,
+    parking: true,
+    photoFriendly: false,
+    dataConfidence: 52,
     ratingMean: 4.5,
     ratingCount: 41,
-    tags: ["bàn đôi", "tối"],
+    tags: ["bàn đôi", "tối", "riêng tư"],
   },
   {
     id: "hcm-cafe-01",
@@ -108,7 +142,15 @@ export const LOVE_PLACES: LovePlace[] = [
     lat: 10.776,
     lng: 106.7,
     blurb: "Café yên trung tâm — dễ tìm, phù hợp lần gặp đầu ở Quận 1.",
-    priceHint: "100–160k / người",
+    priceHint: "200–320k / 2 người (ước tính biên tập)",
+    budgetCoupleMinVnd: 200_000,
+    budgetCoupleMaxVnd: 320_000,
+    quietness: 80,
+    privacy: 72,
+    outdoor: false,
+    parking: false,
+    photoFriendly: true,
+    dataConfidence: 58,
     ratingMean: 4.7,
     ratingCount: 52,
     hoursHint: "08:00–21:30",
@@ -133,7 +175,15 @@ export const LOVE_PLACES: LovePlace[] = [
     lat: 10.782,
     lng: 106.69,
     blurb: "Nhà hàng hẹn đầu ấm cúng, phục vụ chu đáo.",
-    priceHint: "400–700k / người",
+    priceHint: "800–1.400k / 2 người (ước tính biên tập)",
+    budgetCoupleMinVnd: 800_000,
+    budgetCoupleMaxVnd: 1_400_000,
+    quietness: 68,
+    privacy: 70,
+    outdoor: false,
+    parking: true,
+    photoFriendly: true,
+    dataConfidence: 48,
     ratingMean: 4.3,
     ratingCount: 33,
   },
@@ -147,7 +197,15 @@ export const LOVE_PLACES: LovePlace[] = [
     lat: 10.78,
     lng: 106.705,
     blurb: "Suite yên tĩnh cho cặp đôi — check-in linh hoạt.",
-    priceHint: "1.8–3.5tr / đêm",
+    priceHint: "Theo báo giá — chưa có ước tính 2 người",
+    budgetCoupleMinVnd: null,
+    budgetCoupleMaxVnd: null,
+    quietness: 88,
+    privacy: 90,
+    outdoor: false,
+    parking: true,
+    photoFriendly: false,
+    dataConfidence: 35,
     ratingMean: 4.2,
     ratingCount: 12,
   },
@@ -162,6 +220,13 @@ export const LOVE_PLACES: LovePlace[] = [
     lng: 105.79,
     blurb: "Dịch vụ setup tỏ tình riêng tư, tư vấn concept theo câu chuyện của hai bạn.",
     priceHint: "Theo báo giá",
+    budgetCoupleMinVnd: null,
+    budgetCoupleMaxVnd: null,
+    quietness: null,
+    privacy: 92,
+    outdoor: true,
+    photoFriendly: true,
+    dataConfidence: 30,
     ratingMean: 4.8,
     ratingCount: 9,
   },
@@ -176,6 +241,13 @@ export const LOVE_PLACES: LovePlace[] = [
     lng: 106.77,
     blurb: "Tổ chức cầu hôn theo kịch bản riêng — hoa, ánh sáng và khoảnh khắc.",
     priceHint: "Theo báo giá",
+    budgetCoupleMinVnd: null,
+    budgetCoupleMaxVnd: null,
+    quietness: null,
+    privacy: 95,
+    outdoor: true,
+    photoFriendly: true,
+    dataConfidence: 28,
     ratingMean: 4.9,
     ratingCount: 7,
   },
