@@ -32,9 +32,10 @@
     ["Đồng hành", "Đặt / xem booking", "—", "Có (sandbox)", "Assign advisor", "Đang có", "/bookings · không charge thật"],
     ["Đồng hành", "Thanh toán / hóa đơn thật", "—", "Thiếu", "Thiếu", "Đề xuất", "BLOCKED tới EXT-040/Legal"],
     ["Đồng hành", "Feedback riêng sau buổi", "—", "Thiếu", "Thiếu", "Đề xuất", "DM-046"],
-    ["Lifestyle DEMO", "DeepGift/Style/Beauty/Date/Travel/Safe", "Marketing", "Có (ff_lifestyle)", "Catalog admin", "Đang có", "/lifestyle · nhãn DEMO"],
-    ["Lifestyle DEMO", "Giỏ + checkout sandbox", "—", "Có", "—", "Đang có", "Không PSP thật"],
-    ["Lifestyle DEMO", "Provider LIVE", "—", "Chặn", "Chặn", "BLOCKED_EXTERNAL", "EXT-040"],
+    ["Lifestyle", "Premium Marketplace hub", "Marketing", "Có (ff_lifestyle)", "Catalog admin", "Đang nghiệm thu", "/lifestyle · LS-PREM-01"],
+    ["Lifestyle", "Giỏ + checkout sandbox", "—", "Có", "—", "Đang có", "PSP LIVE khi cấu hình key"],
+    ["Lifestyle", "Provider LIVE", "—", "Chặn", "Chặn", "BLOCKED_EXTERNAL", "EXT-040"],
+
     ["AI", "AI Hub + assist gateway", "—", "Có (ff_ai)", "Quota admin", "Đang có", "/ai · consent-bound"],
     ["AI", "DeepMind questionnaire", "—", "Có", "—", "Đang có", "Không chẩn đoán lâm sàng"],
     ["AI", "Profile Coach / Style / Gift hints", "—", "Có", "—", "Đang có", "Không auto-publish"],

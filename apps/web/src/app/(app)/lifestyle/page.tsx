@@ -1,81 +1,59 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 import { flagEnabled } from "@/lib/flags";
 import { getServerTranslator } from "@/lib/i18n/server";
-import { Card } from "@/components/ui/Card";
+import { LifestyleMarketplace } from "@/components/lifestyle/LifestyleMarketplace";
 
-export default async function LifestyleHomePage() {
+export default async function LifestyleHomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
   if (!(await flagEnabled("ff_lifestyle"))) redirect("/me");
   const { t } = await getServerTranslator();
+  const { q } = await searchParams;
+  const supabase = await createClient();
 
-  const pillars = [
-    { href: "/lifestyle/gift", label: "DeepGift", descKey: "commerce.pillarGift" },
-    {
-      href: "/lifestyle/fashion",
-      label: "DeepStyle",
-      descKey: "commerce.pillarFashion",
-    },
-    {
-      href: "/lifestyle/beauty",
-      label: "DeepBeauty",
-      descKey: "commerce.pillarBeauty",
-    },
-    { href: "/lifestyle/venue", label: "DeepDate", descKey: "commerce.pillarVenue" },
-    {
-      href: "/lifestyle/travel",
-      label: "DeepTravel",
-      descKey: "commerce.pillarTravel",
-    },
-    { href: "/safe", label: "DeepSafe", descKey: "commerce.pillarSafe" },
-    {
-      href: "/lifestyle/safety",
-      label: "DeepSafe catalog",
-      descKey: "commerce.pillarSafeCatalog",
-    },
-    {
-      href: "/lifestyle/orders",
-      label: t("commerce.ordersDemo"),
-      descKey: "commerce.pillarOrders",
-    },
-    {
-      href: "/lifestyle/cart",
-      label: t("commerce.cartDemo"),
-      descKey: "commerce.pillarOrders",
-    },
-    { href: "/ai", label: t("ai.title"), descKey: "commerce.pillarAi" },
-    {
-      href: "/ai/deepmind",
-      label: "DeepMind",
-      descKey: "commerce.pillarDeepmind",
-    },
-  ];
+  const [{ data: products }, { data: providers }] = await Promise.all([
+    supabase
+      .from("commerce_products")
+      .select(
+        "mock_id, category, title, price_vnd, unit, commerce_providers(display_name)",
+      )
+      .eq("active", true)
+      .order("price_vnd", { ascending: true })
+      .limit(6),
+    supabase
+      .from("commerce_providers")
+      .select("display_name, status, source_note")
+      .order("display_name", { ascending: true })
+      .limit(8),
+  ]);
+
+  const featured = (products ?? []).map((p) => {
+    const prov = p.commerce_providers as { display_name?: string } | null;
+    return {
+      mockId: p.mock_id as string,
+      category: p.category as string,
+      title: p.title as string,
+      priceVnd: p.price_vnd as number,
+      unit: p.unit as string,
+      providerName: prov?.display_name ?? null,
+    };
+  });
+
+  const partners = (providers ?? []).map((p) => ({
+    name: p.display_name as string,
+    status: (p.status as string) || "listed",
+    note: (p.source_note as string | null) ?? null,
+  }));
 
   return (
-    <div className="max-w-3xl">
-      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-champagne">
-        {t("commerce.lifestyleEyebrow")}
-      </p>
-      <h1 className="mt-2 font-display text-4xl font-semibold text-dm-ink">
-        {t("commerce.lifestyleHeading")}
-      </h1>
-      <p className="mt-2 font-editorial text-sm text-dm-muted">
-        {t("commerce.lifestyleIntro")}
-      </p>
-      <div className="mt-8 grid gap-3 sm:grid-cols-2">
-        {pillars.map((p) => (
-          <Link key={p.href} href={p.href}>
-            <Card className="h-full border-dm-line text-sm transition hover:border-dm-primary">
-              <p className="font-display text-lg font-semibold text-dm-ink">
-                {p.label}
-              </p>
-              <p className="mt-1 text-dm-muted">{t(p.descKey)}</p>
-              <p className="mt-3 text-[11px] font-semibold text-dm-champagne">
-                {t("common.optional")}
-              </p>
-            </Card>
-          </Link>
-        ))}
-      </div>
-    </div>
+    <LifestyleMarketplace
+      featured={featured}
+      partners={partners}
+      searchQuery={q ?? null}
+      t={t}
+    />
   );
 }

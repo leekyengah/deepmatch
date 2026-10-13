@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     "@deepmatch/i18n",
     "@deepmatch/legal-content",
   ],
+  serverExternalPackages: ["sharp", "@aws-sdk/client-s3", "@aws-sdk/s3-request-presigner"],
   eslint: { ignoreDuringBuilds: true },
   async redirects() {
     return [
@@ -28,9 +29,16 @@ const nextConfig: NextConfig = {
       { source: "/matches", destination: "/likes", permanent: true },
       { source: "/profile", destination: "/me", permanent: true },
       { source: "/account", destination: "/me/account", permanent: true },
+      // Lifestyle marketplace — legacy aliases
+      { source: "/lifestyle/home", destination: "/lifestyle", permanent: true },
+      { source: "/lifestyle/modules", destination: "/lifestyle", permanent: true },
+      { source: "/lifestyle/shop", destination: "/lifestyle", permanent: true },
+      { source: "/deepgift", destination: "/lifestyle/gift", permanent: true },
+      { source: "/deepdate", destination: "/lifestyle/venue", permanent: true },
     ];
   },
 };
+
 
 
 
