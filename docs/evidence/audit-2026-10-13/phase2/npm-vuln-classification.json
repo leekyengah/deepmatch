@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-13T16:51:27.390Z",
-  "source": "D:\\DỰ ÁN CÔNG NGHỆ\\DEEPMATCH\\docs\\evidence\\audit-2026-10-13\\phase2\\npm-audit-after-next.json",
+  "generatedAt": "2026-10-13T18:14:22.567Z",
+  "source": "D:\\DỰ ÁN CÔNG NGHỆ\\DEEPMATCH\\docs\\evidence\\audit-2026-10-13\\phase3\\npm-audit-full-omit-dev.json",
   "metadata": {
     "vulnerabilities": {
       "info": 0,
@@ -596,12 +596,12 @@
         }
       ],
       "fixAvailable": {
-        "name": "expo",
-        "version": "44.0.6",
+        "name": "expo-updates",
+        "version": "0.11.7",
         "isSemVerMajor": true
       },
       "disposition": "BLOCKED_MAJOR",
-      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "reason": "Force fix would install expo-updates@0.11.7 (major/breaking)",
       "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
       "impact": "node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements"
     },

@@ -1,7 +1,7 @@
 # npm vulnerability classification (omit=dev)
 
-Generated: 2026-10-13T16:51:27.390Z
-Source: `D:\DỰ ÁN CÔNG NGHỆ\DEEPMATCH\docs\evidence\audit-2026-10-13\phase2\npm-audit-after-next.json`
+Generated: 2026-10-13T18:14:22.567Z
+Source: `D:\DỰ ÁN CÔNG NGHỆ\DEEPMATCH\docs\evidence\audit-2026-10-13\phase3\npm-audit-full-omit-dev.json`
 
 ## Summary
 
@@ -35,7 +35,7 @@ Source: `D:\DỰ ÁN CÔNG NGHỆ\DEEPMATCH\docs\evidence\audit-2026-10-13\phase
 | metro-file-map | high | false | BLOCKED_MAJOR | LOW_IN_PROD | Force fix would install expo@44.0.6 (major/breaking) |
 | metro-transform-worker | high | false | FIXABLE_SAFE | LOW_IN_PROD | npm audit fix available without force |
 | micromatch | high | false | BLOCKED_MAJOR | LOW_IN_PROD | Force fix would install expo@44.0.6 (major/breaking) |
-| node-forge | high | false | BLOCKED_MAJOR | LOW_IN_PROD | Force fix would install expo@44.0.6 (major/breaking) |
+| node-forge | high | false | BLOCKED_MAJOR | LOW_IN_PROD | Force fix would install expo-updates@0.11.7 (major/breaking) |
 | postcss | high | false | BLOCKED_MAJOR | MODERATE | Force fix would install next@16.4.0 (major/breaking) |
 | react-native | high | true | BLOCKED_MAJOR | LOW_IN_PROD | Force fix would install react-native@0.72.17 (major/breaking) |
 | react-native-reanimated | high | true | BLOCKED_MAJOR | LOW_IN_PROD | Force fix would install react-native-reanimated@4.2.2 (major/breaking) |

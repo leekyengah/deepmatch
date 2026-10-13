@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-10-13T18:13:11.352Z",
+  "baseURL": "https://datingvn.com",
+  "hasCreds": true,
+  "results": [
+    {
+      "journey": "J14-guest-auth-gate",
+      "status": "PASS",
+      "notes": "Private routes → /login?next=; /legal 200"
+    },
+    {
+      "journey": "J01-registration-ui",
+      "status": "PASS_PARTIAL",
+      "notes": "Signup UI + split consents verified; full OTP/email verification NOT_TESTED (no disposable inbox automation)"
+    },
+    {
+      "journey": "J05-chat-block-report",
+      "status": "PASS_PARTIAL",
+      "notes": "Chat shell reachable; block/report deep flow depends on active conversation"
+    },
+    {
+      "journey": "J04-discover-match",
+      "status": "PASS_PARTIAL",
+      "notes": "Discover/likes screens load with expected copy; mutual creation not forced"
+    },
+    {
+      "journey": "J02-onboarding-profile",
+      "status": "PASS_PARTIAL",
+      "notes": "Me/edit reachable; questionnaire depth depends on account state"
+    },
+    {
+      "journey": "J03-media-upload",
+      "status": "PASS_PARTIAL",
+      "notes": "Media page loads; 3–10 photo + video upload automation NOT_TESTED (fixture upload pending)"
+    },
+    {
+      "journey": "J06-ai-concierge",
+      "status": "PASS_PARTIAL",
+      "notes": "AI hub loads; personalized generation not forced without consent checkbox interaction"
+    },
+    {
+      "journey": "J07-couple-space",
+      "status": "PASS_PARTIAL",
+      "notes": "Couple home loads; two-sided create depends on invite partner"
+    },
+    {
+      "journey": "J08-datemap",
+      "status": "PASS_PARTIAL",
+      "notes": "Places map UI loads; LIVE Google Maps billing remains BLOCKED_EXTERNAL if keys absent"
+    },
+    {
+      "journey": "J09-services-booking",
+      "status": "PASS_PARTIAL",
+      "notes": "Services/bookings reachable; LIVE provider booking BLOCKED"
+    },
+    {
+      "journey": "J10-checkout-sandbox",
+      "status": "PASS_PARTIAL",
+      "notes": "Premium page OK; /checkout/1 not available or gated"
+    },
+    {
+      "journey": "J11-cancel-refund-support",
+      "status": "PASS",
+      "notes": "Support + subscriptions policy content verified"
+    },
+    {
+      "journey": "J12-privacy-delete",
+      "status": "PASS_PARTIAL",
+      "notes": "Privacy + deletion UI present; destructive delete not executed"
+    },
+    {
+      "journey": "J13-admin",
+      "status": "PASS_PARTIAL",
+      "notes": "Ops page loaded for this account — confirm staff role; deep admin host not tested here"
+    },
+    {
+      "journey": "J14-logout-session",
+      "status": "PASS",
+      "notes": "Logout clears session; /discover redirects to /login"
+    },
+    {
+      "journey": "J01b-age-gate",
+      "status": "PASS",
+      "notes": "Under-18 signup blocked with message/error"
+    }
+  ]
+}
