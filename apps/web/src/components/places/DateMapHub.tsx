@@ -11,7 +11,6 @@ import { LoadingState } from "@/components/ui/LoadingState";
 import { Modal } from "@/components/ui/Modal";
 import { cn } from "@/components/ui/cn";
 import { DateMapLeaflet } from "@/components/places/DateMapLeaflet";
-import { PlacesSubnav } from "@/components/places/PlacesSubnav";
 
 type PlaceDto = {
   id: string;
