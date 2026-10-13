@@ -4,6 +4,8 @@
 |---|---|
 | Date | 2026-10-13 |
 | Branch | `feature/datemap-v2` |
+| Commit | `77a487f` |
+| Prod | `dpl_5oowVSFtRkf13EedNMK6HYZf9mq1` · datingvn.com |
 | Mockup | **MOCKUP_ASSET_REQUIRED** |
 
 | Gate | Status | Notes |
