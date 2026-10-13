@@ -21,8 +21,9 @@ export default async function LifestyleHomePage({
         "mock_id, category, title, price_vnd, unit, commerce_providers(display_name)",
       )
       .eq("active", true)
-      .order("price_vnd", { ascending: true })
-      .limit(6),
+      .gt("price_vnd", 0)
+      .order("price_vnd", { ascending: false })
+      .limit(24),
     supabase
       .from("commerce_providers")
       .select("display_name, status, source_note")
@@ -30,7 +31,18 @@ export default async function LifestyleHomePage({
       .limit(8),
   ]);
 
-  const featured = (products ?? []).map((p) => {
+  // One product per category first, then fill — avoids flooding with 0₫ safety seeds.
+  type Row = NonNullable<typeof products>[number];
+  const byCategory = new Map<string, Row>();
+  const rest: Row[] = [];
+  for (const p of products ?? []) {
+    const cat = String(p.category);
+    if (!byCategory.has(cat)) byCategory.set(cat, p);
+    else rest.push(p);
+  }
+  const picked = [...byCategory.values(), ...rest].slice(0, 6);
+
+  const featured = picked.map((p) => {
     const prov = p.commerce_providers as { display_name?: string } | null;
     return {
       mockId: p.mock_id as string,
