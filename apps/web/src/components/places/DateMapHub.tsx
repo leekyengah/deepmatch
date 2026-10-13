@@ -256,7 +256,32 @@ export function DateMapHub() {
         </div>
       </header>
 
-      <PlacesSubnav active="map" />
+      <nav
+        aria-label={t("places.moduleNav")}
+        className="flex flex-wrap gap-2 text-sm font-semibold"
+      >
+        {[
+          { id: "map", href: "/places/map", label: t("places.navMap") },
+          { id: "top", href: "/places/top", label: t("places.navTop") },
+          {
+            id: "memories",
+            href: "/couple/memories",
+            label: t("places.navMemories"),
+          },
+        ].map((item) => (
+          <Link
+            key={item.id}
+            href={item.href}
+            className={
+              item.id === "map"
+                ? "rounded-full bg-dm-primary px-3 py-1.5 text-white"
+                : "rounded-full border border-dm-line bg-dm-panel px-3 py-1.5 text-dm-ink"
+            }
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
 
       {/* Search bar */}
       <section className="rounded-dm-xl border border-dm-line bg-dm-panel p-4 shadow-sm sm:p-5">
