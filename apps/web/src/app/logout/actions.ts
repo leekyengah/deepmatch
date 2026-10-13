@@ -1,10 +1,23 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { isAuthCookieName } from "@/lib/auth/clear-auth-cookies";
 import { createClient } from "@/lib/supabase/server";
+
+/** Clear Supabase auth cookies even if SSR client setAll is a no-op. */
+async function clearAuthCookies() {
+  const cookieStore = await cookies();
+  for (const { name } of cookieStore.getAll()) {
+    if (isAuthCookieName(name)) {
+      cookieStore.set(name, "", { path: "/", maxAge: 0 });
+    }
+  }
+}
 
 export async function logoutAction() {
   const supabase = await createClient();
-  await supabase.auth.signOut();
+  await supabase.auth.signOut({ scope: "local" });
+  await clearAuthCookies();
   redirect("/");
 }

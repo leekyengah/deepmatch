@@ -1,0 +1,1140 @@
+{
+  "generatedAt": "2026-10-13T16:51:27.390Z",
+  "source": "D:\\DỰ ÁN CÔNG NGHỆ\\DEEPMATCH\\docs\\evidence\\audit-2026-10-13\\phase2\\npm-audit-after-next.json",
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 12,
+      "high": 21,
+      "critical": 0,
+      "total": 33
+    },
+    "dependencies": {
+      "prod": 728,
+      "dev": 746,
+      "optional": 190,
+      "peer": 11,
+      "peerOptional": 0,
+      "total": 1598
+    }
+  },
+  "counts": {
+    "total": 33,
+    "bySeverity": {
+      "high": 21,
+      "moderate": 12
+    },
+    "byDisposition": {
+      "BLOCKED_MAJOR": 31,
+      "FIXABLE_SAFE": 2
+    }
+  },
+  "vulnerabilities": [
+    {
+      "package": "@expo/cli",
+      "severity": "high",
+      "isDirect": false,
+      "range": "<=0.0.0-canary-20231123-1b19f96-4 || >=0.0.1-canary-20231125-d600e44",
+      "effects": [
+        "expo"
+      ],
+      "via": [
+        {
+          "dep": "@expo/code-signing-certificates",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/config-plugins",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/inline-modules",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/metro",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/metro-config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/prebuild-config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "node-forge",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on @expo/cli"
+    },
+    {
+      "package": "@expo/code-signing-certificates",
+      "severity": "high",
+      "isDirect": false,
+      "range": "*",
+      "effects": [
+        "expo-updates"
+      ],
+      "via": [
+        {
+          "dep": "node-forge",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo-updates",
+        "version": "0.11.7",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo-updates@0.11.7 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on @expo/code-signing-certificates"
+    },
+    {
+      "package": "@expo/metro",
+      "severity": "high",
+      "isDirect": false,
+      "range": "*",
+      "effects": [
+        "@expo/cli",
+        "@expo/metro-config",
+        "expo"
+      ],
+      "via": [
+        {
+          "dep": "metro",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "metro-config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "metro-file-map",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "metro-transform-worker",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on @expo/metro"
+    },
+    {
+      "package": "@expo/metro-config",
+      "severity": "high",
+      "isDirect": false,
+      "range": "<=0.0.1-canary-20240418-8d74597 || >=0.1.49-alpha.0",
+      "effects": [
+        "expo"
+      ],
+      "via": [
+        {
+          "dep": "@expo/config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/metro",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on @expo/metro-config"
+    },
+    {
+      "package": "@react-native/community-cli-plugin",
+      "severity": "high",
+      "isDirect": false,
+      "range": "*",
+      "effects": [
+        "react-native"
+      ],
+      "via": [
+        {
+          "dep": "@react-native/metro-config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "metro",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "metro-config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "react-native",
+        "version": "0.72.17",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install react-native@0.72.17 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on @react-native/community-cli-plugin"
+    },
+    {
+      "package": "@react-native/metro-config",
+      "severity": "high",
+      "isDirect": false,
+      "range": "*",
+      "effects": [
+        "@react-native/community-cli-plugin",
+        "react-native-worklets"
+      ],
+      "via": [
+        {
+          "dep": "metro-config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "react-native",
+        "version": "0.72.17",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install react-native@0.72.17 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on @react-native/metro-config"
+    },
+    {
+      "package": "@react-native/virtualized-lists",
+      "severity": "high",
+      "isDirect": false,
+      "range": ">=0.85.0-nightly-20260108-1236b6be4",
+      "effects": [
+        "react-native"
+      ],
+      "via": [
+        {
+          "dep": "react-native",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "react-native",
+        "version": "0.72.17",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install react-native@0.72.17 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on @react-native/virtualized-lists"
+    },
+    {
+      "package": "braces",
+      "severity": "high",
+      "isDirect": false,
+      "range": "*",
+      "effects": [
+        "micromatch"
+      ],
+      "via": [
+        {
+          "dep": "braces",
+          "advisory": "GHSA/CVE via 1240992",
+          "cve": null,
+          "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+          "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+          "severity": "high",
+          "range": "<=3.0.3"
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns"
+    },
+    {
+      "package": "expo",
+      "severity": "high",
+      "isDirect": true,
+      "range": "40.0.0-alpha.0 - 40.0.0-beta.5 || >=41.0.0-alpha.0",
+      "effects": [],
+      "via": [
+        {
+          "dep": "@expo/cli",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/config-plugins",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/local-build-cache-provider",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/metro",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/metro-config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on expo"
+    },
+    {
+      "package": "expo-updates",
+      "severity": "high",
+      "isDirect": true,
+      "range": "<=0.0.1-canary-20240418-8d74597 || >=0.12.0",
+      "effects": [],
+      "via": [
+        {
+          "dep": "@expo/code-signing-certificates",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo-updates",
+        "version": "0.11.7",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo-updates@0.11.7 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on expo-updates"
+    },
+    {
+      "package": "metro",
+      "severity": "high",
+      "isDirect": false,
+      "range": ">=0.71.0",
+      "effects": [
+        "@react-native/community-cli-plugin",
+        "metro-config",
+        "metro-transform-worker"
+      ],
+      "via": [
+        {
+          "dep": "metro-config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "metro-file-map",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "metro-transform-worker",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "react-native",
+        "version": "0.72.17",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install react-native@0.72.17 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on metro"
+    },
+    {
+      "package": "metro-config",
+      "severity": "high",
+      "isDirect": false,
+      "range": ">=0.71.0",
+      "effects": [
+        "@react-native/community-cli-plugin",
+        "@react-native/metro-config"
+      ],
+      "via": [
+        {
+          "dep": "metro",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "react-native",
+        "version": "0.72.17",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install react-native@0.72.17 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on metro-config"
+    },
+    {
+      "package": "metro-file-map",
+      "severity": "high",
+      "isDirect": false,
+      "range": "*",
+      "effects": [
+        "@expo/metro",
+        "metro"
+      ],
+      "via": [
+        {
+          "dep": "micromatch",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on metro-file-map"
+    },
+    {
+      "package": "metro-transform-worker",
+      "severity": "high",
+      "isDirect": false,
+      "range": ">=0.71.0",
+      "effects": [],
+      "via": [
+        {
+          "dep": "metro",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": true,
+      "disposition": "FIXABLE_SAFE",
+      "reason": "npm audit fix available without force",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on metro-transform-worker"
+    },
+    {
+      "package": "micromatch",
+      "severity": "high",
+      "isDirect": false,
+      "range": ">=0.2.0",
+      "effects": [
+        "metro-file-map"
+      ],
+      "via": [
+        {
+          "dep": "braces",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on micromatch"
+    },
+    {
+      "package": "node-forge",
+      "severity": "high",
+      "isDirect": false,
+      "range": "*",
+      "effects": [
+        "@expo/cli",
+        "@expo/code-signing-certificates"
+      ],
+      "via": [
+        {
+          "dep": "node-forge",
+          "advisory": "GHSA/CVE via 1240912",
+          "cve": null,
+          "title": "node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements",
+          "url": "https://github.com/advisories/GHSA-86w9-cpqp-85rv",
+          "severity": "high",
+          "range": "<=1.4.0"
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements"
+    },
+    {
+      "package": "postcss",
+      "severity": "high",
+      "isDirect": false,
+      "range": "<=8.5.22",
+      "effects": [
+        "next"
+      ],
+      "via": [
+        {
+          "dep": "postcss",
+          "advisory": "GHSA/CVE via 1117015",
+          "cve": null,
+          "title": "PostCSS has XSS via Unescaped </style> in its CSS Stringify Output",
+          "url": "https://github.com/advisories/GHSA-qx2v-qp2m-jg93",
+          "severity": "moderate",
+          "range": "<8.5.10"
+        },
+        {
+          "dep": "postcss",
+          "advisory": "GHSA/CVE via 1124252",
+          "cve": null,
+          "title": "PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments",
+          "url": "https://github.com/advisories/GHSA-6g55-p6wh-862q",
+          "severity": "high",
+          "range": "<=8.5.11"
+        },
+        {
+          "dep": "postcss",
+          "advisory": "GHSA/CVE via 1130709",
+          "cve": null,
+          "title": "PostCSS: incomplete fix of GHSA-6g55-p6wh-862q ??? attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset",
+          "url": "https://github.com/advisories/GHSA-fxqj-rqcc-2cmp",
+          "severity": "moderate",
+          "range": "<=8.5.22"
+        },
+        {
+          "dep": "postcss",
+          "advisory": "GHSA/CVE via 1139510",
+          "cve": null,
+          "title": "PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure",
+          "url": "https://github.com/advisories/GHSA-r28c-9q8g-f849",
+          "severity": "high",
+          "range": "<=8.5.17"
+        }
+      ],
+      "fixAvailable": {
+        "name": "next",
+        "version": "16.4.0",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install next@16.4.0 (major/breaking)",
+      "exploitability": "MODERATE — verify call path",
+      "impact": "PostCSS has XSS via Unescaped </style> in its CSS Stringify Output"
+    },
+    {
+      "package": "react-native",
+      "severity": "high",
+      "isDirect": true,
+      "range": ">=0.73.0-nightly-20230506-1af868c52",
+      "effects": [
+        "@react-native/virtualized-lists",
+        "react-native-reanimated"
+      ],
+      "via": [
+        {
+          "dep": "@react-native/community-cli-plugin",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@react-native/virtualized-lists",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "react-native",
+        "version": "0.72.17",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install react-native@0.72.17 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on react-native"
+    },
+    {
+      "package": "react-native-reanimated",
+      "severity": "high",
+      "isDirect": true,
+      "range": "3.20.0-nightly-20250722-b6c8b9a3c - 4.0.0-nightly-20250309-9ce9085cb || 4.1.7 - 4.2.0-nightly-20251017-235c127fd || >=4.2.3",
+      "effects": [],
+      "via": [
+        {
+          "dep": "react-native",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "react-native-worklets",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "react-native-reanimated",
+        "version": "4.2.2",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install react-native-reanimated@4.2.2 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on react-native-reanimated"
+    },
+    {
+      "package": "react-native-worklets",
+      "severity": "high",
+      "isDirect": true,
+      "range": ">=0.8.0-bundle-mode-preview-1",
+      "effects": [
+        "react-native-reanimated"
+      ],
+      "via": [
+        {
+          "dep": "@react-native/metro-config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "react-native",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "react-native-worklets",
+        "version": "0.7.4",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install react-native-worklets@0.7.4 (major/breaking)",
+      "exploitability": "LOW_IN_PROD — build/tooling transitive; not user-facing request path unless attacker controls build inputs",
+      "impact": "high advisory on react-native-worklets"
+    },
+    {
+      "package": "sharp",
+      "severity": "high",
+      "isDirect": true,
+      "range": "<=0.35.5-rc.1",
+      "effects": [],
+      "via": [
+        {
+          "dep": "sharp",
+          "advisory": "GHSA/CVE via 1124066",
+          "cve": null,
+          "title": "sharp inherited vulnerabilities in libvips: CVE-2026-33327, CVE-2026-33328, CVE-2026-35590, CVE-2026-35591",
+          "url": "https://github.com/advisories/GHSA-f88m-g3jw-g9cj",
+          "severity": "high",
+          "range": "<0.35.0"
+        },
+        {
+          "dep": "sharp",
+          "advisory": "GHSA/CVE via 1193725",
+          "cve": null,
+          "title": "sharp: Vulnerabilities in libheif: GHSA-g89c-p67h-r497 and GHSA-2jg2-4ch7-h545",
+          "url": "https://github.com/advisories/GHSA-rgj7-g3m4-5g8c",
+          "severity": "high",
+          "range": "<0.35.4"
+        },
+        {
+          "dep": "sharp",
+          "advisory": "GHSA/CVE via 1241331",
+          "cve": null,
+          "title": "sharp : Vulnerability in librsvg dependency CVE-2026-96889",
+          "url": "https://github.com/advisories/GHSA-wq5f-xc86-pv6w",
+          "severity": "high",
+          "range": "<0.35.5"
+        }
+      ],
+      "fixAvailable": {
+        "name": "sharp",
+        "version": "0.35.5",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install sharp@0.35.5 (major/breaking)",
+      "exploitability": "REVIEW — may touch runtime dependency",
+      "impact": "sharp inherited vulnerabilities in libvips: CVE-2026-33327, CVE-2026-33328, CVE-2026-35590, CVE-2026-35591"
+    },
+    {
+      "package": "@expo/config",
+      "severity": "moderate",
+      "isDirect": false,
+      "range": "<=0.0.1-canary-20240418-8d74597 || >=3.3.23-alpha.0",
+      "effects": [
+        "@expo/local-build-cache-provider",
+        "@expo/metro-config",
+        "expo"
+      ],
+      "via": [
+        {
+          "dep": "@expo/config-plugins",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on @expo/config"
+    },
+    {
+      "package": "@expo/config-plugins",
+      "severity": "moderate",
+      "isDirect": false,
+      "range": "*",
+      "effects": [
+        "@expo/config",
+        "@expo/inline-modules",
+        "@expo/prebuild-config",
+        "expo",
+        "expo-splash-screen"
+      ],
+      "via": [
+        {
+          "dep": "xcode",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on @expo/config-plugins"
+    },
+    {
+      "package": "@expo/inline-modules",
+      "severity": "moderate",
+      "isDirect": false,
+      "range": ">=0.0.2-canary-20260409-6fc2991",
+      "effects": [
+        "@expo/cli"
+      ],
+      "via": [
+        {
+          "dep": "@expo/config-plugins",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on @expo/inline-modules"
+    },
+    {
+      "package": "@expo/local-build-cache-provider",
+      "severity": "moderate",
+      "isDirect": false,
+      "range": "*",
+      "effects": [
+        "expo"
+      ],
+      "via": [
+        {
+          "dep": "@expo/config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on @expo/local-build-cache-provider"
+    },
+    {
+      "package": "@expo/prebuild-config",
+      "severity": "moderate",
+      "isDirect": false,
+      "range": "*",
+      "effects": [],
+      "via": [
+        {
+          "dep": "@expo/config",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        },
+        {
+          "dep": "@expo/config-plugins",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": true,
+      "disposition": "FIXABLE_SAFE",
+      "reason": "npm audit fix available without force",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on @expo/prebuild-config"
+    },
+    {
+      "package": "decode-uri-component",
+      "severity": "moderate",
+      "isDirect": false,
+      "range": "<=0.4.2",
+      "effects": [
+        "query-string"
+      ],
+      "via": [
+        {
+          "dep": "decode-uri-component",
+          "advisory": "GHSA/CVE via 1147955",
+          "cve": null,
+          "title": "decode-uri-component: Denial of service via exponential decoding of malformed percent-encoded input",
+          "url": "https://github.com/advisories/GHSA-vcc3-ghjq-m6fr",
+          "severity": "moderate",
+          "range": "<=0.4.2"
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo-router",
+        "version": "58.0.18",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo-router@58.0.18 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "decode-uri-component: Denial of service via exponential decoding of malformed percent-encoded input"
+    },
+    {
+      "package": "expo-router",
+      "severity": "moderate",
+      "isDirect": true,
+      "range": "1.2.2 - 3.1.2 || 5.2.0-canary-20250611-f0afe80 - 58.0.12",
+      "effects": [],
+      "via": [
+        {
+          "dep": "query-string",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo-router",
+        "version": "58.0.18",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo-router@58.0.18 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on expo-router"
+    },
+    {
+      "package": "expo-splash-screen",
+      "severity": "moderate",
+      "isDirect": true,
+      "range": "55.0.10-canary-20260424-7bedc9d - 55.0.10-canary-20260429-a5e59cf || >=56.0.0-canary-20260212-4f61309",
+      "effects": [],
+      "via": [
+        {
+          "dep": "@expo/config-plugins",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo-splash-screen",
+        "version": "55.0.25",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo-splash-screen@55.0.25 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on expo-splash-screen"
+    },
+    {
+      "package": "next",
+      "severity": "moderate",
+      "isDirect": true,
+      "range": "9.3.4-canary.0 - 16.3.0-preview.10",
+      "effects": [],
+      "via": [
+        {
+          "dep": "postcss",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "next",
+        "version": "16.4.0",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install next@16.4.0 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on next"
+    },
+    {
+      "package": "query-string",
+      "severity": "moderate",
+      "isDirect": false,
+      "range": "5.0.0 - 9.4.1",
+      "effects": [
+        "expo-router"
+      ],
+      "via": [
+        {
+          "dep": "decode-uri-component",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo-router",
+        "version": "58.0.18",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo-router@58.0.18 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on query-string"
+    },
+    {
+      "package": "uuid",
+      "severity": "moderate",
+      "isDirect": false,
+      "range": "<11.1.1",
+      "effects": [
+        "xcode"
+      ],
+      "via": [
+        {
+          "dep": "uuid",
+          "advisory": "GHSA/CVE via 1119441",
+          "cve": null,
+          "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+          "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+          "severity": "moderate",
+          "range": "<11.1.1"
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided"
+    },
+    {
+      "package": "xcode",
+      "severity": "moderate",
+      "isDirect": false,
+      "range": ">=0.9.2",
+      "effects": [
+        "@expo/config-plugins"
+      ],
+      "via": [
+        {
+          "dep": "uuid",
+          "advisory": null,
+          "title": null,
+          "url": null,
+          "severity": null
+        }
+      ],
+      "fixAvailable": {
+        "name": "expo",
+        "version": "44.0.6",
+        "isSemVerMajor": true
+      },
+      "disposition": "BLOCKED_MAJOR",
+      "reason": "Force fix would install expo@44.0.6 (major/breaking)",
+      "exploitability": "LOW",
+      "impact": "moderate advisory on xcode"
+    }
+  ]
+}

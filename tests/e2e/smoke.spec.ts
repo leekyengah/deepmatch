@@ -25,14 +25,16 @@ test.describe("public smoke", () => {
     await expect(page.getByRole("heading", { name: /Tạo tài khoản/i })).toBeVisible();
   });
 
-  test("chat route reachable (auth or shell)", async ({ page }) => {
+  test("chat route redirects unauthenticated users to login", async ({ page }) => {
     await page.goto("/chat");
-    await expect(page.locator("body")).toContainText(/Chat|Trò chuyện|Đăng nhập|tắt/i);
+    await expect(page).toHaveURL(/\/login\?next=%2Fchat/);
+    await expect(page.getByRole("heading", { name: /Đăng nhập/i })).toBeVisible();
   });
 
-  test("discover route reachable", async ({ page }) => {
+  test("discover route redirects unauthenticated users to login", async ({ page }) => {
     await page.goto("/discover");
-    await expect(page.locator("body")).toContainText(/Tìm nhau|discovery|tắt/i);
+    await expect(page).toHaveURL(/\/login\?next=%2Fdiscover/);
+    await expect(page.getByRole("heading", { name: /Đăng nhập/i })).toBeVisible();
   });
 
   test("faq guest page reachable", async ({ page }) => {

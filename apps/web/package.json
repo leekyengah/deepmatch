@@ -8,7 +8,7 @@
     "start": "next start --port 3000",
     "lint": "echo lint-deferred",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "npx tsx --test src/lib/auth/public-paths.test.ts"
+    "test": "npx tsx --test src/lib/auth/public-paths.test.ts src/lib/auth/clear-auth-cookies.test.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1150.0",
@@ -20,11 +20,11 @@
     "@sentry/nextjs": "^11.6.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.10",
-    "leaflet": "^1.9.4",
     "ffmpeg-static": "^5.3.0",
     "fluent-ffmpeg": "^2.1.3",
+    "leaflet": "^1.9.4",
     "mapbox-gl": "^3.32.0",
-    "next": "^15.1.11",
+    "next": "15.5.27",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "sharp": "^0.33.5"
@@ -38,7 +38,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^15.1.11",
+    "eslint-config-next": "15.5.27",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

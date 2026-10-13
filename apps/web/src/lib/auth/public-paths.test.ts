@@ -37,7 +37,15 @@ test("authenticated app paths are private", () => {
     "/home",
     "/likes",
     "/places/map",
+    "/bookings",
+    "/me/orders",
+    "/checkout/cart",
   ]) {
     assert.equal(isPublicPath(p), false, p);
   }
+});
+
+test("query strings do not bypass private gate", () => {
+  assert.equal(isPublicPath("/discover?x=1"), false);
+  assert.equal(isPublicPath("/login?next=%2Fdiscover"), true);
 });
