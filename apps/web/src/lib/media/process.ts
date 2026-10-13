@@ -10,6 +10,7 @@ import {
 import { sniffMime, mimeMatchesClaim } from "./magic";
 import { readVideoDurationSeconds } from "./video-duration";
 import { deleteObject, getObjectBytes, putObjectBytes } from "./storage";
+import { extractVideoPosterWebp } from "./video-poster";
 
 export type ProcessResult = {
   ok: boolean;
@@ -76,6 +77,20 @@ export async function verifyAndProcessMedia(input: {
       }
       return { ok: false, error: "video_too_long", duration_seconds: duration };
     }
+
+    let thumb_path: string | null = null;
+    const seek = Math.min(1, Math.max(0.1, duration * 0.15));
+    const poster = await extractVideoPosterWebp(bytes, seek);
+    if (poster) {
+      thumb_path = input.storagePath.replace(/\.[^.]+$/, ".poster.webp");
+      await putObjectBytes({
+        storagePath: thumb_path,
+        backend: input.backend,
+        bytes: poster,
+        contentType: "image/webp",
+      });
+    }
+
     return {
       ok: true,
       mime_type: input.claimedMime,
@@ -84,7 +99,7 @@ export async function verifyAndProcessMedia(input: {
       height: null,
       duration_seconds: duration,
       storage_path: input.storagePath,
-      thumb_path: null,
+      thumb_path,
     };
   }
 

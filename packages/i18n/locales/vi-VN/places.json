@@ -32,5 +32,12 @@
   "tagsLabel": "Phù hợp",
   "opsVenuesTitle": "Kiểm duyệt địa điểm",
   "opsVenuesIntro": "Chỉ staff: đánh dấu đóng venue và xử lý báo cáo review.",
-  "opsVenuesLink": "Kiểm duyệt địa điểm (ops)"
+  "opsVenuesLink": "Kiểm duyệt địa điểm (ops)",
+  "reviewRating": "Điểm",
+  "reviewBodyPh": "Điều gì ấn tượng về địa điểm này?",
+  "reviewBodyRequired": "Vui lòng viết đánh giá ngắn.",
+  "reviewMediaTypeError": "Dùng JPEG, PNG, WebP hoặc MP4/WebM.",
+  "reviewSubmit": "Gửi đánh giá",
+  "reviewSaved": "Đã lưu đánh giá.",
+  "reviewFailed": "Không lưu được đánh giá."
 }
