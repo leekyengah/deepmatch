@@ -14,9 +14,10 @@
 | Empty / error | PASS (code) | EmptyPanel + EmptyState on listing |
 | Couple privacy | PASS (arch) | Private couple map remains `/couple/map`; Lifestyle uses public curated places |
 | AuthZ APIs | UNCHANGED | Catalog APIs still flag + session gated |
-| Typecheck | See run log |
-| Screenshots 320/768/1440 | PENDING | Capture after deploy |
-| E2E full funnel | PARTIAL | Cart/book flows unchanged; visual redesign only on hub/listing/detail |
+| Typecheck | PASS | `npx tsc --noEmit` apps/web exit 0 |
+| Screenshots 320/768/1440 | PENDING | Capture after deploy (login-gated) |
+| E2E full funnel | PARTIAL | Cart/book flows unchanged; visual redesign on hub/listing/detail |
+| Production deploy | PASS | `844b55c` · `dpl_GYfBU1XhFqFqrQMeihHzprDbF3br` · datingvn.com |
 
 ## BLOCKED / residual
 
