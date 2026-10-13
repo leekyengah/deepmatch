@@ -26,8 +26,20 @@
 2. `/matches` alias → `/likes` (canonical likes page).
 3. Visual regression vs mockup PNG not pixel-diffed in this pass — manual browser check recommended post-deploy.
 
+## Deploy evidence
+
+| Item | Value |
+|---|---|
+| Branch | `feat/me-member-center-redesign` |
+| Commit | `e72cfa7` |
+| Production | https://datingvn.com |
+| Deployment | `dpl_HmFqdU1a5aizPdjD9sa7z7sRNFUN` |
+| Inspect | https://vercel.com/tradingbase/deepmatch/HmFqdU1a5aizPdjD9sa7z7sRNFUN |
+| Gate | G-PMC-LIVE pending Founder / human QA signoff |
+
 ## Rollback plan
 
-1. `git revert` merge commit of this branch on `main` (or redeploy previous Vercel deployment).
+1. Redeploy previous Vercel production deployment, or revert `e72cfa7` on the branch that production tracks.
 2. Redirects are additive — safe to leave or remove with revert.
 3. No migrations in this change set — DB rollback not required.
+
