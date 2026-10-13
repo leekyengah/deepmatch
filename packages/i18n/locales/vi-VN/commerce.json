@@ -137,5 +137,22 @@
   "ordersEmpty": "Chưa có đơn sandbox.",
   "ordersReceipt": "Biên nhận sandbox #{id}",
   "entitlementsTitle": "Quyền lợi đang hiệu lực",
-  "entitlementsEmpty": "Chưa có quyền lợi."
+  "entitlementsEmpty": "Chưa có quyền lợi.",
+  "checkoutStepComplete": "Hoàn tất",
+  "checkoutOneTime": "Thanh toán một lần",
+  "checkoutNoRenew": "Không tự động gia hạn",
+  "checkoutChooseMethod": "Chọn cách thanh toán",
+  "checkoutMethodCard": "Thẻ quốc tế",
+  "checkoutMethodWallet": "Ví điện tử",
+  "checkoutPayAmount": "Thanh toán {amount} ₫",
+  "checkoutQrHeading": "Quét mã để thanh toán",
+  "checkoutProcessingHeading": "Đang xác nhận giao dịch",
+  "checkoutOrderId": "Mã đơn hàng",
+  "checkoutExplore": "Khám phá ngay",
+  "checkoutMethodOther": "Chọn phương thức khác",
+  "checkoutSummary": "Tóm tắt đơn hàng",
+  "checkoutTotal": "Tổng thanh toán",
+  "benefitDiscover": "Khám phá hồ sơ phù hợp",
+  "benefitFilters": "Bộ lọc nâng cao",
+  "benefitDepth": "Kết nối có chiều sâu"
 }

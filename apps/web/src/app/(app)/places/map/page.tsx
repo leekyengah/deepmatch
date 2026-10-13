@@ -78,6 +78,8 @@ export default async function PlacesMapPage({
           title={t("places.mapCanvasTitle")}
           body={t("places.mapCanvasBody", { count: places.length, city })}
           note={t("places.mapFallbackNote")}
+          detailLabel={t("common.viewDetails")}
+          directionsLabel={t("places.directions")}
         />
       </Card>
 

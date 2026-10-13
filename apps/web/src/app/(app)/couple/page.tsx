@@ -1,12 +1,10 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { getActiveCoupleId } from "@/lib/couple";
+import { getActiveCouple } from "@/lib/couple";
 import { getServerTranslator } from "@/lib/i18n/server";
-import { flagEnabled } from "@/lib/flags";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { EmptyState } from "@/components/ui/EmptyState";
+import { CoupleEmptyOnboarding } from "@/components/couple/CoupleEmptyOnboarding";
+import { CoupleHero } from "@/components/couple/CoupleHero";
+import { CoupleOverview } from "@/components/couple/CoupleOverview";
 
 export default async function CoupleHomePage() {
   const supabase = await createClient();
@@ -15,121 +13,106 @@ export default async function CoupleHomePage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
   const { t } = await getServerTranslator();
-  const commerceBridgeOn =
-    (await flagEnabled("ff_lifestyle")) || (await flagEnabled("ff_ai"));
 
-  const coupleId = await getActiveCoupleId(user.id);
-  let pinCount = 0;
-  if (coupleId) {
-    const { count } = await supabase
-      .from("pins")
-      .select("id", { count: "exact", head: true })
-      .eq("pair_id", coupleId);
-    pinCount = count ?? 0;
+  const couple = await getActiveCouple(user.id);
+
+  if (!couple) {
+    return (
+      <CoupleEmptyOnboarding
+        labels={{
+          title: t("couple.emptyPremiumTitle"),
+          body: t("couple.emptyPremiumBody"),
+          benefitMemories: t("couple.benefitMemories"),
+          benefitMap: t("couple.benefitMap"),
+          benefitPlans: t("couple.benefitPlans"),
+          inviteCta: t("couple.invitePartnerCta"),
+          codeCta: t("couple.enterInviteCodeCta"),
+          sampleNote: t("couple.sampleSpaceNote"),
+        }}
+      />
+    );
   }
 
-  const tabs: Array<[string, string]> = [
-    [t("couple.navMap"), "/couple/map"],
-    [t("couple.navMemories"), "/couple/memories"],
-    [t("couple.navAdd"), "/couple/add"],
-    [t("couple.navPromises"), "/couple/promises"],
-    [t("couple.navUs"), "/couple/us"],
-  ];
+  const { data: pins } = await supabase
+    .from("pins")
+    .select("id, layer, title, note, place_label, visited_on, lat, lng, created_at")
+    .eq("pair_id", couple.id)
+    .order("created_at", { ascending: false });
+
+  const latest =
+    pins?.find((p) => p.layer === "visited" || p.layer === "milestone") ??
+    pins?.[0] ??
+    null;
+  const wishes = (pins ?? []).filter((p) => p.layer === "wishlist").slice(0, 8);
+
+  let upcoming: {
+    id: string;
+    title: string;
+    starts_at: string;
+    place_label: string | null;
+    status: string;
+  } | null = null;
+
+  const datesRes = await supabase
+    .from("couple_dates")
+    .select("id, title, starts_at, place_label, status")
+    .eq("pair_id", couple.id)
+    .neq("status", "cancelled")
+    .gte("starts_at", new Date().toISOString())
+    .order("starts_at", { ascending: true })
+    .limit(1)
+    .maybeSingle();
+
+  if (!datesRes.error && datesRes.data) {
+    upcoming = datesRes.data;
+  }
+
+  let coverUrl: string | null = null;
+  if (couple.cover_path) {
+    const { data: signed } = await supabase.storage
+      .from("media")
+      .createSignedUrl(couple.cover_path, 3600);
+    coverUrl = signed?.signedUrl ?? null;
+  }
 
   return (
-    <div className="max-w-3xl">
-      <p className="text-xs font-extrabold uppercase tracking-[2px] text-dm-primary">
-        {t("couple.title")}
-      </p>
-      <h1 className="mt-2 font-display text-4xl font-medium text-dm-raspberry">
-        {t("couple.spaceHeading")}
-      </h1>
-      <p className="mt-2 text-sm text-dm-muted">{t("couple.spaceIntro")}</p>
-      <p className="mt-2 text-sm">
-        <Link href="/legal/couple-data" className="text-dm-primary underline">
-          {t("couple.dataPolicyLink")}
-        </Link>
-      </p>
-
-      {coupleId ? (
-        <p className="mt-4 rounded-dm bg-dm-surface px-3 py-2 text-sm text-dm-raspberry">
-          {t("couple.connectedPins", { count: pinCount })}
-        </p>
-      ) : (
-        <div className="mt-6">
-          <Link href="/couple/invite">
-            <Button type="button">{t("couple.inviteOrPair")}</Button>
-          </Link>
-        </div>
-      )}
-
-      <div className="mt-8 grid gap-3 sm:grid-cols-2">
-        {tabs.map(([label, href]) => (
-          <Link key={href} href={href}>
-            <Card className="h-full font-medium text-dm-raspberry transition hover:border-dm-primary">
-              {label}
-            </Card>
-          </Link>
-        ))}
-      </div>
-
-      {coupleId && commerceBridgeOn ? (
-        <section className="mt-10">
-          <h2 className="font-display text-2xl text-dm-raspberry">
-            {t("couple.commerceBridgeTitle")}
-          </h2>
-          <p className="mt-2 text-sm text-dm-muted">
-            {t("couple.commerceBridgeBody")}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link href="/lifestyle/gift">
-              <Button type="button" variant="secondary">
-                {t("couple.ctaGiftIdeas")}
-              </Button>
-            </Link>
-            <Link href="/lifestyle/venue">
-              <Button type="button" variant="secondary">
-                {t("couple.ctaDatePlan")}
-              </Button>
-            </Link>
-            <Link href="/ai">
-              <Button type="button" variant="secondary">
-                {t("couple.ctaAiHub")}
-              </Button>
-            </Link>
-          </div>
-        </section>
-      ) : null}
-
-      {!coupleId ? (
-        <div className="mt-8">
-          <EmptyState
-            title={t("couple.emptySpaceTitle")}
-            description={t("couple.emptySpaceBody")}
-            action={
-              <Link href="/couple/invite">
-                <Button type="button" variant="secondary">
-                  {t("couple.openInvite")}
-                </Button>
-              </Link>
-            }
-          />
-        </div>
-      ) : pinCount === 0 ? (
-        <div className="mt-8">
-          <EmptyState
-            title={t("couple.emptyPinsTitle")}
-            description={t("couple.emptyPinsBody")}
-            action={
-              <Link href="/couple/add">
-                <Button type="button" variant="secondary">
-                  {t("couple.addPin")}
-                </Button>
-              </Link>
-            }
-          />
-        </div>
-      ) : null}
+    <div className="mx-auto max-w-6xl space-y-6">
+      <CoupleHero
+        couple={couple}
+        coverUrl={coverUrl}
+        labels={{
+          daysTogether: t("couple.daysTogether"),
+          setStartDate: t("couple.setStartDateCta"),
+          changeCover: t("couple.changeCover"),
+          onlyTwo: t("couple.onlyTwoBadge"),
+          spaceHeading: t("couple.spaceHeadingPremium"),
+        }}
+      />
+      <CoupleOverview
+        latest={latest}
+        upcoming={upcoming}
+        wishes={wishes}
+        pinCount={pins?.length ?? 0}
+        labels={{
+          latestTitle: t("couple.latestMoment"),
+          upcomingTitle: t("couple.upcomingDate"),
+          mapTitle: t("couple.ourMapCard"),
+          openMap: t("couple.openMap"),
+          wishTitle: t("couple.wishTogether"),
+          addWish: t("couple.addWishCard"),
+          noLatest: t("couple.noLatestTitle"),
+          noLatestBody: t("couple.noLatestBody"),
+          addMemory: t("couple.addMemoryCta"),
+          noUpcoming: t("couple.noUpcoming"),
+          proposeDate: t("couple.proposeDateCta"),
+          confirmed: t("couple.dateConfirmed"),
+          proposed: t("couple.dateProposed"),
+          firstStepsTitle: t("couple.firstStepsTitle"),
+          stepCover: t("couple.stepCover"),
+          stepMemory: t("couple.stepMemory"),
+          stepWish: t("couple.stepWish"),
+        }}
+      />
     </div>
   );
 }

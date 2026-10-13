@@ -10,12 +10,25 @@ import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Modal } from "@/components/ui/Modal";
 
-export function CoupleUsClient({ coupleId }: { coupleId: string | null }) {
+export function CoupleUsClient({
+  coupleId,
+  initial,
+}: {
+  coupleId: string | null;
+  initial?: {
+    space_title: string | null;
+    motto: string | null;
+    started_on: string | null;
+  };
+}) {
   const t = useT();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
+  const [spaceTitle, setSpaceTitle] = useState(initial?.space_title ?? "");
+  const [motto, setMotto] = useState(initial?.motto ?? "");
+  const [startedOn, setStartedOn] = useState(initial?.started_on ?? "");
 
   if (!coupleId) {
     return (
@@ -31,6 +44,32 @@ export function CoupleUsClient({ coupleId }: { coupleId: string | null }) {
         }
       />
     );
+  }
+
+  async function saveSettings(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setNote(null);
+    try {
+      const res = await fetch(`/api/v1/couples/${coupleId}/settings`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          space_title: spaceTitle || null,
+          motto: motto || null,
+          started_on: startedOn || null,
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setNote(resolveApiErrorMessage(json, t, "couple.settingsFailed"));
+        return;
+      }
+      setNote(t("couple.settingsSaved"));
+      router.refresh();
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function disconnect() {
@@ -57,22 +96,59 @@ export function CoupleUsClient({ coupleId }: { coupleId: string | null }) {
   return (
     <>
       <Card className="mb-4">
-        <p className="text-sm text-dm-raspberry">
-          {t("couple.activePair")}{" "}
-          <code className="text-xs">{coupleId}</code>
-        </p>
-        <a
-          href={`/api/v1/couples/${coupleId}/export`}
-          className="mt-3 inline-block"
-        >
+        <h2 className="font-display text-xl font-semibold text-dm-ink">
+          {t("couple.usSettingsHeading")}
+        </h2>
+        <p className="mt-1 text-sm text-dm-muted">{t("couple.usSettingsHint")}</p>
+        <form onSubmit={(e) => void saveSettings(e)} className="mt-4 space-y-3">
+          <label className="block text-sm">
+            <span className="font-medium text-dm-ink">{t("couple.spaceTitleLabel")}</span>
+            <input
+              value={spaceTitle}
+              onChange={(e) => setSpaceTitle(e.target.value)}
+              className="mt-1 w-full rounded-dm border border-dm-line bg-dm-surface px-3 py-2"
+              placeholder={t("couple.spaceTitlePh")}
+              maxLength={80}
+            />
+          </label>
+          <label className="block text-sm">
+            <span className="font-medium text-dm-ink">{t("couple.startedOnLabel")}</span>
+            <input
+              type="date"
+              value={startedOn}
+              onChange={(e) => setStartedOn(e.target.value)}
+              className="mt-1 w-full rounded-dm border border-dm-line bg-dm-surface px-3 py-2"
+            />
+          </label>
+          <label className="block text-sm">
+            <span className="font-medium text-dm-ink">{t("couple.mottoLabel")}</span>
+            <textarea
+              value={motto}
+              onChange={(e) => setMotto(e.target.value)}
+              className="mt-1 w-full rounded-dm border border-dm-line bg-dm-surface px-3 py-2"
+              rows={2}
+              maxLength={200}
+              placeholder={t("couple.mottoPh")}
+            />
+          </label>
+          <p className="text-xs text-dm-muted">{t("couple.coverHint")}</p>
+          <Button type="submit" size="sm" disabled={busy}>
+            {busy ? t("common.loading") : t("couple.saveSettings")}
+          </Button>
+        </form>
+      </Card>
+
+      <Card className="mb-4">
+        <a href={`/api/v1/couples/${coupleId}/export`} className="inline-block">
           <Button type="button" size="sm" variant="outline">
             {t("couple.exportMemories")}
           </Button>
         </a>
         <p className="mt-2 text-xs text-dm-muted">{t("couple.exportHint")}</p>
       </Card>
+
       <Card>
-        <h2 className="text-lg font-semibold text-dm-raspberry">
+        <h2 className="text-lg font-semibold text-dm-ink">
           {t("couple.disconnectTitle")}
         </h2>
         <p className="mt-2 text-sm text-dm-muted">{t("couple.disconnectHint")}</p>

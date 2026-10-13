@@ -1,17 +1,18 @@
 ﻿# NEXT ACTION
 
-Live https://datingvn.com · ship in progress
+Sánh đôi Premium UI landed on branch (mockup-driven). Apply DB migration + ship.
 
-## Last verified
-- API QA 23/23 · Visual smoke 5/5
-- Branch `feat/ext-lifestyle-ai-commerce`
+## Done
+- Refs in `docs/design/references/sanh-doi-v1.png`
+- `/couple` hero/overview/empty + plans/dates/settings APIs
+- Checkout + places map fidelity pass
+- `tsc --noEmit` PASS
 
-## Ship checklist
-- [x] Web features on branch
-- [ ] `vercel --prod` → datingvn.com
-- [ ] Push remote
-- [ ] Mobile: metro React dedupe + EAS API → datingvn.com (build/update when credentials allow)
+## Next
+1. `supabase db push` (or apply `20261013100000_couple_premium_meta.sql`)
+2. Commit + `vercel --prod` + EAS update
+3. QA-SD visual overlay vs `sanh-doi-v1.png`
+4. Cover upload media picker; two-sided date confirm
 
 ## Still NO GO
-- Store submit / TestFlight without ASC id
-- LIVE PSP / Google Maps billing keys
+- Store / LIVE PSP / Mapbox billing keys

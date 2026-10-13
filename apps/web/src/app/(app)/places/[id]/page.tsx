@@ -85,23 +85,28 @@ export default async function PlaceDetailPage({
         )}
       </section>
 
-      <div className="mt-6 flex flex-wrap gap-3">
-        <a
-          href={`https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lng}#map=16/${place.lat}/${place.lng}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Button type="button" variant="outline">
-            {t("places.directions")}
-          </Button>
-        </a>
-        <Link href="/couple/add">
-          <Button type="button" variant="secondary">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+        <Button type="button" className="sm:flex-1" disabled>
+          {t("places.writeReviewCta")}
+        </Button>
+        <Link href="/couple/add" className="sm:flex-1">
+          <Button type="button" variant="outline" className="w-full">
             {t("places.addPrivateMemory")}
           </Button>
         </Link>
       </div>
+      <div className="mt-3">
+        <a
+          href={`https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lng}#map=16/${place.lat}/${place.lng}`}
+          target="_blank"
+          rel="noreferrer"
+          className="text-sm text-dm-muted underline"
+        >
+          {t("places.directions")}
+        </a>
+      </div>
       <p className="mt-4 text-xs text-dm-muted">{t("places.detailDisclaimer")}</p>
+      <p className="mt-1 text-xs text-dm-muted">{t("places.publicPrivateSplit")}</p>
     </div>
   );
 }

@@ -137,5 +137,22 @@
   "ordersEmpty": "No sandbox orders yet.",
   "ordersReceipt": "Sandbox receipt ref {id}",
   "entitlementsTitle": "Active entitlements",
-  "entitlementsEmpty": "No active entitlements."
+  "entitlementsEmpty": "No active entitlements.",
+  "checkoutStepComplete": "Complete",
+  "checkoutOneTime": "One-time payment",
+  "checkoutNoRenew": "No auto-renewal",
+  "checkoutChooseMethod": "Choose payment method",
+  "checkoutMethodCard": "International card",
+  "checkoutMethodWallet": "E-wallet",
+  "checkoutPayAmount": "Pay {amount} ₫",
+  "checkoutQrHeading": "Scan to pay",
+  "checkoutProcessingHeading": "Confirming payment",
+  "checkoutOrderId": "Order ID",
+  "checkoutExplore": "Explore now",
+  "checkoutMethodOther": "Choose another method",
+  "checkoutSummary": "Order summary",
+  "checkoutTotal": "Total due",
+  "benefitDiscover": "Discover fitting profiles",
+  "benefitFilters": "Advanced filters",
+  "benefitDepth": "Deeper connections"
 }
