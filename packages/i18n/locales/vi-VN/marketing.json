@@ -62,7 +62,7 @@
   "aiGiftBody": "Gợi ý quà và trang phục theo dịp — không dùng dữ liệu riêng tư đối phương nếu chưa opt-in.",
   "aiCta": "Xem gợi ý",
   "couplePreviewTitle": "Sánh đôi — bản đồ kỷ niệm",
-  "couplePreviewSupport": "Hình minh họa marketing — không hiển thị bản đồ hay ảnh riêng tư của cặp đôi thật.",
+  "couplePreviewSupport": "Không gian riêng của hai người — bản đồ và kỷ niệm chỉ hai bạn thấy.",
   "couplePreviewCta": "Khám phá Sánh đôi",
   "lifestyleTitle": "Tiện ích tùy chọn",
   "lifestyleSupport": "Các tiện ích bổ sung sẽ mở khi sẵn sàng — không phải giao dịch đối tác bên ngoài.",
@@ -100,5 +100,5 @@
   "privacy": "Quyền riêng tư",
   "demoLabel": "Minh họa",
   "metaTitle": "DeepMatch — Gặp đúng người. Viết tiếp câu chuyện.",
-  "photoCredit": "Ảnh minh họa marketing — không phải hồ sơ người dùng thật."
+  "photoCredit": "DeepMatch"
 }

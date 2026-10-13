@@ -30,9 +30,6 @@ export default async function PlacesMapPage({
         {t("places.mapTitle")}
       </h1>
       <p className="mt-2 max-w-2xl text-sm text-dm-muted">{t("places.mapIntro")}</p>
-      <div className="mt-3">
-        <Badge tone="warn">{t("places.sampleBadge")}</Badge>
-      </div>
       <PlacesSubnav active="map" />
 
       <div className="mt-6 flex flex-wrap gap-2">

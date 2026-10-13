@@ -27,7 +27,6 @@ export default async function CoupleHomePage() {
           benefitPlans: t("couple.benefitPlans"),
           inviteCta: t("couple.invitePartnerCta"),
           codeCta: t("couple.enterInviteCodeCta"),
-          sampleNote: t("couple.sampleSpaceNote"),
         }}
       />
     );

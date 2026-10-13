@@ -70,11 +70,6 @@ export default async function LifestyleCategoryPage({
       <p className="mt-2 text-sm text-dm-muted">
         {t("commerce.categoryDemoNote")}
       </p>
-      <div className="mt-4">
-        <Badge tone="warn">
-          {t("commerce.lifestyleBadge")}
-        </Badge>
-      </div>
       {category === "venue" ? (
         <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold text-dm-primary">
           <Link href="/lifestyle/venue">Tất cả</Link>
@@ -82,11 +77,6 @@ export default async function LifestyleCategoryPage({
           <Link href="/lifestyle/venue?band=mid">300–800k</Link>
           <Link href="/lifestyle/venue?band=high">&gt;800k</Link>
         </div>
-      ) : null}
-      {category === "venue" ? (
-        <p className="mt-3 text-xs text-dm-muted">
-          {t("commerce.categoryDemoNote")}
-        </p>
       ) : null}
 
       {!products?.length ? (
@@ -113,8 +103,7 @@ export default async function LifestyleCategoryPage({
                           {p.title}
                         </p>
                         <p className="mt-1 text-xs text-dm-muted">
-                          {p.mock_id} · {prov?.display_name ?? t("common.optional")} ·{" "}
-                          {prov?.status ?? t("common.optional")}
+                          {prov?.display_name ?? t("common.optional")}
                         </p>
                       </div>
                       <p className="font-bold text-dm-primary">
@@ -124,9 +113,6 @@ export default async function LifestyleCategoryPage({
                         </span>
                       </p>
                     </div>
-                    <p className="mt-2 text-[11px] font-semibold text-[#9a4a2a]">
-                      {p.demo_banner}
-                    </p>
                   </Card>
                 </Link>
               </li>

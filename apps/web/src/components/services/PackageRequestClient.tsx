@@ -166,8 +166,6 @@ export function PackageRequestClient({
         </label>
       </Card>
 
-      <p className="text-xs text-dm-muted">{t("booking.sandboxPaymentNote")}</p>
-
       <div className="flex flex-wrap gap-3">
         <Button type="submit" disabled={busy || !consent}>
           {busy ? t("booking.sending") : t("booking.submitIntake")}

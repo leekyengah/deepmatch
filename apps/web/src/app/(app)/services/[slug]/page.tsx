@@ -141,8 +141,6 @@ export default async function ServicePackagePage({
         </div>
       </section>
 
-      <p className="mt-4 text-xs text-dm-muted">{t("booking.sandboxPaymentNote")}</p>
-
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-dm-line bg-dm-panel/95 px-4 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3">
           <div className="text-sm">

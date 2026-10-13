@@ -27,7 +27,7 @@ export function DemoBookButton({ productId }: { productId: string }) {
         setMsg(resolveApiErrorMessage(json, t, "commerce.demoBookFailed"));
         return;
       }
-      setMsg(json.receipt ?? "DEMO_RESERVED");
+      setMsg(json.receipt ?? t("commerce.bookingPending"));
     } finally {
       setBusy(false);
     }

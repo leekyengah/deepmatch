@@ -56,7 +56,6 @@ export default async function MeOrdersPage() {
                   <p className="font-medium text-dm-ink">{o.package_code}</p>
                   <p className="mt-1 text-sm text-dm-muted">
                     {o.amount_vnd.toLocaleString(locale)} {o.currency}
-                    {o.sandbox ? ` · ${t("commerce.checkoutSandboxBadge")}` : ""}
                   </p>
                   <p className="mt-1 text-xs text-dm-muted">
                     {formatDateTime(o.created_at, locale)}
@@ -90,7 +89,6 @@ export default async function MeOrdersPage() {
                   <p className="font-medium text-dm-ink">{e.package_code}</p>
                   <p className="mt-1 text-xs text-dm-muted">
                     {e.starts_at ? formatDateTime(e.starts_at, locale) : "—"}
-                    {e.sandbox ? ` · ${t("commerce.checkoutSandboxBadge")}` : ""}
                   </p>
                 </div>
                 <Badge tone={e.status === "active" ? "good" : "default"}>

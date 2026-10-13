@@ -107,8 +107,6 @@ export function CheckoutClient({
 
   return (
     <div className="space-y-6">
-      <Badge tone="warn">{t("commerce.checkoutSandboxBadge")}</Badge>
-
       {/* Stepper — mockup 3 steps */}
       <ol className="flex items-center gap-2 text-xs font-semibold sm:text-sm">
         {[

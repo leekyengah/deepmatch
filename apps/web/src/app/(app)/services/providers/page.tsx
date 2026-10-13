@@ -50,7 +50,6 @@ export default async function ProvidersPage() {
             <Card className="space-y-2 text-sm">
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="font-semibold text-dm-ink">{p.nameVi}</h2>
-                <Badge tone="warn">{t("booking.providersSample")}</Badge>
               </div>
               <p className="text-dm-muted">{p.region}</p>
               <p>

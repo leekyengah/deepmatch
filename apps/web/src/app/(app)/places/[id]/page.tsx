@@ -26,8 +26,7 @@ export default async function PlaceDetailPage({
       </Link>
       <PlacesSubnav active="map" />
       <div className="mt-6">
-        <Badge tone="warn">{t("places.sampleBadge")}</Badge>
-        {cat ? <Badge className="ml-2">{cat.labelVi}</Badge> : null}
+        {cat ? <Badge>{cat.labelVi}</Badge> : null}
       </div>
       <h1 className="mt-3 font-display text-4xl font-semibold text-dm-ink">
         {place.name}

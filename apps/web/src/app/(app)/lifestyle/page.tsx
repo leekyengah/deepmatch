@@ -2,7 +2,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { flagEnabled } from "@/lib/flags";
 import { getServerTranslator } from "@/lib/i18n/server";
-import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 
 export default async function LifestyleHomePage() {
@@ -62,10 +61,6 @@ export default async function LifestyleHomePage() {
       <p className="mt-2 font-editorial text-sm text-dm-muted">
         {t("commerce.lifestyleIntro")}
       </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        <Badge tone="warn">{t("commerce.lifestyleBadge")}</Badge>
-        <Badge>{t("marketing.lifestyleDemoBadge")}</Badge>
-      </div>
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         {pillars.map((p) => (
           <Link key={p.href} href={p.href}>

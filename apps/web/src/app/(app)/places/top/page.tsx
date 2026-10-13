@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PlacesSubnav } from "@/components/places/PlacesSubnav";
-import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { LOVE_PLACE_CATEGORIES, topLovePlaces } from "@/lib/love-places";
 import { getServerTranslator } from "@/lib/i18n/server";
@@ -25,10 +24,6 @@ export default async function PlacesTopPage({
         {t("places.topTitle", { city })}
       </h1>
       <p className="mt-2 text-sm text-dm-muted">{t("places.topIntro")}</p>
-      <div className="mt-3 flex flex-wrap gap-2">
-        <Badge tone="warn">{t("places.sampleBadge")}</Badge>
-        <Badge tone="default">{t("places.rankingMethod")}</Badge>
-      </div>
       <PlacesSubnav active="top" />
 
       <div className="mt-6 flex flex-wrap gap-2 text-sm">
@@ -88,7 +83,6 @@ export default async function PlacesTopPage({
           ))}
         </ol>
       )}
-      <p className="mt-6 text-xs text-dm-muted">{t("places.topDisclaimer")}</p>
     </div>
   );
 }

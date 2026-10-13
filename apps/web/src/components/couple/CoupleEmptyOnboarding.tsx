@@ -12,7 +12,6 @@ export function CoupleEmptyOnboarding({
     benefitPlans: string;
     inviteCta: string;
     codeCta: string;
-    sampleNote: string;
   };
 }) {
   const benefits = [
@@ -56,7 +55,6 @@ export function CoupleEmptyOnboarding({
           </Button>
         </Link>
       </div>
-      <p className="mt-4 text-center text-xs text-dm-muted">{labels.sampleNote}</p>
     </section>
   );
 }

@@ -74,7 +74,7 @@ export default async function MyJourneyPage() {
           </p>
           <p className="text-dm-muted">{t("booking.journeyPackagesBody")}</p>
           <div className="flex flex-wrap gap-2">
-            <Badge tone="warn">{t("booking.stickySandbox")}</Badge>
+            <Badge>{t("booking.stickySandbox")}</Badge>
             <Link href="/services">
               <Button type="button" size="sm">
                 {t("booking.viewServices")}

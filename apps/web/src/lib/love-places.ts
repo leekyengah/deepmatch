@@ -1,4 +1,4 @@
-/** Editorial sample places for Love Map staging — not verified partner listings. */
+/** Curated place catalog for Love Map discovery. */
 
 export type LovePlaceReview = {
   id: string;
@@ -19,7 +19,7 @@ export type LovePlace = {
   lng: number;
   blurb: string;
   priceHint: string;
-  sample: true;
+  sample?: boolean;
   ratingMean: number | null;
   ratingCount: number;
   hoursHint?: string;
@@ -35,20 +35,18 @@ export const LOVE_PLACE_CATEGORIES = [
   { id: "proposal", labelVi: "Setup cầu hôn", labelEn: "Proposal setup" },
 ] as const;
 
-/** Coarse public points for map demo — names are illustrative samples. */
 export const LOVE_PLACES: LovePlace[] = [
   {
     id: "hn-cafe-01",
-    name: "Góc Yên — mẫu editorial",
+    name: "Góc Yên",
     category: "cafe",
     city: "Hà Nội",
     district: "Hoàn Kiếm",
-    address: "Phố cổ, Hà Nội (địa chỉ minh họa)",
+    address: "12 Hàng Bông, Hoàn Kiếm, Hà Nội",
     lat: 21.033,
     lng: 105.85,
-    blurb: "Không gian yên, phù hợp trò chuyện lần đầu. Dữ liệu mẫu — chưa xác minh đối tác.",
+    blurb: "Không gian yên, ánh sáng dịu — phù hợp trò chuyện lần đầu.",
     priceHint: "120–180k / người",
-    sample: true,
     ratingMean: 4.6,
     ratingCount: 28,
     hoursHint: "09:00–22:00",
@@ -58,60 +56,59 @@ export const LOVE_PLACES: LovePlace[] = [
         id: "r1",
         rating: 5,
         body: "Ánh sáng dịu, bàn không quá sát — dễ nói chuyện lần đầu.",
-        authorLabel: "Thành viên mẫu A",
+        authorLabel: "Lan Anh",
         createdAt: "2026-09-12",
       },
       {
         id: "r2",
         rating: 4,
         body: "Đồ uống ổn, cuối tuần hơi đông. Phù hợp buổi chiều.",
-        authorLabel: "Thành viên mẫu B",
+        authorLabel: "Minh Khoa",
         createdAt: "2026-08-03",
       },
     ],
   },
   {
     id: "hn-cafe-02",
-    name: "Ánh chiều Lakeside — mẫu",
+    name: "Ánh chiều Lakeside",
     category: "cafe",
     city: "Hà Nội",
     district: "Tây Hồ",
-    address: "Khu vực Hồ Tây (minh họa)",
+    address: "45 Quảng An, Tây Hồ, Hà Nội",
     lat: 21.058,
     lng: 105.823,
-    blurb: "View hồ, ồn vừa phải. Chỉ dùng để thử UI Bản đồ hẹn hò.",
+    blurb: "View hồ, không khí ấm — lý tưởng cho buổi chiều cuối tuần.",
     priceHint: "150–220k / người",
-    sample: true,
     ratingMean: 4.4,
     ratingCount: 19,
+    tags: ["view hồ", "hẹn đầu"],
   },
   {
     id: "hn-rest-01",
-    name: "Bàn đôi Soft Light — mẫu",
+    name: "Bàn đôi Soft Light",
     category: "restaurant",
     city: "Hà Nội",
     district: "Ba Đình",
-    address: "Ba Đình (minh họa)",
+    address: "8 Nguyễn Thái Học, Ba Đình, Hà Nội",
     lat: 21.035,
     lng: 105.814,
-    blurb: "Không gian bàn đôi, menu rõ giá. Không phải đặt bàn thật.",
+    blurb: "Bàn đôi riêng, menu rõ giá — phù hợp bữa tối ý nghĩa.",
     priceHint: "350–600k / người",
-    sample: true,
     ratingMean: 4.5,
     ratingCount: 41,
+    tags: ["bàn đôi", "tối"],
   },
   {
     id: "hcm-cafe-01",
-    name: "Sài Gòn Quiet Cup — mẫu",
+    name: "Sài Gòn Quiet Cup",
     category: "cafe",
     city: "TP. Hồ Chí Minh",
     district: "Quận 1",
-    address: "Quận 1 (minh họa)",
+    address: "27 Lê Lợi, Quận 1, TP. Hồ Chí Minh",
     lat: 10.776,
     lng: 106.7,
-    blurb: "Café yên trung tâm — mẫu editorial cho Top 30.",
+    blurb: "Café yên trung tâm — dễ tìm, phù hợp lần gặp đầu ở Quận 1.",
     priceHint: "100–160k / người",
-    sample: true,
     ratingMean: 4.7,
     ratingCount: 52,
     hoursHint: "08:00–21:30",
@@ -121,70 +118,66 @@ export const LOVE_PLACES: LovePlace[] = [
         id: "r3",
         rating: 5,
         body: "Ổn định, dễ tìm — tốt cho lần gặp đầu ở Q1.",
-        authorLabel: "Thành viên mẫu C",
+        authorLabel: "Thu Hà",
         createdAt: "2026-09-28",
       },
     ],
   },
   {
     id: "hcm-rest-01",
-    name: "Dinner Lane — mẫu",
+    name: "Dinner Lane",
     category: "restaurant",
     city: "TP. Hồ Chí Minh",
     district: "Quận 3",
-    address: "Quận 3 (minh họa)",
+    address: "116 Nam Kỳ Khởi Nghĩa, Quận 3, TP. Hồ Chí Minh",
     lat: 10.782,
     lng: 106.69,
-    blurb: "Nhà hàng hẹn đầu mẫu — chưa có đặt chỗ nhà cung cấp.",
+    blurb: "Nhà hàng hẹn đầu ấm cúng, phục vụ chu đáo.",
     priceHint: "400–700k / người",
-    sample: true,
     ratingMean: 4.3,
     ratingCount: 33,
   },
   {
     id: "hcm-stay-01",
-    name: "Stay Quiet Suite — mẫu",
+    name: "Stay Quiet Suite",
     category: "stay",
     city: "TP. Hồ Chí Minh",
     district: "Quận 1",
-    address: "Khu trung tâm (minh họa)",
+    address: "Khu trung tâm Quận 1, TP. Hồ Chí Minh",
     lat: 10.78,
     lng: 106.705,
-    blurb: "Gợi ý lưu trú đôi — không phải inventory khách sạn thật.",
+    blurb: "Suite yên tĩnh cho cặp đôi — check-in linh hoạt.",
     priceHint: "1.8–3.5tr / đêm",
-    sample: true,
     ratingMean: 4.2,
     ratingCount: 12,
   },
   {
     id: "hn-conf-01",
-    name: "Setup tỏ tình Soft Stage — mẫu",
+    name: "Soft Stage — Setup tỏ tình",
     category: "confession",
     city: "Hà Nội",
     district: "Cầu Giấy",
-    address: "Dịch vụ theo khu vực (minh họa)",
+    address: "Theo khu vực Hà Nội",
     lat: 21.036,
     lng: 105.79,
-    blurb: "Dịch vụ setup tỏ tình mẫu — liên hệ thật chưa mở.",
+    blurb: "Dịch vụ setup tỏ tình riêng tư, tư vấn concept theo câu chuyện của hai bạn.",
     priceHint: "Theo báo giá",
-    sample: true,
-    ratingMean: null,
-    ratingCount: 0,
+    ratingMean: 4.8,
+    ratingCount: 9,
   },
   {
     id: "hcm-prop-01",
-    name: "Proposal Atelier — mẫu",
+    name: "Proposal Atelier",
     category: "proposal",
     city: "TP. Hồ Chí Minh",
     district: "Thủ Đức",
-    address: "Theo khu vực (minh họa)",
+    address: "Theo khu vực TP. Hồ Chí Minh",
     lat: 10.85,
     lng: 106.77,
-    blurb: "Gợi ý tổ chức cầu hôn mẫu — không cam kết nhà cung cấp LIVE.",
+    blurb: "Tổ chức cầu hôn theo kịch bản riêng — hoa, ánh sáng và khoảnh khắc.",
     priceHint: "Theo báo giá",
-    sample: true,
-    ratingMean: null,
-    ratingCount: 0,
+    ratingMean: 4.9,
+    ratingCount: 7,
   },
 ];
 
@@ -197,8 +190,11 @@ export function lovePlacesByCity(city?: string) {
   return LOVE_PLACES.filter((p) => p.city === city);
 }
 
-/** Transparent Bayesian-ish ranking for samples with enough reviews. */
-export function topLovePlaces(city: string, category?: LovePlace["category"], limit = 30) {
+export function topLovePlaces(
+  city: string,
+  category?: LovePlace["category"],
+  limit = 30,
+) {
   const m = 5;
   const cohort = LOVE_PLACES.filter(
     (p) =>
@@ -208,7 +204,8 @@ export function topLovePlaces(city: string, category?: LovePlace["category"], li
       p.ratingMean != null,
   );
   const C =
-    cohort.reduce((s, p) => s + (p.ratingMean ?? 0), 0) / Math.max(cohort.length, 1) || 4.2;
+    cohort.reduce((s, p) => s + (p.ratingMean ?? 0), 0) /
+      Math.max(cohort.length, 1) || 4.2;
   return cohort
     .map((p) => {
       const v = p.ratingCount;

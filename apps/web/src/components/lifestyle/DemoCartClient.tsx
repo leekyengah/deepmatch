@@ -71,9 +71,6 @@ export function DemoCartClient() {
 
   return (
     <div className="space-y-6">
-      <p className="rounded-dm border border-dm-line bg-dm-blush px-3 py-2 text-xs font-semibold text-dm-deep">
-        {t("commerce.cartBanner")}
-      </p>
       <ul className="space-y-3">
         {lines.map((l) => (
           <li
@@ -83,7 +80,7 @@ export function DemoCartClient() {
             <div>
               <p className="font-semibold text-dm-raspberry">{l.title}</p>
               <p className="text-xs text-dm-muted">
-                {l.mockId} · {l.category} · x{l.qty}
+                x{l.qty}
               </p>
             </div>
             <div className="text-right">

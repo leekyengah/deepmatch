@@ -61,7 +61,6 @@ export function ServicesClient() {
 
   return (
     <div className="space-y-10">
-      <p className="text-sm text-dm-muted">{t("booking.sandboxPaymentNote")}</p>
       <Section title={t("booking.groupCompanion")} items={companion} />
       <Section title={t("booking.groupMatchmaking")} items={matchmaking} />
     </div>
