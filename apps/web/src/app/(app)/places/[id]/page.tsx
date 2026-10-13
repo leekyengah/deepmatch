@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PlacesSubnav } from "@/components/places/PlacesSubnav";
+import { PlaceReviewClient } from "@/components/places/PlaceReviewClient";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { lovePlaceById, LOVE_PLACE_CATEGORIES } from "@/lib/love-places";
 import { getServerTranslator } from "@/lib/i18n/server";
+import { createClient } from "@/lib/supabase/server";
+import { createSignedReadUrl } from "@/lib/media/storage";
+import { getStorageBackend, type StorageBackend } from "@/lib/media/limits";
 
 export default async function PlaceDetailPage({
   params,
@@ -17,7 +21,66 @@ export default async function PlaceDetailPage({
   const place = lovePlaceById(id);
   if (!place) notFound();
   const cat = LOVE_PLACE_CATEGORIES.find((c) => c.id === place.category);
-  const reviews = place.reviews ?? [];
+  const supabase = await createClient();
+  const { data: liveRows } = await supabase
+    .from("place_reviews")
+    .select("id, rating, body, created_at, media_id, profiles(display_name)")
+    .eq("place_id", id)
+    .is("deleted_at", null)
+    .order("created_at", { ascending: false })
+    .limit(30);
+
+  const liveReviews: Array<{
+    id: string;
+    rating: number;
+    body: string;
+    authorLabel: string;
+    createdAt: string;
+    mediaUrl: string | null;
+  }> = [];
+  for (const row of liveRows ?? []) {
+    let mediaUrl: string | null = null;
+    if (row.media_id) {
+      const { data: media } = await supabase
+        .from("media_objects")
+        .select("storage_path, storage_backend, processing_status")
+        .eq("id", row.media_id)
+        .maybeSingle();
+      if (
+        media &&
+        (!media.processing_status || media.processing_status === "ready")
+      ) {
+        mediaUrl = await createSignedReadUrl(
+          media.storage_path,
+          (media.storage_backend ?? getStorageBackend()) as StorageBackend,
+          600,
+        );
+      }
+    }
+    const profile = Array.isArray(row.profiles)
+      ? row.profiles[0]
+      : row.profiles;
+    liveReviews.push({
+      id: row.id,
+      rating: row.rating,
+      body: row.body,
+      authorLabel:
+        (profile as { display_name?: string } | null)?.display_name ?? "Member",
+      createdAt: String(row.created_at).slice(0, 10),
+      mediaUrl,
+    });
+  }
+  const reviews = [
+    ...liveReviews,
+    ...(place.reviews ?? []).map((r) => ({
+      id: r.id,
+      rating: r.rating,
+      body: r.body,
+      authorLabel: r.authorLabel,
+      createdAt: r.createdAt,
+      mediaUrl: null as string | null,
+    })),
+  ];
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -77,6 +140,14 @@ export default async function PlaceDetailPage({
                     <span className="text-xs text-dm-muted">{r.createdAt}</span>
                   </div>
                   <p className="leading-relaxed text-dm-ink">{r.body}</p>
+                  {r.mediaUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={r.mediaUrl}
+                      alt=""
+                      className="mt-2 max-h-48 w-full rounded-dm object-cover"
+                    />
+                  ) : null}
                 </Card>
               </li>
             ))}
@@ -85,9 +156,7 @@ export default async function PlaceDetailPage({
       </section>
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <Button type="button" className="sm:flex-1" disabled>
-          {t("places.writeReviewCta")}
-        </Button>
+        <PlaceReviewClient placeId={place.id} />
         <Link href="/couple/add" className="sm:flex-1">
           <Button type="button" variant="outline" className="w-full">
             {t("places.addPrivateMemory")}

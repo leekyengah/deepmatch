@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Alert, ScrollView, StyleSheet, Text } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 import * as WebBrowser from "expo-web-browser";
 import { Button, Muted, Screen, Title } from "../../components/ui";
 import { LanguageSwitcher } from "../../components/LanguageSwitcher";
 import { useAuth } from "../../lib/auth";
 import { apiPost } from "../../lib/api";
+import { uploadMobileMedia } from "../../lib/media";
+import { supabase } from "../../lib/supabase";
 import { useT } from "../../lib/i18n/I18nProvider";
 import { purchasePremium, restorePremium } from "../../lib/iap";
 import { colors, LEGAL_URLS } from "../../constants/theme";
@@ -17,6 +20,58 @@ export default function MeScreen() {
   const { user, signOut } = useAuth();
   const t = useT();
   const [busy, setBusy] = useState(false);
+  const [avatarBusy, setAvatarBusy] = useState(false);
+
+  async function onAvatar() {
+    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!perm.granted) {
+      Alert.alert(t("profile.avatarIntentFailed"));
+      return;
+    }
+    const picked = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      quality: 0.85,
+    });
+    if (picked.canceled || !picked.assets?.[0]) return;
+    const asset = picked.assets[0];
+    setAvatarBusy(true);
+    try {
+      const { mediaId } = await uploadMobileMedia({
+        uri: asset.uri,
+        mimeType: asset.mimeType ?? "image/jpeg",
+        bytes: asset.fileSize,
+        purpose: "avatar",
+      });
+      const { data: media } = await supabase
+        .from("media_objects")
+        .select("storage_path")
+        .eq("id", mediaId)
+        .maybeSingle();
+      if (media?.storage_path && user?.id) {
+        const { error } = await supabase
+          .from("profiles")
+          .update({
+            avatar_path: media.storage_path,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", user.id);
+        if (error) {
+          Alert.alert(
+            t("profile.avatarProfilePartial", { error: error.message }),
+          );
+          return;
+        }
+      }
+      Alert.alert(t("profile.avatarDone"));
+    } catch (e) {
+      Alert.alert(
+        t("profile.avatarIntentFailed"),
+        e instanceof Error ? e.message : t("errors.unknown"),
+      );
+    } finally {
+      setAvatarBusy(false);
+    }
+  }
 
   async function onBuy() {
     setBusy(true);
@@ -68,6 +123,16 @@ export default function MeScreen() {
       <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
         <Title>{t("profile.title")}</Title>
         <Muted>{user?.email ?? ""}</Muted>
+
+        <Text style={styles.h2}>{t("profile.avatarTitle")}</Text>
+        <Muted>{t("profile.avatarHint")}</Muted>
+        <Button
+          label={
+            avatarBusy ? t("profile.uploading") : t("profile.choosePhoto")
+          }
+          onPress={() => void onAvatar()}
+          disabled={avatarBusy}
+        />
 
         <Text style={styles.h2}>{t("profile.languageSection")}</Text>
         <LanguageSwitcher />
