@@ -10,12 +10,14 @@
   "scripts": {
     "dev:web": "npm run dev -w @deepmatch/web",
     "dev:admin": "npm run dev -w @deepmatch/admin",
-    "dev:mobile": "npm run start -w @deepmatch/mobile",
+    "dev:mobile": "npm run go -w @deepmatch/mobile",
+    "dev:mobile:tunnel": "npm run go:tunnel -w @deepmatch/mobile",
+    "dev:all": "node scripts/dev-all.mjs",
     "build": "npm run build -w @deepmatch/shared && npm run build -w @deepmatch/web && npm run build -w @deepmatch/admin",
-    "lint": "npm run lint -w @deepmatch/i18n && npm run lint -w @deepmatch/legal-content && npm run lint -w @deepmatch/shared && npm run lint -w @deepmatch/web && npm run lint -w @deepmatch/admin",
-    "typecheck": "npm run typecheck -w @deepmatch/i18n && npm run typecheck -w @deepmatch/legal-content && npm run typecheck -w @deepmatch/shared && npm run typecheck -w @deepmatch/web && npm run typecheck -w @deepmatch/admin",
-    "test": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content",
-    "test:unit": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content",
+    "lint": "npm run lint -w @deepmatch/i18n && npm run lint -w @deepmatch/legal-content && npm run lint -w @deepmatch/shared && npm run lint -w @deepmatch/design-tokens && npm run lint -w @deepmatch/web && npm run lint -w @deepmatch/admin",
+    "typecheck": "npm run typecheck -w @deepmatch/i18n && npm run typecheck -w @deepmatch/legal-content && npm run typecheck -w @deepmatch/shared && npm run typecheck -w @deepmatch/design-tokens && npm run typecheck -w @deepmatch/web && npm run typecheck -w @deepmatch/admin",
+    "test": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content && npm run test -w @deepmatch/design-tokens",
+    "test:unit": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content && npm run test -w @deepmatch/design-tokens",
     "i18n:parity": "node scripts/i18n-parity.mjs",
     "test:integration": "npx tsx --test tests/integration/rls-deny.test.ts",
     "test:e2e": "playwright test",
@@ -39,7 +41,11 @@
   },
   "overrides": {
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "@deepmatch/mobile": {
+      "react": "19.2.3",
+      "react-dom": "19.2.3"
+    }
   },
   "allowScripts": {
     "ffmpeg-static@5.3.0": true

@@ -33,6 +33,7 @@ const config = getDefaultConfig(projectRoot);
 config.watchFolders = [
   path.resolve(workspaceRoot, "packages/shared"),
   path.resolve(workspaceRoot, "packages/i18n"),
+  path.resolve(workspaceRoot, "packages/design-tokens"),
 ];
 
 config.resolver.nodeModulesPaths = [
@@ -46,7 +47,11 @@ config.resolver.disableHierarchicalLookup = false;
 config.resolver.extraNodeModules = {
   "@deepmatch/shared": path.resolve(workspaceRoot, "packages/shared"),
   "@deepmatch/i18n": path.resolve(workspaceRoot, "packages/i18n"),
-  // Force one React copy (root is pinned to 19.2.3 via package.json overrides).
+  "@deepmatch/design-tokens": path.resolve(
+    workspaceRoot,
+    "packages/design-tokens",
+  ),
+  // Force one React copy from the mobile workspace (avoid dual React with web 19.3).
   react: reactRoot,
   "react-dom": reactDomRoot,
   "react-native": reactNativeRoot,

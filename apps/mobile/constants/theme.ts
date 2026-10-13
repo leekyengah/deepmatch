@@ -1,34 +1,8 @@
-export const colors = {
-  primary: "#6B2D3C",
-  primaryHover: "#54212F",
-  blush: "#F4E9E4",
-  canvas: "#F7F3EE",
-  deep: "#472025",
-  raspberry: "#6B2D3C",
-  champagne: "#A88A62",
-  gold: "#96734B",
-  ink: "#241A1C",
-  muted: "#706763",
-  line: "#E8DCD4",
-  panel: "#FAF6F3",
-  surface: "#FFFCF9",
-  good: "#2F7D4A",
-  danger: "#A63E52",
-} as const;
+import { colors as tokenColors, layout as tokenLayout } from "@deepmatch/design-tokens";
 
-/** Mirrors web Full Frame tokens (apps/web globals.css v4). */
-export const layout = {
-  gutter: 16,
-  touch: 44,
-  headerH: 56,
-  tabBarH: 56,
-  frameNarrow: 720,
-  aspectPortrait: 3 / 4,
-  aspectLandscape: 16 / 10,
-  aspectVideo: 16 / 9,
-  radiusMd: 12,
-  radiusXl: 22,
-} as const;
+/** Re-export shared DeepMatch tokens for React Native screens. */
+export const colors = tokenColors;
+export const layout = tokenLayout;
 
 const LEGAL_BASE = (
   process.env.EXPO_PUBLIC_API_URL ?? "https://datingvn.com"
