@@ -46,24 +46,25 @@ export function AiContextPanel() {
       .catch(() => setLoadError(true));
 
     // Best-effort profile completeness from existing me API if available
-    void fetch("/api/v1/me")
+    void fetch("/api/v1/me/profile")
       .then(async (r) => {
         if (!r.ok) return null;
         return r.json();
       })
       .then((j) => {
         if (!j) return;
+        const src = j.profile ?? j;
         const completeness =
-          typeof j.profile_completeness === "number"
-            ? j.profile_completeness
-            : typeof j.completeness === "number"
-              ? j.completeness
+          typeof src.profile_completeness === "number"
+            ? src.profile_completeness
+            : typeof src.completeness === "number"
+              ? src.completeness
               : null;
         const intent =
-          typeof j.relationship_intent === "string"
-            ? j.relationship_intent
-            : typeof j.intent === "string"
-              ? j.intent
+          typeof src.relationship_intent === "string"
+            ? src.relationship_intent
+            : typeof src.intent === "string"
+              ? src.intent
               : null;
         setProfile({ completeness, intent });
       })
