@@ -49,7 +49,14 @@ export async function updateSession(request: NextRequest) {
     if (next && next !== "/") {
       login.searchParams.set("next", next);
     }
-    return NextResponse.redirect(login);
+    const redirect = NextResponse.redirect(login);
+    // Prevent intermediary caches from storing gated HTML/redirects
+    redirect.headers.set("Cache-Control", "private, no-store");
+    return redirect;
+  }
+
+  if (user && !isPublicPath(pathname)) {
+    supabaseResponse.headers.set("Cache-Control", "private, no-store");
   }
 
   return supabaseResponse;

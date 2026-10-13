@@ -10,7 +10,15 @@ async function clearAuthCookies() {
   const cookieStore = await cookies();
   for (const { name } of cookieStore.getAll()) {
     if (isAuthCookieName(name)) {
-      cookieStore.set(name, "", { path: "/", maxAge: 0 });
+      // Match typical Supabase SSR cookie path/host scope so browsers drop the jar.
+      cookieStore.set(name, "", {
+        path: "/",
+        maxAge: 0,
+        expires: new Date(0),
+        sameSite: "lax",
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+      });
     }
   }
 }
