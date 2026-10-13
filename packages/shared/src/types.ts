@@ -35,6 +35,17 @@ export interface RankedCandidate {
   userId: string;
   score: number;
   reasons: string[];
+  /** Optional experimental breakdown (Discover V2). */
+  breakdown?: {
+    intent: number | null;
+    values: number | null;
+    lifestyle: number | null;
+    communication: number | null;
+    proximity: number | null;
+    composite: number | null;
+    confidence: "low" | "medium" | "high";
+    dataMissing: string[];
+  };
 }
 
 export interface MutualGateInput {
