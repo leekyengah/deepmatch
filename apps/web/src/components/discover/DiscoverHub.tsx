@@ -276,7 +276,7 @@ export function DiscoverHub({ flagsOn }: { flagsOn: boolean }) {
           : t("discovery.emptyBody");
 
   return (
-    <div className="mx-auto w-full max-w-[1440px] space-y-6 pb-16">
+    <div className="dm-page-frame space-y-6 pb-16">
       {/* Header */}
       <header className="rounded-[22px] border border-dm-line bg-dm-surface p-5 shadow-[0_12px_40px_rgba(36,26,28,0.06)] sm:p-7">
         <p className="text-[11px] font-extrabold uppercase tracking-[2px] text-dm-champagne">
@@ -682,17 +682,13 @@ function ProfileMedia({
   compact?: boolean;
 }) {
   return (
-    <div
-      className={`relative bg-gradient-to-br from-dm-blush to-dm-line ${
-        compact ? "aspect-[3/4]" : "aspect-[3/4]"
-      }`}
-    >
+    <div className="relative dm-media-portrait bg-gradient-to-br from-dm-blush to-dm-line">
       {avatarUrl ? (
         <Image
           src={avatarUrl}
           alt=""
           fill
-          className="object-cover"
+          className="dm-media-cover"
           sizes="(max-width: 1024px) 100vw, 320px"
           unoptimized
         />
@@ -703,7 +699,7 @@ function ProfileMedia({
           </span>
         </div>
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#241A1C]/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-dm-ink/50 to-transparent" />
     </div>
   );
 }

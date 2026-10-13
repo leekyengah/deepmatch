@@ -130,9 +130,9 @@ export default async function HomePage() {
           <img
             src={IMG.hero}
             alt=""
-            className="aspect-[4/5] w-full object-cover object-center md:aspect-[5/6]"
+            className="aspect-portrait w-full object-cover object-center"
             width={900}
-            height={1080}
+            height={1200}
           />
           <figcaption className="sr-only">{t("marketing.photoCredit")}</figcaption>
         </figure>

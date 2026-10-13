@@ -16,6 +16,20 @@ export const colors = {
   danger: "#A63E52",
 } as const;
 
+/** Mirrors web Full Frame tokens (apps/web globals.css v4). */
+export const layout = {
+  gutter: 16,
+  touch: 44,
+  headerH: 56,
+  tabBarH: 56,
+  frameNarrow: 720,
+  aspectPortrait: 3 / 4,
+  aspectLandscape: 16 / 10,
+  aspectVideo: 16 / 9,
+  radiusMd: 12,
+  radiusXl: 22,
+} as const;
+
 const LEGAL_BASE = (
   process.env.EXPO_PUBLIC_API_URL ?? "https://datingvn.com"
 ).replace(/\/$/, "");

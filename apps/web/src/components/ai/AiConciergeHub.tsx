@@ -141,7 +141,7 @@ export function AiConciergeHub() {
   }, []);
 
   return (
-    <div className="mx-auto w-full max-w-[1440px] pb-16">
+    <div className="dm-page-frame pb-16">
       <div className="mb-4 flex items-center justify-between gap-3 lg:hidden">
         <button
           type="button"

@@ -102,9 +102,9 @@ export function CoupleHero({
 function Polaroid({ name, rotate }: { name: string; rotate: string }) {
   return (
     <div
-      className={`h-16 w-14 overflow-hidden rounded-sm border-[3px] border-white bg-white shadow-md sm:h-20 sm:w-[4.5rem] ${rotate}`}
+      className={`w-14 overflow-hidden rounded-sm border-[3px] border-white bg-white shadow-md sm:w-[4.5rem] ${rotate}`}
     >
-      <div className="h-[78%] w-full overflow-hidden bg-dm-surface">
+      <div className="aspect-portrait w-full overflow-hidden bg-dm-surface">
         <Initial name={name} />
       </div>
       <p className="truncate px-0.5 pt-0.5 text-center text-[8px] font-semibold text-dm-ink">

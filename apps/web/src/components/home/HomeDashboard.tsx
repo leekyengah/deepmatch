@@ -23,9 +23,9 @@ export function HomeDashboard({
   const journeyDone = profilePct >= 80 ? 3 : profilePct >= 40 ? 2 : 1;
 
   return (
-    <div className="space-y-6">
+    <div className="dm-page-frame space-y-6">
       {/* Hero — mockup banner */}
-      <section className="relative overflow-hidden rounded-[22px] shadow-[0_12px_40px_rgba(36,26,28,0.08)]">
+      <section className="relative overflow-hidden rounded-dm-xl shadow-dm">
         <div className="relative min-h-[220px] sm:min-h-[260px]">
           <Image
             src="/fixtures/home/hero-city.jpg"
@@ -33,9 +33,9 @@ export function HomeDashboard({
             fill
             className="object-cover"
             priority
-            sizes="(max-width: 1510px) 100vw, 1510px"
+            sizes="(max-width: 1440px) 100vw, 1440px"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#241A1C]/75 via-[#472025]/45 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-dm-ink/75 via-dm-deep/45 to-transparent" />
           <div className="relative grid h-full min-h-[220px] gap-4 p-5 sm:min-h-[260px] sm:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <div className="max-w-xl text-white">
               <p className="text-[11px] font-extrabold uppercase tracking-[2px] text-white/80">

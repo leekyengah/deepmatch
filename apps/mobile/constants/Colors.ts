@@ -1,19 +1,19 @@
-const tintColorLight = '#2f95dc';
-const tintColorDark = '#fff';
+import { colors } from "./theme";
 
+/** Align Expo template Colors with DeepMatch wine tokens. */
 export default {
   light: {
-    text: '#000',
-    background: '#fff',
-    tint: tintColorLight,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorLight,
+    text: colors.ink,
+    background: colors.canvas,
+    tint: colors.primary,
+    tabIconDefault: colors.muted,
+    tabIconSelected: colors.primary,
   },
   dark: {
-    text: '#fff',
-    background: '#000',
-    tint: tintColorDark,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorDark,
+    text: colors.surface,
+    background: colors.deep,
+    tint: colors.champagne,
+    tabIconDefault: colors.muted,
+    tabIconSelected: colors.champagne,
   },
 };

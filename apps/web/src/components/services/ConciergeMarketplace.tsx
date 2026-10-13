@@ -61,7 +61,7 @@ export function ConciergeMarketplace() {
   const matchmaking = filtered.filter((p) => p.group === "matchmaking");
 
   return (
-    <div className="mx-auto w-full max-w-[1280px] space-y-14 pb-16">
+    <div className="dm-page-frame dm-page-frame--wide space-y-14 pb-16">
       {/* Hero */}
       <section className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
         <div>

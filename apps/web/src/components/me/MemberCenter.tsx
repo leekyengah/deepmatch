@@ -64,7 +64,7 @@ export function MemberCenter({
   const journeyPct = Math.round((fx.journeyStep / fx.journeyTotal) * 100);
 
   return (
-    <div className="mx-auto w-full max-w-[1200px] space-y-8 pb-10">
+    <div className="dm-page-frame dm-page-frame--standard space-y-8 pb-10">
       {/* ── Layer 1: Member Identity ── */}
       <section
         aria-labelledby="member-identity-heading"

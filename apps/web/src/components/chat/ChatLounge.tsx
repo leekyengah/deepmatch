@@ -555,7 +555,7 @@ export function ChatLounge({ chatEnabled }: { chatEnabled: boolean }) {
   ];
 
   return (
-    <div className="mx-auto w-full max-w-[1440px]">
+    <div className="dm-page-frame">
       {!online ? (
         <p className="mb-3 rounded-xl bg-dm-danger/10 px-3 py-2 text-sm text-dm-danger" role="status">
           {t("chat.offline")}

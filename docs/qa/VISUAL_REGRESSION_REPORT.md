@@ -3,33 +3,32 @@
 | Field | Value |
 |---|---|
 | Date | 2026-10-13 |
-| Status | **BASELINE PENDING** |
+| Status | **PARTIAL** — P0 code landed; screenshot matrix incomplete |
 
 ## Before / after
 
-| Viewport | Before path | After path | Result |
+| Viewport | Route | Before | After (this branch) | Result |
+|---|---|---|---|---|
+| 375 | `/` prod | browser capture attempted (timeout) | pending preview/local | NOT RUN |
+| 1440 | `/` prod | visual confirm via browser session (no file) | pending | NOT RUN |
+| 768 / 1920 / 2560 | hubs | pending | pending | NOT RUN |
+
+Planned dirs: `docs/evidence/responsive-baseline/` · `docs/evidence/responsive-after/`.
+
+## Screen matrix (honest)
+
+| Screen | Code frame | Overflow verified | Notes |
 |---|---|---|---|
-| 375 | pending | pending | NOT RUN |
-| 768 | pending | pending | NOT RUN |
-| 1440 | pending | pending | NOT RUN |
-| 1920 | pending | pending | NOT RUN |
+| AppShell | gutters + safe-area | code review | touch ≥44 nav |
+| /home | `dm-page-frame` | NOT RUN | — |
+| /discover | `dm-page-frame` + 3:4 | NOT RUN | MediaFrame class |
+| /chat | `dm-page-frame` | NOT RUN | — |
+| /couple | polaroid 3:4 | NOT RUN | — |
+| /me | `--standard` | NOT RUN | — |
+| /services | `--wide` + table scroll | INTENTIONAL | min-w 720 table |
+| /lifestyle | `--wide` | NOT RUN | — |
+| /ai | `dm-page-frame` | NOT RUN | — |
+| `/` marketing | hero `aspect-portrait` | NOT RUN | — |
+| admin | legacy pink | OUT OF SCOPE P0 | P2 |
 
-Capture directory (planned): `docs/evidence/responsive-baseline/` and `docs/evidence/responsive-after/`.
-
-## Screen matrix (audit inventory only)
-
-| Screen | Overflow (audit) | Notes |
-|---|---|---|
-| /home | UNKNOWN | Needs capture |
-| /discover | UNKNOWN | 3:4 cards present in code |
-| /chat | UNKNOWN | 3-col → mobile panes |
-| /couple | UNKNOWN | — |
-| /me | UNKNOWN | — |
-| /services | INTENTIONAL scroll | compare table min-w 720 |
-| /lifestyle | UNKNOWN | — |
-| /ai | UNKNOWN | — |
-| /places/map | UNKNOWN | — |
-| checkout / settings | UNKNOWN | — |
-| admin | OUT OF SYNC | legacy pink theme |
-
-**No PASS without screenshots + probe.**
+**No global PASS.** Production not deployed from this branch.

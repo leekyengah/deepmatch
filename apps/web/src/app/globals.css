@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Visual Standard v3 — wine / ivory / champagne (sheet 26). Legacy pink archived. */
+/* Visual Standard v4 — wine / ivory / champagne + Full Frame tokens */
 :root {
   --dm-primary: #6b2d3c;
   --dm-primary-hover: #54212f;
@@ -19,33 +19,139 @@
   --dm-surface: #fffcf9;
   --dm-good: #2f7d4a;
   --dm-danger: #a63e52;
+
   --dm-radius-sm: 8px;
   --dm-radius-md: 12px;
   --dm-radius-lg: 16px;
   --dm-radius-xl: 22px;
   --dm-shadow: 0 12px 40px rgba(36, 26, 28, 0.08);
+
+  --dm-space-1: 4px;
+  --dm-space-2: 8px;
+  --dm-space-3: 12px;
+  --dm-space-4: 16px;
+  --dm-space-5: 20px;
+  --dm-space-6: 24px;
+  --dm-space-7: 32px;
+  --dm-space-8: 40px;
+  --dm-space-9: 48px;
+  --dm-space-10: 64px;
+
+  --dm-gutter: clamp(16px, 2.5vw, 32px);
+  --dm-sidebar: 272px;
+  --dm-header-h: 72px;
+  --dm-mobile-nav-h: 56px;
+  --dm-touch: 44px;
+  --dm-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --dm-safe-top: env(safe-area-inset-top, 0px);
+
+  --dm-frame-app: 1440px;
+  --dm-frame-wide: 1280px;
+  --dm-frame-standard: 1120px;
+  --dm-frame-narrow: 720px;
+  --dm-frame-prose: 680px;
+
+  --dm-aspect-portrait: 3 / 4;
+  --dm-aspect-landscape: 16 / 10;
+  --dm-aspect-video: 16 / 9;
+
+  --dm-text-display: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  --dm-text-editorial: clamp(0.95rem, 0.9rem + 0.4vw, 1.125rem);
+  --dm-text-body: 1rem;
+
   --background: var(--dm-canvas);
   --foreground: var(--dm-ink);
-  /* legacy aliases (rollback reference only — active UI uses v3) */
+
+  /* legacy aliases (rollback reference only — active UI uses v3/v4 wine) */
   --dm-legacy-peony: #e95383;
   --dm-legacy-petal: #f6c1d2;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--dm-canvas);
-  min-height: 100vh;
-  font-family: var(--font-body), "Be Vietnam Pro", system-ui, sans-serif;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--dm-canvas);
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: var(--font-body), "Be Vietnam Pro", system-ui, sans-serif;
+    overflow-x: clip;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--dm-primary);
+    outline-offset: 2px;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@layer components {
+  .dm-page-frame {
+    width: 100%;
+    max-width: var(--dm-frame-app);
+    margin-inline: auto;
+  }
 
-:focus-visible {
-  outline: 2px solid var(--dm-primary);
-  outline-offset: 2px;
+  .dm-page-frame--wide {
+    max-width: var(--dm-frame-wide);
+  }
+
+  .dm-page-frame--standard {
+    max-width: var(--dm-frame-standard);
+  }
+
+  .dm-page-frame--narrow {
+    max-width: var(--dm-frame-narrow);
+  }
+
+  .dm-page-frame--prose {
+    max-width: var(--dm-frame-prose);
+  }
+
+  .dm-page-frame--flush {
+    max-width: none;
+  }
+
+  .dm-media-portrait {
+    aspect-ratio: var(--dm-aspect-portrait);
+    overflow: hidden;
+  }
+
+  .dm-media-landscape {
+    aspect-ratio: var(--dm-aspect-landscape);
+    overflow: hidden;
+  }
+
+  .dm-media-video {
+    aspect-ratio: var(--dm-aspect-video);
+    overflow: hidden;
+  }
+
+  .dm-media-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .dm-touch-target {
+    min-width: var(--dm-touch);
+    min-height: var(--dm-touch);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

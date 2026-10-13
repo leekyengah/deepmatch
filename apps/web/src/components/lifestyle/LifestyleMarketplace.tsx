@@ -50,7 +50,7 @@ export function LifestyleMarketplace({
     : LIFESTYLE_COMMERCIAL;
 
   return (
-    <div className="mx-auto w-full max-w-[1200px] space-y-10 pb-12">
+    <div className="dm-page-frame dm-page-frame--wide space-y-10 pb-12">
       {/* Hero */}
       <section className="relative overflow-hidden rounded-[22px] shadow-[0_12px_40px_rgba(36,26,28,0.08)]">
         <div className="relative min-h-[240px] sm:min-h-[300px]">

@@ -68,7 +68,7 @@ export default async function LifestyleCategoryPage({
   const { data: products } = await query;
 
   return (
-    <div className="mx-auto w-full max-w-[1000px] pb-12">
+    <div className="dm-page-frame dm-page-frame--standard pb-12">
       <Link
         href="/lifestyle"
         className="text-sm font-semibold text-dm-muted underline-offset-2 hover:text-dm-primary hover:underline"
