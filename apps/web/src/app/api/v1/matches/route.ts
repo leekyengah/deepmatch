@@ -19,9 +19,20 @@ export async function GET(req: Request) {
     m.user_a === user.id ? m.user_b : m.user_a,
   );
   const { data: peers } = peerIds.length
-    ? await supabase.from("profiles").select("id, display_name").in("id", peerIds)
-    : { data: [] as { id: string; display_name: string }[] };
-  const nameMap = new Map((peers ?? []).map((p) => [p.id, p.display_name]));
+    ? await supabase
+        .from("profiles")
+        .select("id, display_name, avatar_path, fuzzy_region, job_title")
+        .in("id", peerIds)
+    : {
+        data: [] as {
+          id: string;
+          display_name: string;
+          avatar_path: string | null;
+          fuzzy_region: string | null;
+          job_title: string | null;
+        }[],
+      };
+  const peerMap = new Map((peers ?? []).map((p) => [p.id, p]));
 
   const convIds = (data ?? [])
     .map((m) => {
@@ -44,6 +55,10 @@ export async function GET(req: Request) {
   );
 
   const unreadMap = new Map<string, number>();
+  const lastMsgMap = new Map<
+    string,
+    { body: string | null; created_at: string; sender_id: string }
+  >();
   for (const cid of convIds) {
     const since = readMap.get(cid);
     let q = supabase
@@ -54,6 +69,21 @@ export async function GET(req: Request) {
     if (since) q = q.gt("created_at", since);
     const { count } = await q;
     unreadMap.set(cid, count ?? 0);
+
+    const { data: last } = await supabase
+      .from("messages")
+      .select("body, created_at, sender_id, media_id")
+      .eq("conversation_id", cid)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (last) {
+      lastMsgMap.set(cid, {
+        body: last.media_id && !last.body ? "[media]" : last.body,
+        created_at: last.created_at,
+        sender_id: last.sender_id,
+      });
+    }
   }
 
   const peerDefault = await apiT("peerDefault");
@@ -63,14 +93,20 @@ export async function GET(req: Request) {
       : m.conversations;
     const peerId = m.user_a === user.id ? m.user_b : m.user_a;
     const conversationId = conv?.id ?? null;
+    const peer = peerMap.get(peerId);
+    const last = conversationId ? lastMsgMap.get(conversationId) : undefined;
     return {
       match_id: m.id,
       user_a: m.user_a,
       user_b: m.user_b,
       peer_id: peerId,
-      peer_name: nameMap.get(peerId) ?? peerDefault,
+      peer_name: peer?.display_name ?? peerDefault,
+      peer_region: peer?.fuzzy_region ?? null,
+      peer_job: peer?.job_title ?? null,
       conversation_id: conversationId,
       unread_count: conversationId ? (unreadMap.get(conversationId) ?? 0) : 0,
+      last_message: last?.body ?? null,
+      last_message_at: last?.created_at ?? m.created_at,
       created_at: m.created_at,
     };
   });

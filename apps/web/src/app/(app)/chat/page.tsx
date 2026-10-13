@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { flagEnabled } from "@/lib/flags";
 import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
-import { ChatShell } from "@/components/chat/ChatShell";
+import { ChatLounge } from "@/components/chat/ChatLounge";
 import { LoadingState } from "@/components/ui/LoadingState";
 import { getServerTranslator } from "@/lib/i18n/server";
 
@@ -12,7 +12,7 @@ export default async function ChatPage() {
     <>
       <AnalyticsBeacon event="chat_open" />
       <Suspense fallback={<LoadingState label={t("chat.opening")} />}>
-        <ChatShell chatEnabled={chatEnabled} />
+        <ChatLounge chatEnabled={chatEnabled} />
       </Suspense>
     </>
   );
