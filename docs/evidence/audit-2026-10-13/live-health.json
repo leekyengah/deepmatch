@@ -1,0 +1,25 @@
+﻿{
+    "ok":  true,
+    "service":  "deepmatch-web",
+    "env":  "staging",
+    "brand":  {
+                  "primary":  "#6B2D3C",
+                  "blush":  "#F4E9E4",
+                  "canvas":  "#F7F3EE",
+                  "deep":  "#472025",
+                  "champagne":  "#A88A62",
+                  "ink":  "#241A1C"
+              },
+    "flags":  {
+                  "ff_matching":  true,
+                  "ff_chat":  true,
+                  "ff_media_upload":  true,
+                  "ff_concierge":  true,
+                  "ff_discovery":  true,
+                  "ff_premium":  true,
+                  "ff_billing":  true,
+                  "ff_lifestyle":  true,
+                  "ff_ai":  true
+              },
+    "productionDeploy":  false
+}

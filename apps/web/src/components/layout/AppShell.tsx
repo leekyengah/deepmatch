@@ -88,10 +88,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-10 flex h-dm-header items-center gap-3 border-b border-dm-line bg-dm-canvas/92 px-dm-gutter backdrop-blur-md md:gap-4">
           {isHome ? (
             <label className="relative mx-auto hidden min-w-0 max-w-xl flex-1 md:block">
-              <span className="sr-only">Tìm kiếm</span>
+              <span className="sr-only">{t("nav.searchLabel")}</span>
               <input
                 type="search"
-                placeholder="Tìm kiếm người, địa điểm, chủ đề..."
+                placeholder={t("nav.searchPlaceholder")}
                 className="w-full rounded-full border border-dm-line bg-white px-5 py-2.5 text-sm text-dm-ink outline-none ring-0 placeholder:text-dm-muted focus:border-dm-primary"
               />
             </label>
@@ -105,7 +105,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <button
               type="button"
               className="relative flex h-dm-touch w-dm-touch items-center justify-center rounded-full border border-dm-line bg-white text-dm-primary"
-              aria-label="Thông báo"
+              aria-label={t("nav.notificationsAria")}
             >
               <BellIcon />
               <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-dm-danger" />
