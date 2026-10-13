@@ -26,12 +26,16 @@ export type UploadIntentPayload = {
   expires_in: number;
 };
 
+function cleanEnv(v: string | undefined): string {
+  return (v ?? "").replace(/^\uFEFF/, "").trim();
+}
+
 function r2Config() {
-  const endpoint = process.env.R2_ENDPOINT?.replace(/\/$/, "");
-  const bucket = process.env.R2_BUCKET;
-  const accessKeyId = process.env.R2_ACCESS_KEY_ID;
-  const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
-  const region = process.env.R2_REGION || "auto";
+  const endpoint = cleanEnv(process.env.R2_ENDPOINT).replace(/\/$/, "");
+  const bucket = cleanEnv(process.env.R2_BUCKET);
+  const accessKeyId = cleanEnv(process.env.R2_ACCESS_KEY_ID);
+  const secretAccessKey = cleanEnv(process.env.R2_SECRET_ACCESS_KEY);
+  const region = cleanEnv(process.env.R2_REGION) || "auto";
   if (!endpoint || !bucket || !accessKeyId || !secretAccessKey) {
     throw new Error("R2 credentials missing");
   }

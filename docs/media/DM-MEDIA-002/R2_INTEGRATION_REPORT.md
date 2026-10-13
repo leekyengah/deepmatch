@@ -3,7 +3,7 @@
 **Task:** DM-MEDIA-002 ↔ DM-MEDIA-001  
 **Date:** 2026-10-13  
 **Provider:** Cloudflare R2 (S3-compatible)  
-**Status:** Audit complete · Implementation **BLOCKED** on secrets + ADR
+**Status:** Implemented (adapter dual-backend) · Staging `STORAGE_BACKEND=r2` · Prod keys installed but `STORAGE_BACKEND=supabase` until cutover
 
 ---
 

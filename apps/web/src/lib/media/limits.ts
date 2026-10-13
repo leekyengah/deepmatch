@@ -33,6 +33,9 @@ export type ProcessingStatus =
 export type StorageBackend = "supabase" | "r2";
 
 export function getStorageBackend(): StorageBackend {
-  const raw = (process.env.STORAGE_BACKEND ?? "supabase").toLowerCase().trim();
+  const raw = (process.env.STORAGE_BACKEND ?? "supabase")
+    .replace(/^\uFEFF/, "")
+    .toLowerCase()
+    .trim();
   return raw === "r2" ? "r2" : "supabase";
 }
