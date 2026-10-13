@@ -6,13 +6,7 @@ const nextConfig: NextConfig = {
     "@deepmatch/i18n",
     "@deepmatch/legal-content",
   ],
-  serverExternalPackages: [
-    "sharp",
-    "@aws-sdk/client-s3",
-    "@aws-sdk/s3-request-presigner",
-    "ffmpeg-static",
-    "fluent-ffmpeg",
-  ],
+  serverExternalPackages: ["sharp", "@aws-sdk/client-s3", "@aws-sdk/s3-request-presigner"],
   eslint: { ignoreDuringBuilds: true },
   async redirects() {
     return [

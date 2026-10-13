@@ -71,14 +71,10 @@ export function derivePurpose(input: {
   pairId?: string | null;
   conversationId?: string | null;
   purpose?: string | null;
-  placeId?: string | null;
-  serviceId?: string | null;
 }): MediaPurpose {
   if (input.purpose === "avatar") return "avatar";
   if (input.conversationId) return "chat";
   if (input.pairId) return "couple";
-  if (input.placeId || input.purpose === "place_review") return "place_review";
-  if (input.serviceId || input.purpose === "service") return "service";
   if (
     input.purpose &&
     ["profile", "place_review", "service", "banner"].includes(input.purpose)

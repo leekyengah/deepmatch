@@ -104,8 +104,6 @@ export type MessageRow = {
   id: string;
   sender_id: string;
   body: string | null;
-  media_id?: string | null;
   media_url?: string | null;
-  media_content_type?: string | null;
   created_at: string;
 };

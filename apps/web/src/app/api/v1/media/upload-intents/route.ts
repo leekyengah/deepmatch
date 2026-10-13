@@ -16,8 +16,6 @@ import {
   derivePurpose,
 } from "@/lib/media/keys";
 import { createUploadIntent } from "@/lib/media/storage";
-import { lovePlaceById } from "@/lib/love-places";
-import { companionByCode, companionBySlug } from "@/lib/companion-packages";
 
 export async function POST(req: NextRequest) {
   const requestId = makeRequestId();
@@ -34,8 +32,6 @@ export async function POST(req: NextRequest) {
     pair_id?: string;
     conversation_id?: string;
     purpose?: string;
-    place_id?: string;
-    service_id?: string;
   };
 
   if (!body.content_type || !ALLOWED_MIME.has(body.content_type)) {
@@ -51,27 +47,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (body.place_id && !lovePlaceById(body.place_id)) {
-    return jsonError("VALIDATION_ERROR", "invalidJson", requestId);
-  }
-  if (
-    body.service_id &&
-    !companionByCode(body.service_id) &&
-    !companionBySlug(body.service_id)
-  ) {
-    return jsonError("VALIDATION_ERROR", "invalidJson", requestId);
-  }
-
-  const isProfileLibrary =
-    !body.pair_id &&
-    !body.conversation_id &&
-    !body.place_id &&
-    !body.service_id &&
-    body.purpose !== "avatar" &&
-    body.purpose !== "place_review" &&
-    body.purpose !== "service";
-
-  if (isProfileLibrary) {
+  if (!body.pair_id && !body.conversation_id && body.purpose !== "avatar") {
     const { data: existing } = await supabase
       .from("media_objects")
       .select("content_type")
@@ -111,8 +87,6 @@ export async function POST(req: NextRequest) {
     pairId: body.pair_id,
     conversationId: body.conversation_id,
     purpose: body.purpose,
-    placeId: body.place_id,
-    serviceId: body.service_id,
   });
   const storagePath =
     backend === "r2"
@@ -121,30 +95,10 @@ export async function POST(req: NextRequest) {
           userId: user.id,
           mime: body.content_type,
           pairId: body.pair_id,
-          placeId: body.place_id,
-          serviceId: body.service_id,
         })
       : buildSupabaseStoragePath(user.id, body.content_type);
 
-  const visibility =
-    purpose === "place_review"
-      ? "public"
-      : body.pair_id
-        ? "couple_private"
-        : "private";
-
-  const purposeDb =
-    purpose === "avatar"
-      ? "avatar"
-      : purpose === "chat"
-        ? "chat"
-        : purpose === "place_review"
-          ? "place_review"
-          : purpose === "service"
-            ? "service"
-            : purpose === "couple"
-              ? "couple"
-              : "profile";
+  const visibility = body.pair_id ? "couple_private" : "private";
 
   const insertRow: Record<string, unknown> = {
     owner_user_id: user.id,
@@ -153,17 +107,12 @@ export async function POST(req: NextRequest) {
     storage_path: storagePath,
     content_type: body.content_type,
     bytes: body.bytes,
-    purpose: purposeDb,
+    purpose:
+      purpose === "avatar" ? "avatar" : purpose === "chat" ? "chat" : "profile",
     storage_backend: backend,
     processing_status: "pending_upload",
     visibility,
     media_type: isVideo ? "video" : "image",
-    entity_type: body.place_id
-      ? "place"
-      : body.service_id
-        ? "service"
-        : null,
-    entity_ref: body.place_id ?? body.service_id ?? null,
   };
 
   const { data: media, error: mediaErr } = await supabase

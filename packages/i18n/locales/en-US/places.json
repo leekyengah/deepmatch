@@ -32,12 +32,5 @@
   "tagsLabel": "Good for",
   "opsVenuesTitle": "Venue moderation",
   "opsVenuesIntro": "Staff-only: flag closed venues and resolve review reports.",
-  "opsVenuesLink": "Venue moderation (ops)",
-  "reviewRating": "Rating",
-  "reviewBodyPh": "What stood out about this place?",
-  "reviewBodyRequired": "Please write a short review.",
-  "reviewMediaTypeError": "Use JPEG, PNG, WebP, or MP4/WebM.",
-  "reviewSubmit": "Submit review",
-  "reviewSaved": "Review saved.",
-  "reviewFailed": "Could not save the review."
+  "opsVenuesLink": "Venue moderation (ops)"
 }
