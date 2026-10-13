@@ -3,13 +3,16 @@ import { useCallback, useEffect, useState } from "react";
 import {
   Alert,
   FlatList,
+  Image,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 import { apiGet, apiPost, type MessageRow } from "../../lib/api";
+import { uploadMobileMedia } from "../../lib/media";
 import { Button, Field, Loading, Screen } from "../../components/ui";
 import { useAuth } from "../../lib/auth";
 import { useT } from "../../lib/i18n/I18nProvider";
@@ -26,6 +29,7 @@ export default function ChatThreadScreen() {
   const [messages, setMessages] = useState<MessageRow[]>([]);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
 
   const load = useCallback(async () => {
     if (!id) return;
@@ -65,6 +69,48 @@ export default function ChatThreadScreen() {
         t("chat.sendFailed"),
         e instanceof Error ? e.message : t("errors.unknown"),
       );
+    }
+  }
+
+  async function sendMedia() {
+    if (!id || uploading) return;
+    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!perm.granted) {
+      Alert.alert(t("chat.mediaUploadFailed"));
+      return;
+    }
+    const picked = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images", "videos"],
+      quality: 0.85,
+      videoMaxDuration: 60,
+    });
+    if (picked.canceled || !picked.assets?.[0]) return;
+    const asset = picked.assets[0];
+    const mime =
+      asset.mimeType ??
+      (asset.type === "video" ? "video/mp4" : "image/jpeg");
+    setUploading(true);
+    try {
+      const { mediaId } = await uploadMobileMedia({
+        uri: asset.uri,
+        mimeType: mime,
+        bytes: asset.fileSize,
+        conversationId: id,
+      });
+      await apiPost("/api/v1/messages", {
+        conversationId: id,
+        mediaId,
+        text: "",
+        clientDedupeKey: `${Date.now()}`,
+      });
+      await load();
+    } catch (e) {
+      Alert.alert(
+        t("chat.mediaUploadFailed"),
+        e instanceof Error ? e.message : t("errors.unknown"),
+      );
+    } finally {
+      setUploading(false);
     }
   }
 
@@ -127,21 +173,36 @@ export default function ChatThreadScreen() {
           const mine = item.sender_id === user?.id;
           return (
             <View style={[styles.bubble, mine ? styles.mine : styles.theirs]}>
-              <Text style={{ color: mine ? "#fff" : colors.ink }}>
-                {item.body}
-              </Text>
+              {item.media_url ? (
+                <Image
+                  source={{ uri: item.media_url }}
+                  style={styles.media}
+                  accessibilityLabel={t("chat.attachmentAlt")}
+                />
+              ) : null}
+              {item.body ? (
+                <Text style={{ color: mine ? "#fff" : colors.ink }}>
+                  {item.body}
+                </Text>
+              ) : null}
             </View>
           );
         }}
       />
       <View style={styles.composer}>
+        <Button
+          label={uploading ? t("chat.mediaUploading") : t("chat.media")}
+          variant="outline"
+          onPress={() => void sendMedia()}
+          disabled={uploading}
+        />
         <Field
           placeholder={t("chat.composerPlaceholder")}
           value={text}
           onChangeText={setText}
           style={{ flex: 1, marginBottom: 0 }}
         />
-        <Button label={t("chat.send")} onPress={send} />
+        <Button label={t("chat.send")} onPress={send} disabled={uploading} />
       </View>
     </KeyboardAvoidingView>
   );
@@ -171,6 +232,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.panel,
     borderWidth: 1,
     borderColor: colors.line,
+  },
+  media: {
+    width: 180,
+    height: 180,
+    borderRadius: 12,
+    marginBottom: 6,
+    backgroundColor: colors.line,
   },
   composer: {
     flexDirection: "row",
