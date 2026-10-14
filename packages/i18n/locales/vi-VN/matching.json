@@ -1,0 +1,12 @@
+{
+  "title": "Kết nối",
+  "loading": "Đang tải kết nối…",
+  "loadError": "Không tải được danh sách kết nối.",
+  "emptyTitle": "Chưa có kết nối phù hợp",
+  "emptyBody": "Khi hai người cùng quan tâm, kết nối sẽ xuất hiện tại đây để bắt đầu trò chuyện.",
+  "openChat": "Mở trò chuyện",
+  "noConversation": "Chưa có cuộc trò chuyện cho kết nối này.",
+  "mutualMatch": "Cùng thích",
+  "matchedAt": "Kết nối lúc {when}",
+  "pageIntro": "Danh sách cùng thích. Chat chỉ mở khi đủ điều kiện mutual; không tự tạo không gian Sánh đôi."
+}

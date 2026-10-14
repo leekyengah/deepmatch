@@ -1,15 +1,27 @@
-{
+﻿{
   "project": "DeepMatch",
-  "updatedAt": "2026-10-11T19:45:00+07:00",
-  "state": "G0 GO by Founder (đồng ý hết); await staging Supabase credentials for DM-022+",
-  "gates": {
-    "G0": "GO",
-    "G1": "Pending",
-    "G6": "NO-GO until Founder+Safety"
+  "updatedAt": "2026-10-12T19:00:00+07:00",
+  "state": "Master wave: persona home + AI quota/revoke + admin catalog + catalog E2E local PASS; staging deploy next",
+  "branch": "feat/ext-lifestyle-ai-commerce",
+  "wave": {
+    "ext": [
+      "EXT-021",
+      "EXT-030",
+      "EXT-031",
+      "EXT-033",
+      "EXT-037",
+      "EXT-041",
+      "EXT-042",
+      "EXT-052",
+      "EXT-053",
+      "EXT-054",
+      "EXT-055",
+      "EXT-056"
+    ],
+    "gates": {
+      "i18nParity": "PASS",
+      "typecheck": "PASS"
+    }
   },
-  "blockerIds": ["B1-soft", "B5", "B6"],
-  "nextReady": [
-    "Provide staging Supabase env",
-    "DM-022 Authentication & consent"
-  ]
+  "blocked": ["EXT-040", "TestFlight"]
 }

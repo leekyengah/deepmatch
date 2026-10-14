@@ -11,6 +11,32 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        dm: {
+          primary: "var(--dm-primary)",
+          blush: "var(--dm-blush)",
+          canvas: "var(--dm-canvas)",
+          deep: "var(--dm-deep)",
+          raspberry: "var(--dm-raspberry)",
+          ink: "var(--dm-ink)",
+          muted: "var(--dm-muted)",
+          line: "var(--dm-line)",
+          panel: "var(--dm-panel)",
+          surface: "var(--dm-surface)",
+          good: "var(--dm-good)",
+          danger: "var(--dm-danger)",
+        },
+      },
+      borderRadius: {
+        dm: "var(--dm-radius-md)",
+        "dm-lg": "var(--dm-radius-lg)",
+        "dm-xl": "var(--dm-radius-xl)",
+      },
+      boxShadow: {
+        dm: "var(--dm-shadow)",
+      },
+      fontFamily: {
+        display: ["var(--font-display)", "Georgia", "serif"],
+        body: ["var(--font-body)", "Be Vietnam Pro", "sans-serif"],
       },
     },
   },

@@ -1,0 +1,1 @@
+﻿TSC_OK apps/web responsive-full-frame 2026-10-13

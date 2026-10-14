@@ -1,0 +1,30 @@
+=== apps/web/src/components/lifestyle/AddToCartButton.tsx (2)
+29:          setMsg("Đã thêm vào giỏ DEMO (sandbox)");
+32:        Thêm vào giỏ DEMO
+
+=== apps/web/src/components/lifestyle/DemoCartClient.tsx (11)
+39:        setMsg(json?.error?.message ?? "Checkout DEMO thất bại");
+46:          "DEMO_CHECKOUT_OK — không có thanh toán thật / không phải hóa đơn thương mại",
+56:        <p className="text-sm text-dm-muted">Giỏ DEMO trống.</p>
+58:          Quay lại Lifestyle
+70:        BẢN MẪU / KHÔNG CÓ ĐẶT CHỖ HOẶC THANH TOÁN THẬT — không phải hóa đơn
+71:        thương mại.
+92:                Xóa
+99:        Tổng DEMO: {total.toLocaleString("vi-VN")}₫
+103:          {busy ? "Đang xử lý…" : "Checkout sandbox DEMO"}
+113:          Xóa giỏ
+116:          Xem lệnh DEMO
+
+=== apps/web/src/app/(app)/lifestyle/[category]/[mockId]/page.tsx (1)
+81:          Xem giỏ DEMO
+
+=== apps/web/src/app/(app)/lifestyle/cart/page.tsx (3)
+17:          Giỏ DEMO
+22:        Giỏ hàng sandbox cục bộ. Checkout chỉ tạo lệnh DEMO — không thu thẻ, không
+23:        phát hành hóa đơn thật.
+
+=== apps/web/src/app/(app)/lifestyle/page.tsx (1)
+43:      label: "Giỏ DEMO",
+
+=== apps/web/src/app/page.tsx (1)
+14:    title: "DeepMatch — Mỗi kết nối, một hành trình đáng nhớ",

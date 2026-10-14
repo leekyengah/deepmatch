@@ -1,0 +1,39 @@
+{
+  "generatedAt": "2026-10-13T19:13:53.667Z",
+  "base": "https://datingvn.com",
+  "findings": [
+    {
+      "name": "private_html_discover_redirect",
+      "status": "PASS",
+      "detail": "307 loc=/login?next=%2Fdiscover"
+    },
+    {
+      "name": "public_legal_200",
+      "status": "PASS",
+      "detail": "status=200"
+    },
+    {
+      "name": "api_profile_unauth_401",
+      "status": "PASS",
+      "detail": "status=401"
+    },
+    {
+      "name": "sandbox_webhook_no_secret_or_bad_sig",
+      "status": "PASS",
+      "detail": "status=400"
+    },
+    {
+      "name": "stripe_webhook_bad_sig",
+      "status": "PASS",
+      "detail": "status=503"
+    },
+    {
+      "name": "password_grant_qa",
+      "status": "PASS",
+      "detail": "login_ok media_library=200 foreign_media_url=403"
+    }
+  ],
+  "pass": 6,
+  "fail": 0,
+  "blocked": 0
+}

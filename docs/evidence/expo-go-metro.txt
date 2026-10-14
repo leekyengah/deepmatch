@@ -1,0 +1,4 @@
+﻿Metro RUNNING localhost:8081
+exp://10.200.249.62:8081
+QR: docs/evidence/expo-go-qr.png
+commit 04977a9

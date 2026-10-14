@@ -1,0 +1,10 @@
+Vercel production deploy — feature/responsive-full-frame @ 4b4f7fa
+READY dpl_HPScT8Y5fyiDEPn8QDq8ekurFeGE
+Aliased https://datingvn.com
+Production URL: https://deepmatch-k69v1m1j3-tradingbase.vercel.app
+Inspector: https://vercel.com/tradingbase/deepmatch/HPScT8Y5fyiDEPn8QDq8ekurFeGE
+
+Probe 2026-10-13:
+- https://datingvn.com/ HTTP 200
+- https://datingvn.com/chat HTTP 200 css?dpl=dpl_HPScT8Y5fyiDEPn8QDq8ekurFeGE
+- https://datingvn.com/discover HTTP 200 css?dpl=dpl_HPScT8Y5fyiDEPn8QDq8ekurFeGE

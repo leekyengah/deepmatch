@@ -1,0 +1,51 @@
+{
+  "runId": "VISUAL-SMOKE-2026-10-12T2239",
+  "timestampUtc": "2026-10-12T22:39:15.247Z",
+  "environment": "https://datingvn.com",
+  "commit": "40f49ad",
+  "pass": 5,
+  "fail": 0,
+  "results": [
+    {
+      "id": "LM-01",
+      "path": "/places/map",
+      "status": 200,
+      "location": null,
+      "missing": [],
+      "ok": true
+    },
+    {
+      "id": "LM-02",
+      "path": "/places/top?city=H%C3%A0%20N%E1%BB%99i",
+      "status": 200,
+      "location": null,
+      "missing": [],
+      "ok": true
+    },
+    {
+      "id": "LM-03",
+      "path": "/places/hn-cafe-01",
+      "status": 200,
+      "location": null,
+      "missing": [],
+      "ok": true
+    },
+    {
+      "id": "LM-04",
+      "path": "/couple/map",
+      "status": 200,
+      "location": null,
+      "missing": [],
+      "ok": true
+    },
+    {
+      "id": "PAY-01",
+      "path": "/checkout/confirm?package=CMP-01",
+      "status": 307,
+      "location": "/login?next=/checkout/confirm",
+      "missing": [],
+      "ok": true
+    }
+  ],
+  "notes": "HTML marker smoke + checkout auth gate. Pixel overlay vs Drive mockup still human-reviewed. Screenshots under docs/evidence/visual/ when captured."
+}

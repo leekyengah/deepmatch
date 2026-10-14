@@ -5,10 +5,14 @@ import {
   type MatchPreferences,
 } from "@deepmatch/shared";
 import { flagEnabled } from "@/lib/flags";
+import { jsonError } from "@/lib/api-error";
 
 export async function POST(req: Request) {
-  if (!flagEnabled("ff_matching") || !flagEnabled("ff_discovery")) {
-    return NextResponse.json({ error: "matching_disabled" }, { status: 503 });
+  if (
+    !(await flagEnabled("ff_matching")) ||
+    !(await flagEnabled("ff_discovery"))
+  ) {
+    return jsonError("FORBIDDEN", "flagDiscoveryOff");
   }
 
   const body = (await req.json()) as {
