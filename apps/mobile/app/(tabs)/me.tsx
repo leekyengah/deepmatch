@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, ScrollView, StyleSheet, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as WebBrowser from "expo-web-browser";
+import { router } from "expo-router";
 import { Button, Muted, Screen, Title } from "../../components/ui";
 import { LanguageSwitcher } from "../../components/LanguageSwitcher";
 import { useAuth } from "../../lib/auth";
 import { apiPost } from "../../lib/api";
 import { uploadMobileMedia } from "../../lib/media";
 import { supabase } from "../../lib/supabase";
+import { fetchIsStaff } from "../../lib/staff";
 import { useT } from "../../lib/i18n/I18nProvider";
 import { purchasePremium, restorePremium } from "../../lib/iap";
 import { colors, LEGAL_URLS } from "../../constants/theme";
@@ -21,6 +23,11 @@ export default function MeScreen() {
   const t = useT();
   const [busy, setBusy] = useState(false);
   const [avatarBusy, setAvatarBusy] = useState(false);
+  const [staff, setStaff] = useState(false);
+
+  useEffect(() => {
+    void fetchIsStaff().then(setStaff);
+  }, []);
 
   async function onAvatar() {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -123,6 +130,34 @@ export default function MeScreen() {
       <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
         <Title>{t("profile.title")}</Title>
         <Muted>{user?.email ?? ""}</Muted>
+
+        <Text style={styles.h2}>{t("mobile.hubGoals")}</Text>
+        <Button
+          label={t("mobile.goalsTitle")}
+          variant="outline"
+          onPress={() => router.push("/onboarding/goals")}
+        />
+        <Text style={{ height: 10 }} />
+        <Button
+          label={t("mobile.hubNotifications")}
+          variant="outline"
+          onPress={() => router.push("/notifications")}
+        />
+        <Text style={{ height: 10 }} />
+        <Button
+          label={t("mobile.hubPremium")}
+          variant="outline"
+          onPress={() => router.push("/premium/" as never)}
+        />
+        {staff ? (
+          <>
+            <Text style={{ height: 10 }} />
+            <Button
+              label={t("mobile.hubAdmin")}
+              onPress={() => router.push("/(admin)/" as never)}
+            />
+          </>
+        ) : null}
 
         <Text style={styles.h2}>{t("profile.avatarTitle")}</Text>
         <Muted>{t("profile.avatarHint")}</Muted>

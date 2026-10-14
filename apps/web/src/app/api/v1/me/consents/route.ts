@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { getRouteUser } from "@/lib/supabase/route";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 
 export async function POST(req: Request) {
   const requestId = makeRequestId();
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
 
   const body = (await req.json()) as {
@@ -37,12 +34,9 @@ export async function POST(req: Request) {
   });
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   const requestId = makeRequestId();
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
 
   const { data, error } = await supabase

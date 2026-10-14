@@ -1,51 +1,15 @@
-import { Linking, StyleSheet, Text, View } from "react-native";
-import { useT } from "../../lib/i18n/I18nProvider";
-import { Button, Muted, Screen, Title } from "../../components/ui";
-import { colors } from "../../constants/theme";
+import { useEffect } from "react";
+import { router } from "expo-router";
+import { SkeletonLoader, PremiumScreen } from "../../components/premium";
 
-const WEB = (process.env.EXPO_PUBLIC_API_URL ?? "https://datingvn.com").replace(
-  /\/$/,
-  "",
-);
-
-export default function CompanionTabScreen() {
-  const t = useT();
+/** Legacy tab → native services (M09) */
+export default function CompanionRedirect() {
+  useEffect(() => {
+    router.replace("/services/" as never);
+  }, []);
   return (
-    <Screen>
-      <Text style={styles.eyebrow}>{t("nav.companion")}</Text>
-      <Title>{t("booking.title")}</Title>
-      <Muted>{t("booking.servicesIntro")}</Muted>
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t("marketing.pillarCompanionTitle")}</Text>
-        <Text style={styles.cardBody}>{t("marketing.pillarCompanionBody")}</Text>
-      </View>
-      <View style={styles.cta}>
-        <Button
-          label={t("marketing.pillarCompanionCta")}
-          onPress={() => void Linking.openURL(`${WEB}/services`)}
-        />
-      </View>
-    </Screen>
+    <PremiumScreen>
+      <SkeletonLoader />
+    </PremiumScreen>
   );
 }
-
-const styles = StyleSheet.create({
-  eyebrow: {
-    fontSize: 11,
-    fontWeight: "800",
-    letterSpacing: 2,
-    color: colors.champagne,
-    textTransform: "uppercase",
-  },
-  card: {
-    marginTop: 16,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: colors.line,
-    backgroundColor: colors.panel,
-    padding: 14,
-  },
-  cardTitle: { fontWeight: "700", color: colors.ink, fontSize: 16 },
-  cardBody: { marginTop: 6, color: colors.muted, fontSize: 13, lineHeight: 20 },
-  cta: { marginTop: 20 },
-});

@@ -1,30 +1,38 @@
 import { useCallback, useState } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
-import { useFocusEffect } from "expo-router";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+import { router, useFocusEffect } from "expo-router";
 import { apiGet, apiPost, type Candidate } from "../../lib/api";
 import { useT } from "../../lib/i18n/I18nProvider";
-import { Button, Empty, Loading, Muted, Screen, Title } from "../../components/ui";
-import { colors } from "../../constants/theme";
+import {
+  EmptyState,
+  ErrorState,
+  MatchScore,
+  PremiumButton,
+  PremiumHeader,
+  PremiumScreen,
+  SkeletonLoader,
+} from "../../components/premium";
+import { colors, layout, spacing } from "../../constants/theme";
 
+/** M03 — Discovery */
 export default function DiscoverScreen() {
   const t = useT();
   const [items, setItems] = useState<Candidate[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const current = items[0];
 
   const load = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const res = await apiGet<{ data: { candidates: Candidate[] } }>(
         "/api/v1/discovery/candidates?page_size=20",
       );
       setItems(res.data.candidates ?? []);
     } catch (e) {
-      Alert.alert(
-        t("discovery.title"),
-        e instanceof Error ? e.message : t("discovery.loadError"),
-      );
+      setError(e instanceof Error ? e.message : t("discovery.loadError"));
     } finally {
       setLoading(false);
     }
@@ -63,55 +71,78 @@ export default function DiscoverScreen() {
 
   if (loading) {
     return (
-      <Screen>
-        <Loading />
-      </Screen>
+      <PremiumScreen>
+        <SkeletonLoader />
+      </PremiumScreen>
+    );
+  }
+
+  if (error) {
+    return (
+      <PremiumScreen>
+        <ErrorState message={error} onRetry={load} retryLabel={t("mobile.retry")} />
+      </PremiumScreen>
     );
   }
 
   if (!current) {
     return (
-      <Screen>
-        <Title>{t("discovery.title")}</Title>
-        <Empty text={t("discovery.emptyBody")} />
-        <Button label={t("common.reload")} onPress={load} variant="outline" />
-      </Screen>
+      <PremiumScreen>
+        <PremiumHeader title={t("discovery.title")} />
+        <EmptyState title={t("discovery.emptyBody")} />
+        <PremiumButton label={t("common.reload")} onPress={load} variant="outline" />
+      </PremiumScreen>
     );
   }
 
   return (
-    <Screen>
-      <Title>{t("discovery.title")}</Title>
-      <View style={styles.card}>
+    <PremiumScreen>
+      <PremiumHeader
+        title={t("discovery.title")}
+        subtitle={t("mobile.compatDisclaimer")}
+        right={<MatchScore score={current.score} />}
+      />
+      <Pressable
+        style={styles.card}
+        onPress={() => router.push(`/profile/${current.userId}` as never)}
+        accessibilityRole="button"
+        accessibilityLabel={t("mobile.profileDetail")}
+      >
         <Text style={styles.name}>{current.displayName}</Text>
-        <Muted>{current.fuzzyRegion || t("discovery.fuzzyRegion")}</Muted>
-        <Text style={styles.score}>
-          {t("discovery.badge")} {Math.round(current.score)}
+        <Text style={styles.region}>
+          {current.fuzzyRegion || t("discovery.fuzzyRegion")}
+        </Text>
+        <Text style={styles.compat}>
+          {t("mobile.compatLabel", {
+            score: Math.round(
+              current.score <= 1 ? current.score * 100 : current.score,
+            ),
+          })}
         </Text>
         <Text style={styles.tags}>
           {(current.interests ?? []).slice(0, 6).join(" · ") ||
             t("discovery.defaultReason")}
         </Text>
-      </View>
+      </Pressable>
       <View style={styles.row}>
         <View style={{ flex: 1 }}>
-          <Button
+          <PremiumButton
             label={t("discovery.pass")}
             onPress={() => act("pass")}
             variant="outline"
             disabled={busy}
           />
         </View>
-        <View style={{ width: 12 }} />
+        <View style={{ width: spacing[3] }} />
         <View style={{ flex: 1 }}>
-          <Button
+          <PremiumButton
             label={t("discovery.like")}
             onPress={() => act("like")}
             disabled={busy}
           />
         </View>
       </View>
-    </Screen>
+    </PremiumScreen>
   );
 }
 
@@ -119,15 +150,16 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     backgroundColor: colors.panel,
-    borderRadius: 20,
+    borderRadius: layout.radiusXl,
     borderWidth: 1,
     borderColor: colors.line,
-    padding: 24,
-    marginVertical: 16,
+    padding: spacing[6],
+    marginVertical: spacing[4],
     justifyContent: "flex-end",
   },
-  name: { fontSize: 32, fontWeight: "700", color: colors.raspberry },
-  score: { marginTop: 8, color: colors.primary, fontWeight: "700" },
-  tags: { marginTop: 12, color: colors.ink, lineHeight: 22 },
-  row: { flexDirection: "row", marginBottom: 24 },
+  name: { fontSize: 32, fontWeight: "700", color: colors.primary },
+  region: { marginTop: spacing[2], color: colors.muted },
+  compat: { marginTop: spacing[2], color: colors.champagne, fontWeight: "700" },
+  tags: { marginTop: spacing[3], color: colors.ink, lineHeight: 22 },
+  row: { flexDirection: "row", marginBottom: spacing[6] },
 });

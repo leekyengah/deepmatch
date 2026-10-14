@@ -21,7 +21,8 @@ const display = Playfair_Display({
 
 const editorial = Lora({
   variable: "--font-editorial",
-  subsets: ["latin", "vietnamese"],
+  /** latin-ext covers VI diacritics; google "vietnamese" subset breaks Next font loader on Vercel. */
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
 });
 

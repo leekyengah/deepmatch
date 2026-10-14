@@ -1,8 +1,8 @@
 {
-  "runId": "QA-STAGING-2026-10-13T1651",
-  "timestampUtc": "2026-10-13T16:51:42.475Z",
+  "runId": "QA-STAGING-2026-10-13T1904",
+  "timestampUtc": "2026-10-13T19:04:46.342Z",
   "environment": "https://datingvn.com",
-  "commit": "11a4f43",
+  "commit": "139292e",
   "personas": [
     "QA_ADULT_A",
     "QA_ADULT_B",
@@ -85,7 +85,7 @@
     {
       "id": "QA-REL-040",
       "status": "PASS",
-      "note": "wh first=200 replayDedupe=true badSig=400 amt=400 ent=8"
+      "note": "wh first=200 replayDedupe=true badSig=400 amt=400 ent=9"
     },
     {
       "id": "QA-REL-018",

@@ -8,7 +8,7 @@ async function login(page: import("@playwright/test").Page) {
   await page.goto("/login");
   await page.locator('input[name="email"]').fill(email!);
   await page.locator('input[name="password"]').fill(password!);
-  await page.getByRole("button", { name: /Đăng nhập/i }).click();
+  await page.getByRole("button", { name: /Đăng nhập|Log in|Sign in/i }).click();
   await page.waitForURL(/\/(me|discover|onboarding|chat|couple|$)/, {
     timeout: 30_000,
   });
@@ -21,19 +21,29 @@ test.describe("QA seeded journeys", () => {
     await login(page);
 
     await page.goto("/discover");
-    await expect(page.locator("body")).toContainText(/Tìm nhau|gợi ý|discovery|bật/i);
+    await expect(page.locator("body")).toContainText(
+      /Tìm nhau|gợi ý|Discover|Suggestions|discovery|bật|khám phá/i,
+    );
 
     await page.goto("/likes");
-    await expect(page.locator("body")).toContainText(/Thích|match|kết nối|mutual|trống|chưa/i);
+    await expect(page.locator("body")).toContainText(
+      /Thích|Likes|match|kết nối|mutual|trống|chưa|Matches/i,
+    );
 
     await page.goto("/services");
-    await expect(page.locator("body")).toContainText(/Đồng hành|dịch vụ|tư vấn|tắt/i);
+    await expect(page.locator("body")).toContainText(
+      /Đồng hành|dịch vụ|tư vấn|Concierge|Companion|Service|tắt/i,
+    );
 
     await page.goto("/bookings");
-    await expect(page.locator("body")).toContainText(/Lịch hẹn|đăng ký|tiếp nhận|tắt|chưa/i);
+    await expect(page.locator("body")).toContainText(
+      /Lịch hẹn|Bookings|Service|Concierge|Cancel|đăng ký|tiếp nhận|tắt|chưa/i,
+    );
 
     await page.goto("/couple/map");
-    await expect(page.locator("body")).toContainText(/ghim|bản đồ|Chúng mình|mời|Mapbox|lớp/i);
+    await expect(page.locator("body")).toContainText(
+      /ghim|bản đồ|Chúng mình|mời|Mapbox|Date map|Couple|lớp|map/i,
+    );
   });
 
   test("chat with seeded conversation query", async ({ page }) => {

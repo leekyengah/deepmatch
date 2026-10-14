@@ -82,6 +82,19 @@ export async function apiPatch<T>(path: string, body: unknown): Promise<T> {
   return json as T;
 }
 
+export async function apiPut<T>(path: string, body: unknown): Promise<T> {
+  const res = await fetch(`${API_URL}${path}`, {
+    method: "PUT",
+    headers: await authHeaders(),
+    body: JSON.stringify(body),
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new ApiError(messageFromBody(json, res.status), res.status, json);
+  }
+  return json as T;
+}
+
 export type Candidate = {
   userId: string;
   score: number;

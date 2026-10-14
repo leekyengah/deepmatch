@@ -2,10 +2,11 @@ import "react-native-gesture-handler";
 import { Stack, useRouter, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { useColorScheme } from "react-native";
 import { AuthProvider, useAuth } from "../lib/auth";
 import { I18nProvider, useT } from "../lib/i18n/I18nProvider";
 import { Loading, Screen } from "../components/ui";
-import { colors } from "../constants/theme";
+import { colors, darkColors } from "../constants/theme";
 
 function Gate({ children }: { children: React.ReactNode }) {
   const { session, loading } = useAuth();
@@ -14,11 +15,12 @@ function Gate({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (loading) return;
-    const inAuth = segments[0] === "(auth)";
+    const root = segments[0];
+    const inAuth = root === "(auth)";
     if (!session && !inAuth) {
-      router.replace("/(auth)/login");
+      router.replace("/(auth)/welcome");
     } else if (session && inAuth) {
-      router.replace("/(tabs)/discover");
+      router.replace("/(tabs)");
     }
   }, [session, loading, segments, router]);
 
@@ -34,29 +36,49 @@ function Gate({ children }: { children: React.ReactNode }) {
 
 function RootStack() {
   const t = useT();
+  const scheme = useColorScheme();
+  const palette = scheme === "dark" ? darkColors : colors;
   return (
     <Stack
       screenOptions={{
-        headerStyle: { backgroundColor: colors.canvas },
-        headerTintColor: colors.raspberry,
-        contentStyle: { backgroundColor: colors.canvas },
+        headerStyle: { backgroundColor: palette.canvas },
+        headerTintColor: palette.primary,
+        contentStyle: { backgroundColor: palette.canvas },
       }}
     >
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="(admin)" options={{ headerShown: false }} />
       <Stack.Screen
         name="chat/[id]"
         options={{ title: t("chat.title"), presentation: "card" }}
+      />
+      <Stack.Screen
+        name="profile/[id]"
+        options={{ title: t("mobile.profileDetail") }}
+      />
+      <Stack.Screen
+        name="onboarding/goals"
+        options={{ title: t("mobile.goalsTitle") }}
+      />
+      <Stack.Screen name="places/index" options={{ title: t("mobile.placesTitle") }} />
+      <Stack.Screen name="lifestyle/index" options={{ title: t("mobile.lifestyleTitle") }} />
+      <Stack.Screen name="services/index" options={{ title: t("mobile.servicesTitle") }} />
+      <Stack.Screen name="premium/index" options={{ title: t("mobile.premiumTitle") }} />
+      <Stack.Screen
+        name="notifications"
+        options={{ title: t("mobile.notificationsTitle") }}
       />
     </Stack>
   );
 }
 
 export default function RootLayout() {
+  const scheme = useColorScheme();
   return (
     <I18nProvider>
       <AuthProvider>
-        <StatusBar style="dark" />
+        <StatusBar style={scheme === "dark" ? "light" : "dark"} />
         <Gate>
           <RootStack />
         </Gate>

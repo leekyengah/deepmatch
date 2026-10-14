@@ -1,3 +1,4 @@
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
 
 export type CoupleProfile = {
@@ -21,15 +22,17 @@ export type ActiveCouple = {
 
 export async function getActiveCoupleId(
   userId: string,
+  client?: SupabaseClient,
 ): Promise<string | null> {
-  const couple = await getActiveCouple(userId);
+  const couple = await getActiveCouple(userId, client);
   return couple?.id ?? null;
 }
 
 export async function getActiveCouple(
   userId: string,
+  client?: SupabaseClient,
 ): Promise<ActiveCouple | null> {
-  const supabase = await createClient();
+  const supabase = client ?? (await createClient());
 
   let pair: {
     id: string;

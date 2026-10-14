@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T18:13:11.352Z",
+  "generatedAt": "2026-10-13T19:24:25.274Z",
   "baseURL": "https://datingvn.com",
   "hasCreds": true,
   "results": [
@@ -77,11 +77,6 @@
       "journey": "J14-logout-session",
       "status": "PASS",
       "notes": "Logout clears session; /discover redirects to /login"
-    },
-    {
-      "journey": "J01b-age-gate",
-      "status": "PASS",
-      "notes": "Under-18 signup blocked with message/error"
     }
   ]
 }

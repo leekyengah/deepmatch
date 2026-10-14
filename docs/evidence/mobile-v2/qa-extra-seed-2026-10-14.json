@@ -1,0 +1,10 @@
+{
+  "minor_id": "e099b385-d374-4201-9cd5-38cebb3540ce",
+  "staff_id": "cc9f2021-d299-4ca3-973a-c3910ca62e22",
+  "discovery_minor_status": 403,
+  "discovery_candidates": null,
+  "discovery_error": "FORBIDDEN",
+  "admin_venues_staff": 200,
+  "flags_count": 9,
+  "flags_error": null
+}

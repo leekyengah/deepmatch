@@ -2,29 +2,32 @@ import { useCallback, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { router, useFocusEffect } from "expo-router";
 import { apiGet } from "../../lib/api";
+import { fetchIsStaff } from "../../lib/staff";
 import { useT } from "../../lib/i18n/I18nProvider";
-import { Button, Loading, Muted, Screen, Title } from "../../components/ui";
-import { colors } from "../../constants/theme";
+import {
+  PremiumHeader,
+  PremiumScreen,
+  SkeletonLoader,
+  StatusBadge,
+} from "../../components/premium";
+import { colors, layout, spacing } from "../../constants/theme";
 
-type HomeState = {
-  state?: string;
-  redirectTo?: string;
-  hasMutualMatch?: boolean;
-  coupleActive?: boolean;
-};
-
-export default function PersonaHomeScreen() {
+/** Home hub — entry to M02/M07–M12 modules (mockup nav: Trang chủ) */
+export default function HomeHubScreen() {
   const t = useT();
-  const [home, setHome] = useState<HomeState | null>(null);
   const [loading, setLoading] = useState(true);
+  const [state, setState] = useState("dating");
+  const [staff, setStaff] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await apiGet<HomeState>("/api/v1/me/home-state");
-      setHome(res);
-    } catch {
-      setHome({ state: "dating", redirectTo: "/discover" });
+      const [home, isStaff] = await Promise.all([
+        apiGet<{ state?: string }>("/api/v1/me/home-state").catch(() => ({ state: "dating" })),
+        fetchIsStaff(),
+      ]);
+      setState(home.state ?? "dating");
+      setStaff(isStaff);
     } finally {
       setLoading(false);
     }
@@ -38,103 +41,62 @@ export default function PersonaHomeScreen() {
 
   if (loading) {
     return (
-      <Screen>
-        <Loading />
-      </Screen>
+      <PremiumScreen>
+        <SkeletonLoader />
+      </PremiumScreen>
     );
   }
 
-  const state = home?.state ?? "dating";
-  const tiles: Array<{ href: string; title: string; body: string }> = [
-    {
-      href: "/(tabs)/discover",
-      title: t("home.tileDiscover"),
-      body: t("home.tileDiscoverBody"),
-    },
+  const tiles = [
+    { href: "/onboarding/goals", title: t("mobile.hubGoals"), body: t("mobile.goalsTitle") },
+    { href: "/(tabs)/discover", title: t("nav.explore"), body: t("home.tileDiscoverBody") },
+    { href: "/(tabs)/chat", title: t("nav.messages"), body: t("home.tileChatBody") },
+    { href: "/places/", title: t("mobile.hubPlaces"), body: t("nav.places") },
+    { href: "/lifestyle/", title: t("mobile.hubLifestyle"), body: "DEMO" },
+    { href: "/services/", title: t("mobile.hubServices"), body: t("nav.companion") },
+    { href: "/premium/", title: t("mobile.hubPremium"), body: t("mobile.premiumSandboxNote") },
+    { href: "/notifications", title: t("mobile.hubNotifications"), body: t("nav.notificationsAria") },
   ];
-  if (home?.hasMutualMatch) {
-    tiles.push({
-      href: "/(tabs)/chat",
-      title: t("home.tileChat"),
-      body: t("home.tileChatBody"),
-    });
+  if (staff) {
+    tiles.push({ href: "/(admin)/", title: t("mobile.hubAdmin"), body: t("mobile.adminTitle") });
   }
-  tiles.push({
-    href: "/(tabs)/likes",
-    title: t("nav.likes"),
-    body: t("home.tileDiscoverBody"),
-  });
-  tiles.push({
-    href: "/(tabs)/me",
-    title: t("home.tileProfile"),
-    body: t("home.tileProfileReady"),
-  });
 
   return (
-    <Screen>
-      <ScrollView contentContainerStyle={styles.pad}>
-        <Text style={styles.eyebrow}>{t("home.eyebrow")}</Text>
-        <Title>{t("home.greeting", { name: "bạn" })}</Title>
-        <Muted>{t("home.intro")}</Muted>
-        <View style={styles.badge}>
-          <Text style={styles.badgeText}>{state}</Text>
-        </View>
-
-        <View style={styles.cta}>
-          <Button
-            label={t("home.primaryCta")}
-            onPress={() => router.push("/(tabs)/discover")}
-          />
-        </View>
-
+    <PremiumScreen>
+      <ScrollView contentContainerStyle={{ paddingBottom: spacing[8] }}>
+        <PremiumHeader
+          title={t("home.greeting", { name: "bạn" })}
+          subtitle={t("home.intro")}
+          right={<StatusBadge label={state} tone="gold" />}
+        />
         {tiles.map((tile) => (
           <Pressable
-            key={tile.href + tile.title}
-            onPress={() => router.push(tile.href as "/")}
-            style={styles.card}
+            key={tile.href}
+            style={styles.tile}
+            onPress={() => router.push(tile.href as never)}
+            accessibilityRole="button"
+            accessibilityLabel={tile.title}
           >
-            <Text style={styles.cardTitle}>{tile.title}</Text>
-            <Text style={styles.cardBody}>{tile.body}</Text>
+            <Text style={styles.tileTitle}>{tile.title}</Text>
+            <Text style={styles.tileBody} numberOfLines={2}>
+              {tile.body}
+            </Text>
           </Pressable>
         ))}
-
-        {home?.coupleActive ? (
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>{t("home.tileCouple")}</Text>
-            <Text style={styles.cardBody}>{t("home.tileCoupleActive")}</Text>
-          </View>
-        ) : null}
       </ScrollView>
-    </Screen>
+    </PremiumScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  pad: { paddingBottom: 32, gap: 10 },
-  eyebrow: {
-    fontSize: 11,
-    fontWeight: "800",
-    letterSpacing: 2,
-    color: colors.primary,
-    textTransform: "uppercase",
-  },
-  badge: {
-    alignSelf: "flex-start",
-    marginTop: 8,
-    borderRadius: 999,
+  tile: {
     backgroundColor: colors.panel,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-  },
-  badgeText: { fontSize: 12, color: colors.raspberry, fontWeight: "600" },
-  cta: { marginTop: 12, marginBottom: 8 },
-  card: {
-    borderRadius: 16,
+    borderRadius: layout.radiusLg,
     borderWidth: 1,
     borderColor: colors.line,
-    backgroundColor: colors.panel,
-    padding: 14,
+    padding: spacing[4],
+    marginBottom: spacing[3],
   },
-  cardTitle: { fontWeight: "700", color: colors.raspberry, fontSize: 16 },
-  cardBody: { marginTop: 4, color: colors.muted, fontSize: 13 },
+  tileTitle: { color: colors.ink, fontWeight: "800", fontSize: 17 },
+  tileBody: { color: colors.muted, marginTop: 6, lineHeight: 18 },
 });

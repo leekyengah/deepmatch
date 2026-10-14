@@ -25,6 +25,7 @@ import faqVi from "../locales/vi-VN/faq.json";
 import homeVi from "../locales/vi-VN/home.json";
 import placesVi from "../locales/vi-VN/places.json";
 import needsVi from "../locales/vi-VN/needs.json";
+import mobileVi from "../locales/vi-VN/mobile.json";
 
 import commonEn from "../locales/en-US/common.json";
 import navEn from "../locales/en-US/nav.json";
@@ -50,6 +51,7 @@ import faqEn from "../locales/en-US/faq.json";
 import homeEn from "../locales/en-US/home.json";
 import placesEn from "../locales/en-US/places.json";
 import needsEn from "../locales/en-US/needs.json";
+import mobileEn from "../locales/en-US/mobile.json";
 
 export const NAMESPACES = [
   "common",
@@ -76,6 +78,7 @@ export const NAMESPACES = [
   "home",
   "places",
   "needs",
+  "mobile",
 ] as const;
 
 export type Namespace = (typeof NAMESPACES)[number];
@@ -110,6 +113,7 @@ export const messages: MessagesByLocale = {
     home: homeVi,
     places: placesVi,
     needs: needsVi,
+    mobile: mobileVi,
   }),
   "en-US": bundle({
     common: commonEn,
@@ -136,6 +140,7 @@ export const messages: MessagesByLocale = {
     home: homeEn,
     places: placesEn,
     needs: needsEn,
+    mobile: mobileEn,
   }),
 };
 

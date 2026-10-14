@@ -1,8 +1,21 @@
-import { colors as tokenColors, layout as tokenLayout } from "@deepmatch/design-tokens";
+import {
+  colors as tokenColors,
+  darkColors as tokenDark,
+  layout as tokenLayout,
+  spacing as tokenSpacing,
+} from "@deepmatch/design-tokens";
+import { useColorScheme } from "react-native";
 
 /** Re-export shared DeepMatch tokens for React Native screens. */
 export const colors = tokenColors;
+export const darkColors = tokenDark;
 export const layout = tokenLayout;
+export const spacing = tokenSpacing;
+
+export function useThemeColors() {
+  const scheme = useColorScheme();
+  return scheme === "dark" ? darkColors : colors;
+}
 
 const LEGAL_BASE = (
   process.env.EXPO_PUBLIC_API_URL ?? "https://datingvn.com"

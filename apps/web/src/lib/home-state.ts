@@ -1,3 +1,4 @@
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveCoupleId } from "@/lib/couple";
 
@@ -19,6 +20,7 @@ export type HomeStateResult = {
 /** Server-owned home routing — never trust client role claims. */
 export async function resolveHomeState(
   userId?: string | null,
+  client?: SupabaseClient,
 ): Promise<HomeStateResult> {
   if (!userId) {
     return {
@@ -29,7 +31,7 @@ export async function resolveHomeState(
     };
   }
 
-  const supabase = await createClient();
+  const supabase = client ?? (await createClient());
   const { data: profile } = await supabase
     .from("profiles")
     .select("display_name, discovery_opt_in, suspended, birth_date")
@@ -45,7 +47,7 @@ export async function resolveHomeState(
     };
   }
 
-  const coupleId = await getActiveCoupleId(userId);
+  const coupleId = await getActiveCoupleId(userId, supabase);
   if (coupleId) {
     return {
       state: "couple",

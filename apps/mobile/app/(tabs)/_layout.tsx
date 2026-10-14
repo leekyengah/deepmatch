@@ -18,7 +18,7 @@ function TabIcon({ label, focused }: { label: string; focused: boolean }) {
   );
 }
 
-/** ADR-11: Khám phá · Sánh đôi · Đồng hành · Tin nhắn · Cá nhân */
+/** Mockup Member nav: Trang chủ · Khám phá · Tin nhắn · Sánh đôi · Cá nhân */
 export default function TabsLayout() {
   const t = useT();
   const insets = useSafeAreaInsets();
@@ -39,24 +39,17 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
+        name="index"
+        options={{
+          title: t("nav.home"),
+          tabBarIcon: ({ focused }) => <TabIcon label="⌂" focused={focused} />,
+        }}
+      />
+      <Tabs.Screen
         name="discover"
         options={{
           title: t("nav.explore"),
           tabBarIcon: ({ focused }) => <TabIcon label="◇" focused={focused} />,
-        }}
-      />
-      <Tabs.Screen
-        name="couple"
-        options={{
-          title: t("nav.memories"),
-          tabBarIcon: ({ focused }) => <TabIcon label="◎" focused={focused} />,
-        }}
-      />
-      <Tabs.Screen
-        name="companion"
-        options={{
-          title: t("nav.companion"),
-          tabBarIcon: ({ focused }) => <TabIcon label="✦" focused={focused} />,
         }}
       />
       <Tabs.Screen
@@ -67,13 +60,20 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="couple"
+        options={{
+          title: t("nav.memories"),
+          tabBarIcon: ({ focused }) => <TabIcon label="◎" focused={focused} />,
+        }}
+      />
+      <Tabs.Screen
         name="me"
         options={{
           title: t("nav.me"),
           tabBarIcon: ({ focused }) => <TabIcon label="●" focused={focused} />,
         }}
       />
-      <Tabs.Screen name="index" options={{ href: null }} />
+      <Tabs.Screen name="companion" options={{ href: null }} />
       <Tabs.Screen name="likes" options={{ href: null }} />
       <Tabs.Screen name="two" options={{ href: null }} />
     </Tabs>
