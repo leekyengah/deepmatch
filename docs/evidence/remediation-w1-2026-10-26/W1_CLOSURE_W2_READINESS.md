@@ -16,7 +16,7 @@
 | `scripts/seed-qa-pair.mjs` | Idempotent ensure visited+wishlist+milestone pins |
 | Probe/eval scripts + evidence pack | Staging accept, pin visibility, EXT eval, audits |
 
-**Commit SHA:** `e07e6fbed652098d9ba6248f1531a3ea0e702ced`  
+**Commit SHA:** `472649387505f7067ad8500a5c529c293fafd45c`  
 
 **No production schema changes in this step.**
 
