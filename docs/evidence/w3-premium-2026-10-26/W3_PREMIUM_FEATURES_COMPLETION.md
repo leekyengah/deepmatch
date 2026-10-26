@@ -4,7 +4,8 @@
 **Wave status:** `IN_PROGRESS` (delta shipped; not complete)  
 **Acceptance:** **NOT VERIFIED** · ceiling `QA_PASSED_AUTOMATED`  
 **GA:** **NO-GO**  
-**HEAD tip (feature):** see git · Staging deploy: `dpl_72CP7LZHbNgNVMfaxFYy4wLGTiYN` → datingvn.com (`productionDeploy:false`)
+**HEAD tip (feature):** PR #3 · Accept staging **13/13** includes concierge+media RLS  
+**Privacy after unmatch:** match-level unmatch clears conversation/likes; couple `pairs` space separate (QA11) — device proof of private media post-unmatch still residual
 
 ---
 

@@ -24,7 +24,16 @@
 - No LIVE charge tests executed  
 - Next WP: refund/cancel state machine + admin report exports (sandbox fixtures)
 
+## Store billing classification (must not assume external PSP covers all)
+
+| Type | Guidance |
+|------|----------|
+| Digital entitlements / unlock in-app | **Apple IAP / Google Play Billing** required |
+| Real-world concierge / offline services | May use external PSP **if** store policy for “services consumed outside app” applies — counsel review |
+| Hybrid packages | Split SKUs; never route digital unlock solely through bank transfer on iOS/Android builds |
+
 ## Blockers
 
 - LIVE PSP Founder GO (4B) — do not activate  
 - Store IAP shared secrets — BLOCKED_EXTERNAL until ASC/Play  
+- Cancel/refund state machine — next WP (sandbox fixtures only)  

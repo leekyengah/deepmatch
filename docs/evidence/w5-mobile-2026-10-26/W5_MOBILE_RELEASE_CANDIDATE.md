@@ -9,7 +9,7 @@
 
 | Item | Status | Notes |
 |------|--------|-------|
-| Web–Mobile feature parity | PARTIAL | Discover/onboarding catching up; unmatch mobile UI TBD |
+| Web–Mobile feature parity | PARTIAL | Discover filters + mobile unmatch UI landed; device QA pending |
 | EAS development/preview profiles | READY_FOR_QA (config) | `apps/mobile/eas.json` profiles exist |
 | iOS/Android signing | BLOCKED_EXTERNAL | ASC App ID placeholder `REPLACE_ASC_APP_ID` |
 | TestFlight / Play Internal | BLOCKED_EXTERNAL | Needs Apple/Google EAS secrets |
