@@ -16,12 +16,14 @@ type AuthCtx = {
   session: Session | null;
   user: User | null;
   loading: boolean;
+  emailVerified: boolean;
   signIn: (email: string, password: string) => Promise<string | null>;
   signUp: (
     email: string,
     password: string,
     birthDate: string,
-  ) => Promise<string | null>;
+  ) => Promise<{ error: string | null; needsVerification: boolean }>;
+  resendVerification: (email?: string) => Promise<string | null>;
   signOut: () => Promise<void>;
 };
 
@@ -53,24 +55,52 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signUp = useCallback(
     async (email: string, password: string, birthDate: string) => {
       if (!isAgeEligible(birthDate, 18)) {
-        return t(getActiveLocale(), "auth.ageGate");
+        return {
+          error: t(getActiveLocale(), "auth.ageGate"),
+          needsVerification: false,
+        };
       }
+      const site =
+        process.env.EXPO_PUBLIC_API_URL?.replace(/\/$/, "") ||
+        "https://datingvn.com";
       const { data, error } = await supabase.auth.signUp({
         email: email.trim(),
         password,
-        options: { data: { birth_date: birthDate } },
+        options: {
+          data: { birth_date: birthDate },
+          emailRedirectTo: `${site}/auth/callback?next=/onboarding`,
+        },
       });
-      if (error) return error.message;
+      if (error) {
+        return { error: error.message, needsVerification: false };
+      }
       if (data.user) {
         await supabase
           .from("profiles")
           .update({ birth_date: birthDate, discovery_opt_in: true })
           .eq("id", data.user.id);
       }
-      return null;
+      const needsVerification = !data.user?.email_confirmed_at;
+      return { error: null, needsVerification };
     },
     [],
   );
+
+  const resendVerification = useCallback(async (email?: string) => {
+    const target = (email ?? session?.user?.email ?? "").trim();
+    if (!target) return t(getActiveLocale(), "auth.verifyMissingEmail");
+    const site =
+      process.env.EXPO_PUBLIC_API_URL?.replace(/\/$/, "") ||
+      "https://datingvn.com";
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email: target,
+      options: {
+        emailRedirectTo: `${site}/auth/callback?next=/onboarding`,
+      },
+    });
+    return error?.message ?? null;
+  }, [session?.user?.email]);
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
@@ -81,11 +111,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       session,
       user: session?.user ?? null,
       loading,
+      emailVerified: Boolean(session?.user?.email_confirmed_at),
       signIn,
       signUp,
+      resendVerification,
       signOut,
     }),
-    [session, loading, signIn, signUp, signOut],
+    [session, loading, signIn, signUp, resendVerification, signOut],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

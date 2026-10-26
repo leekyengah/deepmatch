@@ -34,6 +34,14 @@ export async function signupAction(formData: FormData) {
     redirect(signupErrorUrl(t("auth.passwordMinError"), next));
   }
 
+  const origin =
+    process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ||
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+    "https://datingvn.com";
+  const emailRedirectTo = next.startsWith("/couple/join")
+    ? `${origin}${next}`
+    : `${origin}/auth/callback?next=/onboarding`;
+
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -44,9 +52,7 @@ export async function signupAction(formData: FormData) {
         birth_date: birthDate,
         mode: next.startsWith("/couple/join") ? "has_partner" : "solo",
       },
-      emailRedirectTo: next.startsWith("/couple/join")
-        ? `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://datingvn.com"}${next}`
-        : undefined,
+      emailRedirectTo,
     },
   });
 
@@ -81,6 +87,12 @@ export async function signupAction(formData: FormData) {
   // Couple invite: skip generic onboarding and accept immediately
   if (next.startsWith("/couple/join")) {
     redirect(next);
+  }
+
+  // When confirmation is required, session may exist but email_confirmed_at is null.
+  const confirmed = Boolean(data.user?.email_confirmed_at);
+  if (!confirmed) {
+    redirect("/auth/verify-email");
   }
   redirect("/onboarding");
 }

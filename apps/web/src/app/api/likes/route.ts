@@ -1,14 +1,23 @@
 import { NextResponse } from "next/server";
-import { isMutual, mutualCreatesPairSpace } from "@deepmatch/shared";
+import {
+  isAgeEligible,
+  isMutual,
+  mutualCreatesPairSpace,
+  MIN_AGE_DEFAULT,
+} from "@deepmatch/shared";
 import { getRouteUser } from "@/lib/supabase/route";
 import { takeToken } from "@/lib/rate-limit";
 import { jsonError, makeRequestId } from "@/lib/api-error";
+import { isEmailVerified } from "@/lib/auth/email-verified";
 
 export async function POST(req: Request) {
   const requestId = makeRequestId();
   const { supabase, user } = await getRouteUser(req);
   if (!user) {
     return jsonError("UNAUTHENTICATED", null, requestId);
+  }
+  if (!isEmailVerified(user)) {
+    return jsonError("FORBIDDEN", "emailNotVerified", requestId);
   }
 
   const rl = takeToken(`likes:${user.id}`, 60, 60_000);
@@ -25,6 +34,19 @@ export async function POST(req: Request) {
   }
   if (body.targetId === user.id) {
     return jsonError("VALIDATION_ERROR", null, requestId);
+  }
+
+  const minAge = Number(process.env.MIN_AGE ?? MIN_AGE_DEFAULT);
+  const { data: actorProfile } = await supabase
+    .from("profiles")
+    .select("birth_date")
+    .eq("id", user.id)
+    .maybeSingle();
+  if (
+    !actorProfile?.birth_date ||
+    !isAgeEligible(actorProfile.birth_date, minAge)
+  ) {
+    return jsonError("FORBIDDEN", "ageUnderage", requestId);
   }
 
   const { error } = await supabase.from("likes").upsert(

@@ -8,7 +8,7 @@
     "start": "next start --port 3000",
     "lint": "echo lint-deferred",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "npx tsx --test src/lib/auth/public-paths.test.ts src/lib/auth/clear-auth-cookies.test.ts"
+    "test": "npx tsx --test src/lib/auth/public-paths.test.ts src/lib/auth/clear-auth-cookies.test.ts src/lib/auth/email-verified.test.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1150.0",

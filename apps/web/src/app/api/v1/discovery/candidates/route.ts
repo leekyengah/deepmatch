@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import {
   INTENT_GOAL_ALIASES,
+  MIN_AGE_DEFAULT,
   evaluateDiscoverMediaGate,
+  isAgeEligible,
   normalizeIntent,
   rankCandidates,
   type DiscoveryProfile,
@@ -12,6 +14,7 @@ import { flagEnabled } from "@/lib/flags";
 import { jsonError, makeRequestId, apiT } from "@/lib/api-error";
 import { createSignedReadUrl } from "@/lib/media/storage";
 import { getStorageBackend } from "@/lib/media/limits";
+import { isEmailVerified } from "@/lib/auth/email-verified";
 
 const INTENT_GOALS: Record<string, string[]> = {
   friendship: INTENT_GOAL_ALIASES.friendship,
@@ -73,6 +76,9 @@ export async function GET(req: Request) {
 
   const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
+  if (!isEmailVerified(user)) {
+    return jsonError("FORBIDDEN", "emailNotVerified", requestId);
+  }
 
   const url = new URL(req.url);
   const pageSize = Math.min(Number(url.searchParams.get("page_size") ?? 24), 50);
@@ -115,6 +121,11 @@ export async function GET(req: Request) {
 
   if (!me?.discovery_opt_in) {
     return jsonError("FORBIDDEN", "flagDiscoveryUserOff", requestId);
+  }
+
+  const minAgeHard = Number(process.env.MIN_AGE ?? MIN_AGE_DEFAULT);
+  if (!me.birth_date || !isAgeEligible(me.birth_date, minAgeHard)) {
+    return jsonError("FORBIDDEN", "ageUnderage", requestId);
   }
 
   const mediaGate = await viewerDiscoverEligible(supabase, user.id);

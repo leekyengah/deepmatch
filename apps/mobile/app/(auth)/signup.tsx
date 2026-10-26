@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, Switch, StyleSheet, Text, View } from "react-native";
 import * as WebBrowser from "expo-web-browser";
@@ -24,10 +24,21 @@ export default function SignupScreen() {
       return;
     }
     setBusy(true);
-    const err = await signUp(email, password, birthDate);
+    const result = await signUp(email, password, birthDate);
     setBusy(false);
-    if (err) Alert.alert(t("auth.signupFailed"), err);
-    else Alert.alert(t("common.confirm"), t("auth.signupSuccess"));
+    if (result.error) {
+      Alert.alert(t("auth.signupFailed"), result.error);
+      return;
+    }
+    if (result.needsVerification) {
+      router.replace({
+        pathname: "/(auth)/verify-email",
+        params: { email },
+      } as never);
+      return;
+    }
+    Alert.alert(t("common.confirm"), t("auth.signupSuccess"));
+    router.replace("/(tabs)" as never);
   }
 
   return (

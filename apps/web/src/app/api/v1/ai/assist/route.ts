@@ -52,6 +52,17 @@ export async function POST(req: NextRequest) {
     return jsonError("FORBIDDEN", "aiConsentRequired");
   }
 
+  // Honor prior revoke: do not silently re-grant via assist checkbox alone.
+  const { data: prior } = await supabase
+    .from("ai_consents")
+    .select("granted, revoked_at")
+    .eq("user_id", user.id)
+    .eq("purpose", task)
+    .maybeSingle();
+  if (prior?.revoked_at) {
+    return jsonError("FORBIDDEN", "aiConsentRevoked");
+  }
+
   const quota = Number(process.env.AI_DAILY_QUOTA ?? "40") || 40;
   const { data: usedToday } = await supabase.rpc("ai_usage_count_today", {
     p_user: user.id,
@@ -65,13 +76,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  await supabase.from("ai_consents").upsert({
-    user_id: user.id,
-    purpose: task,
-    granted: true,
-    granted_at: new Date().toISOString(),
-    revoked_at: null,
-  });
+  if (!prior?.granted) {
+    await supabase.from("ai_consents").upsert({
+      user_id: user.id,
+      purpose: task,
+      granted: true,
+      granted_at: new Date().toISOString(),
+      revoked_at: null,
+    });
+  }
 
   const safe = redactedInput(body.input);
   const configured = resolveAiAdapter();

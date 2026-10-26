@@ -68,17 +68,24 @@ export function LifestyleMarketplace({
               <p className="text-[11px] font-extrabold uppercase tracking-[2px] text-white/75">
                 {t("commerce.marketplaceEyebrow")}
               </p>
+              <span className="mt-2 inline-flex rounded-full bg-[#A88A62] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+                {t("commerce.demoBadge")}
+              </span>
               <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-[2.75rem]">
                 {t("commerce.marketplaceHeading")}
               </h1>
               <p className="mt-3 max-w-md text-sm leading-relaxed text-white/90 sm:text-[15px]">
                 {t("commerce.marketplaceIntro")}
               </p>
+              <p className="mt-2 text-xs font-semibold text-[#F4E9E4]">
+                {t("commerce.demoSandboxNote")}
+              </p>
               <form
                 action="/lifestyle"
                 method="get"
                 className="mt-5 flex max-w-md overflow-hidden rounded-full bg-white/95 shadow-sm"
                 role="search"
+                aria-label={t("commerce.searchAria")}
               >
                 <label htmlFor="ls-q" className="sr-only">
                   {t("commerce.searchPlaceholder")}

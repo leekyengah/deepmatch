@@ -1,72 +1,65 @@
-# W2 — Core Member Completion (partial delivery)
+# W2 — Core Member Completion
 
 **Date:** 2026-10-26  
-**Wave status:** `IN_PROGRESS` (WP1–WP3 shipped; remainder open)  
-**Acceptance:** **NOT VERIFIED** (developer tests only; no Independent QA)  
-**Baseline:** W1 tip `c05e6a7` · branch `feat/w2-core-member-wp1-3`
+**Wave status:** `READY_FOR_QA` (engineering WP1–8 delivered; **NOT VERIFIED**)  
+**Acceptance:** developer unit/typecheck only — **no Independent QA / DONE_VERIFIED**  
+**Branch:** `feat/w2-core-member-wp1-3` · **PR:** https://github.com/leekyengah/deepmatch/pull/3 (OPEN, not merged)  
+**GA:** **NO-GO**
 
 ---
 
-## 1. Delivered this session
+## 1. Work packages
 
-| WP | FIX26 / DM | Change | Tests |
-|----|------------|--------|-------|
-| WP1 Intent + media gate | FIX26-022, FIX26-023 | Web onboarding intents → `friendship\|dating\|marriage`; legacy map; Discover returns `emptyReason=MEDIA_GATE` when viewer &lt;3 photos | `@deepmatch/shared` intents + discover-gate unit **PASS** |
-| WP2 Unmatch | FIX26-028 / DM matching | `POST /api/v1/matches/unmatch` (service role after participant check) + Likes UI | Unit N/A; API wired; staging E2E pending |
-| WP3 Live `/me` | FIX26-027 / DM-272 | MemberCenter uses live avatar, bio, age, match counts, couple dates; no fixture person-as-self | web typecheck PASS |
-| WP4 Home honesty | FIX26-027 / home | Live match/like/unread counts; live Discover suggests when available; fixture suggests/activity labeled **DEMO** | web typecheck |
+| WP | Status | Evidence |
+|----|--------|----------|
+| WP1 Intent + MEDIA_GATE | READY_FOR_QA | shared unit + candidates route |
+| WP2 Unmatch | READY_FOR_QA | `/api/v1/matches/unmatch` + Likes UI |
+| WP3 Live `/me` | READY_FOR_QA | MemberCenter live aggregates |
+| WP4 Home honesty | READY_FOR_QA | live stats; DEMO-labeled fixtures |
+| WP5 Email verification | READY_FOR_QA | `/auth/verify-email`, resend+RL, middleware soft gate, mobile screen |
+| WP6 Age gate 18+ | READY_FOR_QA | signup + onboarding + Discover viewer + likes API; age boundary unit tests |
+| WP7 Mobile Discover parity | READY_FOR_QA | intent/age/region/q/strict + MEDIA_GATE empty |
+| WP8 Integration | PARTIAL | unit/typecheck PASS; staging E2E journey **NOT_RUN** this wave |
 
-**No production writes. No LIVE PSP. No store publish.**
-
----
-
-## 2. Area rollup (updated)
-
-| Area | Status |
-|------|--------|
-| Auth email/session | PARTIAL (verify UX / Phone OTP open) |
-| Onboarding 3 intents | **READY_FOR_QA** (web aligned; mobile friends→friendship via needs) |
-| Profile 3–10 media | PARTIAL (gate enforced on Discover GET) |
-| Discover filters | PARTIAL (web OK; mobile filters still thin) |
-| Unmatch | **READY_FOR_QA** (API+web UI) |
-| Chat / report / block | PARTIAL (prior) |
-| `/me` honesty | **READY_FOR_QA** (live aggregates) |
-| Fake home suggests | PARTIAL (live when possible; else DEMO-labeled) |
+**No production writes · No LIVE PSP · No store publish · No auto-merge**
 
 ---
 
-## 3. Residuals (next packages)
+## 2. Counts (engineering claim only)
 
-**P0**
-1. HomeDashboard / suggest cards — live or labeled DEMO (stop hardcode-as-real).
-2. Age-gate E2E under-18 blocked.
-3. Block → chat ACL journey on staging.
-4. Mobile discover filters parity.
-5. Email verify + resend UX.
-
-**P1**
-- field_visibility UI; sessions list honesty; deleted-account post-login state.
-
-**BLOCKED_EXTERNAL**
-- Phone OTP, Push (APNs/FCM), Store, Sentry DSN, LIVE PSP.
+| Bucket | Count | Notes |
+|--------|------:|-------|
+| IMPLEMENTED (code complete for scope) | 6 | WP1–4,5,7 core surfaces |
+| READY_FOR_QA | 7 | WP1–7 |
+| PARTIAL | 3 | WP8 E2E; chat/block deep E2E; Phone OTP |
+| BLOCKED_EXTERNAL | 5 | Phone OTP, Push, Store, Sentry DSN, LIVE PSP |
 
 ---
 
-## 4. Evidence index
+## 3. Tests
 
-- Shared tests: intents + discover-gate (23 shared suite pass including new).
-- Code: `packages/shared/src/onboarding/intents.ts`, `media/discover-gate.ts`
-- API: `apps/web/src/app/api/v1/discovery/candidates/route.ts`, `matches/unmatch/route.ts`
-- UI: onboarding, DiscoverHub MEDIA_GATE, LikesClient unmatch, MemberCenter live
-- W1 closure: `docs/evidence/remediation-w1-2026-10-26/W1_IMPLEMENTATION_CLOSURE.md`
+| Suite | Result |
+|-------|--------|
+| `@deepmatch/shared` unit | **26 PASS** (age boundaries + intents + media gate) |
+| `@deepmatch/web` auth unit | **8 PASS** (incl. email-verified paths) |
+| `@deepmatch/web` typecheck | **PASS** |
+| Mobile typecheck | env noise (react-native types) — not treated as product FAIL |
+| Staging E2E full journey | **NOT_RUN** → WP8 remains PARTIAL |
+
+---
+
+## 4. Residuals (do not VERIFIED)
+
+- Staging authenticated E2E: signup→verify→onboard→discover→match→chat→unmatch  
+- Block→chat ACL journey  
+- field_visibility UI · sessions list honesty  
+- Outsider pin visibility (third synthetic user)  
+- Independent QA Agent / Founder UAT  
 
 ---
 
 ## 5. Verdict
 
-| Gate | Result |
-|------|--------|
-| W2 complete | **NO** — partial WP1–3 only |
-| Continue W3–W5 | Allowed for **independent** packages; do not claim W2 done |
-| GA | **NO-GO** |
-| DONE_VERIFIED | **0** |
+**W2 engineering closable with residuals.**  
+**W2 acceptance / VERIFIED: NO.**  
+**Hand-off to W3 independent modules: YES (staging).**

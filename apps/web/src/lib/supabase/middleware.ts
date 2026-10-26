@@ -1,6 +1,10 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { isPublicPath } from "@/lib/auth/public-paths";
+import {
+  isEmailVerified,
+  isUnverifiedAllowedPath,
+} from "@/lib/auth/email-verified";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
@@ -51,6 +55,21 @@ export async function updateSession(request: NextRequest) {
     }
     const redirect = NextResponse.redirect(login);
     // Prevent intermediary caches from storing gated HTML/redirects
+    redirect.headers.set("Cache-Control", "private, no-store");
+    return redirect;
+  }
+
+  // Soft gate: unverified email cannot use dating surfaces until confirmed.
+  if (
+    user &&
+    !isEmailVerified(user) &&
+    !isUnverifiedAllowedPath(pathname) &&
+    !isPublicPath(pathname)
+  ) {
+    const verify = request.nextUrl.clone();
+    verify.pathname = "/auth/verify-email";
+    verify.search = "";
+    const redirect = NextResponse.redirect(verify);
     redirect.headers.set("Cache-Control", "private, no-store");
     return redirect;
   }
