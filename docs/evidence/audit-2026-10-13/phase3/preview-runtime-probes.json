@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-10-13T18:10:39.057Z",
+  "base": "https://deepmatch-8soug4uz1-tradingbase.vercel.app",
+  "fail": 0,
+  "pass": 7,
+  "results": [
+    {
+      "path": "/api/v1/health",
+      "status": 200,
+      "location": "",
+      "pass": true,
+      "bodySnippet": "{\"ok\":true,\"service\":\"deepmatch-web\",\"env\":\"staging\\r\\n\",\"brand\":{\"primary\":\"#6B2D3C\",\"blush\":\"#F4E9E4\",\"canvas\":\"#F7F3EE\",\"deep\":\"#472025\",\"champagne\":\"#A88A62\",\"ink\":\"#241A1C\"},\"flags\":{\"ff_matching\":true,\"ff_chat\":true,\"ff_media_upload\":"
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "location": "",
+      "pass": true,
+      "bodySnippet": "<!DOCTYPE html><html lang=\"vi\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\"/><link rel=\"stylesheet\" href=\"/_next/static/css/5507a318b84124d4.css?dpl=dpl_7HcytJFy3FavrLo"
+    },
+    {
+      "path": "/login",
+      "status": 200,
+      "location": "",
+      "pass": true,
+      "bodySnippet": "<!DOCTYPE html><html lang=\"vi\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\"/><link rel=\"stylesheet\" href=\"/_next/static/css/5507a318b84124d4.css?dpl=dpl_7HcytJFy3FavrLo"
+    },
+    {
+      "path": "/legal",
+      "status": 200,
+      "location": "",
+      "pass": true,
+      "bodySnippet": "<!DOCTYPE html><html lang=\"vi\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\"/><link rel=\"stylesheet\" href=\"/_next/static/css/5507a318b84124d4.css?dpl=dpl_7HcytJFy3FavrLo"
+    },
+    {
+      "path": "/discover",
+      "status": 307,
+      "location": "/login?next=%2Fdiscover",
+      "pass": true,
+      "bodySnippet": "Redirecting... Vercel CLI 63.1.2 (Node.js 24.18.0) "
+    },
+    {
+      "path": "/chat",
+      "status": 307,
+      "location": "/login?next=%2Fchat",
+      "pass": true,
+      "bodySnippet": "Redirecting... Vercel CLI 63.1.2 (Node.js 24.18.0) "
+    },
+    {
+      "path": "/me",
+      "status": 307,
+      "location": "/login?next=%2Fme",
+      "pass": true,
+      "bodySnippet": "Redirecting... Vercel CLI 63.1.2 (Node.js 24.18.0) "
+    }
+  ]
+}

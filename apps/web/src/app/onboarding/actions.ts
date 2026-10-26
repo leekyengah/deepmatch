@@ -14,8 +14,30 @@ export async function saveModeAction(formData: FormData) {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  await supabase.from("profiles").update({ mode }).eq("id", user.id);
+  const fuzzy_region = String(formData.get("fuzzy_region") ?? "").trim();
+  const discovery_opt_in = formData.get("discovery_opt_in") === "on";
+  const values = formData
+    .getAll("values")
+    .map((v) => String(v))
+    .filter(Boolean);
+  const intent = String(formData.get("intent") ?? "long_term");
 
-  if (mode === "has_partner") redirect("/couple");
-  redirect("/me");
+  const patch: Record<string, unknown> = { mode };
+  if (mode === "solo") {
+    patch.discovery_opt_in = discovery_opt_in;
+    if (fuzzy_region) patch.fuzzy_region = fuzzy_region;
+  }
+
+  await supabase.from("profiles").update(patch).eq("id", user.id);
+
+  if (values.length || intent) {
+    await supabase.from("profile_deep").upsert({
+      user_id: user.id,
+      values: values.length ? values : [],
+      goals: intent ? [intent] : [],
+    });
+  }
+
+  // QX-01: continue to 7-question needs onboarding (skip-able).
+  redirect("/onboarding/needs");
 }

@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "DeepMatch: Expo Go (LAN)",
+      "type": "shell",
+      "command": "npm run go -w @deepmatch/mobile",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "runOptions": {
+        "runOn": "default"
+      }
+    },
+    {
+      "label": "DeepMatch: Expo Go (tunnel)",
+      "type": "shell",
+      "command": "npm run go:tunnel -w @deepmatch/mobile",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "DeepMatch: Web + Mobile (dev:all)",
+      "type": "shell",
+      "command": "npm run dev:all",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "DeepMatch: Web only",
+      "type": "shell",
+      "command": "npm run dev:web",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    }
+  ]
+}

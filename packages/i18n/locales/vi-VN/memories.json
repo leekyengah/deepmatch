@@ -1,0 +1,20 @@
+{
+  "title": "Kỷ niệm",
+  "map": "Bản đồ kỷ niệm",
+  "timeline": "Dòng thời gian",
+  "add": "Thêm kỷ niệm",
+  "emptyTitle": "Chưa có kỷ niệm",
+  "emptyBody": "Khi cả hai sẵn sàng, hãy thêm nơi đã đến hoặc khoảnh khắc đáng nhớ.",
+  "wishlist": "Danh sách mong muốn",
+  "pageIntro": "Kỷ niệm dùng chung dữ liệu với bản đồ. Góc nhìn riêng chỉ hiện khi được chia sẻ.",
+  "emptySpaceTitle": "Chưa có không gian cặp",
+  "emptySpaceBody": "Cần lời mời hai phía trước khi xem dòng thời gian.",
+  "inviteCta": "Lời mời",
+  "addCta": "Thêm mới",
+  "emptyTimelineBody": "Tạo ghim đầu tiên để bắt đầu dòng thời gian.",
+  "momentsHeading": "Khoảnh khắc đáng nhớ",
+  "privateBadge": "Chỉ hai người",
+  "privateHint": "Nội dung cặp — RLS sau khi ngắt kết nối không chuyển sang không gian mới.",
+  "addPhoto": "Thêm ảnh",
+  "addVideo": "Thêm video"
+}

@@ -1,10 +1,29 @@
-import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Fraunces } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Be_Vietnam_Pro, Lora, Playfair_Display } from "next/font/google";
+import { SentryInit } from "@/components/SentryInit";
+import { I18nProvider } from "@/components/i18n/I18nProvider";
+import { getHtmlLang, getRequestLocale } from "@/lib/i18n/server";
+import { t as translate } from "@deepmatch/i18n";
 import "./globals.css";
 
-const display = Fraunces({
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#6B2D3C",
+};
+
+const display = Playfair_Display({
   variable: "--font-display",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700"],
+});
+
+const editorial = Lora({
+  variable: "--font-editorial",
+  /** latin-ext covers VI diacritics; google "vietnamese" subset breaks Next font loader on Vercel. */
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
 });
 
 const body = Be_Vietnam_Pro({
@@ -13,21 +32,35 @@ const body = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
 });
 
-export const metadata: Metadata = {
-  title: "DeepMatch",
-  description:
-    "Tìm nhau, chat an toàn, bản đồ cặp đôi, đồng hành và không gian cá nhân.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  return {
+    title: "DeepMatch",
+    description: translate(locale, "marketing.heroSupport"),
+    icons: {
+      icon: [{ url: "/brand/deepmatch-symbol.svg", type: "image/svg+xml" }],
+      apple: [{ url: "/brand/deepmatch-symbol.svg" }],
+    },
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getRequestLocale();
+  const lang = await getHtmlLang();
+
   return (
-    <html lang="vi">
-      <body className={`${display.variable} ${body.variable} antialiased`}>
-        {children}
+    <html lang={lang}>
+      <body
+        className={`${display.variable} ${editorial.variable} ${body.variable} antialiased`}
+      >
+        <I18nProvider locale={locale}>
+          <SentryInit />
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );

@@ -1,0 +1,239 @@
+openapi: 3.0.3
+info:
+  title: DeepMatch BFF API
+  version: 1.0.0
+  description: Versioned public BFF under /api/v1. Legacy /api/* aliases remain during transition.
+servers:
+  - url: https://datingvn.com
+  - url: https://deepmatch-eight.vercel.app
+  - url: http://localhost:3000
+paths:
+  /api/v1/health:
+    get:
+      summary: Liveness and flag defaults
+      operationId: getHealth
+      responses:
+        "200":
+          description: OK
+  /api/v1/likes:
+    post:
+      summary: Like or pass a candidate
+      operationId: createLike
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [targetId, action]
+              properties:
+                targetId:
+                  type: string
+                  format: uuid
+                action:
+                  type: string
+                  enum: [like, pass]
+      responses:
+        "200":
+          description: Like recorded
+        "401":
+          $ref: "#/components/responses/Error"
+  /api/v1/matching/rank:
+    post:
+      summary: Rank discovery candidates
+      operationId: rankCandidates
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Ranked list with explainable reasons
+  /api/v1/messages:
+    get:
+      summary: List messages in a conversation
+      operationId: listMessages
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: conversationId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Messages
+        "403":
+          $ref: "#/components/responses/Error"
+    post:
+      summary: Send a message
+      operationId: sendMessage
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Message created or deduped
+  /api/v1/chat/access:
+    post:
+      summary: Check chat ACL
+      operationId: chatAccess
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Access decision
+  /api/v1/couple-invitations:
+    post:
+      summary: Create couple invitation
+      operationId: createCoupleInvitation
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Invite created
+  /api/v1/couple-invitations/accept:
+    post:
+      summary: Accept couple invitation by code
+      operationId: acceptCoupleInvitation
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Pair formed
+  /api/v1/matches:
+    get:
+      summary: List mutual matches for current user
+      operationId: listMatches
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Matches
+  /api/v1/couples/{id}/journals:
+    get:
+      summary: List journals visible to caller
+      operationId: listJournals
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/CoupleId"
+      responses:
+        "200":
+          description: Journals
+    post:
+      summary: Create private journal note on a pin
+      operationId: createJournal
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/CoupleId"
+      responses:
+        "200":
+          description: Created
+  /api/v1/discovery/candidates:
+    get:
+      summary: Paginated discovery candidates
+      operationId: listDiscoveryCandidates
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Candidates
+  /api/v1/reports:
+    post:
+      summary: Submit a trust & safety report
+      operationId: createReport
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Report accepted
+  /api/v1/couples/{id}/disconnect:
+    post:
+      summary: Disconnect active couple space
+      operationId: disconnectCouple
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/CoupleId"
+      responses:
+        "200":
+          description: Disconnected
+  /api/v1/couples/{id}/pins:
+    get:
+      summary: List memory pins
+      operationId: listPins
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/CoupleId"
+      responses:
+        "200":
+          description: Pins
+    post:
+      summary: Create memory pin
+      operationId: createPin
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/CoupleId"
+      responses:
+        "200":
+          description: Pin created
+  /api/v1/me/profile:
+    get:
+      summary: Get own profile
+      operationId: getMyProfile
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Profile
+    patch:
+      summary: Update own profile
+      operationId: patchMyProfile
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Updated
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    CoupleId:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    Error:
+      description: Unified error envelope
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [error]
+            properties:
+              error:
+                type: object
+                required: [code, message, request_id]
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  request_id:
+                    type: string

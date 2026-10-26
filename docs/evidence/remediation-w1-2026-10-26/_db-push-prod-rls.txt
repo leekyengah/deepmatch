@@ -1,0 +1,28 @@
+node.exe : Connecting to remote database...
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Connecting to remote database...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Do you want to push these migrations to the remote database?
+ GÇó 20261026140000_matching_rule_versions_rls.sql
+
+ [Y/n] y
+Applying migration 20261026140000_matching_rule_versions_rls.sql...
+NOTICE (00000): policy "matching_rule_versions_select_staff" for relation "public.matching_rule_versions" does not 
+exist, skipping
+NOTICE (00000): policy "matching_rule_versions_write_staff" for relation "public.matching_rule_versions" does not 
+exist, skipping
+Warning: failed to cache migrations catalog: error exporting pg-delta catalog: failed to inspect docker image: error 
+during connect: Get 
+"http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/images/public.ecr.aws/supabase/edge-runtime:v1.74.2/json": 
+open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.:
+
+Finished supabase db push.
+A new version of Supabase CLI is available: v2.122.0 (currently installed v2.109.1)
+We recommend updating regularly for new features and bug fixes: 
+https://supabase.com/docs/guides/cli/getting-started#updating-the-supabase-cli
+Docker Desktop is a prerequisite for local development. Follow the official docs to install: 
+https://docs.docker.com/desktop
+

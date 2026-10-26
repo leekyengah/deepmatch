@@ -5,3 +5,8 @@ export * from "./chat/acl";
 export * from "./flags";
 export * from "./age";
 export * from "./brand";
+export * from "./http/errors";
+export * from "./outbox/worker";
+export * from "./ai/gateway";
+export * from "./ai/deepmind";
+export * from "./needs";

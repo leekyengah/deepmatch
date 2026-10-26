@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 12,
+      "high": 21,
+      "critical": 0,
+      "total": 33
+    },
+    "dependencies": {
+      "prod": 728,
+      "dev": 746,
+      "optional": 190,
+      "peer": 11,
+      "peerOptional": 0,
+      "total": 1598
+    }
+  },
+  "packages": 33,
+  "bySev": {
+    "info": 0,
+    "low": 0,
+    "moderate": 12,
+    "high": 21,
+    "critical": 0,
+    "total": 33
+  }
+}

@@ -1,21 +1,18 @@
-# NEXT ACTION
+﻿# NEXT ACTION
+
+Sánh đôi Premium UI landed on branch (mockup-driven). Apply DB migration + ship.
 
 ## Done
+- Refs in `docs/design/references/sanh-doi-v1.png`
+- `/couple` hero/overview/empty + plans/dates/settings APIs
+- Checkout + places map fidelity pass
+- `tsc --noEmit` PASS
 
-- [x] Supabase cloud project `deepmatch` (`zzqpvjdyvjarpphqhaze`, ap-southeast-1)
-- [x] Linked + `db push` migrations
-- [x] Local `.env.local` written (gitignored) for root/web/admin
+## Next
+1. `supabase db push` (or apply `20261013100000_couple_premium_meta.sql`)
+2. Commit + `vercel --prod` + EAS update
+3. QA-SD visual overlay vs `sanh-doi-v1.png`
+4. Cover upload media picker; two-sided date confirm
 
-## Need Founder (1 phút)
-
-Vercel CLI token hiện invalid / login cần TTY. Làm **một** trong hai:
-
-1. Trong terminal repo: `npx vercel login` → Continue with GitHub → rồi báo mình  
-2. Hoặc tạo token tại https://vercel.com/account/tokens → gửi token (hoặc set `$env:VERCEL_TOKEN`) — mình sẽ tạo `deepmatch-web` + `deepmatch-admin` và gắn env
-
-## After Vercel login
-
-```bash
-npx vercel --cwd apps/web --yes
-npx vercel --cwd apps/admin --yes
-```
+## Still NO GO
+- Store / LIVE PSP / Mapbox billing keys

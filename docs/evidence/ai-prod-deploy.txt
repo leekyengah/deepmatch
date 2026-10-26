@@ -1,0 +1,247 @@
+Vercel CLI 63.1.2 (Node.js 24.18.0)
+Deploying deepmatch
+Uploading [--------------------] (0.0B/41.1KB)
+Uploading [========------------] (18.4KB/41.1KB)
+Uploading [============--------] (25.5KB/41.1KB)
+Uploading [===============-----] (31.5KB/41.1KB)
+Uploading [====================] (41.1KB/41.1KB)
+  Inspect         https://vercel.com/tradingbase/deepmatch/2XX44FUdJVhS57QCxkhN2GQXBPCT
+  Production      https://deepmatch-ems8yugai-tradingbase.vercel.app
+Building…
+Building…
+Running build in Washington, D.C., USA (East) – iad1
+Build machine configuration: 4 cores, 8 GB
+Retrieving list of deployment files...
+Downloading 584 deployment files...
+Restored build cache from previous deployment (Gm7qZWe8EeS2XUxzSEQib1xKSxk3)
+Running "vercel build"
+Vercel CLI 62.7.0
+Warning: Detected "engines": { "node": ">=20" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+Running "install" command: `npm install`...
+added 4 packages, and audited 1429 packages in 27s
+228 packages are looking for funding
+run `npm fund` for details
+65 vulnerabilities (1 low, 25 moderate, 38 high, 1 critical)
+To address issues that do not require attention, run:
+npm audit fix
+To address all issues possible (including breaking changes), run:
+npm audit fix --force
+Some issues need review, and may require choosing
+a different dependency.
+Run `npm audit` for details.
+npm warn install-scripts 5 packages have install scripts not yet covered by allowScripts:
+npm warn install-scripts   dtrace-provider@0.8.8 (install: node-gyp rebuild)
+npm warn install-scripts   esbuild@0.28.2 (postinstall: node install.js)
+npm warn install-scripts   protobufjs@7.6.6 (postinstall: node scripts/postinstall)
+npm warn install-scripts   sharp@0.33.5 (install: node install/check)
+npm warn install-scripts   unrs-resolver@1.12.2 (postinstall: node postinstall.js)
+npm warn install-scripts
+npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+Detected Next.js version: 15.1.11
+Running "npm run build -w @deepmatch/shared && npm run build -w @deepmatch/web"
+> @deepmatch/shared@0.1.0 build
+> tsc -p tsconfig.json
+> @deepmatch/web@0.1.0 build
+> next build
+▲ Next.js 15.1.11
+Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (113kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (268kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+✓ Compiled successfully
+Skipping linting
+Checking validity of types ...
+Collecting page data ...
+Generating static pages (0/123) ...
+Generating static pages (30/123)
+Generating static pages (61/123)
+Generating static pages (92/123)
+✓ Generating static pages (123/123)
+Finalizing page optimization ...
+Collecting build traces ...
+Route (app)                               Size     First Load JS
+┌ ƒ /                                     2.02 kB         167 kB
+├ ƒ /_not-found                           989 B           108 kB
+├ ƒ /account-deletion                     213 B           111 kB
+├ ƒ /ai                                   5.88 kB         176 kB
+├ ƒ /ai/coach                             1.83 kB         166 kB
+├ ƒ /ai/deepmind                          9.47 kB         174 kB
+├ ƒ /api/chat/access                      307 B           107 kB
+├ ƒ /api/health                           307 B           107 kB
+├ ƒ /api/likes                            307 B           107 kB
+├ ƒ /api/matching/rank                    307 B           107 kB
+├ ƒ /api/messages                         307 B           107 kB
+├ ƒ /api/pairs/accept                     307 B           107 kB
+├ ƒ /api/pairs/invites                    307 B           107 kB
+├ ƒ /api/v1/admin/venues                  307 B           107 kB
+├ ƒ /api/v1/ai/assist                     307 B           107 kB
+├ ƒ /api/v1/ai/deepmind                   307 B           107 kB
+├ ƒ /api/v1/ai/usage                      307 B           107 kB
+├ ƒ /api/v1/analytics/events              307 B           107 kB
+├ ƒ /api/v1/blocks                        307 B           107 kB
+├ ƒ /api/v1/catalog/bookings              307 B           107 kB
+├ ƒ /api/v1/catalog/cart/checkout         307 B           107 kB
+├ ƒ /api/v1/catalog/categories            307 B           107 kB
+├ ƒ /api/v1/catalog/products              307 B           107 kB
+├ ƒ /api/v1/chat/access                   307 B           107 kB
+├ ƒ /api/v1/chat/read                     307 B           107 kB
+├ ƒ /api/v1/checkout/orders               307 B           107 kB
+├ ƒ /api/v1/checkout/orders/[id]          307 B           107 kB
+├ ƒ /api/v1/checkout/webhooks/sandbox     307 B           107 kB
+├ ƒ /api/v1/couple-invitations            307 B           107 kB
+├ ƒ /api/v1/couple-invitations/accept     307 B           107 kB
+├ ƒ /api/v1/couples/[id]/dates            307 B           107 kB
+├ ƒ /api/v1/couples/[id]/disconnect       307 B           107 kB
+├ ƒ /api/v1/couples/[id]/export           307 B           107 kB
+├ ƒ /api/v1/couples/[id]/journals         307 B           107 kB
+├ ƒ /api/v1/couples/[id]/pins             307 B           107 kB
+├ ƒ /api/v1/couples/[id]/settings         307 B           107 kB
+├ ƒ /api/v1/discovery/candidates          307 B           107 kB
+├ ƒ /api/v1/entitlements                  307 B           107 kB
+├ ƒ /api/v1/geocode                       307 B           107 kB
+├ ƒ /api/v1/health                        307 B           107 kB
+├ ƒ /api/v1/likes                         307 B           107 kB
+├ ƒ /api/v1/matches                       307 B           107 kB
+├ ƒ /api/v1/matching/rank                 307 B           107 kB
+├ ƒ /api/v1/matchmaking/invites           307 B           107 kB
+├ ƒ /api/v1/matchmaking/meetings          307 B           107 kB
+├ ƒ /api/v1/me/consents                   307 B           107 kB
+├ ƒ /api/v1/me/delete                     307 B           107 kB
+├ ƒ /api/v1/me/home-state                 307 B           107 kB
+├ ƒ /api/v1/me/profile                    307 B           107 kB
+├ ƒ /api/v1/media/[id]/confirm            307 B           107 kB
+├ ƒ /api/v1/media/[id]/url                307 B           107 kB
+├ ƒ /api/v1/media/export                  307 B           107 kB
+├ ƒ /api/v1/media/health                  307 B           107 kB
+├ ƒ /api/v1/media/library                 307 B           107 kB
+├ ƒ /api/v1/media/upload-intents          307 B           107 kB
+├ ƒ /api/v1/messages                      307 B           107 kB
+├ ƒ /api/v1/needs/answers                 307 B           107 kB
+├ ƒ /api/v1/needs/preferences             307 B           107 kB
+├ ƒ /api/v1/needs/questions               307 B           107 kB
+├ ƒ /api/v1/payments/apple/notifications  307 B           107 kB
+├ ƒ /api/v1/payments/apple/verify         307 B           107 kB
+├ ƒ /api/v1/payments/bank-transfer        307 B           107 kB
+├ ƒ /api/v1/payments/checkout             307 B           107 kB
+├ ƒ /api/v1/payments/webhooks/stripe      307 B           107 kB
+├ ƒ /api/v1/places                        307 B           107 kB
+├ ƒ /api/v1/places/[id]                   307 B           107 kB
+├ ƒ /api/v1/places/[id]/reviews           307 B           107 kB
+├ ƒ /api/v1/reports                       307 B           107 kB
+├ ƒ /api/v1/safety/checkins               307 B           107 kB
+├ ƒ /api/v1/safety/contacts               307 B           107 kB
+├ ƒ /api/v1/services/bookings             307 B           107 kB
+├ ƒ /api/v1/services/offerings            307 B           107 kB
+├ ƒ /auth/callback                        307 B           107 kB
+├ ƒ /auth/reset                           1.94 kB         235 kB
+├ ƒ /bookings                             2.13 kB         167 kB
+├ ƒ /chat                                 6.06 kB         239 kB
+├ ƒ /checkout/[step]                      3.11 kB         168 kB
+├ ƒ /couple                               193 B           111 kB
+├ ƒ /couple/add                           2.44 kB         167 kB
+├ ƒ /couple/invite                        2 kB            163 kB
+├ ƒ /couple/join                          1.33 kB         166 kB
+├ ƒ /couple/map                           4.39 kB         169 kB
+├ ƒ /couple/memories                      213 B           111 kB
+├ ƒ /couple/promises                      2.07 kB         167 kB
+├ ƒ /couple/us                            3.84 kB         236 kB
+├ ƒ /discover                             3.77 kB         168 kB
+├ ƒ /faq                                  213 B           111 kB
+├ ƒ /forgot-password                      1.98 kB         235 kB
+├ ƒ /home                                 199 B           116 kB
+├ ƒ /legal                                193 B           111 kB
+├ ● /legal/[slug]                         193 B           111 kB
+├   ├ /legal/terms
+├   ├ /legal/privacy
+├   ├ /legal/community
+├   └ [+6 more paths]
+├ ƒ /lifestyle                            199 B           116 kB
+├ ƒ /lifestyle/[category]                 199 B           116 kB
+├ ƒ /lifestyle/[category]/[mockId]        1.69 kB         166 kB
+├ ƒ /lifestyle/cart                       1.96 kB         167 kB
+├ ƒ /lifestyle/orders                     1.17 kB         166 kB
+├ ƒ /likes                                1.96 kB         167 kB
+├ ƒ /login                                213 B           111 kB
+├ ƒ /me                                   199 B           116 kB
+├ ƒ /me/account                           1.3 kB          166 kB
+├ ƒ /me/deep                              2.1 kB          163 kB
+├ ƒ /me/edit                              2.52 kB         231 kB
+├ ƒ /me/history                           213 B           111 kB
+├ ƒ /me/journey                           2.14 kB         167 kB
+├ ƒ /me/media                             3.13 kB         236 kB
+├ ƒ /me/orders                            213 B           111 kB
+├ ƒ /me/preferences                       2.27 kB         167 kB
+├ ƒ /me/premium                           1.94 kB         167 kB
+├ ƒ /me/privacy                           307 B           107 kB
+├ ƒ /me/understand                        142 B           168 kB
+├ ƒ /me/understand/refresh                213 B           111 kB
+├ ƒ /onboarding                           213 B           111 kB
+├ ƒ /onboarding/needs                     143 B           168 kB
+├ ƒ /ops/venues                           1.83 kB         112 kB
+├ ƒ /places/[id]                          2.83 kB         235 kB
+├ ƒ /places/map                           193 B           111 kB
+├ ƒ /places/top                           193 B           111 kB
+├ ƒ /privacy                              213 B           111 kB
+├ ○ /robots.txt                           0 B                0 B
+├ ƒ /safe                                 1.98 kB         167 kB
+├ ƒ /services                             7.97 kB         178 kB
+├ ƒ /services/[slug]                      1.3 kB          166 kB
+├ ƒ /services/[slug]/request              3.24 kB         236 kB
+├ ƒ /services/providers                   213 B           111 kB
+├ ƒ /services/recommend                   6.58 kB         171 kB
+├ ƒ /signup                               213 B           111 kB
+├ ○ /sitemap.xml                          0 B                0 B
+├ ƒ /support                              193 B           111 kB
+└ ƒ /terms                                213 B           111 kB
++ First Load JS shared by all             107 kB
+├ chunks/2855-2b3f8c13a1a0f706.js       51 kB
+├ chunks/87c73c54-04b10d1ebb036dd9.js   53 kB
+└ other shared chunks (total)           2.77 kB
+ƒ Middleware                              163 kB
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+Traced Next.js server files in: 99.219ms
+Created all serverless functions in: 509.937ms
+Collected static files (public/, static/, .next/static): 18.128ms
+Build Completed in /vercel/output [1m]
+Deploying outputs...
+[2K[1A[2K[G  Production      https://deepmatch-ems8yugai-tradingbase.vercel.app
+Completing…
+▲ Aliased         https://datingvn.com
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_2XX44FUdJVhS57QCxkhN2GQXBPCT",
+    "url": "https://deepmatch-ems8yugai-tradingbase.vercel.app",
+    "productionUrl": "https://datingvn.com",
+    "inspectorUrl": "https://vercel.com/tradingbase/deepmatch/2XX44FUdJVhS57QCxkhN2GQXBPCT",
+    "readyState": "READY",
+    "target": "production",
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_2XX44FUdJVhS57QCxkhN2GQXBPCT",
+    "buildMachine": {
+      "cores": 4,
+      "memory": 8192,
+      "machine": "standard",
+      "selectionType": "fixed",
+      "selectionSource": "project-setting"
+    },
+    "deploymentProtection": [
+      "vercel_authentication"
+    ]
+  },
+  "message": "Deployment deepmatch-ems8yugai-tradingbase.vercel.app ready. Production URL: https://datingvn.com",
+  "next": [
+    {
+      "command": "vercel curl https://datingvn.com",
+      "when": "Verify deployment, including when Deployment Protection is enabled"
+    },
+    {
+      "command": "vercel inspect deepmatch-ems8yugai-tradingbase.vercel.app",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod",
+      "when": "Promote to production"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+node.exe : Connecting to remote database...
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Connecting to remote database...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Do you want to push these migrations to the remote database?
+ G求 20261012160000_ff_premium_on_catalog.sql
+ G求 20261012170000_bank_transfer_billing.sql
+ G求 20261012180000_commerce_catalog_ai.sql
+ G求 20261012190000_ext_deepmind_safety_quota.sql
+ G求 20261012200000_pair_invite_email.sql
+ G求 20261013040000_needs_answers.sql
+ G求 20261013050000_needs_prefs_booking_meta.sql
+ G求 20261013060000_entitlements_checkout_media.sql
+ G求 20261013061000_entitlements_insert_policy.sql
+ G求 20261013070000_matchmaking_meetings.sql
+ G求 20261013071000_venue_moderation.sql
+ G求 20261013072000_venue_moderation_rls_fix.sql
+ G求 20261013073000_checkout_webhook_idempotency.sql
+ G求 20261013074000_blocks_visible_to_blocked.sql
+ G求 20261013100000_couple_premium_meta.sql
+ G求 20261013120000_media_processing_r2.sql
+ G求 20261013130000_place_reviews_service_media.sql
+ G求 20261014120000_pin_media.sql
+
+ [Y/n] y
+Applying migration 20261012160000_ff_premium_on_catalog.sql...
+Applying migration 20261012170000_bank_transfer_billing.sql...
+Applying migration 20261012180000_commerce_catalog_ai.sql...
+Applying migration 20261012190000_ext_deepmind_safety_quota.sql...
+NOTICE (00000): policy "ai_deepmind_own" for relation "public.ai_deepmind_answers" does not exist, skipping
+Applying migration 20261012200000_pair_invite_email.sql...
+Applying migration 20261013040000_needs_answers.sql...
+NOTICE (00000): policy "needs_answers_own" for relation "public.needs_answers" does not exist, skipping
+Applying migration 20261013050000_needs_prefs_booking_meta.sql...
+Applying migration 20261013060000_entitlements_checkout_media.sql...
+NOTICE (00000): policy "checkout_orders_own" for relation "public.checkout_orders" does not exist, skipping
+NOTICE (00000): policy "entitlements_own" for relation "public.entitlements" does not exist, skipping
+NOTICE (00000): policy "matchmaking_invites_parties" for relation "public.matchmaking_invites" does not exist, skipping
+Applying migration 20261013061000_entitlements_insert_policy.sql...
+NOTICE (00000): policy "entitlements_insert_own" for relation "public.entitlements" does not exist, skipping
+Applying migration 20261013070000_matchmaking_meetings.sql...
+NOTICE (00000): policy "matchmaking_meetings_parties" for relation "public.matchmaking_meetings" does not exist, 
+skipping
+Applying migration 20261013071000_venue_moderation.sql...
+NOTICE (00000): policy "venue_flags_staff" for relation "public.venue_admin_flags" does not exist, skipping
+NOTICE (00000): policy "venue_mod_report" for relation "public.venue_moderation_queue" does not exist, skipping
+NOTICE (00000): policy "venue_mod_staff" for relation "public.venue_moderation_queue" does not exist, skipping
+NOTICE (00000): policy "venue_mod_public_removed" for relation "public.venue_moderation_queue" does not exist, skipping
+NOTICE (00000): policy "venue_flags_public_read" for relation "public.venue_admin_flags" does not exist, skipping
+Applying migration 20261013072000_venue_moderation_rls_fix.sql...
+Applying migration 20261013073000_checkout_webhook_idempotency.sql...
+Applying migration 20261013074000_blocks_visible_to_blocked.sql...
+NOTICE (00000): policy "blocks_visible_blocked" for relation "public.blocks" does not exist, skipping
+Applying migration 20261013100000_couple_premium_meta.sql...
+NOTICE (00000): policy "couple_dates_member" for relation "public.couple_dates" does not exist, skipping
+NOTICE (00000): policy "couple_dates_select" for relation "public.couple_dates" does not exist, skipping
+NOTICE (00000): policy "couple_dates_insert" for relation "public.couple_dates" does not exist, skipping
+NOTICE (00000): policy "couple_dates_update" for relation "public.couple_dates" does not exist, skipping
+NOTICE (00000): policy "couple_dates_delete" for relation "public.couple_dates" does not exist, skipping
+Applying migration 20261013120000_media_processing_r2.sql...
+Applying migration 20261013130000_place_reviews_service_media.sql...
+NOTICE (00000): policy "place_reviews_select" for relation "public.place_reviews" does not exist, skipping
+NOTICE (00000): policy "place_reviews_insert_own" for relation "public.place_reviews" does not exist, skipping
+NOTICE (00000): policy "place_reviews_update_own" for relation "public.place_reviews" does not exist, skipping
+Applying migration 20261014120000_pin_media.sql...
+Warning: failed to cache migrations catalog: error exporting pg-delta catalog: failed to inspect docker image: error 
+during connect: Get 
+"http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/images/public.ecr.aws/supabase/edge-runtime:v1.74.2/json": 
+open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.:
+
+Finished supabase db push.
+A new version of Supabase CLI is available: v2.122.0 (currently installed v2.109.1)
+We recommend updating regularly for new features and bug fixes: 
+https://supabase.com/docs/guides/cli/getting-started#updating-the-supabase-cli
+Docker Desktop is a prerequisite for local development. Follow the official docs to install: 
+https://docs.docker.com/desktop
+

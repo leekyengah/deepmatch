@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
   const result = canAccessChat({
     ...body,
-    chatFlagEnabled: flagEnabled("ff_chat"),
+    chatFlagEnabled: await flagEnabled("ff_chat"),
   });
 
   return NextResponse.json(result, {

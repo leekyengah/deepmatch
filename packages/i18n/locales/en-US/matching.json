@@ -1,0 +1,12 @@
+{
+  "title": "Matches",
+  "loading": "Loading matches…",
+  "loadError": "Could not load matches.",
+  "emptyTitle": "No matches yet",
+  "emptyBody": "When two people show mutual interest, the match appears here so you can start a conversation.",
+  "openChat": "Open chat",
+  "noConversation": "No conversation for this match yet.",
+  "mutualMatch": "Mutual match",
+  "matchedAt": "Matched {when}",
+  "pageIntro": "Mutual matches list. Chat opens only when mutual conditions are met; Our Space is never auto-created."
+}

@@ -1,0 +1,80 @@
+{
+  "at": "2026-10-26T09:01:53.246Z",
+  "base": "https://datingvn.com",
+  "emailA": "<qa-a>",
+  "emailB": "<qa-b>",
+  "pairId": "1408b290-9ad4-4873-ace7-67640664ca55",
+  "conversationId": "c7ba0c83-3070-4699-8af2-2eaf60805b5e",
+  "passed": 12,
+  "total": 13,
+  "failed": [
+    "pair_pins_three_layers"
+  ],
+  "results": [
+    {
+      "id": "health",
+      "pass": true,
+      "detail": "{\"ff_matching\":true,\"ff_chat\":true,\"ff_media_upload\":true,\"ff_concierge\":true,\"ff_discovery\":true,\"ff_premium\":true,\"ff_billing\":true,\"ff_lifestyle\":true,\"ff_ai\":true}"
+    },
+    {
+      "id": "discovery_candidates_rls",
+      "pass": true,
+      "detail": "count=10"
+    },
+    {
+      "id": "rls_peer_profile_mutual",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "id": "rls_private_note_deny",
+      "pass": true,
+      "detail": "denied_or_empty"
+    },
+    {
+      "id": "pair_pins_three_layers",
+      "pass": false,
+      "detail": "A=0 B=0"
+    },
+    {
+      "id": "chat_messages_readable",
+      "pass": true,
+      "detail": "count=17"
+    },
+    {
+      "id": "chat_send_message",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "id": "mutual_match_exists",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "id": "media_signed_upload",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "id": "concierge_offerings",
+      "pass": true,
+      "detail": "count=7"
+    },
+    {
+      "id": "concierge_bookings_own",
+      "pass": true,
+      "detail": "count=1"
+    },
+    {
+      "id": "concierge_booking_rls_deny",
+      "pass": true,
+      "detail": "leaked=0"
+    },
+    {
+      "id": "consent_self_select",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

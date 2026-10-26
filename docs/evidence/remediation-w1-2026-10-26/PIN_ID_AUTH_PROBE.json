@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-26T09:02:47.129Z",
+  "pairConfigured": true,
+  "pinEnvConfigured": true,
+  "media_select": {
+    "ok": true,
+    "err": null
+  },
+  "pins": {
+    "ok": true,
+    "count": 0,
+    "err": null
+  },
+  "usedExistingPin": true,
+  "probePinId": "<uuid>",
+  "insert_with_pin": {
+    "ok": true,
+    "err": null
+  },
+  "roundtrip": {
+    "ok": true
+  },
+  "bff_couples_active": {
+    "status": 200,
+    "keys": [
+      "data",
+      "meta"
+    ]
+  }
+}

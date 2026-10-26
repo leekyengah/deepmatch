@@ -1,0 +1,4 @@
+npx tsc --noEmit apps/web + packages/shared
+EXIT:0
+Date: 2026-10-13
+Branch: feature/discover-v2
