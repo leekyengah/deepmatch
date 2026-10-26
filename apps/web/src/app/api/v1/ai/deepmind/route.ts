@@ -54,6 +54,16 @@ export async function PUT(req: NextRequest) {
     answers[k] = v.slice(0, 200);
   }
 
+  const { data: prior } = await supabase
+    .from("ai_consents")
+    .select("granted, revoked_at")
+    .eq("user_id", user.id)
+    .eq("purpose", "deepmind")
+    .maybeSingle();
+  if (prior?.revoked_at) {
+    return jsonError("FORBIDDEN", "aiConsentRevoked");
+  }
+
   const { error } = await supabase.from("ai_deepmind_answers").upsert({
     user_id: user.id,
     answers,
@@ -67,13 +77,15 @@ export async function PUT(req: NextRequest) {
   });
   if (error) return jsonError("INTERNAL");
 
-  await supabase.from("ai_consents").upsert({
-    user_id: user.id,
-    purpose: "deepmind",
-    granted: true,
-    granted_at: new Date().toISOString(),
-    revoked_at: null,
-  });
+  if (!prior?.granted) {
+    await supabase.from("ai_consents").upsert({
+      user_id: user.id,
+      purpose: "deepmind",
+      granted: true,
+      granted_at: new Date().toISOString(),
+      revoked_at: null,
+    });
+  }
 
   return NextResponse.json({ ok: true, answers });
 }
