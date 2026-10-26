@@ -3,7 +3,8 @@
 **Date:** 2026-10-26  
 **Actor:** Independent QA Agent (automated)  
 **GA stance:** **NO-GO** (unchanged; recommendation only)  
-**Base commit before this work:** `c05e6a7` (branch at run time may differ)
+**Base commit before this work:** `c05e6a7`  
+**Commits this wave:** `5cdc170` (docs+core) · `9dfab0c` (adapters+DeepMatch) · `861969e` (scripts+evidence)
 
 ## Verified topology
 
