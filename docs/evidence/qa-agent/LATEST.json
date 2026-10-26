@@ -1,104 +1,87 @@
 {
   "context": {
-    "runId": "qa-2026-10-26T09-48-01-417Z-b854601b",
+    "runId": "qa-2026-10-26T10-05-43-874Z-53368451",
     "projectId": "deepmatch",
-    "commitSha": "c05e6a7044726151c33661febaf071e1936331c4",
+    "commitSha": "ecb9595fb4bbabc4a0f61780b48e8ab25bb1527e",
     "branch": "feat/w2-core-member-wp1-3",
     "environment": {
-      "id": "dm-staging",
-      "baseUrl": "https://datingvn.com",
-      "kind": "staging",
+      "id": "dm-local",
+      "baseUrl": "http://127.0.0.1:3000",
+      "kind": "local",
       "allowWrites": false
     },
-    "startedAt": "2026-10-26T09:48:01.417Z",
-    "suite": "p0",
+    "startedAt": "2026-10-26T10:05:43.874Z",
+    "suite": "w3",
     "actor": "qa-agent-automated"
   },
   "results": [
     {
       "id": "DM-QA-P0-001",
-      "outcome": "PASS",
-      "actual": "PASS  pair_pins_three_layers — A=3 B=3",
-      "durationMs": 8659,
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
       "requirements": {
         "fixId": "FIX26-011",
         "auditId": "AUD26-011"
-      },
-      "expected": "Both pair members see ≥3 pins covering visited, wishlist, milestone via RLS"
+      }
     },
     {
       "id": "DM-QA-P0-002",
-      "outcome": "PASS",
-      "actual": "{\n  \"at\": \"2026-10-26T09:48:12.638Z\",\n  \"pairConfigured\": true,\n  \"pinEnvConfigured\": true,\n  \"media_select\": {\n    \"ok\": true,\n    \"err\": null\n  },\n  \"pins\": {\n    \"ok\": true,\n    \"count\": 3,\n    \"err\": null\n  },\n  \"usedExistingPin\": true,\n  \"probePinId\": \"<uuid>\",\n  \"insert_with_pin\": {\n    \"ok\": true,\n    \"err\": null\n  },\n  \"roundtrip\": {\n    \"ok\": true\n  },\n  \"bff_couples_active\": {\n    \"status\": 200,\n    \"keys\": [\n      \"data\",\n      \"meta\"\n    ]\n  }\n}\n",
-      "durationMs": 6378,
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
       "requirements": {
         "fixId": "FIX26-011",
         "auditId": "AUD26-011"
-      },
-      "expected": "Authenticated user can attach pin_id; outsider/anon denied or empty"
+      }
     },
     {
       "id": "DM-QA-P0-003",
-      "outcome": "PASS",
-      "actual": "{\n  \"pass\": true,\n  \"results\": {\n    \"at\": \"2026-10-26T09:48:21.002Z\",\n    \"owner_sees_three_layers\": {\n      \"pass\": true,\n      \"count\": 3,\n      \"err\": null\n    },\n    \"partner_sees_pins\": {\n      \"pass\": true,\n      \"count\": 3,\n      \"err\": null\n    },\n    \"anonymous_denied_or_empty\": {\n      \"pass\": true,\n      \"count\": 0,\n      \"err\": null\n    },\n    \"outsider_denied_or_empty\": {\n      \"pass\": null,\n      \"count\": null,\n      \"err\": \"no_third_user\"\n    }\n  }\n}\n",
-      "durationMs": 3877,
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
       "requirements": {
         "fixId": "FIX26-011",
         "auditId": "AUD26-011"
-      },
-      "expected": "Owner and partner see three layers; anonymous empty"
+      }
     },
     {
       "id": "DM-QA-P0-004",
-      "outcome": "PASS",
-      "actual": "\n> deepmatch@0.1.0 test:no-leak\n> node scripts/no-leak-public.mjs https://datingvn.com\n\nno-leak scan base=https://datingvn.com\nPASS / status=200 bytes=33779\nPASS /faq status=200 bytes=16919\nPASS /privacy status=200 bytes=42150\nPASS /terms status=200 bytes=33781\nPASS /login status=200 bytes=12175\nPASS /signup status=200 bytes=15040\nPASS /robots.txt status=200 bytes=27\nPASS /sitemap.xml status=200 bytes=2651\nPASS probe /.env status=307\nPASS probe /.git/config status=307\nPASS probe /.ai/NEXT_ACTION.md status=307\nPASS probe /docs/audits/DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md status=307\nPASS probe /api/v1/admin/users status=404\nno-leak PASSED\n",
-      "durationMs": 7886,
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
       "requirements": {
         "fixId": "FIX26-018",
         "auditId": "AUD26-018"
-      },
-      "expected": "Public pages do not leak staging banners, service role, or private routes"
+      }
     },
     {
       "id": "DM-QA-P0-005",
-      "outcome": "PASS",
-      "actual": "{\n  \"doneTotal\": 85,\n  \"byBucket\": {\n    \"ID_NAMED_EVIDENCE\": 1,\n    \"WAVE_MENTION_ONLY\": 84,\n    \"NO_ID_EVIDENCE\": 0\n  }\n}\n",
-      "remediation": "Do not auto-mark EXT Done as VERIFIED",
-      "durationMs": 4202,
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
       "requirements": {
         "fixId": "FIX26-003",
         "auditId": "AUD26-003"
-      },
-      "expected": "Eval script runs read-only; zero fabricated VERIFIED"
+      }
     },
     {
       "id": "DM-QA-P0-006",
-      "outcome": "PASS",
-      "actual": "core=0 adapters=0",
-      "detail": "\n> @tradingbase/qa-core@1.0.0 test\n> tsx --test src/*.test.ts\n\n▶ evidence\n  ✔ summarizes outcomes (3.4593ms)\n  ✔ writes redacted json and keeps GA NO-GO (28.589ms)\n✔ evidence (37.8733ms)\n▶ safety\n  ✔ allows staging datingvn.com (6.7013ms)\n  ✔ blocks production kind (2.1115ms)\n  ✔ blocks unknown hosts (15.0814ms)\n  ✔ redacts JWTs and bearer tokens (2.0187ms)\n✔ safety (32.089ms)\n▶ status-machine\n  ✔ allows READY_FOR_QA → QA_PASSED_AUTOMATED (4.7476ms)\n  ✔ blocks automated self-sign of independent review (2.2099ms)\n  ✔ blocks RELEASE_APPROVED from automated path (0.7807ms)\n  ✔ maps failures to QA_FAILED (0.7809ms)\n  ✔ maps all pass to QA_PASSED_AUTOMATED (0.6396ms)\n✔ status-machine (17.3941ms)\nℹ tests 11\nℹ suites 3\nℹ pass 11\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 3165.3966\n\n\n> @tradingbase/qa-adapters@1.0.0 test\n> tsx --test src/*.test.ts\n\n▶ adapter registry\n  ✔ registers and resolves executable adapter (6.0593ms)\n  ✔ refuses non-executable stubs (2.8131ms)\n  ✔ lists future stubs as non-executable (1.3866ms)\n✔ adapter registry (16.7311ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2275.7543\n",
-      "durationMs": 22754,
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
       "requirements": {
         "other": [
           "QA-GATE-7"
         ]
-      },
-      "expected": "@tradingbase/qa-core and adapters unit tests pass"
+      }
     },
     {
       "id": "DM-QA-P0-007",
-      "outcome": "PASS",
-      "actual": "13/13",
-      "detail": "rue,\"ff_billing\":true,\"ff_lifestyle\":true,\"ff_ai\":true}\nPASS  discovery_candidates_rls — count=10\nPASS  rls_peer_profile_mutual\nPASS  rls_private_note_deny — denied_or_empty\nPASS  pair_pins_three_layers — A=3 B=3\nPASS  chat_messages_readable — count=22\nPASS  chat_send_message\nPASS  mutual_match_exists\nPASS  media_signed_upload — ok\nPASS  concierge_offerings — count=7\nPASS  concierge_bookings_own — count=2\nPASS  concierge_booking_rls_deny — leaked=0\nPASS  consent_self_select\n\nSummary: 13/13 PASS\n",
-      "durationMs": 15299,
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
       "requirements": {
         "fixId": "FIX26-011"
-      },
-      "expected": "scripts/accept-staging.mjs reports all checks; classify seed vs app defects"
+      }
     },
     {
       "id": "DM-QA-A-001",
       "outcome": "SKIPPED",
-      "detail": "suite filter p0",
+      "detail": "suite filter w3",
       "requirements": {
         "fixId": "FIX26-018",
         "auditId": "AUD26-018"
@@ -107,20 +90,93 @@
     {
       "id": "DM-QA-H-001",
       "outcome": "SKIPPED",
-      "detail": "suite filter p0",
+      "detail": "suite filter w3",
       "requirements": {
         "other": [
           "coverage-H"
         ]
       }
+    },
+    {
+      "id": "DM-QA-W2-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
+      "requirements": {
+        "fixId": "FIX26-022",
+        "auditId": "AUD26-022"
+      }
+    },
+    {
+      "id": "DM-QA-W2-002",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
+      "requirements": {
+        "fixId": "FIX26-023",
+        "auditId": "AUD26-023"
+      }
+    },
+    {
+      "id": "DM-QA-W2-003",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
+      "requirements": {
+        "fixId": "FIX26-017",
+        "auditId": "AUD26-017"
+      }
+    },
+    {
+      "id": "DM-QA-W2-004",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
+      "requirements": {
+        "fixId": "FIX26-016",
+        "auditId": "AUD26-016"
+      }
+    },
+    {
+      "id": "DM-QA-W2-005",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
+      "requirements": {
+        "fixId": "FIX26-028",
+        "auditId": "AUD26-028"
+      }
+    },
+    {
+      "id": "DM-QA-W2-006",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
+      "requirements": {
+        "fixId": "FIX26-028"
+      }
+    },
+    {
+      "id": "DM-QA-W2-007",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w3",
+      "requirements": {
+        "fixId": "FIX26-027",
+        "auditId": "AUD26-027"
+      }
+    },
+    {
+      "id": "DM-QA-W3-001",
+      "outcome": "PASS",
+      "actual": "▶ ai gateway stub\n  ✔ redacts private keys (3.6656ms)\n  ✔ returns demo-labeled gift suggestions (2.1429ms)\n  ✔ deepmind is non-clinical (0.9364ms)\n  ✔ resolveAiAdapter defaults to stub (DECISION-AI-01 C) (0.5725ms)\n✔ ai gateway stub (12.2995ms)\nℹ tests 4\nℹ suites 1\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1286.7189\n",
+      "durationMs": 5970,
+      "requirements": {
+        "fixId": "FIX26-039",
+        "auditId": "AUD26-039"
+      },
+      "expected": "packages/shared AI gateway unit tests PASS"
     }
   ],
   "summary": {
-    "total": 9,
-    "pass": 7,
+    "total": 17,
+    "pass": 1,
     "fail": 0,
     "blocked": 0,
-    "skipped": 2,
+    "skipped": 16,
     "inconclusive": 0,
     "notRun": 0
   },
@@ -128,7 +184,7 @@
   "releaseRecommendation": "NO-GO",
   "gaStance": "NO-GO",
   "costEstimateUsd": 0,
-  "durationMs": 69789,
+  "durationMs": 6371,
   "lifecycleEffect": "QA_PASSED_AUTOMATED",
   "reviewerSignoff": {
     "identity": null,

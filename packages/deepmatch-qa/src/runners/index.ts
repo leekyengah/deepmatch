@@ -2,6 +2,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import type { CaseRunner } from "@tradingbase/qa-core";
 import { hasQaCreds, loadQaEnv, runCommand } from "./shell.js";
+import { w2Runners } from "./w2.js";
 
 function nodeEnvFileArgs(projectRoot: string): string[] {
   const envLocal = join(projectRoot, ".env.local");
@@ -32,6 +33,7 @@ function classifyPairPinsFail(detail: string): {
 }
 
 export const runners: Record<string, CaseRunner> = {
+  ...w2Runners,
   qa_core_unit: async (spec, ctx) => {
     const core = await runCommand(
       "npm",

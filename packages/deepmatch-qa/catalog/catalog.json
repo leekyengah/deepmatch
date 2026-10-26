@@ -91,6 +91,86 @@
       "criteria": "smoke.spec.ts PASS against allowlisted staging/local",
       "runner": "playwright_smoke",
       "tags": ["e2e"]
+    },
+    {
+      "id": "DM-QA-W2-001",
+      "title": "Onboarding intents friendship|dating|marriage",
+      "suite": "w2",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-022", "auditId": "AUD26-022" },
+      "criteria": "normalizeIntent maps legacy + canonical intents",
+      "runner": "w2_intents_unit",
+      "tags": ["onboarding", "w2"]
+    },
+    {
+      "id": "DM-QA-W2-002",
+      "title": "Discover media gate (<3 photos)",
+      "suite": "w2",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-023", "auditId": "AUD26-023" },
+      "criteria": "discover-gate unit enforces minimum photos",
+      "runner": "w2_discover_gate_unit",
+      "tags": ["discover", "media", "w2"]
+    },
+    {
+      "id": "DM-QA-W2-003",
+      "title": "Age gate 18+ helpers",
+      "suite": "w2",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-017", "auditId": "AUD26-017" },
+      "criteria": "isAgeEligible rejects underage",
+      "runner": "w2_age_unit",
+      "tags": ["auth", "age", "w2"]
+    },
+    {
+      "id": "DM-QA-W2-004",
+      "title": "Email verification helpers",
+      "suite": "w2",
+      "priority": "P1",
+      "requirements": { "fixId": "FIX26-016", "auditId": "AUD26-016" },
+      "criteria": "email-verified unit PASS",
+      "runner": "w2_email_verified_unit",
+      "tags": ["auth", "email", "w2"]
+    },
+    {
+      "id": "DM-QA-W2-005",
+      "title": "Discover candidates API (MEDIA_GATE aware)",
+      "suite": "w2",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-028", "auditId": "AUD26-028" },
+      "criteria": "Authenticated discovery returns candidates or emptyReason",
+      "runner": "w2_discovery_media_gate",
+      "tags": ["discover", "w2"]
+    },
+    {
+      "id": "DM-QA-W2-006",
+      "title": "Unmatch authz negatives (preserve QA match)",
+      "suite": "w2",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-028" },
+      "criteria": "Guest denied; authed empty body not 500; no fixture destroy",
+      "runner": "w2_unmatch_authz",
+      "tags": ["matching", "unmatch", "w2"]
+    },
+    {
+      "id": "DM-QA-W2-007",
+      "title": "Profile /me live read",
+      "suite": "w2",
+      "priority": "P1",
+      "requirements": { "fixId": "FIX26-027", "auditId": "AUD26-027" },
+      "criteria": "QA user can read own profile via API when Bearer accepted",
+      "runner": "w2_profile_me",
+      "tags": ["profile", "w2"]
+    },
+    {
+      "id": "DM-QA-W3-001",
+      "title": "AI gateway unit (consent/safety surface)",
+      "suite": "w3",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-039", "auditId": "AUD26-039" },
+      "criteria": "packages/shared AI gateway unit tests PASS",
+      "runner": "w3_ai_gateway_unit",
+      "tags": ["ai", "w3"]
     }
   ]
 }
