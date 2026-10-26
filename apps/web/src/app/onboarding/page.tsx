@@ -73,16 +73,32 @@ export default async function OnboardingPage() {
             <input
               type="radio"
               name="intent"
-              value="long_term"
+              value="friendship"
+              className="mt-1 accent-[var(--dm-primary)]"
+            />
+            <span>
+              <span className="block text-sm font-semibold">
+                {t("onboarding.intentFriendship")}
+              </span>
+              <span className="mt-0.5 block text-xs text-dm-muted">
+                {t("onboarding.intentFriendshipHint")}
+              </span>
+            </span>
+          </label>
+          <label className="flex cursor-pointer gap-3 rounded-dm border border-dm-line bg-dm-surface p-3 has-[:checked]:border-dm-primary">
+            <input
+              type="radio"
+              name="intent"
+              value="dating"
               defaultChecked
               className="mt-1 accent-[var(--dm-primary)]"
             />
             <span>
               <span className="block text-sm font-semibold">
-                {t("onboarding.intentLongTerm")}
+                {t("onboarding.intentDating")}
               </span>
               <span className="mt-0.5 block text-xs text-dm-muted">
-                {t("onboarding.intentLongTermHint")}
+                {t("onboarding.intentDatingHint")}
               </span>
             </span>
           </label>
@@ -90,22 +106,16 @@ export default async function OnboardingPage() {
             <input
               type="radio"
               name="intent"
-              value="companion"
+              value="marriage"
               className="mt-1 accent-[var(--dm-primary)]"
             />
-            <span className="text-sm font-semibold">
-              {t("onboarding.intentCompanion")}
-            </span>
-          </label>
-          <label className="flex cursor-pointer gap-3 rounded-dm border border-dm-line bg-dm-surface p-3 has-[:checked]:border-dm-primary">
-            <input
-              type="radio"
-              name="intent"
-              value="talks"
-              className="mt-1 accent-[var(--dm-primary)]"
-            />
-            <span className="text-sm font-semibold">
-              {t("onboarding.intentTalks")}
+            <span>
+              <span className="block text-sm font-semibold">
+                {t("onboarding.intentMarriage")}
+              </span>
+              <span className="mt-0.5 block text-xs text-dm-muted">
+                {t("onboarding.intentMarriageHint")}
+              </span>
             </span>
           </label>
         </fieldset>

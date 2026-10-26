@@ -267,13 +267,15 @@ export function DiscoverHub({ flagsOn }: { flagsOn: boolean }) {
   }
 
   const emptyCopy =
-    state.emptyReason === "FILTERS_STRICT"
-      ? t("discovery.emptyFilters")
-      : state.emptyReason === "ACTED_ALL"
-        ? t("discovery.emptyActed")
-        : state.emptyReason === "NO_POOL"
-          ? t("discovery.emptyPool")
-          : t("discovery.emptyBody");
+    state.emptyReason === "MEDIA_GATE"
+      ? t("discovery.emptyMediaGate")
+      : state.emptyReason === "FILTERS_STRICT"
+        ? t("discovery.emptyFilters")
+        : state.emptyReason === "ACTED_ALL"
+          ? t("discovery.emptyActed")
+          : state.emptyReason === "NO_POOL"
+            ? t("discovery.emptyPool")
+            : t("discovery.emptyBody");
 
   return (
     <div className="dm-page-frame space-y-6 pb-16">
@@ -438,17 +440,25 @@ export function DiscoverHub({ flagsOn }: { flagsOn: boolean }) {
               description={emptyCopy}
               action={
                 <div className="flex flex-wrap gap-2">
-                  <Button
-                    type="button"
-                    size="sm"
-                    onClick={() => {
-                      setDraft(DEFAULT_FILTERS);
-                      setFilters(DEFAULT_FILTERS);
-                      setIntent("all");
-                    }}
-                  >
-                    {t("discovery.relaxFilters")}
-                  </Button>
+                  {state.emptyReason === "MEDIA_GATE" ? (
+                    <Link href="/me/media">
+                      <Button type="button" size="sm">
+                        {t("discovery.openMediaGate")}
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Button
+                      type="button"
+                      size="sm"
+                      onClick={() => {
+                        setDraft(DEFAULT_FILTERS);
+                        setFilters(DEFAULT_FILTERS);
+                        setIntent("all");
+                      }}
+                    >
+                      {t("discovery.relaxFilters")}
+                    </Button>
+                  )}
                   <Link href="/me/preferences">
                     <Button type="button" size="sm" variant="outline">
                       {t("needs.discoverNudgeCta")}

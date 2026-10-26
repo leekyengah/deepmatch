@@ -1,27 +1,22 @@
 ﻿{
   "project": "DeepMatch",
-  "updatedAt": "2026-10-12T19:00:00+07:00",
-  "state": "Master wave: persona home + AI quota/revoke + admin catalog + catalog E2E local PASS; staging deploy next",
-  "branch": "feat/ext-lifestyle-ai-commerce",
+  "updatedAt": "2026-10-26T16:50:00+07:00",
+  "state": "W1 IMPLEMENTATION_CLOSED_WITH_RESIDUALS; W2 WP1-3 shipped (intent+MEDIA_GATE+unmatch+live /me); GA NO-GO",
+  "branch": "feat/w2-core-member-wp1-3",
+  "baseline": {
+    "w1Pr": "https://github.com/leekyengah/deepmatch/pull/2",
+    "w1Tip": "c05e6a7044726151c33661febaf071e1936331c4"
+  },
   "wave": {
-    "ext": [
-      "EXT-021",
-      "EXT-030",
-      "EXT-031",
-      "EXT-033",
-      "EXT-037",
-      "EXT-041",
-      "EXT-042",
-      "EXT-052",
-      "EXT-053",
-      "EXT-054",
-      "EXT-055",
-      "EXT-056"
-    ],
+    "w1": "IMPLEMENTATION_CLOSED_WITH_RESIDUALS",
+    "w2": "IN_PROGRESS",
+    "donePendingQa": ["FIX26-022", "FIX26-023", "FIX26-027", "FIX26-028", "FIX26-W2-WP1", "FIX26-W2-WP2", "FIX26-W2-WP3"],
     "gates": {
-      "i18nParity": "PASS",
-      "typecheck": "PASS"
+      "sharedUnit": "PASS",
+      "webTypecheck": "PASS",
+      "doneVerified": 0,
+      "ga": "NO-GO"
     }
   },
-  "blocked": ["EXT-040", "TestFlight"]
+  "blocked": ["Sentry DSN", "ASC/Play", "Legal", "DR restore", "LIVE PSP", "Independent QA / VERIFIED"]
 }

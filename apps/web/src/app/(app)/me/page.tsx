@@ -5,7 +5,8 @@ import { resolveHomeState, type HomeState } from "@/lib/home-state";
 import { logoutAction } from "@/app/logout/actions";
 import { Button } from "@/components/ui/Button";
 import { MemberCenter } from "@/components/me/MemberCenter";
-import { ME_FIXTURE } from "@/lib/me-fixtures";
+import { createSignedReadUrl } from "@/lib/media/storage";
+import { getStorageBackend } from "@/lib/media/limits";
 
 function stateLabelKey(state: HomeState): string {
   switch (state) {
@@ -38,6 +39,38 @@ function ctaLabelKey(state: HomeState): string {
   }
 }
 
+function journeyFromState(state: HomeState): { step: number; total: number } {
+  const total = 6;
+  switch (state) {
+    case "onboarding":
+      return { step: 1, total };
+    case "dating":
+      return { step: 2, total };
+    case "matched":
+      return { step: 4, total };
+    case "couple":
+      return { step: 5, total };
+    case "suspended":
+      return { step: 1, total };
+    default:
+      return { step: 2, total };
+  }
+}
+
+function ageYears(birthDateIso: string | null | undefined): number | null {
+  if (!birthDateIso) return null;
+  const birth = new Date(birthDateIso);
+  if (Number.isNaN(birth.getTime())) return null;
+  const now = new Date();
+  return (
+    now.getFullYear() -
+    birth.getFullYear() -
+    (now < new Date(now.getFullYear(), birth.getMonth(), birth.getDate())
+      ? 1
+      : 0)
+  );
+}
+
 function estimateProfilePct(input: {
   discovery_opt_in: boolean | null;
   fuzzy_region: string | null;
@@ -62,28 +95,93 @@ export default async function MePage() {
   if (!user) redirect("/login");
   const { t } = await getServerTranslator();
 
-  const [{ data: profile }, { data: roleRow }, { data: entitlements }, home] =
-    await Promise.all([
-      supabase
+  const [
+    { data: profile },
+    { data: roleRow },
+    { data: entitlements },
+    home,
+    { count: matchCount },
+  ] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select(
+        "display_name, mode, discovery_opt_in, fuzzy_region, avatar_path, bio, birth_date",
+      )
+      .eq("id", user.id)
+      .maybeSingle(),
+    supabase
+      .from("admin_roles")
+      .select("role")
+      .eq("user_id", user.id)
+      .maybeSingle(),
+    supabase
+      .from("entitlements")
+      .select("id, package_code, status")
+      .eq("user_id", user.id)
+      .eq("status", "active")
+      .limit(1),
+    resolveHomeState(user.id),
+    supabase
+      .from("mutual_matches")
+      .select("id", { count: "exact", head: true })
+      .or(`user_a.eq.${user.id},user_b.eq.${user.id}`),
+  ]);
+
+  const { data: matchRows } = await supabase
+    .from("mutual_matches")
+    .select("id, user_a, user_b")
+    .or(`user_a.eq.${user.id},user_b.eq.${user.id}`)
+    .order("created_at", { ascending: false })
+    .limit(3);
+
+  const peerIds = (matchRows ?? []).map((m) =>
+    m.user_a === user.id ? m.user_b : m.user_a,
+  );
+  const { data: peers } = peerIds.length
+    ? await supabase
         .from("profiles")
-        .select(
-          "display_name, mode, discovery_opt_in, fuzzy_region, avatar_path, bio",
-        )
-        .eq("id", user.id)
-        .maybeSingle(),
-      supabase
-        .from("admin_roles")
-        .select("role")
-        .eq("user_id", user.id)
-        .maybeSingle(),
-      supabase
-        .from("entitlements")
-        .select("id, package_code, status")
-        .eq("user_id", user.id)
-        .eq("status", "active")
-        .limit(1),
-      resolveHomeState(user.id),
-    ]);
+        .select("id, avatar_path")
+        .in("id", peerIds)
+    : { data: [] as { id: string; avatar_path: string | null }[] };
+
+  let upcomingDatesCount = 0;
+  const { data: pairRow } = await supabase
+    .from("pairs")
+    .select("id")
+    .or(`user_a.eq.${user.id},user_b.eq.${user.id}`)
+    .eq("status", "active")
+    .maybeSingle();
+  if (pairRow?.id) {
+    const nowIso = new Date().toISOString();
+    const { count } = await supabase
+      .from("couple_dates")
+      .select("id", { count: "exact", head: true })
+      .eq("pair_id", pairRow.id)
+      .gte("starts_at", nowIso);
+    upcomingDatesCount = count ?? 0;
+  }
+
+  const backend = getStorageBackend();
+  let avatarUrl: string | null = null;
+  if (profile?.avatar_path) {
+    try {
+      avatarUrl = await createSignedReadUrl(profile.avatar_path, backend, 600);
+    } catch {
+      avatarUrl = null;
+    }
+  }
+
+  const matchPreviewUrls: string[] = [];
+  for (const peer of peers ?? []) {
+    const path = peer.avatar_path;
+    if (!path) continue;
+    try {
+      const url = await createSignedReadUrl(path, backend, 600);
+      if (url) matchPreviewUrls.push(url);
+    } catch {
+      /* skip */
+    }
+  }
 
   const isStaff =
     user.email?.toLowerCase() === "leekyengah@gmail.com" ||
@@ -107,13 +205,20 @@ export default async function MePage() {
 
   const hasEntitlement = Boolean(entitlements?.length);
   const membershipLabel = hasEntitlement
-    ? entitlements?.[0]?.package_code?.trim() || ME_FIXTURE.membershipLabel
+    ? entitlements?.[0]?.package_code?.trim() ||
+      t("profile.memberCenter.tierPlus")
     : t("profile.memberCenter.tierExplorer");
+
+  const journey = journeyFromState(home.state);
+  const connections = matchCount ?? 0;
 
   return (
     <MemberCenter
       displayName={name}
       location={profile?.fuzzy_region ?? null}
+      headline={profile?.bio ?? null}
+      age={ageYears(profile?.birth_date)}
+      avatarUrl={avatarUrl}
       stateLabel={t(stateLabelKey(home.state))}
       discoveryOn={Boolean(profile?.discovery_opt_in)}
       discoveryOnLabel={t("profile.discoveryOn")}
@@ -124,6 +229,12 @@ export default async function MePage() {
       completionPercent={completionPercent}
       hasEntitlement={hasEntitlement}
       membershipLabel={membershipLabel}
+      connectionsCount={connections}
+      upcomingDatesCount={upcomingDatesCount}
+      matchesActive={connections}
+      journeyStep={journey.step}
+      journeyTotal={journey.total}
+      matchPreviewUrls={matchPreviewUrls}
       isStaff={isStaff}
       adminUrl={adminUrl}
       staffOpsLabel={t("places.opsVenuesLink")}

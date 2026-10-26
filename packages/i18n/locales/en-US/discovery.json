@@ -74,5 +74,7 @@
   "noBio": "No public intro yet.",
   "emptyFilters": "Filters are too strict. Relax them or turn off strict mode.",
   "emptyActed": "You’ve acted on everyone in this set. Come back later or relax filters.",
-  "emptyPool": "No discovery-eligible profiles in the system right now."
+  "emptyPool": "No discovery-eligible profiles in the system right now.",
+  "emptyMediaGate": "Add 3–10 photos (and at most 2 videos) before browsing Discover suggestions.",
+  "openMediaGate": "Open media gate"
 }

@@ -7,6 +7,9 @@
   "openChat": "Open chat",
   "noConversation": "No conversation for this match yet.",
   "mutualMatch": "Mutual match",
+  "unmatch": "Unmatch",
+  "unmatchConfirm": "Unmatch {name}? Chat access will end.",
+  "unmatchError": "Could not unmatch. Try again.",
   "matchedAt": "Matched {when}",
   "pageIntro": "Mutual matches list. Chat opens only when mutual conditions are met; Our Space is never auto-created."
 }

@@ -7,6 +7,9 @@
   "openChat": "Mở trò chuyện",
   "noConversation": "Chưa có cuộc trò chuyện cho kết nối này.",
   "mutualMatch": "Cùng thích",
+  "unmatch": "Hủy kết nối",
+  "unmatchConfirm": "Hủy kết nối với {name}? Chat sẽ không còn truy cập được.",
+  "unmatchError": "Không hủy được kết nối. Thử lại.",
   "matchedAt": "Kết nối lúc {when}",
   "pageIntro": "Danh sách cùng thích. Chat chỉ mở khi đủ điều kiện mutual; không tự tạo không gian Sánh đôi."
 }

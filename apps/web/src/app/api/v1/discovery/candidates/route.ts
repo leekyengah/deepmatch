@@ -1,20 +1,52 @@
 import { NextResponse } from "next/server";
 import {
+  INTENT_GOAL_ALIASES,
+  evaluateDiscoverMediaGate,
+  normalizeIntent,
   rankCandidates,
   type DiscoveryProfile,
   type MatchPreferences,
 } from "@deepmatch/shared";
 import { getRouteUser } from "@/lib/supabase/route";
 import { flagEnabled } from "@/lib/flags";
-import { apiT, jsonError, makeRequestId } from "@/lib/api-error";
+import { jsonError, makeRequestId, apiT } from "@/lib/api-error";
 import { createSignedReadUrl } from "@/lib/media/storage";
 import { getStorageBackend } from "@/lib/media/limits";
 
 const INTENT_GOALS: Record<string, string[]> = {
-  friendship: ["friendship", "friends", "kết bạn", "ban_be"],
-  dating: ["dating", "serious", "hẹn hò", "hen_ho", "long_term"],
-  marriage: ["marriage", "long_term", "hôn nhân", "hon_nhan", "serious"],
+  friendship: INTENT_GOAL_ALIASES.friendship,
+  dating: INTENT_GOAL_ALIASES.dating,
+  marriage: INTENT_GOAL_ALIASES.marriage,
 };
+
+async function viewerDiscoverEligible(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  supabase: any,
+  userId: string,
+): Promise<{ ok: boolean; reasons: string[] }> {
+  const full = await supabase
+    .from("media_objects")
+    .select("content_type, moderation_status")
+    .eq("owner_user_id", userId)
+    .is("pair_id", null)
+    .limit(50);
+  const rows = full.data ?? [];
+  const images = rows.filter((r: { content_type?: string }) =>
+    String(r.content_type || "").startsWith("image/"),
+  );
+  const videos = rows.filter((r: { content_type?: string }) =>
+    String(r.content_type || "").startsWith("video/"),
+  );
+  const approved = images.filter((r: { moderation_status?: string }) => {
+    const st = r.moderation_status;
+    return !st || st === "approved" || st === "pending";
+  });
+  const gate = evaluateDiscoverMediaGate({
+    approvedOrPendingImages: approved.length,
+    videoCount: videos.length,
+  });
+  return { ok: gate.discoverEligible, reasons: gate.reasons };
+}
 
 function ageYears(birthDateIso: string | null | undefined): number | null {
   if (!birthDateIso) return null;
@@ -44,7 +76,11 @@ export async function GET(req: Request) {
 
   const url = new URL(req.url);
   const pageSize = Math.min(Number(url.searchParams.get("page_size") ?? 24), 50);
-  const intent = (url.searchParams.get("intent") ?? "all").toLowerCase();
+  const intentRaw = (url.searchParams.get("intent") ?? "all").toLowerCase();
+  const intent =
+    intentRaw === "all"
+      ? "all"
+      : (normalizeIntent(intentRaw) ?? intentRaw);
   const strict = url.searchParams.get("strict") === "1";
   const q = (url.searchParams.get("q") ?? "").trim().toLowerCase();
   const regionFilter = (url.searchParams.get("region") ?? "").trim();
@@ -79,6 +115,28 @@ export async function GET(req: Request) {
 
   if (!me?.discovery_opt_in) {
     return jsonError("FORBIDDEN", "flagDiscoveryUserOff", requestId);
+  }
+
+  const mediaGate = await viewerDiscoverEligible(supabase, user.id);
+  if (!mediaGate.ok) {
+    return NextResponse.json({
+      data: {
+        candidates: [],
+        emptyReason: "MEDIA_GATE",
+        gate: {
+          discover_eligible: false,
+          reasons: mediaGate.reasons,
+        },
+        meta: {
+          poolCount: 0,
+          excludedCount: 0,
+          intent,
+          strict,
+          softMode: !strict,
+        },
+      },
+      meta: { request_id: requestId, page_size: pageSize },
+    });
   }
 
   const { data: poolRows } = await supabase

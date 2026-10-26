@@ -74,5 +74,7 @@
   "noBio": "Chưa có phần giới thiệu công khai.",
   "emptyFilters": "Bộ lọc đang quá chặt. Hãy nới tiêu chí hoặc tắt lọc nghiêm.",
   "emptyActed": "Bạn đã tương tác hết hồ sơ trong nhóm hiện tại. Quay lại sau hoặc nới tiêu chí.",
-  "emptyPool": "Chưa có hồ sơ đủ điều kiện khám phá trong hệ thống lúc này."
+  "emptyPool": "Chưa có hồ sơ đủ điều kiện khám phá trong hệ thống lúc này.",
+  "emptyMediaGate": "Bạn cần 3–10 ảnh (và tối đa 2 video) trước khi xem gợi ý Tìm nhau.",
+  "openMediaGate": "Mở cổng ảnh"
 }

@@ -7,20 +7,39 @@ import {
   HOME_CONCIERGE_PROMPTS,
   HOME_JOURNEY_STEPS,
   HOME_MAP_CARDS,
-  HOME_STAT_AVATARS,
   HOME_SUGGESTS,
 } from "@/lib/home-fixtures";
+
+export type HomeLiveSuggest = {
+  id: string;
+  name: string;
+  age: number | null;
+  city: string;
+  matchPct: number | null;
+  interests: string[];
+  bio: string | null;
+  photo: string | null;
+};
 
 export function HomeDashboard({
   displayName,
   profilePct,
   primaryHref,
+  matchCount = 0,
+  inviteCount = 0,
+  unreadCount = 0,
+  suggests = [],
 }: {
   displayName: string;
   profilePct: number;
   primaryHref: string;
+  matchCount?: number;
+  inviteCount?: number;
+  unreadCount?: number;
+  suggests?: HomeLiveSuggest[];
 }) {
   const journeyDone = profilePct >= 80 ? 3 : profilePct >= 40 ? 2 : 1;
+  const useLiveSuggests = suggests.length > 0;
 
   return (
     <div className="dm-page-frame space-y-6">
@@ -91,27 +110,32 @@ export function HomeDashboard({
           }
         />
         <StatCard
-          label="Hồ sơ phù hợp hôm nay"
-          value="12"
-          avatars
+          label="Kết nối đang mở"
+          value={String(matchCount)}
           footer={
-            <p className="mt-2 text-xs font-semibold text-[#2F7D4A]">
-              +3 so với hôm qua
-            </p>
+            <Link
+              href="/likes"
+              className="mt-2 inline-flex text-xs font-semibold text-[#6B2D3C]"
+            >
+              Xem kết nối →
+            </Link>
           }
         />
         <StatCard
-          label="Lời mời kết nối"
-          value="5"
-          avatars
+          label="Lượt thích đã gửi"
+          value={String(inviteCount)}
           footer={
-            <p className="mt-2 text-xs font-semibold text-[#6B2D3C]">+8 tuần này</p>
+            <Link
+              href="/discover"
+              className="mt-2 inline-flex text-xs font-semibold text-[#6B2D3C]"
+            >
+              Tiếp tục Tìm nhau →
+            </Link>
           }
         />
         <StatCard
           label="Tin nhắn chưa đọc"
-          value="3"
-          avatars
+          value={String(unreadCount)}
           footer={
             <Link
               href="/chat"
@@ -132,6 +156,11 @@ export function HomeDashboard({
                 <h2 className="font-display text-2xl font-semibold text-[#241A1C]">
                   Gợi ý phù hợp cho bạn
                 </h2>
+                {!useLiveSuggests ? (
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[#A88A62]">
+                    DEMO — không phải hồ sơ thật
+                  </p>
+                ) : null}
               </div>
               <Link
                 href="/discover"
@@ -141,32 +170,62 @@ export function HomeDashboard({
               </Link>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {HOME_SUGGESTS.map((p) => (
+              {(useLiveSuggests
+                ? suggests.map((p) => ({
+                    id: p.id,
+                    name: p.name,
+                    age: p.age,
+                    city: p.city || "—",
+                    distanceKm: null as number | null,
+                    matchPct: p.matchPct,
+                    interests: p.interests,
+                    bio: p.bio ?? "",
+                    photo: p.photo,
+                    live: true,
+                  }))
+                : HOME_SUGGESTS.map((p) => ({
+                    ...p,
+                    age: p.age as number | null,
+                    distanceKm: p.distanceKm as number | null,
+                    matchPct: p.matchPct as number | null,
+                    photo: p.photo as string | null,
+                    live: false,
+                  }))
+              ).map((p) => (
                 <article
                   key={p.id}
                   className="overflow-hidden rounded-[18px] border border-[#E8DCD4] bg-[#FAF6F3] shadow-[0_8px_24px_rgba(36,26,28,0.06)]"
                 >
-                  <div className="relative aspect-[4/5]">
-                    <Image
-                      src={p.photo}
-                      alt=""
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1280px) 50vw, 280px"
-                    />
-                    <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-bold text-[#6B2D3C] shadow-sm">
-                      {p.matchPct}% phù hợp
-                    </span>
-                    <span className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-[#6B2D3C] shadow-sm">
-                      ♡
-                    </span>
+                  <div className="relative aspect-[4/5] bg-[#E8DCD4]">
+                    {p.photo ? (
+                      <Image
+                        src={p.photo}
+                        alt=""
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1280px) 50vw, 280px"
+                        unoptimized={p.live}
+                      />
+                    ) : null}
+                    {p.matchPct != null ? (
+                      <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-bold text-[#6B2D3C] shadow-sm">
+                        {Math.round(p.matchPct)}% phù hợp
+                      </span>
+                    ) : null}
+                    {!p.live ? (
+                      <span className="absolute right-3 top-3 rounded-full bg-[#A88A62] px-2 py-1 text-[10px] font-bold text-white">
+                        DEMO
+                      </span>
+                    ) : null}
                   </div>
                   <div className="space-y-2.5 p-4">
                     <h3 className="font-display text-lg font-semibold text-[#241A1C]">
-                      {p.name}, {p.age}
+                      {p.name}
+                      {p.age != null ? `, ${p.age}` : ""}
                     </h3>
                     <p className="text-xs text-dm-muted">
-                      {p.city} · {p.distanceKm}km
+                      {p.city}
+                      {p.distanceKm != null ? ` · ${p.distanceKm}km` : ""}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {p.interests.map((tag) => (
@@ -186,13 +245,13 @@ export function HomeDashboard({
                         href="/discover"
                         className="inline-flex flex-1 items-center justify-center rounded-full bg-[#6B2D3C] px-3 py-2.5 text-xs font-semibold text-white"
                       >
-                        Kết nối ngay
+                        Mở Tìm nhau
                       </Link>
                       <Link
                         href="/discover"
                         className="inline-flex flex-1 items-center justify-center rounded-full border border-[#E8DCD4] bg-[#F4E9E4] px-3 py-2.5 text-xs font-semibold text-[#6B2D3C]"
                       >
-                        Xem hồ sơ
+                        Xem gợi ý
                       </Link>
                     </div>
                   </div>
@@ -308,6 +367,9 @@ export function HomeDashboard({
             <h2 className="font-display text-xl font-semibold text-[#241A1C]">
               Hoạt động gần đây
             </h2>
+            <p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-[#A88A62]">
+              DEMO minh họa
+            </p>
             <ul className="mt-4 space-y-3">
               {HOME_ACTIVITY.map((a) => (
                 <li key={a.id} className="flex gap-3">
@@ -374,30 +436,16 @@ function StatCard({
   label,
   value,
   footer,
-  avatars,
 }: {
   label: string;
   value: string;
   footer?: ReactNode;
-  avatars?: boolean;
 }) {
   return (
     <div className="rounded-[18px] border border-[#E8DCD4] bg-[#FAF6F3] p-4 shadow-[0_8px_24px_rgba(36,26,28,0.05)]">
       <p className="text-xs font-medium text-dm-muted">{label}</p>
       <div className="mt-2 flex items-end justify-between gap-2">
         <p className="font-display text-3xl font-semibold text-[#241A1C]">{value}</p>
-        {avatars ? (
-          <div className="mb-1 flex -space-x-2">
-            {HOME_STAT_AVATARS.map((src) => (
-              <span
-                key={src}
-                className="relative h-7 w-7 overflow-hidden rounded-full border-2 border-white"
-              >
-                <Image src={src} alt="" fill className="object-cover" sizes="28px" />
-              </span>
-            ))}
-          </div>
-        ) : null}
       </div>
       {footer}
     </div>

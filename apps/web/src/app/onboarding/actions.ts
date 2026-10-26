@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { normalizeIntent } from "@deepmatch/shared";
 import { createClient } from "@/lib/supabase/server";
 
 export async function saveModeAction(formData: FormData) {
@@ -20,7 +21,8 @@ export async function saveModeAction(formData: FormData) {
     .getAll("values")
     .map((v) => String(v))
     .filter(Boolean);
-  const intent = String(formData.get("intent") ?? "long_term");
+  const canonical =
+    normalizeIntent(String(formData.get("intent") ?? "dating")) ?? "dating";
 
   const patch: Record<string, unknown> = { mode };
   if (mode === "solo") {
@@ -30,11 +32,11 @@ export async function saveModeAction(formData: FormData) {
 
   await supabase.from("profiles").update(patch).eq("id", user.id);
 
-  if (values.length || intent) {
+  if (values.length || canonical) {
     await supabase.from("profile_deep").upsert({
       user_id: user.id,
       values: values.length ? values : [],
-      goals: intent ? [intent] : [],
+      goals: [canonical],
     });
   }
 

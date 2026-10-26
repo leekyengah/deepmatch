@@ -23,6 +23,7 @@ export function LikesClient() {
   const [needAuth, setNeedAuth] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [matches, setMatches] = useState<MatchRow[]>([]);
+  const [busyId, setBusyId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -49,6 +50,31 @@ export function LikesClient() {
   useEffect(() => {
     void load();
   }, [load]);
+
+  async function unmatch(m: MatchRow) {
+    const ok = window.confirm(
+      t("matching.unmatchConfirm", { name: m.peer_name }),
+    );
+    if (!ok) return;
+    setBusyId(m.match_id);
+    try {
+      const res = await fetch("/api/v1/matches/unmatch", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          match_id: m.match_id,
+          peer_id: m.peer_id,
+        }),
+      });
+      if (!res.ok) {
+        setError(t("matching.unmatchError"));
+        return;
+      }
+      setMatches((prev) => prev.filter((x) => x.match_id !== m.match_id));
+    } finally {
+      setBusyId(null);
+    }
+  }
 
   if (loading) return <LoadingState label={t("matching.loading")} />;
 
@@ -100,17 +126,28 @@ export function LikesClient() {
               <p className="font-semibold text-dm-raspberry">{m.peer_name}</p>
               <p className="text-xs text-dm-muted">{t("matching.mutualMatch")}</p>
             </div>
-            {m.conversation_id ? (
-              <Link href={`/chat?c=${encodeURIComponent(m.conversation_id)}`}>
-                <Button type="button" size="sm">
-                  {t("matching.openChat")}
+            <div className="flex flex-wrap gap-2">
+              {m.conversation_id ? (
+                <Link href={`/chat?c=${encodeURIComponent(m.conversation_id)}`}>
+                  <Button type="button" size="sm">
+                    {t("matching.openChat")}
+                  </Button>
+                </Link>
+              ) : (
+                <Button type="button" size="sm" variant="outline" disabled>
+                  {t("matching.noConversation")}
                 </Button>
-              </Link>
-            ) : (
-              <Button type="button" size="sm" variant="outline" disabled>
-                {t("matching.noConversation")}
+              )}
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                disabled={busyId === m.match_id}
+                onClick={() => void unmatch(m)}
+              >
+                {t("matching.unmatch")}
               </Button>
-            )}
+            </div>
           </Card>
         </li>
       ))}

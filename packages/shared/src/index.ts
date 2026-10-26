@@ -10,3 +10,5 @@ export * from "./outbox/worker";
 export * from "./ai/gateway";
 export * from "./ai/deepmind";
 export * from "./needs";
+export * from "./onboarding/intents";
+export * from "./media/discover-gate";
