@@ -24,6 +24,21 @@
       }
     },
     "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "resourceClass": "m-medium",
+        "simulator": false
+      },
+      "env": {
+        "EXPO_PUBLIC_APP_ENV": "staging",
+        "EXPO_PUBLIC_API_URL": "https://datingvn.com",
+        "EXPO_PUBLIC_IAP_PRODUCT_ID": "premium_monthly"
+      }
+    },
+    "preview-store": {
       "distribution": "store",
       "ios": {
         "resourceClass": "m-medium"
@@ -38,7 +53,7 @@
       "autoIncrement": true,
       "env": {
         "EXPO_PUBLIC_APP_ENV": "production",
-        "EXPO_PUBLIC_API_URL": "https://datingvn.com",
+        "EXPO_PUBLIC_API_URL": "https://deepmatch-prod.vercel.app",
         "EXPO_PUBLIC_IAP_PRODUCT_ID": "premium_monthly"
       }
     }
