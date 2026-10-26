@@ -187,7 +187,14 @@ export const w2Runners: Record<string, CaseRunner> = {
           "Deploy feat/w2 unmatch route to staging, then re-run DM-QA-W2-006",
       };
     }
-    const guestDenied = guest.status === 401 || guest.status === 403;
+    const guestDenied =
+      guest.status === 401 ||
+      guest.status === 403 ||
+      (guest.status === 200 &&
+        typeof guest.json === "object" &&
+        guest.json !== null &&
+        "error" in (guest.json as object));
+    // Prefer explicit UNAUTHENTICATED JSON (401) after staging deploy of unmatch.
     loadQaEnv(ctx.projectRoot);
     if (!hasQaCreds()) {
       return {

@@ -11,23 +11,31 @@ type Pin = {
   layer: string;
 };
 
+type Props = {
+  pins: Pin[];
+  /** When set, map click fills lat/lng for pin create (OSM-only path). */
+  onMapClick?: (lat: number, lng: number) => void;
+};
+
+const DEFAULT_CENTER: [number, number] = [21.0285, 105.8542]; // Hà Nội
+
 /** Free OSM canvas via Leaflet — no Mapbox token required. */
-export function CoupleOsmCanvas({ pins }: { pins: Pin[] }) {
+export function CoupleOsmCanvas({ pins, onMapClick }: Props) {
   const t = useT();
   const containerRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState<string | null>(null);
+  const onClickRef = useRef(onMapClick);
+  onClickRef.current = onMapClick;
+
   const geoPins = pins.filter(
     (p): p is Pin & { lat: number; lng: number } =>
       typeof p.lat === "number" && typeof p.lng === "number",
   );
   const geoKey = geoPins.map((p) => `${p.id}:${p.lat},${p.lng}`).join("|");
+  const clickable = Boolean(onMapClick);
 
   useEffect(() => {
-    const points = pins.filter(
-      (p): p is Pin & { lat: number; lng: number } =>
-        typeof p.lat === "number" && typeof p.lng === "number",
-    );
-    if (!containerRef.current || points.length === 0) return;
+    if (!containerRef.current) return;
     let cancelled = false;
     let map: { remove: () => void } | null = null;
 
@@ -48,30 +56,49 @@ export function CoupleOsmCanvas({ pins }: { pins: Pin[] }) {
             "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
         });
 
-        const first = points[0];
-        const instance = L.map(containerRef.current).setView(
-          [first.lat, first.lng],
-          12,
+        const points = pins.filter(
+          (p): p is Pin & { lat: number; lng: number } =>
+            typeof p.lat === "number" && typeof p.lng === "number",
         );
+
+        const center =
+          points.length > 0
+            ? ([points[0].lat, points[0].lng] as [number, number])
+            : DEFAULT_CENTER;
+
+        const instance = L.map(containerRef.current).setView(center, points.length ? 12 : 11);
         map = instance;
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           attribution: "&copy; OpenStreetMap",
           maxZoom: 19,
         }).addTo(instance);
 
-        const bounds = L.latLngBounds([]);
-        for (const p of points) {
-          L.circleMarker([p.lat, p.lng], {
-            radius: 8,
-            color: "#6B2D3C",
-            fillColor: "#6B2D3C",
-            fillOpacity: 0.85,
-          })
-            .addTo(instance)
-            .bindPopup(p.title);
-          bounds.extend([p.lat, p.lng]);
+        if (points.length) {
+          const bounds = L.latLngBounds([]);
+          for (const p of points) {
+            L.circleMarker([p.lat, p.lng], {
+              radius: 8,
+              color: "#6B2D3C",
+              fillColor: "#6B2D3C",
+              fillOpacity: 0.85,
+            })
+              .addTo(instance)
+              .bindPopup(p.title);
+            bounds.extend([p.lat, p.lng]);
+          }
+          if (points.length > 1) instance.fitBounds(bounds.pad(0.2));
         }
-        if (points.length > 1) instance.fitBounds(bounds.pad(0.2));
+
+        if (onClickRef.current) {
+          instance.on("click", (e: { latlng: { lat: number; lng: number } }) => {
+            const { lat, lng } = e.latlng;
+            onClickRef.current?.(
+              Math.round(lat * 1e6) / 1e6,
+              Math.round(lng * 1e6) / 1e6,
+            );
+          });
+          instance.getContainer().style.cursor = "crosshair";
+        }
       } catch (e) {
         if (!cancelled) {
           setError(
@@ -86,15 +113,7 @@ export function CoupleOsmCanvas({ pins }: { pins: Pin[] }) {
       map?.remove();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [geoKey]);
-
-  if (geoPins.length === 0) {
-    return (
-      <p className="m-auto px-4 text-center text-sm text-dm-muted">
-        {t("couple.osmEmptyPins")}
-      </p>
-    );
-  }
+  }, [geoKey, clickable]);
 
   if (error) {
     return (
@@ -104,5 +123,18 @@ export function CoupleOsmCanvas({ pins }: { pins: Pin[] }) {
     );
   }
 
-  return <div ref={containerRef} className="h-full w-full min-h-[16rem]" />;
+  return (
+    <div className="relative h-full w-full min-h-[16rem]">
+      <div ref={containerRef} className="h-full w-full min-h-[16rem]" />
+      {geoPins.length === 0 ? (
+        <p className="pointer-events-none absolute inset-x-0 bottom-2 z-[400] px-3 text-center text-xs text-dm-ink/80">
+          {clickable ? t("couple.osmClickHint") : t("couple.osmEmptyPins")}
+        </p>
+      ) : clickable ? (
+        <p className="pointer-events-none absolute inset-x-0 bottom-2 z-[400] px-3 text-center text-xs text-dm-ink/80">
+          {t("couple.osmClickHint")}
+        </p>
+      ) : null}
+    </div>
+  );
 }

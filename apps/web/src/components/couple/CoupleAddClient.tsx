@@ -1,6 +1,12 @@
 "use client";
 
 import { resolveApiErrorMessage } from "@/lib/api-error-message";
+import {
+  confirmMedia,
+  uploadWithIntent,
+  type UploadIntentResponse,
+} from "@/lib/media/client-upload";
+import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,6 +26,7 @@ export function CoupleAddClient({ coupleId }: { coupleId: string | null }) {
   const [layer, setLayer] = useState<(typeof layerIds)[number]>("visited");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
 
   const layers = [
     { id: "visited" as const, label: t("couple.layerVisited") },
@@ -41,6 +48,54 @@ export function CoupleAddClient({ coupleId }: { coupleId: string | null }) {
     );
   }
 
+  async function uploadCoupleMedia(pairId: string, mediaFile: File) {
+    const allowed = new Set(["image/jpeg", "image/png", "image/webp"]);
+    if (!allowed.has(mediaFile.type)) {
+      return t("couple.addMediaTypeError");
+    }
+    if (mediaFile.size > 10 * 1024 * 1024) {
+      return t("couple.addMediaSizeError");
+    }
+    const intentRes = await fetch("/api/v1/media/upload-intents", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content_type: mediaFile.type,
+        bytes: mediaFile.size,
+        pair_id: pairId,
+        purpose: "couple",
+      }),
+    });
+    const intent = (await intentRes.json()) as {
+      error?: { message?: string };
+      data?: UploadIntentResponse;
+    };
+    if (!intentRes.ok || !intent.data) {
+      return resolveApiErrorMessage(intent, t, "couple.addMediaIntentFailed");
+    }
+    const supabase = createClient();
+    const up = await uploadWithIntent(
+      intent.data,
+      mediaFile,
+      async ({ path, token, file: f, contentType }) => {
+        const { error } = await supabase.storage
+          .from("media")
+          .uploadToSignedUrl(path, token, f, { contentType });
+        return { error: error ? new Error(error.message) : null };
+      },
+    );
+    if (up.error) {
+      return up.error === "upload_unavailable"
+        ? t("couple.addMediaUnavailable")
+        : up.error;
+    }
+    const confirmed = await confirmMedia(intent.data.media_id);
+    if (!confirmed.ok) {
+      return confirmed.error ?? t("couple.addMediaIntentFailed");
+    }
+    return null;
+  }
+
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
@@ -50,10 +105,12 @@ export function CoupleAddClient({ coupleId }: { coupleId: string | null }) {
     const occurred_on = String(fd.get("visited_on") ?? "").trim() || undefined;
     if (!title) return;
 
+    if (!coupleId) return;
+    const pairId = coupleId;
     setBusy(true);
     setMessage(null);
     try {
-      const res = await fetch(`/api/v1/couples/${coupleId}/pins`, {
+      const res = await fetch(`/api/v1/couples/${pairId}/pins`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -75,7 +132,7 @@ export function CoupleAddClient({ coupleId }: { coupleId: string | null }) {
 
       const pinId = json.data?.pin?.id;
       if (pinId && privateNote) {
-        const jRes = await fetch(`/api/v1/couples/${coupleId}/journals`, {
+        const jRes = await fetch(`/api/v1/couples/${pairId}/journals`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -86,6 +143,16 @@ export function CoupleAddClient({ coupleId }: { coupleId: string | null }) {
         });
         if (!jRes.ok) {
           setMessage(t("couple.pinJournalPartial"));
+          return;
+        }
+      }
+
+      if (file) {
+        const mediaErr = await uploadCoupleMedia(pairId, file);
+        if (mediaErr) {
+          setMessage(`${t("couple.pinSaved")} ${mediaErr}`);
+          router.push("/couple/map");
+          router.refresh();
           return;
         }
       }
@@ -134,6 +201,18 @@ export function CoupleAddClient({ coupleId }: { coupleId: string | null }) {
         <label className="block text-sm font-semibold text-dm-raspberry">
           {t("couple.privateFeel")}
           <Textarea name="private_note" rows={2} className="mt-1" />
+        </label>
+        <label className="block text-sm font-semibold text-dm-raspberry">
+          {t("couple.addMediaLabel")}
+          <Input
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            className="mt-1"
+            onChange={(ev) => setFile(ev.target.files?.[0] ?? null)}
+          />
+          <span className="mt-1 block text-xs font-normal text-dm-muted">
+            {t("couple.addMediaHint")}
+          </span>
         </label>
 
         <div className="flex flex-wrap gap-2">

@@ -205,7 +205,14 @@ export function CoupleMapClient({ coupleId }: { coupleId: string | null }) {
         {mapbox ? (
           <CoupleMapCanvas token={mapbox} pins={pins} />
         ) : (
-          <CoupleOsmCanvas pins={pins} />
+          <CoupleOsmCanvas
+            pins={pins}
+            onMapClick={(clickLat, clickLng) => {
+              setLat(String(clickLat));
+              setLng(String(clickLng));
+              setError(null);
+            }}
+          />
         )}
       </Card>
       {!mapbox ? (
