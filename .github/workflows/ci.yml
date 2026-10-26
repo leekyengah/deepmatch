@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, master, develop]
   pull_request:
 
 jobs:
@@ -18,7 +18,8 @@ jobs:
         run: npm ci || npm install
       - name: Secrets guard
         run: |
-          if git grep -nE 'SUPABASE_SERVICE_ROLE_KEY=ey|BEGIN RSA PRIVATE KEY|sk_live_' -- ':!.github/**' ; then
+          # Match credential-like assignments, not regex literals in no-leak scanners
+          if git grep -nE 'SUPABASE_SERVICE_ROLE_KEY=eyJ|BEGIN RSA PRIVATE KEY|sk_live_[A-Za-z0-9]{16,}' -- ':!.github/**' ; then
             echo "Potential secret detected"; exit 1;
           fi
           echo "Secrets guard OK"

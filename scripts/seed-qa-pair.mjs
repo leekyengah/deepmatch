@@ -169,53 +169,73 @@ if (!pair) {
   pair = data;
 }
 
-const { data: existingPin } = await admin
+// Idempotent three-layer pins (accept suite requires visited+wishlist+milestone)
+const { data: existingPins } = await admin
+  .from("pins")
+  .select("id, layer")
+  .eq("pair_id", pair.id);
+
+const layersPresent = new Set((existingPins ?? []).map((p) => p.layer));
+const pinSpecs = [
+  {
+    layer: "visited",
+    title: "Hồ Gươm QA",
+    place_label: "Hoàn Kiếm, Hà Nội",
+    created_by: idA,
+  },
+  {
+    layer: "wishlist",
+    title: "Đà Lạt muốn đến",
+    place_label: "Đà Lạt",
+    created_by: idB,
+  },
+  {
+    layer: "milestone",
+    title: "Ngày bắt đầu QA",
+    place_label: "Hà Nội",
+    visited_on: "2026-10-01",
+    created_by: idA,
+  },
+];
+
+const missingPins = pinSpecs.filter((s) => !layersPresent.has(s.layer));
+if (missingPins.length) {
+  const { error: pinErr } = await admin.from("pins").insert(
+    missingPins.map((s) => ({
+      pair_id: pair.id,
+      ...s,
+    })),
+  );
+  if (pinErr) throw pinErr;
+}
+
+const { data: visitedPin } = await admin
   .from("pins")
   .select("id")
   .eq("pair_id", pair.id)
+  .eq("layer", "visited")
   .limit(1)
   .maybeSingle();
 
-let pinId = existingPin?.id;
-if (!pinId) {
-  const { data: pin, error: pinErr } = await admin
-    .from("pins")
-    .insert({
-      pair_id: pair.id,
-      layer: "visited",
-      title: "Hồ Gươm QA",
-      place_label: "Hoàn Kiếm, Hà Nội",
-      created_by: idA,
-    })
+let pinId = visitedPin?.id ?? existingPins?.[0]?.id;
+
+if (pinId) {
+  const { data: priorNote } = await admin
+    .from("private_notes")
     .select("id")
-    .single();
-  if (pinErr) throw pinErr;
-  pinId = pin.id;
-
-  await admin.from("pins").insert([
-    {
-      pair_id: pair.id,
-      layer: "wishlist",
-      title: "Đà Lạt muốn đến",
-      place_label: "Đà Lạt",
-      created_by: idB,
-    },
-    {
-      pair_id: pair.id,
-      layer: "milestone",
-      title: "Ngày bắt đầu QA",
-      place_label: "Hà Nội",
-      visited_on: "2026-10-01",
-      created_by: idA,
-    },
-  ]);
-
-  await admin.from("private_notes").insert({
-    pin_id: pinId,
-    author_id: idA,
-    body: "Ghi chú riêng của Alpha — Beta không đọc mặc định.",
-    shared_with_partner: false,
-  });
+    .eq("pin_id", pinId)
+    .eq("author_id", idA)
+    .eq("shared_with_partner", false)
+    .limit(1)
+    .maybeSingle();
+  if (!priorNote) {
+    await admin.from("private_notes").insert({
+      pin_id: pinId,
+      author_id: idA,
+      body: "Ghi chú riêng của Alpha — Beta không đọc mặc định.",
+      shared_with_partner: false,
+    });
+  }
 }
 
 const { data: offering } = await admin
