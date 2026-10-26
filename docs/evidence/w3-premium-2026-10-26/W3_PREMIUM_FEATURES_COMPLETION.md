@@ -1,41 +1,41 @@
-# W3 — Premium Features Completion (partial)
+# W3 — Premium Features Completion
 
 **Date:** 2026-10-26  
-**Wave status:** `IN_PROGRESS`  
-**Acceptance:** **NOT VERIFIED**  
+**Wave status:** `IN_PROGRESS` (delta shipped; not complete)  
+**Acceptance:** **NOT VERIFIED** · ceiling `QA_PASSED_AUTOMATED`  
 **GA:** **NO-GO**  
-**Constraint:** no prod / no LIVE PSP / OSM-only maps
+**HEAD tip (feature):** see git · Staging deploy: `dpl_72CP7LZHbNgNVMfaxFYy4wLGTiYN` → datingvn.com (`productionDeploy:false`)
 
 ---
 
-## 1. Module rollup
+## Module rollup
 
-| Module | Status | This wave |
-|--------|--------|-----------|
-| Love Map OSM | PARTIAL | Prior OSM canvas + geocode; click-to-pin still open |
-| Cloudflare R2 | PARTIAL | Storage intents + validation exist; env-gated |
-| AI Concierge | READY_FOR_QA (consent revoke) | Assist **refuses** when purpose has `revoked_at` (no silent re-grant) |
-| Couple Space | PARTIAL | Memories/pins prior; couple media on Add still thin; match unmatch ≠ pair disconnect |
-| Lifestyle | READY_FOR_QA (honesty) | Persistent **DEMO / Sandbox** badge + note; search `aria-label` |
-| Premium UI / a11y | PARTIAL | Tokens + focus; Lifestyle search a11y improved |
+| Module | Status | Evidence / delta |
+|--------|--------|------------------|
+| AI Concierge | READY_FOR_QA | Consent revoke honored (`ecb9595`); gateway unit `DM-QA-W3-001` PASS |
+| Love Map OSM | READY_FOR_QA (click-to-pin) | OSM canvas click fills lat/lng; empty map still interactive; OSM-only policy |
+| Couple Space | PARTIAL→READY_FOR_QA (media) | Couple Add optional photo via signed upload `couple_private` |
+| Cloudflare R2 | PARTIAL | Intent path supports R2/Supabase; env-gated; failure copy on Add |
+| Lifestyle | READY_FOR_QA | Prior DEMO/Sandbox honesty + a11y search |
+| Premium UI / a11y | PARTIAL | Tokens + Lifestyle a11y; full visual regression still open |
 
----
+## QA Core after WP
 
-## 2. Counts
+| Suite | Run | Result |
+|-------|-----|--------|
+| w2 (post-deploy) | `qa-…76b1e218` | **7 PASS** (incl. unmatch) |
+| security | `qa-…40f1a5e2` | **1 PASS** (`rls_deny`) |
+| w3 | prior | AI gateway PASS |
 
-| Bucket | # |
-|--------|--:|
-| READY_FOR_QA (delta this wave) | 2 |
-| PARTIAL | 4 |
-| BLOCKED_EXTERNAL | LIVE PSP, Mapbox (policy: keep unset), paid geo vendors |
+## Blocked / open
 
----
+- Mapbox/Google paid maps — **BLOCKED_EXTERNAL** (Founder OSM-only for GA)
+- LIVE PSP — forbidden
+- Device Lighthouse / visual mockup sign — pending Design UAT
+- Pin↔media foreign key link — media uploaded to pair library (not pin_id column yet)
 
-## 3. Next (unblocked)
+## Next unblocked
 
-1. OSM map click → lat/lng for pin create  
-2. CoupleAdd media upload (`couple_private`)  
-3. R2 intent failure UX copy  
-4. Visual regression / Lighthouse (device)  
-
-Then continue **W4** (sandbox commerce/admin) and **W5** (EAS candidate) without waiting Independent QA — gates stay required for release.
+1. Redeploy staging with OSM click + CoupleAdd media commits  
+2. W4 sandbox commerce/admin reports  
+3. W5 EAS preview (credentials may BLOCKED_EXTERNAL)

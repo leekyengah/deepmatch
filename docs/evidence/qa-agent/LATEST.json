@@ -1,24 +1,24 @@
 {
   "context": {
-    "runId": "qa-2026-10-26T10-05-43-874Z-53368451",
+    "runId": "qa-2026-10-26T10-25-20-245Z-40f1a5e2",
     "projectId": "deepmatch",
-    "commitSha": "ecb9595fb4bbabc4a0f61780b48e8ab25bb1527e",
+    "commitSha": "d2a58eae29fbf44197cc1d84855a3469c3c2e94d",
     "branch": "feat/w2-core-member-wp1-3",
     "environment": {
-      "id": "dm-local",
-      "baseUrl": "http://127.0.0.1:3000",
-      "kind": "local",
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
       "allowWrites": false
     },
-    "startedAt": "2026-10-26T10:05:43.874Z",
-    "suite": "w3",
+    "startedAt": "2026-10-26T10:25:20.245Z",
+    "suite": "security",
     "actor": "qa-agent-automated"
   },
   "results": [
     {
       "id": "DM-QA-P0-001",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-011",
         "auditId": "AUD26-011"
@@ -27,7 +27,7 @@
     {
       "id": "DM-QA-P0-002",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-011",
         "auditId": "AUD26-011"
@@ -36,7 +36,7 @@
     {
       "id": "DM-QA-P0-003",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-011",
         "auditId": "AUD26-011"
@@ -45,7 +45,7 @@
     {
       "id": "DM-QA-P0-004",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-018",
         "auditId": "AUD26-018"
@@ -54,7 +54,7 @@
     {
       "id": "DM-QA-P0-005",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-003",
         "auditId": "AUD26-003"
@@ -63,7 +63,7 @@
     {
       "id": "DM-QA-P0-006",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "other": [
           "QA-GATE-7"
@@ -73,24 +73,26 @@
     {
       "id": "DM-QA-P0-007",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-011"
       }
     },
     {
       "id": "DM-QA-A-001",
-      "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "outcome": "PASS",
+      "actual": "﹣ RLS deny suite (0.9077ms) # SKIP\n▶ RLS harness gate\n  ✔ documents skip when credentials absent (0.7229ms)\n✔ RLS harness gate (1.4033ms)\nℹ tests 1\nℹ suites 2\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 619.6168\n",
+      "durationMs": 3018,
       "requirements": {
         "fixId": "FIX26-018",
         "auditId": "AUD26-018"
-      }
+      },
+      "expected": "Cross-user deny cases reproducible on staging JWTs"
     },
     {
       "id": "DM-QA-H-001",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "other": [
           "coverage-H"
@@ -100,7 +102,7 @@
     {
       "id": "DM-QA-W2-001",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-022",
         "auditId": "AUD26-022"
@@ -109,7 +111,7 @@
     {
       "id": "DM-QA-W2-002",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-023",
         "auditId": "AUD26-023"
@@ -118,7 +120,7 @@
     {
       "id": "DM-QA-W2-003",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-017",
         "auditId": "AUD26-017"
@@ -127,7 +129,7 @@
     {
       "id": "DM-QA-W2-004",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-016",
         "auditId": "AUD26-016"
@@ -136,7 +138,7 @@
     {
       "id": "DM-QA-W2-005",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-028",
         "auditId": "AUD26-028"
@@ -145,7 +147,7 @@
     {
       "id": "DM-QA-W2-006",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-028"
       }
@@ -153,7 +155,7 @@
     {
       "id": "DM-QA-W2-007",
       "outcome": "SKIPPED",
-      "detail": "suite filter w3",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-027",
         "auditId": "AUD26-027"
@@ -161,14 +163,12 @@
     },
     {
       "id": "DM-QA-W3-001",
-      "outcome": "PASS",
-      "actual": "▶ ai gateway stub\n  ✔ redacts private keys (3.6656ms)\n  ✔ returns demo-labeled gift suggestions (2.1429ms)\n  ✔ deepmind is non-clinical (0.9364ms)\n  ✔ resolveAiAdapter defaults to stub (DECISION-AI-01 C) (0.5725ms)\n✔ ai gateway stub (12.2995ms)\nℹ tests 4\nℹ suites 1\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1286.7189\n",
-      "durationMs": 5970,
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
       "requirements": {
         "fixId": "FIX26-039",
         "auditId": "AUD26-039"
-      },
-      "expected": "packages/shared AI gateway unit tests PASS"
+      }
     }
   ],
   "summary": {
@@ -184,7 +184,7 @@
   "releaseRecommendation": "NO-GO",
   "gaStance": "NO-GO",
   "costEstimateUsd": 0,
-  "durationMs": 6371,
+  "durationMs": 3276,
   "lifecycleEffect": "QA_PASSED_AUTOMATED",
   "reviewerSignoff": {
     "identity": null,
