@@ -1,0 +1,96 @@
+{
+  "projectId": "deepmatch",
+  "version": "1.0.0",
+  "cases": [
+    {
+      "id": "DM-QA-P0-001",
+      "title": "pair_pins_three_layers (visited+wishlist+milestone)",
+      "suite": "p0",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-011", "auditId": "AUD26-011" },
+      "criteria": "Both pair members see ≥3 pins covering visited, wishlist, milestone via RLS",
+      "runner": "accept_pair_pins",
+      "tags": ["love-map", "rls", "couple"]
+    },
+    {
+      "id": "DM-QA-P0-002",
+      "title": "pin_id authenticated insert + roundtrip",
+      "suite": "p0",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-011", "auditId": "AUD26-011" },
+      "criteria": "Authenticated user can attach pin_id; outsider/anon denied or empty",
+      "runner": "probe_pin_id",
+      "tags": ["pin_id", "media"]
+    },
+    {
+      "id": "DM-QA-P0-003",
+      "title": "pin visibility three-layer matrix",
+      "suite": "p0",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-011", "auditId": "AUD26-011" },
+      "criteria": "Owner and partner see three layers; anonymous empty",
+      "runner": "probe_pin_visibility",
+      "tags": ["love-map", "visibility"]
+    },
+    {
+      "id": "DM-QA-P0-004",
+      "title": "Public no-leak smoke (G-HOME-SEC)",
+      "suite": "p0",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-018", "auditId": "AUD26-018" },
+      "criteria": "Public pages do not leak staging banners, service role, or private routes",
+      "runner": "no_leak_public",
+      "tags": ["security"]
+    },
+    {
+      "id": "DM-QA-P0-005",
+      "title": "EXT Done evidence traceability eval",
+      "suite": "p0",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-003", "auditId": "AUD26-003" },
+      "criteria": "Eval script runs read-only; zero fabricated VERIFIED",
+      "runner": "ext_evidence_eval",
+      "tags": ["governance"]
+    },
+    {
+      "id": "DM-QA-P0-006",
+      "title": "QA core unit self-test",
+      "suite": "unit",
+      "priority": "P0",
+      "requirements": { "other": ["QA-GATE-7"] },
+      "criteria": "@tradingbase/qa-core and adapters unit tests pass",
+      "runner": "qa_core_unit",
+      "tags": ["meta"]
+    },
+    {
+      "id": "DM-QA-P0-007",
+      "title": "Accept staging full suite wrapper",
+      "suite": "staging-accept",
+      "priority": "P0",
+      "requirements": { "fixId": "FIX26-011" },
+      "criteria": "scripts/accept-staging.mjs reports all checks; classify seed vs app defects",
+      "runner": "accept_staging",
+      "tags": ["accept"]
+    },
+    {
+      "id": "DM-QA-A-001",
+      "title": "RLS deny integration harness",
+      "suite": "security",
+      "priority": "P1",
+      "requirements": { "fixId": "FIX26-018", "auditId": "AUD26-018" },
+      "criteria": "Cross-user deny cases reproducible on staging JWTs",
+      "runner": "rls_deny",
+      "tags": ["rls", "idor"]
+    },
+    {
+      "id": "DM-QA-H-001",
+      "title": "Playwright smoke (allowlisted base)",
+      "suite": "e2e",
+      "priority": "P1",
+      "requirements": { "other": ["coverage-H"] },
+      "criteria": "smoke.spec.ts PASS against allowlisted staging/local",
+      "runner": "playwright_smoke",
+      "tags": ["e2e"]
+    }
+  ]
+}
