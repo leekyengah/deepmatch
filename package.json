@@ -8,6 +8,8 @@
     "packages/*"
   ],
   "scripts": {
+    "qa:deepmatch": "npm run qa -w @deepmatch/qa --",
+    "test:qa-core": "npm run test -w @tradingbase/qa-core && npm run test -w @tradingbase/qa-adapters && npm run test -w @deepmatch/qa",
     "dev:web": "npm run dev -w @deepmatch/web",
     "dev:admin": "npm run dev -w @deepmatch/admin",
     "dev:mobile": "npm run go -w @deepmatch/mobile",
@@ -18,10 +20,10 @@
     "vercel-build:web": "node scripts/vercel-build-web.mjs",
     "vercel-build:admin": "node scripts/vercel-build-admin.mjs",
     "check:workspaces": "node scripts/check-workspace-resolution.mjs",
-    "lint": "npm run lint -w @deepmatch/i18n && npm run lint -w @deepmatch/legal-content && npm run lint -w @deepmatch/shared && npm run lint -w @deepmatch/design-tokens && npm run lint -w @deepmatch/web && npm run lint -w @deepmatch/admin",
-    "typecheck": "npm run typecheck -w @deepmatch/i18n && npm run typecheck -w @deepmatch/legal-content && npm run typecheck -w @deepmatch/shared && npm run typecheck -w @deepmatch/design-tokens && npm run typecheck -w @deepmatch/web && npm run typecheck -w @deepmatch/admin",
-    "test": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content && npm run test -w @deepmatch/design-tokens",
-    "test:unit": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content && npm run test -w @deepmatch/design-tokens",
+    "lint": "npm run lint -w @deepmatch/i18n && npm run lint -w @deepmatch/legal-content && npm run lint -w @deepmatch/shared && npm run lint -w @deepmatch/design-tokens && npm run lint -w @tradingbase/qa-core && npm run lint -w @tradingbase/qa-adapters && npm run lint -w @deepmatch/qa && npm run lint -w @deepmatch/web && npm run lint -w @deepmatch/admin",
+    "typecheck": "npm run typecheck -w @deepmatch/i18n && npm run typecheck -w @deepmatch/legal-content && npm run typecheck -w @deepmatch/shared && npm run typecheck -w @deepmatch/design-tokens && npm run typecheck -w @tradingbase/qa-core && npm run typecheck -w @tradingbase/qa-adapters && npm run typecheck -w @deepmatch/qa && npm run typecheck -w @deepmatch/web && npm run typecheck -w @deepmatch/admin",
+    "test": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content && npm run test -w @deepmatch/design-tokens && npm run test:qa-core",
+    "test:unit": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content && npm run test -w @deepmatch/design-tokens && npm run test:qa-core",
     "i18n:parity": "node scripts/i18n-parity.mjs",
     "test:integration": "npx tsx --test tests/integration/rls-deny.test.ts",
     "test:e2e": "playwright test",

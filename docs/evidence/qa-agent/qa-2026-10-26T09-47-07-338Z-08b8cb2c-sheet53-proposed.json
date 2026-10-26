@@ -1,0 +1,120 @@
+{
+  "status": "PROPOSED_ONLY",
+  "spreadsheetId": "1R_de74Szc0xbPZEJpXcoKrNrX5QESi39FYBRESDm6D8",
+  "sheet": "53 REMEDIATION EXECUTION PLAN",
+  "runId": "qa-2026-10-26T09-47-07-338Z-08b8cb2c",
+  "note": "Narrow QA-owned fields only. Never set DONE_VERIFIED automatically.",
+  "rows": [
+    {
+      "fixId": "FIX26-011",
+      "auditId": "AUD26-011",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T09-47-07-338Z-08b8cb2c · c05e6a7 · DM-QA-P0-001",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-011",
+      "auditId": "AUD26-011",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T09-47-07-338Z-08b8cb2c · c05e6a7 · DM-QA-P0-002",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-011",
+      "auditId": "AUD26-011",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T09-47-07-338Z-08b8cb2c · c05e6a7 · DM-QA-P0-003",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-018",
+      "auditId": "AUD26-018",
+      "qaOwned": {
+        "QA độc lập": "INCONCLUSIVE",
+        "Evidence mới / commit / test": "qa-2026-10-26T09-47-07-338Z-08b8cb2c · c05e6a7 · DM-QA-P0-004",
+        "Ghi chú": "automated only; not DONE_VERIFIED · Error: spawn EINVAL"
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-003",
+      "auditId": "AUD26-003",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T09-47-07-338Z-08b8cb2c · c05e6a7 · DM-QA-P0-005",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-011",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T09-47-07-338Z-08b8cb2c · c05e6a7 · DM-QA-P0-007",
+        "Ghi chú": "automated only; not DONE_VERIFIED · rue,\"ff_billing\":true,\"ff_lifestyle\":true,\"ff_ai\":true}\nPASS  discovery_candidates_rls — count=10\nPASS  rls_peer_profile_mutual\nPASS  rls_private_note_deny — denied"
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-018",
+      "auditId": "AUD26-018",
+      "qaOwned": {
+        "QA độc lập": "SKIPPED",
+        "Evidence mới / commit / test": "qa-2026-10-26T09-47-07-338Z-08b8cb2c · c05e6a7 · DM-QA-A-001",
+        "Ghi chú": "automated only; not DONE_VERIFIED · suite filter p0"
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    }
+  ]
+}

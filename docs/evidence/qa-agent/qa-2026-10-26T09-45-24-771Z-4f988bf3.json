@@ -1,0 +1,123 @@
+{
+  "context": {
+    "runId": "qa-2026-10-26T09-45-24-771Z-4f988bf3",
+    "projectId": "deepmatch",
+    "commitSha": "c05e6a7044726151c33661febaf071e1936331c4",
+    "branch": "feat/w2-core-member-wp1-3",
+    "environment": {
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
+      "allowWrites": false
+    },
+    "startedAt": "2026-10-26T09:45:24.771Z",
+    "suite": "unit",
+    "actor": "qa-agent-automated"
+  },
+  "results": [
+    {
+      "id": "DM-QA-P0-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter unit",
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      }
+    },
+    {
+      "id": "DM-QA-P0-002",
+      "outcome": "SKIPPED",
+      "detail": "suite filter unit",
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      }
+    },
+    {
+      "id": "DM-QA-P0-003",
+      "outcome": "SKIPPED",
+      "detail": "suite filter unit",
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      }
+    },
+    {
+      "id": "DM-QA-P0-004",
+      "outcome": "SKIPPED",
+      "detail": "suite filter unit",
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      }
+    },
+    {
+      "id": "DM-QA-P0-005",
+      "outcome": "SKIPPED",
+      "detail": "suite filter unit",
+      "requirements": {
+        "fixId": "FIX26-003",
+        "auditId": "AUD26-003"
+      }
+    },
+    {
+      "id": "DM-QA-P0-006",
+      "outcome": "PASS",
+      "actual": "core=0 adapters=0",
+      "detail": "\n> @tradingbase/qa-core@1.0.0 test\n> tsx --test src/*.test.ts\n\n▶ evidence\n  ✔ summarizes outcomes (32.2016ms)\n  ✔ writes redacted json and keeps GA NO-GO (278.6023ms)\n✔ evidence (315.5602ms)\n▶ safety\n  ✔ allows staging datingvn.com (36.8025ms)\n  ✔ blocks production kind (2.4207ms)\n  ✔ blocks unknown hosts (25.0277ms)\n  ✔ redacts JWTs and bearer tokens (2.9798ms)\n✔ safety (75.243ms)\n▶ status-machine\n  ✔ allows READY_FOR_QA → QA_PASSED_AUTOMATED (42.3354ms)\n  ✔ blocks automated self-sign of independent review (1.7059ms)\n  ✔ blocks RELEASE_APPROVED from automated path (2.3416ms)\n  ✔ maps failures to QA_FAILED (0.4176ms)\n  ✔ maps all pass to QA_PASSED_AUTOMATED (0.467ms)\n✔ status-machine (76.4158ms)\nℹ tests 11\nℹ suites 3\nℹ pass 11\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2287.0988\n\n\n> @tradingbase/qa-adapters@1.0.0 test\n> tsx --test src/*.test.ts\n\n▶ adapter registry\n  ✔ registers and resolves executable adapter (1.6697ms)\n  ✔ refuses non-executable stubs (0.8457ms)\n  ✔ lists future stubs as non-executable (0.357ms)\n✔ adapter registry (4.6659ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 655.8485\n",
+      "durationMs": 7661,
+      "requirements": {
+        "other": [
+          "QA-GATE-7"
+        ]
+      },
+      "expected": "@tradingbase/qa-core and adapters unit tests pass"
+    },
+    {
+      "id": "DM-QA-P0-007",
+      "outcome": "SKIPPED",
+      "detail": "suite filter unit",
+      "requirements": {
+        "fixId": "FIX26-011"
+      }
+    },
+    {
+      "id": "DM-QA-A-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter unit",
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      }
+    },
+    {
+      "id": "DM-QA-H-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter unit",
+      "requirements": {
+        "other": [
+          "coverage-H"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total": 9,
+    "pass": 1,
+    "fail": 0,
+    "blocked": 0,
+    "skipped": 8,
+    "inconclusive": 0,
+    "notRun": 0
+  },
+  "openBlockers": [],
+  "releaseRecommendation": "NO-GO",
+  "gaStance": "NO-GO",
+  "costEstimateUsd": 0,
+  "durationMs": 7878,
+  "lifecycleEffect": "QA_PASSED_AUTOMATED",
+  "reviewerSignoff": {
+    "identity": null,
+    "status": "unsigned"
+  }
+}
