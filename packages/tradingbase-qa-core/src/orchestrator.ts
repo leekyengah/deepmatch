@@ -82,7 +82,15 @@ export async function runOrchestrator(
       const suiteMatch =
         input.suite === "all" ||
         spec.suite === input.suite ||
-        (input.suite === "p0" && spec.priority === "P0");
+        (input.suite === "p0" &&
+          spec.priority === "P0" &&
+          (spec.suite === "p0" ||
+            spec.suite === "unit" ||
+            spec.suite === "staging-accept")) ||
+        (input.suite === "w2" &&
+          (spec.suite === "w2" || (spec.tags ?? []).includes("w2"))) ||
+        (input.suite === "w3" &&
+          (spec.suite === "w3" || (spec.tags ?? []).includes("w3")));
       if (!suiteMatch) {
         results.push({
           id: spec.id,

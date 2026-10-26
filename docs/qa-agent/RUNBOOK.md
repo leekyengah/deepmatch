@@ -11,17 +11,21 @@
 ```bash
 # Unit self-tests (safe, no network secrets required)
 npm run test:qa-core
-npm run qa:deepmatch -- --suite unit
+npx tsx packages/deepmatch-qa/src/cli.ts --suite unit
 
-# P0 staging (allowlisted datingvn.com)
+# P0 / W2 / W3 staging (allowlisted datingvn.com)
 npm run seed:qa
-npm run qa:deepmatch -- --seed --suite p0 --env dm-staging
+npx tsx packages/deepmatch-qa/src/cli.ts --seed --suite p0 --env dm-staging
+npx tsx packages/deepmatch-qa/src/cli.ts --suite w2 --env dm-staging --sheet-snapshot docs/evidence/qa-agent/sheet53-snapshot.json
+npx tsx packages/deepmatch-qa/src/cli.ts --suite w3 --env dm-local
 
-# Full catalog filter
-npm run qa:deepmatch -- --suite all --env dm-staging
+# Security / e2e (SKIPPED under --suite p0 — run explicitly)
+npx tsx packages/deepmatch-qa/src/cli.ts --suite security --env dm-staging
+npx tsx packages/deepmatch-qa/src/cli.ts --suite e2e --env dm-staging
 
-# List projects (future stubs are non-executable)
-npm run qa:deepmatch -- --list-projects
+# CI
+# - .github/workflows/qa-core.yml (PR)
+# - .github/workflows/qa-staging.yml (workflow_dispatch)
 ```
 
 ## Evidence

@@ -1,9 +1,15 @@
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { getAdapter, FUTURE_PROJECT_STUBS } from "@tradingbase/qa-adapters";
 import { runOrchestrator } from "@tradingbase/qa-core";
 import { registerDeepMatchAdapter, resolveMonorepoRoot } from "./adapter.js";
 import { proposeSheet53Updates } from "./sheet-propose.js";
+import {
+  buildNarrowPatches,
+  indexSheet53Rows,
+  writePatchPlan,
+  type Sheet53RowSnapshot,
+} from "./sheet53-narrow.js";
 import { readHistoricalPairPinsRootCause } from "./runners/index.js";
 
 function parseArgs(argv: string[]) {
@@ -13,10 +19,23 @@ function parseArgs(argv: string[]) {
     if (a === "--suite") out.suite = argv[++i] ?? "unit";
     else if (a === "--env") out.env = argv[++i] ?? "dm-staging";
     else if (a === "--seed") out.seed = true;
+    else if (a === "--write-sheet") out.writeSheet = true;
+    else if (a === "--sheet-snapshot") out.sheetSnapshot = argv[++i] ?? "";
     else if (a === "--help" || a === "-h") out.help = true;
     else if (a === "--list-projects") out.list = true;
   }
   return out;
+}
+
+function loadSheetSnapshot(
+  path: string | undefined,
+): Map<string, Sheet53RowSnapshot> | null {
+  if (!path || !existsSync(path)) return null;
+  const raw = JSON.parse(readFileSync(path, "utf8")) as {
+    values?: string[][];
+  };
+  if (!raw.values) return null;
+  return indexSheet53Rows(raw.values);
 }
 
 async function main() {
@@ -24,12 +43,13 @@ async function main() {
   if (args.help) {
     console.log(`DeepMatch QA adapter CLI
 
-  npm run qa:deepmatch -- --suite unit|p0|staging-accept|all
-  npm run qa:deepmatch -- --suite p0 --env dm-staging
-  npm run qa:deepmatch -- --seed --suite p0
+  npx tsx packages/deepmatch-qa/src/cli.ts --suite unit|p0|w2|security|e2e|all
+  npx tsx packages/deepmatch-qa/src/cli.ts --suite w2 --env dm-staging
+  npx tsx packages/deepmatch-qa/src/cli.ts --suite p0 --write-sheet --sheet-snapshot path.json
 
-Safety: production writes forbidden. Sheets write disabled by default.
-GA stance remains NO-GO until human release gates pass.
+Sheet writes: narrow QA columns only (Q/R/U). Never signoff / DONE_VERIFIED.
+Requires QA_SHEETS_WRITE=1 AND --write-sheet; default is propose-only.
+GA stance remains NO-GO.
 `);
     process.exit(0);
   }
@@ -65,7 +85,9 @@ GA stance remains NO-GO until human release gates pass.
   if (args.seed && adapter.seed) {
     console.log("Seeding synthetic QA pair…");
     const seeded = await adapter.seed();
-    console.log(seeded.ok ? `SEED OK — ${seeded.detail}` : `SEED FAIL — ${seeded.detail}`);
+    console.log(
+      seeded.ok ? `SEED OK — ${seeded.detail}` : `SEED FAIL — ${seeded.detail}`,
+    );
     if (!seeded.ok) process.exit(2);
   }
 
@@ -90,6 +112,36 @@ GA stance remains NO-GO until human release gates pass.
     adapter.evidenceDir,
   );
 
+  const snapshot =
+    loadSheetSnapshot(String(args.sheetSnapshot || "")) ||
+    loadSheetSnapshot(
+      join(adapter.evidenceDir, "sheet53-snapshot.json"),
+    );
+  let narrowPlanPath: string | undefined;
+  let sheetApply: string = proposed.status;
+  if (snapshot) {
+    const patches = buildNarrowPatches(report, snapshot);
+    narrowPlanPath = writePatchPlan(
+      report,
+      patches,
+      adapter.tracker,
+      adapter.evidenceDir,
+    );
+    const wantWrite =
+      Boolean(args.writeSheet) &&
+      process.env.QA_SHEETS_WRITE === "1" &&
+      adapter.tracker.writeEnabled;
+    if (wantWrite) {
+      sheetApply = "BLOCKED_CONNECTOR";
+      // Live Sheets API credentials are not embedded in the CLI.
+      // Agent/MCP or approved service account applies narrow-plan cells.
+    } else if (args.writeSheet) {
+      sheetApply = "BLOCKED_CONNECTOR";
+    } else {
+      sheetApply = "narrow_plan";
+    }
+  }
+
   const execPath = join(adapter.evidenceDir, "EXECUTIVE_LATEST.md");
   mkdirSync(adapter.evidenceDir, { recursive: true });
   writeFileSync(
@@ -106,9 +158,9 @@ GA stance remains NO-GO until human release gates pass.
       `| ${report.summary.pass} | ${report.summary.fail} | ${report.summary.blocked} | ${report.summary.skipped} | ${report.summary.inconclusive} | ${report.summary.total} |`,
       ``,
       `Regression vs baseline: ${regression.join("; ") || "n/a"}`,
-      `Sheet 53: ${proposed.status}${proposed.path ? ` → ${proposed.path}` : ""}`,
+      `Sheet 53: ${sheetApply}${proposed.path ? ` · proposed ${proposed.path}` : ""}${narrowPlanPath ? ` · narrow ${narrowPlanPath}` : ""}`,
       `Evidence: ${jsonPath}`,
-      `Duration: ${report.durationMs}ms · Est. incremental cost: $0 (reuse existing runners)`,
+      `Duration: ${report.durationMs}ms`,
       ``,
       `Open blockers:`,
       ...(report.openBlockers.length
@@ -131,7 +183,8 @@ GA stance remains NO-GO until human release gates pass.
         jsonPath,
         mdPath,
         execPath,
-        sheet: proposed.status,
+        sheet: sheetApply,
+        narrowPlanPath: narrowPlanPath ?? null,
         regression,
       },
       null,

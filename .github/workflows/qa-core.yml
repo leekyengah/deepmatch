@@ -1,0 +1,44 @@
+# Universal QA Core — required-friendly PR gate (no staging secrets).
+name: QA Core
+
+on:
+  pull_request:
+  push:
+    branches: [main, master, develop]
+
+concurrency:
+  group: qa-core-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qa-unit:
+    name: QA Core unit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci || npm install
+      - name: QA packages typecheck
+        run: |
+          npm run typecheck -w @tradingbase/qa-core
+          npm run typecheck -w @tradingbase/qa-adapters
+          npm run typecheck -w @deepmatch/qa
+      - name: QA Core unit suite
+        run: npm run test:qa-core
+      - name: DeepMatch QA CLI (unit)
+        run: npx tsx packages/deepmatch-qa/src/cli.ts --suite unit --env dm-local
+        env:
+          E2E_BASE_URL: http://127.0.0.1:3000
+      - name: Upload QA evidence (unit)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-agent-unit-${{ github.sha }}
+          path: docs/evidence/qa-agent/
+          retention-days: 14
+          if-no-files-found: ignore
