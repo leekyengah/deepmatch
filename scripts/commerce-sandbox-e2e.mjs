@@ -41,8 +41,16 @@ function jwtSub(token) {
 }
 
 const qa = loadQaEnv();
-const tokenA = process.env.QA_ACCESS_TOKEN_A || qa.QA_ACCESS_TOKEN_A;
-const tokenB = process.env.QA_ACCESS_TOKEN_B || qa.QA_ACCESS_TOKEN_B;
+const tokenA =
+  process.env.QA_JWT_A ||
+  process.env.QA_ACCESS_TOKEN_A ||
+  qa.QA_JWT_A ||
+  qa.QA_ACCESS_TOKEN_A;
+const tokenB =
+  process.env.QA_JWT_B ||
+  process.env.QA_ACCESS_TOKEN_B ||
+  qa.QA_JWT_B ||
+  qa.QA_ACCESS_TOKEN_B;
 
 const results = [];
 function rec(id, ok, detail) {
@@ -96,7 +104,7 @@ const admin = createClient(url, service, {
 }
 
 if (!tokenA) {
-  rec("auth.qa_token_a", false, "missing — run npm run seed:qa");
+  rec("auth.qa_token_a", false, "missing QA_JWT_A — run npm run seed:qa");
 } else {
   rec("auth.qa_token_a", true);
   const userId = jwtSub(tokenA);

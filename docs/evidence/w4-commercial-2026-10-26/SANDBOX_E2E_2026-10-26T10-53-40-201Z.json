@@ -1,0 +1,99 @@
+{
+  "base": "https://datingvn.com",
+  "commit": "008ca3f",
+  "live_psp": false,
+  "pass": 18,
+  "fail": 0,
+  "results": [
+    {
+      "id": "env.staging_project",
+      "ok": true,
+      "detail": "zzqpvjdyvjarpphqhaze"
+    },
+    {
+      "id": "env.live_psp_off",
+      "ok": true,
+      "detail": "OFF"
+    },
+    {
+      "id": "schema.commerce_audit_log",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "id": "schema.staff_transition_booking",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "id": "auth.qa_token_a",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "id": "booking.create",
+      "ok": true,
+      "detail": "ece29999"
+    },
+    {
+      "id": "booking.cancel",
+      "ok": true,
+      "detail": "cancelled"
+    },
+    {
+      "id": "booking.cancel_idempotent",
+      "ok": true,
+      "detail": "{\"booking\":{\"id\":\"ece29999-3207-4960-a192-d4022076ebb6\",\"status\":\"cancelled\",\"requester_id\":\"67a88092-7f0b-4fd1-bb3e-357d1ba98e18\"},\"idempot"
+    },
+    {
+      "id": "booking.illegal_refund_from_cancelled",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "id": "booking.cross_user_deny",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "id": "booking.seed_completed",
+      "ok": true,
+      "detail": "d0963c88"
+    },
+    {
+      "id": "booking.request_refund",
+      "ok": true,
+      "detail": "refund_requested"
+    },
+    {
+      "id": "order.create",
+      "ok": true,
+      "detail": "dda82a53"
+    },
+    {
+      "id": "order.cancel",
+      "ok": true,
+      "detail": "cancelled"
+    },
+    {
+      "id": "order.seed_paid",
+      "ok": true,
+      "detail": "822b5eb1"
+    },
+    {
+      "id": "order.request_refund",
+      "ok": true,
+      "detail": "refund_requested"
+    },
+    {
+      "id": "auth.guest_deny",
+      "ok": true,
+      "detail": "401"
+    },
+    {
+      "id": "audit.rows_readable",
+      "ok": true,
+      "detail": "count=4"
+    }
+  ]
+}
