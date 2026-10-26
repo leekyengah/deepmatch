@@ -101,5 +101,22 @@
   "safetyEmptyTitle": "No reports yet",
   "safetyEmptyBody": "When users report from chat, the queue appears here.",
   "billingAmount": "{amount}₫ · code {code}",
-  "safetyLinkShort": "Safety"
+  "safetyLinkShort": "Safety",
+  "commerce": "Commerce",
+  "commerceFull": "Sandbox commerce",
+  "commerceIntro": "Sandbox cancel/refund · transaction reconciliation · Store SKU split. No LIVE PSP.",
+  "commerceSandboxOnly": "Sandbox only · LIVE PSP OFF",
+  "commerceRevenue": "Sandbox revenue (paid)",
+  "commerceRefunded": "Sandbox refunded",
+  "commerceOpenRefunds": "Open refund requests",
+  "commerceSkuSplit": "SKU classification (IAP vs offline)",
+  "commerceRefundQueue": "Refund queue",
+  "commerceRefundEmptyTitle": "No refund requests",
+  "commerceRefundEmptyBody": "When users submit request_refund, the queue appears here.",
+  "commerceApproveSandbox": "Approve sandbox refund",
+  "commerceDenyRefund": "Deny refund",
+  "commerceBookings": "Recent bookings",
+  "commerceComplete": "Mark completed",
+  "commerceAudit": "Commerce audit",
+  "commerceAuditEmpty": "No audit rows yet."
 }

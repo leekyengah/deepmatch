@@ -1,7 +1,7 @@
 # W5 — Mobile & Store Release Candidate
 
 **Date:** 2026-10-26  
-**Wave status:** `STARTED`  
+**Wave status:** `IN_PROGRESS`  
 **RELEASE_CANDIDATE_READY:** **NO**  
 **GA:** **NO-GO**
 
@@ -9,20 +9,24 @@
 
 | Item | Status | Notes |
 |------|--------|-------|
-| Web–Mobile feature parity | PARTIAL | Discover filters + mobile unmatch UI landed; device QA pending |
-| EAS development/preview profiles | READY_FOR_QA (config) | `apps/mobile/eas.json` profiles exist |
-| iOS/Android signing | BLOCKED_EXTERNAL | ASC App ID placeholder `REPLACE_ASC_APP_ID` |
-| TestFlight / Play Internal | BLOCKED_EXTERNAL | Needs Apple/Google EAS secrets |
-| Store metadata / screenshots / privacy | PARTIAL | Legal routes exist; screenshots pack incomplete |
-| Account deletion / moderation | PARTIAL | API routes present; device E2E pending |
-| Device E2E / crash reporting | BLOCKED_EXTERNAL | Sentry DSN empty; no device farm run |
-
-## Independent work continued without credentials
-
-- Keep Expo Go / LAN API pointing at staging `https://datingvn.com`  
-- Do not submit store binaries until signing + privacy pack signed  
-- Mobile discover filters / unmatch UI remain next eng slices  
+| Mobile Unmatch UI | IMPLEMENTED | `apps/mobile/app/(tabs)/likes.tsx` — confirm + POST `/api/v1/matches/unmatch` + error/retry |
+| Discover filters Web–Mobile | PARITY (code) | intent/age/region/q/strict — device QA pending |
+| Onboarding / email / age / profile / match / chat / couple media | PARTIAL | Existing screens; full device matrix not run |
+| Loading / empty / error / retry / offline | PARTIAL | Likes + Discover error/retry; offline banner incomplete |
+| Navigation / deep link / permissions | PARTIAL | Expo Router; deep-link matrix pending |
+| EAS preview builds | BLOCKED_EXTERNAL | Profiles in `eas.json`; ASC/Play secrets missing |
+| iOS/Android signing | BLOCKED_EXTERNAL | `REPLACE_ASC_APP_ID` placeholder |
+| TestFlight / Play Internal | BLOCKED_EXTERNAL | Needs credentials |
+| Crash reporting | BLOCKED_EXTERNAL | Sentry DSN empty |
 
 ## Binary
 
-**None produced this wave.** Cannot mark `RELEASE_CANDIDATE_READY`.
+**None produced.** Cannot mark `RELEASE_CANDIDATE_READY`.
+
+## Founder actions for binary
+
+1. Provide ASC App ID + Apple distribution cert / ASC API key to EAS  
+2. Provide Play Console service account + upload keystore  
+3. Set Sentry DSN for mobile  
+4. Approve staging migration + preview channel build  
+5. Human review + merge of PR #3 when CI green  

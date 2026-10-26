@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { getRouteUser } from "@/lib/supabase/route";
+import {
+  isIdempotentNoop,
+  transitionBooking,
+} from "@deepmatch/shared";
+import { getRouteUser, createServiceClient } from "@/lib/supabase/route";
 import { flagEnabled } from "@/lib/flags";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 import {
@@ -7,6 +11,8 @@ import {
   offeringTitleForDb,
   type CompanionPackage,
 } from "@/lib/companion-packages";
+
+const USER_BOOKING_ACTIONS = new Set(["cancel", "request_refund"]);
 
 export async function GET(req: Request) {
   const requestId = makeRequestId();
@@ -230,28 +236,79 @@ export async function PATCH(req: Request) {
   const { supabase, user } = await getRouteUser(req);
   if (!user) return jsonError("UNAUTHENTICATED", null, requestId);
 
-  let body: { id?: string; action?: string };
+  let body: { id?: string; action?: string; idempotency_key?: string };
   try {
     body = await req.json();
   } catch {
     return jsonError("VALIDATION_ERROR", "invalidJson", requestId);
   }
-  if (!body.id || body.action !== "cancel") {
+  if (!body.id || !body.action || !USER_BOOKING_ACTIONS.has(body.action)) {
+    return jsonError("VALIDATION_ERROR", "bookingActionInvalid", requestId);
+  }
+
+  const { data: existing } = await supabase
+    .from("service_bookings")
+    .select("id, status, requester_id")
+    .eq("id", body.id)
+    .eq("requester_id", user.id)
+    .maybeSingle();
+  if (!existing) {
+    return jsonError("VALIDATION_ERROR", "bookingNotFound", requestId);
+  }
+
+  if (isIdempotentNoop(existing.status, body.action, "booking")) {
+    return NextResponse.json({
+      data: { booking: existing, idempotent: true },
+      meta: { request_id: requestId },
+    });
+  }
+
+  const transition = transitionBooking(existing.status, body.action, "user");
+  if (!transition.ok) {
     return jsonError("VALIDATION_ERROR", "bookingActionInvalid", requestId);
   }
 
   const { data, error } = await supabase
     .from("service_bookings")
-    .update({ status: "cancelled" })
+    .update({ status: transition.to })
     .eq("id", body.id)
     .eq("requester_id", user.id)
-    .in("status", ["requested", "assigned"])
+    .eq("status", existing.status)
     .select("id, status")
     .maybeSingle();
 
   if (error || !data) {
     return jsonError("VALIDATION_ERROR", "bookingNotFound", requestId);
   }
+
+  const admin = createServiceClient();
+  await admin.from("commerce_audit_log").insert({
+    entity_type: "booking",
+    entity_id: body.id,
+    from_status: existing.status,
+    to_status: transition.to,
+    action: body.action,
+    actor_role: "user",
+    actor_user_id: user.id,
+    request_id: requestId,
+    meta: {
+      sandbox: true,
+      live_psp: false,
+      idempotency_key: body.idempotency_key ?? null,
+    },
+  });
+  await supabase.rpc("enqueue_outbox", {
+    p_event_id: `${transition.auditEvent}:${body.id}:${requestId}`,
+    p_event_type: transition.auditEvent,
+    p_payload: {
+      booking_id: body.id,
+      from: existing.status,
+      to: transition.to,
+      actor: user.id,
+      request_id: requestId,
+    },
+  });
+
   return NextResponse.json({
     data: { booking: data },
     meta: { request_id: requestId },

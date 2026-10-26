@@ -101,5 +101,22 @@
   "safetyEmptyTitle": "Chưa có báo cáo",
   "safetyEmptyBody": "Khi người dùng gửi báo cáo từ chat, hàng đợi hiện tại đây.",
   "billingAmount": "{amount}₫ · mã {code}",
-  "safetyLinkShort": "An toàn"
+  "safetyLinkShort": "An toàn",
+  "commerce": "Thương mại",
+  "commerceFull": "Thương mại sandbox",
+  "commerceIntro": "Hủy/hoàn tiền sandbox · đối soát giao dịch · phân loại SKU Store. Không LIVE PSP.",
+  "commerceSandboxOnly": "Sandbox only · LIVE PSP OFF",
+  "commerceRevenue": "Doanh thu sandbox (paid)",
+  "commerceRefunded": "Đã hoàn sandbox",
+  "commerceOpenRefunds": "Yêu cầu hoàn mở",
+  "commerceSkuSplit": "Phân loại SKU (IAP vs offline)",
+  "commerceRefundQueue": "Hàng đợi hoàn tiền",
+  "commerceRefundEmptyTitle": "Không có yêu cầu hoàn",
+  "commerceRefundEmptyBody": "Khi user gửi request_refund, hàng đợi hiện tại đây.",
+  "commerceApproveSandbox": "Duyệt hoàn sandbox",
+  "commerceDenyRefund": "Từ chối hoàn",
+  "commerceBookings": "Booking gần đây",
+  "commerceComplete": "Đánh dấu hoàn thành",
+  "commerceAudit": "Audit thương mại",
+  "commerceAuditEmpty": "Chưa có bản ghi audit."
 }

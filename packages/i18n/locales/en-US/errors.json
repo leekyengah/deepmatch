@@ -20,6 +20,7 @@
   "ageUnderage": "DeepMatch is only for people aged 18 and over.",
   "emailNotVerified": "Verify your email before using this feature.",
   "flagConciergeOff": "Concierge is turned off.",
+  "livePspForbidden": "LIVE payment is not enabled.",
   "flagBillingOff": "Billing is turned off.",
   "flagPremiumOff": "Premium is turned off.",
   "flagMediaOff": "Media is turned off.",

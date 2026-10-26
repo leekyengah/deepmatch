@@ -124,8 +124,19 @@ export function CoupleOsmCanvas({ pins, onMapClick }: Props) {
   }
 
   return (
-    <div className="relative h-full w-full min-h-[16rem]">
-      <div ref={containerRef} className="h-full w-full min-h-[16rem]" />
+    <div
+      className="relative h-full w-full min-h-[16rem]"
+      role="region"
+      aria-label={t("couple.map")}
+    >
+      <div
+        ref={containerRef}
+        className="h-full w-full min-h-[16rem]"
+        role="application"
+        aria-label={
+          clickable ? t("couple.osmClickHint") : t("couple.osmEmptyPins")
+        }
+      />
       {geoPins.length === 0 ? (
         <p className="pointer-events-none absolute inset-x-0 bottom-2 z-[400] px-3 text-center text-xs text-dm-ink/80">
           {clickable ? t("couple.osmClickHint") : t("couple.osmEmptyPins")}

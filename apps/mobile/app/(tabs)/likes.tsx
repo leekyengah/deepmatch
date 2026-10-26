@@ -11,25 +11,27 @@ import { useFocusEffect, useRouter } from "expo-router";
 import { apiGet, apiPost, type MatchRow } from "../../lib/api";
 import { useT } from "../../lib/i18n/I18nProvider";
 import { Empty, Loading, Muted, Screen, Title } from "../../components/ui";
+import { ErrorState } from "../../components/premium";
 import { colors } from "../../constants/theme";
 
 export default function LikesScreen() {
   const t = useT();
   const [rows, setRows] = useState<MatchRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const router = useRouter();
 
   const load = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const res = await apiGet<{ data: { matches: MatchRow[] } }>(
         "/api/v1/matches",
       );
       setRows(res.data.matches ?? []);
     } catch (e) {
-      Alert.alert(
-        t("matching.title"),
+      setError(
         e instanceof Error ? e.message : t("matching.loadError"),
       );
     } finally {
@@ -43,39 +45,37 @@ export default function LikesScreen() {
     }, [load]),
   );
 
-  function unmatch(item: MatchRow) {
+  function confirmUnmatch(m: MatchRow) {
     Alert.alert(
       t("matching.unmatch"),
-      t("matching.unmatchConfirm", { name: item.peer_name }),
+      t("matching.unmatchConfirm", { name: m.peer_name }),
       [
         { text: t("common.cancel"), style: "cancel" },
         {
           text: t("matching.unmatch"),
           style: "destructive",
-          onPress: () => {
-            void (async () => {
-              setBusyId(item.match_id);
-              try {
-                await apiPost("/api/v1/matches/unmatch", {
-                  match_id: item.match_id,
-                  peer_id: item.peer_id,
-                });
-                setRows((prev) =>
-                  prev.filter((r) => r.match_id !== item.match_id),
-                );
-              } catch (e) {
-                Alert.alert(
-                  t("matching.unmatchError"),
-                  e instanceof Error ? e.message : t("errors.unknown"),
-                );
-              } finally {
-                setBusyId(null);
-              }
-            })();
-          },
+          onPress: () => void unmatch(m),
         },
       ],
     );
+  }
+
+  async function unmatch(m: MatchRow) {
+    setBusyId(m.match_id);
+    try {
+      await apiPost("/api/v1/matches/unmatch", {
+        match_id: m.match_id,
+        peer_id: m.peer_id,
+      });
+      setRows((prev) => prev.filter((x) => x.match_id !== m.match_id));
+    } catch (e) {
+      Alert.alert(
+        t("matching.unmatch"),
+        e instanceof Error ? e.message : t("matching.unmatchError"),
+      );
+    } finally {
+      setBusyId(null);
+    }
   }
 
   if (loading) {
@@ -86,10 +86,22 @@ export default function LikesScreen() {
     );
   }
 
+  if (error) {
+    return (
+      <Screen>
+        <ErrorState
+          message={error}
+          onRetry={() => void load()}
+          retryLabel={t("common.retry")}
+        />
+      </Screen>
+    );
+  }
+
   return (
     <Screen>
       <Title>{t("matching.title")}</Title>
-      <Muted>{t("matching.pageIntro")}</Muted>
+      <Muted>{t("matching.emptyBody")}</Muted>
       <FlatList
         style={{ marginTop: 16 }}
         data={rows}
@@ -120,13 +132,17 @@ export default function LikesScreen() {
               ) : null}
             </Pressable>
             <Pressable
-              onPress={() => unmatch(item)}
+              style={styles.unmatch}
               disabled={busyId === item.match_id}
+              onPress={() => confirmUnmatch(item)}
               accessibilityRole="button"
               accessibilityLabel={t("matching.unmatch")}
-              style={styles.unmatchBtn}
             >
-              <Text style={styles.unmatchText}>{t("matching.unmatch")}</Text>
+              <Text style={styles.unmatchText}>
+                {busyId === item.match_id
+                  ? t("common.loading")
+                  : t("matching.unmatch")}
+              </Text>
             </Pressable>
           </View>
         )}
@@ -139,8 +155,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     gap: 8,
-    paddingVertical: 10,
+    paddingVertical: 14,
     borderBottomWidth: 1,
     borderBottomColor: colors.line,
   },
@@ -149,7 +166,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 4,
+    gap: 8,
   },
   name: { fontSize: 17, fontWeight: "600", color: colors.ink },
   badge: {
@@ -161,12 +178,16 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     fontWeight: "700",
   },
-  unmatchBtn: {
+  unmatch: {
     paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderRadius: 999,
+    paddingVertical: 6,
+    borderRadius: 8,
     borderWidth: 1,
     borderColor: colors.line,
   },
-  unmatchText: { fontSize: 12, fontWeight: "700", color: colors.primary },
+  unmatchText: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: colors.raspberry ?? colors.primary,
+  },
 });

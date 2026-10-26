@@ -12,3 +12,5 @@ export * from "./ai/deepmind";
 export * from "./needs";
 export * from "./onboarding/intents";
 export * from "./media/discover-gate";
+export * from "./commerce/lifecycle";
+export * from "./commerce/product-split";

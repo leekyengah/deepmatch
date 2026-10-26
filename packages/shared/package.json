@@ -14,7 +14,7 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "tsc -p tsconfig.json --noEmit",
-    "test": "tsx --test src/age.test.ts src/matching/engine.test.ts src/chat/acl.test.ts src/http/errors.test.ts src/outbox/worker.test.ts src/ai/gateway.test.ts src/onboarding/intents.test.ts src/media/discover-gate.test.ts"
+    "test": "tsx --test src/age.test.ts src/matching/engine.test.ts src/chat/acl.test.ts src/http/errors.test.ts src/outbox/worker.test.ts src/ai/gateway.test.ts src/onboarding/intents.test.ts src/media/discover-gate.test.ts src/commerce/lifecycle.test.ts"
   },
   "dependencies": {
     "@deepmatch/i18n": "*"
