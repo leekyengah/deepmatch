@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
-import { isDiscoverCohortVisible } from "@deepmatch/shared";
+import {
+  isCustomerVisibleDiscoverBio,
+  isDiscoverCohortVisible,
+} from "@deepmatch/shared";
 import { createClient } from "@/lib/supabase/server";
 import { resolveHomeState } from "@/lib/home-state";
 import {
@@ -160,11 +163,13 @@ export default async function PersonaHomePage() {
       .neq("id", user.id)
       .limit(24);
     const pool = (poolRaw ?? [])
-      .filter((p) =>
-        isDiscoverCohortVisible(
-          viewerCohort,
-          typeof p.cohort === "string" ? p.cohort : null,
-        ),
+      .filter(
+        (p) =>
+          isDiscoverCohortVisible(
+            viewerCohort,
+            typeof p.cohort === "string" ? p.cohort : null,
+          ) &&
+          isCustomerVisibleDiscoverBio(typeof p.bio === "string" ? p.bio : null),
       )
       .slice(0, 3);
     for (const p of pool) {

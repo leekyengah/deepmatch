@@ -4,6 +4,7 @@ import {
   MIN_AGE_DEFAULT,
   evaluateDiscoverMediaGate,
   isAgeEligible,
+  isCustomerVisibleDiscoverBio,
   isDiscoverCohortVisible,
   normalizeIntent,
   rankCandidates,
@@ -164,11 +165,12 @@ export async function GET(req: Request) {
 
   const viewerCohort =
     typeof me?.cohort === "string" ? me.cohort : null;
-  const poolRows = (poolRaw ?? []).filter((p) =>
-    isDiscoverCohortVisible(
-      viewerCohort,
-      typeof p.cohort === "string" ? p.cohort : null,
-    ),
+  const poolRows = (poolRaw ?? []).filter(
+    (p) =>
+      isDiscoverCohortVisible(
+        viewerCohort,
+        typeof p.cohort === "string" ? p.cohort : null,
+      ) && isCustomerVisibleDiscoverBio(typeof p.bio === "string" ? p.bio : null),
   );
 
   const poolCount = poolRows.length;

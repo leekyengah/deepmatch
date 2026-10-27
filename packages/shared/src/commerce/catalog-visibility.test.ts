@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  isCustomerVisibleDiscoverBio,
   isCustomerVisibleFulfillment,
   isCustomerVisibleProviderStatus,
   isDiscoverCohortVisible,
@@ -17,10 +18,18 @@ describe("catalog-visibility", () => {
     assert.equal(isCustomerVisibleFulfillment("PARTNER"), true);
   });
 
-  it("treats cohort as purge marker only (Discover peers)", () => {
-    assert.equal(isDiscoverCohortVisible(null, "Mebertes"), true);
+  it("isolates discover cohorts", () => {
+    assert.equal(isDiscoverCohortVisible(null, "Mebertes"), false);
     assert.equal(isDiscoverCohortVisible(null, null), true);
     assert.equal(isDiscoverCohortVisible("Mebertes", "Mebertes"), true);
-    assert.equal(isDiscoverCohortVisible("Mebertes", null), true);
+    assert.equal(isDiscoverCohortVisible("Mebertes", null), false);
+  });
+
+  it("hides Synthetic Mebertes bios", () => {
+    assert.equal(
+      isCustomerVisibleDiscoverBio("Synthetic Mebertes · HN · CC"),
+      false,
+    );
+    assert.equal(isCustomerVisibleDiscoverBio("Loves coffee and travel"), true);
   });
 });
