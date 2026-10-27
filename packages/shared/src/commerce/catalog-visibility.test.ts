@@ -17,10 +17,10 @@ describe("catalog-visibility", () => {
     assert.equal(isCustomerVisibleFulfillment("PARTNER"), true);
   });
 
-  it("isolates discover cohorts", () => {
-    assert.equal(isDiscoverCohortVisible(null, "Mebertes"), false);
+  it("treats cohort as purge marker only (Discover peers)", () => {
+    assert.equal(isDiscoverCohortVisible(null, "Mebertes"), true);
     assert.equal(isDiscoverCohortVisible(null, null), true);
     assert.equal(isDiscoverCohortVisible("Mebertes", "Mebertes"), true);
-    assert.equal(isDiscoverCohortVisible("Mebertes", null), false);
+    assert.equal(isDiscoverCohortVisible("Mebertes", null), true);
   });
 });

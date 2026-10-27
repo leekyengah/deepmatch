@@ -27,13 +27,13 @@ export function isCustomerVisibleFulfillment(
   return !HIDDEN_FULFILLMENT.has(String(fulfillment).trim().toUpperCase());
 }
 
-/** Organic members never see seeded cohorts; cohort members only see same cohort. */
+/**
+ * Cohort is a purge marker (e.g. Mebertes), not a Discover silo.
+ * Organic and bootstrap accounts see each other like real peers.
+ */
 export function isDiscoverCohortVisible(
-  viewerCohort: string | null | undefined,
-  candidateCohort: string | null | undefined,
+  _viewerCohort: string | null | undefined,
+  _candidateCohort: string | null | undefined,
 ): boolean {
-  const viewer = viewerCohort?.trim() || null;
-  const candidate = candidateCohort?.trim() || null;
-  if (viewer) return candidate === viewer;
-  return candidate == null;
+  return true;
 }
