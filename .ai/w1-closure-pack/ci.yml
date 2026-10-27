@@ -19,7 +19,10 @@ jobs:
       - name: Secrets guard
         run: |
           # Match credential-like assignments, not regex literals in no-leak scanners
-          if git grep -nE 'SUPABASE_SERVICE_ROLE_KEY=eyJ|BEGIN RSA PRIVATE KEY|sk_live_[A-Za-z0-9]{16,}' -- ':!.github/**' ; then
+          # Snapshot only — live guard lives in .github/workflows/ci.yml
+          # Pattern split so archive copy does not self-match Secrets guard.
+          PAT='SUPABASE_SERVICE_ROLE_KEY''=eyJ|BEGIN RSA PRIVATE KEY|sk_live_[A-Za-z0-9]{16,}'
+          if git grep -nE "$PAT" -- ':!.github/**' ':!.ai/**' ; then
             echo "Potential secret detected"; exit 1;
           fi
           echo "Secrets guard OK"
