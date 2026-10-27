@@ -3,15 +3,16 @@
 **Environment:** Staging `https://datingvn.com` · `productionDeploy=false` · `LIVE_PSP=false`  
 **Do not use production credentials in this pack.**
 
-## Demo accounts (Founder fills — never commit secrets)
+## Demo accounts (seeded staging — never commit secrets)
 
 | Role | Email | Password | Notes |
 |------|-------|----------|-------|
-| Reviewer A (discoverable) | _TBD by FAR-07_ | _out-of-band_ | ≥3 approved photos; email verified; 18+ |
-| Reviewer B (mutual match with A) | _TBD_ | _out-of-band_ | Opens chat + couple surfaces |
-| Disposable delete subject | _TBD_ | _out-of-band_ | Only account allowed for delete UAT |
+| Reviewer A (discoverable) | `reviewer_a@deepmatch.test` | **1Password / sealed note** (from `.ai/reviewer.env.ps1` on seed host) | Email verified; mutual with B; add ≥3 photos for discover |
+| Reviewer B (mutual match with A) | `reviewer_b@deepmatch.test` | same vault | Opens chat + couple surfaces |
+| Disposable delete subject | `reviewer_delete@deepmatch.test` | same vault | Only account allowed for delete UAT |
 
-Password delivery: 1Password / sealed note — **not** Master Sheet, **not** git.
+Re-seed: `node --env-file=.env.local scripts/seed-reviewer-accounts.mjs`  
+Password delivery: 1Password / sealed note — **not** Master Sheet, **not** git, **not** this file.
 
 ## Reviewer happy path (Web)
 
