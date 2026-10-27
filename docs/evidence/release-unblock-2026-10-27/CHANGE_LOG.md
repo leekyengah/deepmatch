@@ -1,5 +1,7 @@
 # Change log — Release Unblock (saved 2026-10-27)
 
+**Git commit:** `3e43d8f` · branch `feat/w2-core-member-wp1-3` (ahead of origin; not pushed)
+
 ## Code
 - `tradingbase-qa-core`: suite filter → `filteredOut` (not false SKIPPED); CONDITIONAL when in-scope all PASS
 - `deepmatch-qa`: env-blocked classify for accept/pin probes; load `.ai/rls-test.env.ps1`; EXECUTIVE write fallback on lock; RLS A-001 SKIPPED without JWTs
