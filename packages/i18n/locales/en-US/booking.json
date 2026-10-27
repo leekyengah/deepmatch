@@ -149,7 +149,7 @@
   "safety4": "Complaints and safety support stay open in your account.",
   "faqHeading": "Frequently asked questions",
   "faq1Q": "Will my card be charged immediately?",
-  "faq1A": "Only sandbox/bank-transfer flows are open per configuration. LIVE payment needs separate approval.",
+  "faq1A": "Bank transfer is available as published. Automatic card charging is not enabled yet.",
   "faq2Q": "Can I cancel a request?",
   "faq2A": "Yes — cancel before the service starts according to order status and published policy.",
   "faq3Q": "Does matchmaking auto-create Couple Space?",
