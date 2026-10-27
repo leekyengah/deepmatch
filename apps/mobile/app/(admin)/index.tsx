@@ -74,6 +74,7 @@ export default function AdminDashboardScreen() {
     <PremiumScreen>
       <ScrollView contentContainerStyle={{ paddingBottom: spacing[8] }}>
         <PremiumHeader title={t("admin.dashboard")} subtitle={t("admin.homeIntro")} />
+        <MutedExitRow />
         <View style={styles.grid}>
           <KPIStatCard label={t("admin.statUsers")} value={stats.users} />
           <KPIStatCard label={t("admin.statMatches")} value={stats.matches} />
@@ -95,7 +96,22 @@ export default function AdminDashboardScreen() {
   );
 }
 
+function MutedExitRow() {
+  const t = useT();
+  return (
+    <Text style={styles.exitHint} accessibilityRole="text">
+      {t("mobile.adminExitHint")}
+    </Text>
+  );
+}
+
 const styles = StyleSheet.create({
+  exitHint: {
+    color: colors.muted,
+    fontSize: 13,
+    marginBottom: spacing[3],
+    lineHeight: 18,
+  },
   grid: { flexDirection: "row", flexWrap: "wrap", gap: spacing[2], marginBottom: spacing[4] },
   link: {
     backgroundColor: colors.panel,

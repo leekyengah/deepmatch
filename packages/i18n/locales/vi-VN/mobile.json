@@ -34,5 +34,7 @@
   "hubPremium": "Premium",
   "hubNotifications": "Thông báo",
   "hubGoals": "Nhu cầu ghép đôi",
-  "hubAdmin": "Admin"
+  "hubAdmin": "Admin",
+  "adminBackToApp": "Về DeepMatch",
+  "adminExitHint": "Thoát bảng điều khiển về app thành viên"
 }

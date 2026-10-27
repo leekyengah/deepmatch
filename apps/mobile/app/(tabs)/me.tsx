@@ -131,6 +131,25 @@ export default function MeScreen() {
         <Title>{t("profile.title")}</Title>
         <Muted>{user?.email ?? ""}</Muted>
 
+        <Text style={styles.h2}>{t("profile.account")}</Text>
+        <Button
+          label={t("auth.logout")}
+          variant="outline"
+          onPress={() => {
+            void (async () => {
+              await signOut();
+              router.replace("/(auth)/welcome");
+            })();
+          }}
+        />
+        <Text style={{ height: 10 }} />
+        <Button
+          label={t("profile.deleteAccount")}
+          variant="danger"
+          onPress={onDelete}
+        />
+        <Muted>{t("profile.deleteSubscriptionNote")}</Muted>
+
         <Text style={styles.h2}>{t("mobile.hubGoals")}</Text>
         <Button
           label={t("mobile.goalsTitle")}
@@ -210,19 +229,6 @@ export default function MeScreen() {
           <ViewButton key={url} label={label} onPress={() => openLegal(url)} />
         ))}
 
-        <Text style={styles.h2}>{t("profile.account")}</Text>
-        <Button
-          label={t("auth.logout")}
-          variant="outline"
-          onPress={() => signOut()}
-        />
-        <Text style={{ height: 10 }} />
-        <Button
-          label={t("profile.deleteAccount")}
-          variant="danger"
-          onPress={onDelete}
-        />
-        <Muted>{t("profile.deleteSubscriptionNote")}</Muted>
       </ScrollView>
     </Screen>
   );

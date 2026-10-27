@@ -34,5 +34,7 @@
   "hubPremium": "Premium",
   "hubNotifications": "Notifications",
   "hubGoals": "Matching preferences",
-  "hubAdmin": "Admin"
+  "hubAdmin": "Admin",
+  "adminBackToApp": "Back to DeepMatch",
+  "adminExitHint": "Leave admin and return to the member app"
 }

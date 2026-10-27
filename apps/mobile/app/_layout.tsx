@@ -20,6 +20,7 @@ function Gate({ children }: { children: React.ReactNode }) {
     if (!session && !inAuth) {
       router.replace("/(auth)/welcome");
     } else if (session && inAuth) {
+      // Always land on member tabs after login/signup — never restore admin stack.
       router.replace("/(tabs)");
     }
   }, [session, loading, segments, router]);

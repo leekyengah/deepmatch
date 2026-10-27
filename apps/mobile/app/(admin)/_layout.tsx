@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import { Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AdminGate } from "../../components/AdminGate";
+import { AdminHeaderActions } from "../../components/AdminHeaderActions";
 import { useT } from "../../lib/i18n/I18nProvider";
 import { colors, layout } from "../../constants/theme";
 
@@ -29,6 +30,7 @@ export default function AdminLayout() {
         screenOptions={{
           headerStyle: { backgroundColor: colors.canvas },
           headerTintColor: colors.ink,
+          headerRight: () => <AdminHeaderActions />,
           tabBarStyle: {
             backgroundColor: colors.panel,
             borderTopColor: colors.line,

@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import { Button, Field, Screen, Title } from "../../components/ui";
@@ -17,7 +17,11 @@ export default function LoginScreen() {
     setBusy(true);
     const err = await signIn(email, password);
     setBusy(false);
-    if (err) Alert.alert(t("auth.loginFailed"), err);
+    if (err) {
+      Alert.alert(t("auth.loginFailed"), err);
+      return;
+    }
+    router.replace("/(tabs)");
   }
 
   return (

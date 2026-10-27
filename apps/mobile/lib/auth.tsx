@@ -103,7 +103,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [session?.user?.email]);
 
   const signOut = useCallback(async () => {
-    await supabase.auth.signOut();
+    // Local first so SecureStore clears even if network/global revoke fails.
+    await supabase.auth.signOut({ scope: "local" });
+    try {
+      await supabase.auth.signOut({ scope: "global" });
+    } catch {
+      /* offline / already cleared */
+    }
   }, []);
 
   const value = useMemo(
