@@ -1,32 +1,39 @@
 # W5 — Mobile & Store Release Candidate
 
-**Date:** 2026-10-26  
-**Wave status:** `IN_PROGRESS`  
+**Date:** 2026-10-27  
+**Wave status:** `ENGINEERING_BINARY_PARTIAL`  
 **RELEASE_CANDIDATE_READY:** **NO**  
-**GA:** **NO-GO**
+**GA:** **NO-GO**  
+**Android preview APK:** **YES** (`ANDROID_PREVIEW_BUILD_COMPLETED`)  
+**Device QA:** **`DEVICE_TEST_BLOCKED`**
 
 ## Checklist
 
 | Item | Status | Notes |
 |------|--------|-------|
-| Mobile Unmatch UI | IMPLEMENTED | `apps/mobile/app/(tabs)/likes.tsx` — confirm + POST `/api/v1/matches/unmatch` + error/retry |
-| Discover filters Web–Mobile | PARITY (code) | intent/age/region/q/strict — device QA pending |
-| Onboarding / email / age / profile / match / chat / couple media | PARTIAL | Existing screens; full device matrix not run |
-| Loading / empty / error / retry / offline | PARTIAL | Likes + Discover error/retry; offline banner incomplete |
-| Navigation / deep link / permissions | PARTIAL | Expo Router; deep-link matrix pending |
-| EAS preview builds | BLOCKED_EXTERNAL | Profiles in `eas.json`; ASC/Play secrets missing |
-| iOS/Android signing | BLOCKED_EXTERNAL | `REPLACE_ASC_APP_ID` placeholder |
-| TestFlight / Play Internal | BLOCKED_EXTERNAL | Needs credentials |
+| Mobile Unmatch UI | IMPLEMENTED | likes.tsx confirm + API |
+| Discover filters Web–Mobile | PARITY (code) | device QA pending |
+| Onboarding / email / age / profile / match / chat / couple | PARTIAL | screens exist; device matrix blocked on this host |
+| Loading / empty / error / retry | PARTIAL | code-level; device pending |
+| Navigation / permissions | PARTIAL | Expo Router; deep-link matrix pending |
+| EAS Android preview APK | **DONE** | Build `fe0ad595` · handoff under `artifacts/android-preview/` |
+| EAS iOS simulator | **DONE** | Build `72114bb8` · device/TestFlight still OPEN |
+| iOS device / TestFlight | BLOCKED_EXTERNAL | Apple Dev + ASC App ID (`FAR-13`) |
+| Play Internal / store | HOLD | no submit · FAR-06 draft only |
 | Crash reporting | BLOCKED_EXTERNAL | Sentry DSN empty |
+| Independent QA | OPEN | FAR-08 |
 
 ## Binary
 
-**None produced.** Cannot mark `RELEASE_CANDIDATE_READY`.
+| Platform | Artifact |
+|----------|----------|
+| Android preview APK | Local `artifacts/android-preview/deepmatch-preview-fe0ad595.apk` + EAS URL in `ANDROID_PREVIEW_BUILD_REPORT.md` |
+| iOS simulator | EAS `72114bb8` `.tar.gz` (not TestFlight) |
 
-## Founder actions for binary
+## Founder remaining (blocked)
 
-1. Provide ASC App ID + Apple distribution cert / ASC API key to EAS  
-2. Provide Play Console service account + upload keystore  
-3. Set Sentry DSN for mobile  
-4. Approve staging migration + preview channel build  
-5. Human review + merge of PR #3 when CI green  
+1. Device smoke install of Android APK (or Independent QA)  
+2. ASC App ID + Apple creds for iOS device / TestFlight  
+3. Privacy / Data Safety counsel sign (`FAR-05` / `FAR-06`)  
+4. Independent QA signoff (`FAR-08`) then PR #3 merge (`FAR-01`) — never auto-merge  
+5. Do **not** enable LIVE PSP · do **not** Play/App Store submit until GO  
