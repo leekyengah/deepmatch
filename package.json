@@ -34,10 +34,14 @@
     "seed:catalog": "node --env-file=.env.local scripts/seed-catalog-mock-60.mjs",
     "test:no-leak": "node scripts/no-leak-public.mjs",
     "accept:staging": "node --env-file=.env.local scripts/accept-staging.mjs",
+    "mint:rls-jwts": "node --env-file=.env.local scripts/mint-rls-test-jwts.mjs",
+    "critical-path:smoke": "node --env-file=.env.local scripts/critical-path-smoke.mjs",
     "grant:owner": "node --env-file=.env.local scripts/grant-admin-owner.mjs",
     "outbox:worker": "node --env-file=.env.local scripts/outbox-worker.mjs",
     "format:check": "echo \"format check placeholder — prettier optional\"",
-    "ci": "npm run check:workspaces && npm run lint && npm run typecheck && npm run test && npm run build"
+    "ci": "npm run check:workspaces && npm run lint && npm run typecheck && npm run test && npm run build",
+    "postinstall": "node scripts/link-mobile-expo-modules.mjs",
+    "link:mobile-expo": "node scripts/link-mobile-expo-modules.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -47,11 +51,7 @@
   },
   "overrides": {
     "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "@deepmatch/mobile": {
-      "react": "19.2.3",
-      "react-dom": "19.2.3"
-    }
+    "react-dom": "19.3.0"
   },
   "allowScripts": {
     "ffmpeg-static@5.3.0": true

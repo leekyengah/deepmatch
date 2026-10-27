@@ -1,7 +1,8 @@
 {
   "cli": {
     "version": ">= 16.0.0",
-    "appVersionSource": "local"
+    "appVersionSource": "local",
+    "promptToConfigurePushNotifications": false
   },
   "build": {
     "development": {
@@ -20,6 +21,7 @@
       "env": {
         "EXPO_PUBLIC_APP_ENV": "staging",
         "EXPO_PUBLIC_API_URL": "https://datingvn.com",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://zzqpvjdyvjarpphqhaze.supabase.co",
         "EXPO_PUBLIC_IAP_PRODUCT_ID": "premium_monthly"
       }
     },
@@ -35,6 +37,7 @@
       "env": {
         "EXPO_PUBLIC_APP_ENV": "staging",
         "EXPO_PUBLIC_API_URL": "https://datingvn.com",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://zzqpvjdyvjarpphqhaze.supabase.co",
         "EXPO_PUBLIC_IAP_PRODUCT_ID": "premium_monthly"
       }
     },
@@ -46,6 +49,7 @@
       "env": {
         "EXPO_PUBLIC_APP_ENV": "staging",
         "EXPO_PUBLIC_API_URL": "https://datingvn.com",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://zzqpvjdyvjarpphqhaze.supabase.co",
         "EXPO_PUBLIC_IAP_PRODUCT_ID": "premium_monthly"
       }
     },
