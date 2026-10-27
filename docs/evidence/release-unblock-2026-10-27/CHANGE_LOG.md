@@ -1,6 +1,6 @@
 # Change log — Release Unblock (saved 2026-10-27)
 
-**Git commit:** `3e43d8f` · branch `feat/w2-core-member-wp1-3` (ahead of origin; not pushed)
+**Git:** branch `feat/w2-core-member-wp1-3` · FAR-03 APK `fe0ad595` DONE
 
 ## Code
 - `tradingbase-qa-core`: suite filter → `filteredOut` (not false SKIPPED); CONDITIONAL when in-scope all PASS

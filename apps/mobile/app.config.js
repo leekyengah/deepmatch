@@ -14,12 +14,11 @@ module.exports = ({ config }) => {
     return !v || !String(v).trim();
   });
 
-  const strict =
-    process.env.EAS_BUILD === "true" ||
-    process.env.CI === "true" ||
-    process.env.DEEPMATCH_REQUIRE_MOBILE_ENV === "1";
-
-  if (strict && missing.length) {
+  // Fail-fast only on explicit local gate. EAS early phases (e.g. Calculate
+  // expo-updates runtime version) may evaluate this file before Dashboard
+  // Sensitive EXPO_PUBLIC_* are injected; throwing there aborts the build.
+  // Metro still inlines EAS-injected EXPO_PUBLIC_* during the JS bundle step.
+  if (process.env.DEEPMATCH_REQUIRE_MOBILE_ENV === "1" && missing.length) {
     throw new Error(
       `Missing mobile public env: ${missing.join(", ")}. ` +
         `Configure EAS project env/secrets (anon + URL only).`,

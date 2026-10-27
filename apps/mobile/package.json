@@ -17,15 +17,18 @@
     "eas:preview:ios-sim": "eas build --platform ios --profile preview-simulator",
     "eas:production": "eas build --platform ios --profile production",
     "doctor": "npx expo-doctor",
-    "preflight:preview": "npx expo-doctor && npm run typecheck"
+    "preflight:preview": "npx expo-doctor && npm run typecheck",
+    "eas-build-post-install": "node ../../scripts/link-mobile-expo-modules.mjs"
   },
   "dependencies": {
     "@deepmatch/design-tokens": "*",
     "@deepmatch/i18n": "*",
     "@deepmatch/shared": "*",
+    "@expo/json-file": "^11.0.1",
     "@supabase/supabase-js": "^2.47.10",
     "expo": "~57.0.31",
     "expo-constants": "~57.0.22",
+    "expo-dev-client": "~57.0.20",
     "expo-font": "~57.0.4",
     "expo-image-picker": "~57.0.20",
     "expo-linking": "~57.0.13",
@@ -34,7 +37,6 @@
     "expo-splash-screen": "~57.0.10",
     "expo-status-bar": "~57.0.1",
     "expo-symbols": "~57.0.3",
-    "expo-updates": "~57.0.26",
     "expo-web-browser": "~57.0.3",
     "react": "19.3.0",
     "react-dom": "19.3.0",
@@ -42,7 +44,7 @@
     "react-native-gesture-handler": "~2.32.0",
     "react-native-reanimated": "4.5.1",
     "react-native-safe-area-context": "~5.7.0",
-    "react-native-screens": "~4.26.0",
+    "react-native-screens": "^4.26.1",
     "react-native-web": "~0.21.0",
     "react-native-worklets": "0.10.1"
   },
@@ -54,7 +56,10 @@
   },
   "expo": {
     "install": {
-      "exclude": ["react", "react-dom"]
+      "exclude": [
+        "react",
+        "react-dom"
+      ]
     },
     "autolinking": {
       "exclude": [
