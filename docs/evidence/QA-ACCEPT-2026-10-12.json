@@ -1,9 +1,9 @@
 {
-  "at": "2026-10-12T05:24:51.407Z",
+  "at": "2026-10-26T15:40:50.086Z",
   "base": "https://datingvn.com",
   "emailA": "qa_a@deepmatch.test",
   "emailB": "qa_b@deepmatch.test",
-  "pairId": "1408b290-9ad4-4873-ace7-67640664ca55",
+  "pairId": "d8bcbc13-442e-4b73-a960-a10ad2af2f08",
   "conversationId": "c7ba0c83-3070-4699-8af2-2eaf60805b5e",
   "passed": 13,
   "total": 13,
@@ -12,12 +12,12 @@
     {
       "id": "health",
       "pass": true,
-      "detail": "{\"ff_matching\":true,\"ff_chat\":true,\"ff_media_upload\":true,\"ff_concierge\":true,\"ff_discovery\":true}"
+      "detail": "{\"ff_matching\":true,\"ff_chat\":true,\"ff_media_upload\":true,\"ff_concierge\":true,\"ff_discovery\":true,\"ff_premium\":true,\"ff_billing\":true,\"ff_lifestyle\":true,\"ff_ai\":true}"
     },
     {
       "id": "discovery_candidates_rls",
       "pass": true,
-      "detail": "count=2"
+      "detail": "count=10"
     },
     {
       "id": "rls_peer_profile_mutual",
@@ -37,7 +37,7 @@
     {
       "id": "chat_messages_readable",
       "pass": true,
-      "detail": "count=7"
+      "detail": "count=32"
     },
     {
       "id": "chat_send_message",
@@ -57,12 +57,12 @@
     {
       "id": "concierge_offerings",
       "pass": true,
-      "detail": "count=4"
+      "detail": "count=7"
     },
     {
       "id": "concierge_bookings_own",
       "pass": true,
-      "detail": "count=1"
+      "detail": "count=4"
     },
     {
       "id": "concierge_booking_rls_deny",

@@ -1,10 +1,10 @@
 {
-  "at": "2026-10-26T09:03:22.754Z",
+  "at": "2026-10-26T15:40:32.557Z",
   "doneTotal": 85,
   "byBucket": {
     "ID_NAMED_EVIDENCE": 1,
-    "WAVE_MENTION_ONLY": 69,
-    "NO_ID_EVIDENCE": 15
+    "WAVE_MENTION_ONLY": 84,
+    "NO_ID_EVIDENCE": 0
   },
   "note": "No row marked VERIFIED. WAVE_MENTION_ONLY = covered in wave markdown without per-ID file. Attach evidence URL on Master before DONE_VERIFIED.",
   "rows": [
@@ -16,10 +16,9 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md",
         "docs\\audits\\DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md",
-        "docs\\evidence\\audit-2026-10-26\\c2.json",
-        "docs\\evidence\\audit-2026-10-26\\chunk-2-21.json",
-        "docs\\evidence\\audit-2026-10-26\\sheet52-answers-GP.json",
         "docs\\evidence\\EXT-S0-S1-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-SUMMARY.md",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -33,6 +32,7 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md",
         "docs\\evidence\\EXT-S0-S1-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -46,6 +46,7 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md",
         "docs\\evidence\\EXT-S0-S1-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -59,6 +60,7 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md",
         "docs\\evidence\\EXT-S0-S1-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -72,6 +74,7 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md",
         "docs\\evidence\\EXT-S0-S1-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -85,6 +88,7 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md",
         "docs\\evidence\\EXT-S0-S1-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -98,6 +102,7 @@
       "evidencePaths": [
         "docs\\architecture\\SYSTEM_ARCHITECTURE_EXTENDED.md",
         "docs\\evidence\\EXT-S0-S1-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -113,6 +118,7 @@
         "docs\\audits\\NEEDS_PROFILE_AUDIT.md",
         "docs\\evidence\\EXT-S0-S1-2026-10-12.md",
         "docs\\evidence\\EXT-S2-S3-WAVE-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -125,6 +131,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\evidence\\EXT-S2-S3-WAVE-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -136,6 +143,7 @@
       "deliverable": "/v1/ai/style + results UI",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -147,6 +155,7 @@
       "deliverable": "/v1/ai/beauty + cards",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -158,6 +167,7 @@
       "deliverable": "/v1/ai/gifts + category UI",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -169,6 +179,7 @@
       "deliverable": "/v1/ai/date-plan + editable itinerary",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -180,6 +191,7 @@
       "deliverable": "/v1/ai/trips + trip planner",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -191,6 +203,7 @@
       "deliverable": "chat assistant UI + endpoints",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -204,6 +217,7 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md",
         "docs\\evidence\\EXT-S2-S3-WAVE-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -216,6 +230,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
@@ -229,6 +244,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\architecture\\PROVIDER_ADAPTER_CONTRACTS.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -242,6 +258,7 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md",
         "docs\\evidence\\EXT-S2-S3-WAVE-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
@@ -254,6 +271,7 @@
       "deliverable": "Safety mock booking UI",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -265,10 +283,8 @@
       "deliverable": "Admin catalog routes",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
-        "docs\\evidence\\audit-2026-10-26\\c2.json",
-        "docs\\evidence\\audit-2026-10-26\\chunk-2-21.json",
-        "docs\\evidence\\audit-2026-10-26\\sheet52-answers-GP.json",
         "docs\\evidence\\EXT-S2-S3-WAVE-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -280,6 +296,7 @@
       "deliverable": "Admin service console",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -292,6 +309,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -303,6 +321,7 @@
       "deliverable": "responsive screens + preview",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -314,6 +333,7 @@
       "deliverable": "responsive screens + preview",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -325,6 +345,7 @@
       "deliverable": "responsive screens + flow",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -336,6 +357,7 @@
       "deliverable": "responsive screens + flow",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -347,6 +369,7 @@
       "deliverable": "responsive screens + accessibility",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -358,6 +381,7 @@
       "deliverable": "responsive screens",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -369,6 +393,7 @@
       "deliverable": "AI hub, bottom navigation, microcopy",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -380,6 +405,7 @@
       "deliverable": "couple CTAs and user flows",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -392,6 +418,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_CURRENT_SYSTEM_GAP_AUDIT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json",
         "docs\\ops\\DEEP_LINKS.md"
       ],
@@ -405,6 +432,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\architecture\\CATALOG_RANKING.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -417,6 +445,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\evidence\\PACKAGING-SANDBOX-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -429,6 +458,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\evidence\\MOBILE-UX-QA-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -441,6 +471,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\architecture\\ANALYTICS_EVENT_TAXONOMY.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -453,6 +484,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -466,6 +498,7 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_SECURITY_PRIVACY_REPORT.md",
         "docs\\audits\\PUBLIC_SURFACE_DATA_LEAK_AUDIT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -477,6 +510,7 @@
       "deliverable": "staging release and rollback",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -490,6 +524,7 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_SECURITY_PRIVACY_REPORT.md",
         "docs\\evidence\\EXT-S2-S3-WAVE-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -502,6 +537,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_SECURITY_PRIVACY_REPORT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -514,6 +550,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
@@ -526,6 +563,7 @@
       "deliverable": "HOME_INFORMATION_ARCHITECTURE.md; route-state matrix",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
@@ -538,6 +576,7 @@
       "deliverable": "Web hero responsive; navigation",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
@@ -550,6 +589,7 @@
       "deliverable": "3 pillars + How It Works components",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -561,6 +601,7 @@
       "deliverable": "Section cards with real/fallback states",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -572,6 +613,7 @@
       "deliverable": "Safety/FAQ/footer modules",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json"
       ],
       "verdictHint": "PARTIAL",
@@ -583,6 +625,7 @@
       "deliverable": "SEO config + tests",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
@@ -597,6 +640,7 @@
       "evidencePaths": [
         "docs\\architecture\\HOME_INFORMATION_ARCHITECTURE.md",
         "docs\\audits\\DEEPMATCH_WEB_APP_UIUX_REPORT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
@@ -609,6 +653,7 @@
       "deliverable": "Role/state route guard + app home container",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-002-003-map.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
@@ -622,7 +667,8 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md",
-        "docs\\audits\\DEEPMATCH_WEB_APP_UIUX_REPORT.md"
+        "docs\\audits\\DEEPMATCH_WEB_APP_UIUX_REPORT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
       ],
       "verdictHint": "PARTIAL",
       "verified": false
@@ -631,8 +677,12 @@
       "id": "EXT-053",
       "title": "App Dating Home",
       "deliverable": "Dating Home screens",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-SUMMARY.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\W1_REMEDIATION_STATUS.md"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -640,8 +690,10 @@
       "id": "EXT-054",
       "title": "App Matched Conversation Home",
       "deliverable": "Match & Chat highlights",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -649,8 +701,10 @@
       "id": "EXT-055",
       "title": "App Sánh đôi Home",
       "deliverable": "Sánh đôi dashboard + navigation",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -658,8 +712,10 @@
       "id": "EXT-056",
       "title": "App Lifestyle Home",
       "deliverable": "Lifestyle Home + link routing",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -669,6 +725,7 @@
       "deliverable": "Tokens/components and examples",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
       "verdictHint": "PARTIAL",
@@ -680,6 +737,7 @@
       "deliverable": "Locale dictionaries & screen copy",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
       "verdictHint": "PARTIAL",
@@ -691,6 +749,7 @@
       "deliverable": "HOME_DATA_CLASSIFICATION.md; DTO schemas; access tests",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
       "verdictHint": "PARTIAL",
@@ -702,6 +761,7 @@
       "deliverable": "PUBLIC_SURFACE_DATA_LEAK_AUDIT.md; safe caches",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
       "verdictHint": "PARTIAL",
@@ -714,6 +774,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\evidence\\A11Y-PERF-QA-2026-10-12.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
       "verdictHint": "PARTIAL",
@@ -727,7 +788,8 @@
       "evidencePaths": [
         "docs\\audits\\DEEPMATCH_WEB_APP_UIUX_REPORT.md",
         "docs\\evidence\\A11Y-PERF-QA-2026-10-12.md",
-        "docs\\evidence\\HOME_RELEASE_EVIDENCE.md"
+        "docs\\evidence\\HOME_RELEASE_EVIDENCE.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
       ],
       "verdictHint": "PARTIAL",
       "verified": false
@@ -738,7 +800,8 @@
       "deliverable": "Event taxonomy & funnel dashboards",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
-        "docs\\architecture\\ANALYTICS_EVENT_TAXONOMY.md"
+        "docs\\architecture\\ANALYTICS_EVENT_TAXONOMY.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
       ],
       "verdictHint": "PARTIAL",
       "verified": false
@@ -747,8 +810,10 @@
       "id": "EXT-064",
       "title": "E2E web/app state matrix",
       "deliverable": "Playwright/Mobile E2E logs + screenshots",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -758,7 +823,8 @@
       "deliverable": "HOME_RELEASE_EVIDENCE.md; screenshots; rollback",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
-        "docs\\audits\\DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md"
+        "docs\\audits\\DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
       ],
       "verdictHint": "PARTIAL",
       "verified": false
@@ -772,6 +838,7 @@
         "docs\\audits\\DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md",
         "docs\\audits\\DEEPMATCH_SECURITY_PRIVACY_REPORT.md",
         "docs\\audits\\HOME_SECURITY_GATE.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\tracker\\DEEPMATCH_MASTER_RECONCILIATION.md"
       ],
       "verdictHint": "PARTIAL",
@@ -784,6 +851,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\audits\\PREMIUM_AS_IS_UX_AUDIT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\VISUAL_IMPLEMENTATION_REPORT.md"
       ],
       "verdictHint": "PARTIAL",
@@ -796,6 +864,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\content\\PREMIUM_BRAND_CONTENT_SPEC.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\VISUAL_IMPLEMENTATION_REPORT.md"
       ],
       "verdictHint": "PARTIAL",
@@ -807,7 +876,8 @@
       "deliverable": "PREMIUM_DESIGN_SYSTEM_V2.md + component preview",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
-        "docs\\content\\PREMIUM_DESIGN_SYSTEM_V2.md"
+        "docs\\content\\PREMIUM_DESIGN_SYSTEM_V2.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
       ],
       "verdictHint": "PARTIAL",
       "verified": false
@@ -818,7 +888,8 @@
       "deliverable": "PREMIUM_JOURNEY_FLOWS.md",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
-        "docs\\content\\PREMIUM_JOURNEY_FLOWS.md"
+        "docs\\content\\PREMIUM_JOURNEY_FLOWS.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
       ],
       "verdictHint": "PARTIAL",
       "verified": false
@@ -827,8 +898,10 @@
       "id": "EXT-071",
       "title": "Premium homepage production-quality UI",
       "deliverable": "Web/app premium homepage + screenshot diff",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -836,8 +909,10 @@
       "id": "EXT-072",
       "title": "Onboarding/profile UI refresh",
       "deliverable": "Profile/onboarding components + UX tests",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -845,8 +920,10 @@
       "id": "EXT-073",
       "title": "Discover & match card interaction redesign",
       "deliverable": "Discover components and UI E2E",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -854,8 +931,10 @@
       "id": "EXT-074",
       "title": "Chat high-trust experience",
       "deliverable": "Chat web/app UI + E2E",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -863,8 +942,10 @@
       "id": "EXT-075",
       "title": "Sánh đôi timeline & memories refinement",
       "deliverable": "Couple UI components + tests",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -875,12 +956,13 @@
       "bucket": "ID_NAMED_EVIDENCE",
       "evidencePaths": [
         "docs\\content\\PREMIUM_FUNNEL_UAT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-SUMMARY.md",
         "docs\\evidence\\remediation-w1-2026-10-26\\FIX26-003-ext-evidence-gap.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\W1_REMEDIATION_STATUS.md",
         "docs\\evidence\\visual-2026-10-13\\EXT-076-ai.png",
         "docs\\evidence\\visual-2026-10-13\\EXT-076-lifestyle.png",
-        "docs\\evidence\\VISUAL_IMPLEMENTATION_REPORT.md",
-        ".ai\\feature-matrix-2026-10-13.json",
-        ".ai\\feature-matrix.json"
+        "docs\\evidence\\VISUAL_IMPLEMENTATION_REPORT.md"
       ],
       "verdictHint": "READY_FOR_QA",
       "verified": false
@@ -892,6 +974,7 @@
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
         "docs\\content\\PREMIUM_FUNNEL_UAT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         ".ai\\feature-matrix-2026-10-13.json",
         ".ai\\feature-matrix.json"
       ],
@@ -904,7 +987,8 @@
       "deliverable": "PREMIUM_RELEASE_EVIDENCE.md + QA & rollback",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
-        "docs\\evidence\\PREMIUM_RELEASE_EVIDENCE.md"
+        "docs\\evidence\\PREMIUM_RELEASE_EVIDENCE.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
       ],
       "verdictHint": "PARTIAL",
       "verified": false
@@ -917,6 +1001,7 @@
       "evidencePaths": [
         "docs\\design\\VISUAL_REFERENCE_MANIFEST.md",
         "docs\\evidence\\FOUNDER-G-VISUAL-FIDELITY-2026-10-13.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\VISUAL_IMPLEMENTATION_REPORT.md"
       ],
       "verdictHint": "PARTIAL",
@@ -926,8 +1011,10 @@
       "id": "EXT-080",
       "title": "Implement canonical Wine-Ivory brand kit",
       "deliverable": "brand tokens v3; logo; favicon; icon; components",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -935,8 +1022,10 @@
       "id": "EXT-081",
       "title": "Rebuild visual-locked website homepage",
       "deliverable": "Web UI/screenshots at reference and mobile widths",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -944,8 +1033,10 @@
       "id": "EXT-082",
       "title": "Rebuild visual-locked dating mobile 4 screens",
       "deliverable": "4 live screens + screenshot proof — staging wine UI",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -953,8 +1044,10 @@
       "id": "EXT-083",
       "title": "Rebuild visual-locked couple/support/safety 4 screens",
       "deliverable": "4 live screens + screenshot proof — staging wine UI",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     },
@@ -964,6 +1057,7 @@
       "deliverable": "FOUNDER GO 13/10/2026 — VISUAL_IMPLEMENTATION_REPORT.md + docs/evidence/visual-2026-10-13/FOUNDER_VI",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json",
         "docs\\evidence\\VISUAL_IMPLEMENTATION_REPORT.md"
       ],
       "verdictHint": "PARTIAL",
@@ -975,7 +1069,8 @@
       "deliverable": "FULL_UX_ROUTE_AUDIT.md + screenshot matrix",
       "bucket": "WAVE_MENTION_ONLY",
       "evidencePaths": [
-        "docs\\audits\\FULL_UX_ROUTE_AUDIT.md"
+        "docs\\audits\\FULL_UX_ROUTE_AUDIT.md",
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
       ],
       "verdictHint": "PARTIAL",
       "verified": false
@@ -984,8 +1079,10 @@
       "id": "EXT-090",
       "title": "Rebuild /me Personal Relationship Dashboard",
       "deliverable": "/me desktop+mobile code, scenarios & screenshots",
-      "bucket": "NO_ID_EVIDENCE",
-      "evidencePaths": [],
+      "bucket": "WAVE_MENTION_ONLY",
+      "evidencePaths": [
+        "docs\\evidence\\remediation-w1-2026-10-26\\EXT-DONE-EVIDENCE-EVAL.json"
+      ],
       "verdictHint": "PARTIAL",
       "verified": false
     }

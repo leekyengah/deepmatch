@@ -96,6 +96,8 @@ export interface QaRunReport {
     skipped: number;
     inconclusive: number;
     notRun: number;
+    /** Cases excluded by suite filter (not SKIPPED) */
+    filteredOut?: number;
   };
   openBlockers: string[];
   releaseRecommendation: "NO-GO" | "CONDITIONAL" | "GO_CANDIDATE";

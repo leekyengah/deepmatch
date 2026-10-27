@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-26T09:02:47.129Z",
+  "at": "2026-10-26T15:38:24.171Z",
   "pairConfigured": true,
   "pinEnvConfigured": true,
   "media_select": {
@@ -8,7 +8,7 @@
   },
   "pins": {
     "ok": true,
-    "count": 0,
+    "count": 3,
     "err": null
   },
   "usedExistingPin": true,

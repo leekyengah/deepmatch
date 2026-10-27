@@ -1,54 +1,11 @@
 {
-  "generatedAt": "2026-10-12T10:12:29.284Z",
-  "passwordHint": "see qa-matrix.env.ps1 (gitignored)",
-  "accounts": [
-    {
-      "id": "QA-USER-01",
-      "email": "qa_user01@deepmatch.test",
-      "userId": "a8c6540a-dd33-4b32-88fe-6017d9a09355",
-      "suspended": false
-    },
-    {
-      "id": "QA-USER-02",
-      "email": "qa_user02@deepmatch.test",
-      "userId": "badc012c-8106-4952-ac9e-c953bd60e90f",
-      "suspended": false
-    },
-    {
-      "id": "QA-USER-03",
-      "email": "qa_user03@deepmatch.test",
-      "userId": "93d33085-547a-495b-aece-bbfcc35bdebb",
-      "suspended": false
-    },
-    {
-      "id": "QA-COUPLE-A",
-      "email": "qa_couple_a@deepmatch.test",
-      "userId": "f1aa1b87-fd62-449d-9f17-8b707b2161f5",
-      "suspended": false
-    },
-    {
-      "id": "QA-COUPLE-B",
-      "email": "qa_couple_b@deepmatch.test",
-      "userId": "2b71ea20-af74-472b-9f40-a3d5a3bc0578",
-      "suspended": false
-    },
-    {
-      "id": "QA-EX-PARTNER",
-      "email": "qa_ex@deepmatch.test",
-      "userId": "72405bcb-a168-4617-8a12-e837d0862c07",
-      "suspended": false
-    },
-    {
-      "id": "QA-PREMIUM",
-      "email": "qa_premium@deepmatch.test",
-      "userId": "b25f9e71-a219-464e-ad01-942de7bbdcfc",
-      "suspended": false
-    },
-    {
-      "id": "QA-SUSPENDED",
-      "email": "qa_suspended@deepmatch.test",
-      "userId": "128f3561-d809-4f55-864a-b39481eff36f",
-      "suspended": true
-    }
-  ]
+  "emailA": "qa_a@deepmatch.test",
+  "emailB": "qa_b@deepmatch.test",
+  "idA": "67a88092-7f0b-4fd1-bb3e-357d1ba98e18",
+  "idB": "cd82631a-fa6f-4b4a-a324-0394dc4074ed",
+  "pairId": "d8bcbc13-442e-4b73-a960-a10ad2af2f08",
+  "conversationId": "c7ba0c83-3070-4699-8af2-2eaf60805b5e",
+  "matchId": "eb398d74-5030-4e15-812e-33782158986a",
+  "pinId": "7baa038e-5acc-43e2-856d-271e09647c9d",
+  "seededAt": "2026-10-26T10:50:28.928Z"
 }

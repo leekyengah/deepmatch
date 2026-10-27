@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci || npm install
+      - name: Secrets guard
+        run: |
+          # Match credential-like assignments, not regex literals in no-leak scanners
+          if git grep -nE 'SUPABASE_SERVICE_ROLE_KEY=eyJ|BEGIN RSA PRIVATE KEY|sk_live_[A-Za-z0-9]{16,}' -- ':!.github/**' ; then
+            echo "Potential secret detected"; exit 1;
+          fi
+          echo "Secrets guard OK"
+      - name: Lint / typecheck / unit / build
+        run: npm run ci
+        env:
+          NEXT_PUBLIC_APP_ENV: ci
+          FF_MATCHING: "true"
+          FF_CHAT: "true"
+          FF_MEDIA_UPLOAD: "true"
+          FF_CONCIERGE: "false"
+          FF_DISCOVERY: "true"
+      - name: Public no-leak smoke (G-HOME-SEC)
+        working-directory: apps/web
+        env:
+          NEXT_PUBLIC_APP_ENV: ci
+          PORT: "3000"
+        run: |
+          npm run start -- --port 3000 &
+          for i in $(seq 1 60); do
+            if curl -sf http://127.0.0.1:3000/api/v1/health >/dev/null; then break; fi
+            sleep 2
+          done
+          cd ../..
+          npm run test:no-leak -- http://127.0.0.1:3000
+

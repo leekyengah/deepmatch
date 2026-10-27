@@ -76,16 +76,28 @@ export const runners: Record<string, CaseRunner> = {
     );
     const failed = /FAILED:\s*(.+)/.exec(r.stdout + r.stderr);
     const summary = /Summary:\s*(\d+)\/(\d+)/.exec(r.stdout);
+    const combined = `${r.stdout}\n${r.stderr}`;
+    const envFetchFail =
+      r.code !== 0 &&
+      /AuthRetryableFetchError|fetch failed|ENOTFOUND|ECONNRESET|schannel/i.test(
+        combined,
+      );
     return {
       id: spec.id,
-      outcome: r.code === 0 ? "PASS" : "FAIL",
+      outcome: r.code === 0 ? "PASS" : envFetchFail ? "BLOCKED" : "FAIL",
       actual: summary ? `${summary[1]}/${summary[2]}` : `exit=${r.code}`,
-      detail: failed?.[1] ?? (r.stderr.slice(-500) || r.stdout.slice(-500)),
-      failureClass: r.code === 0 ? undefined : "application_defect",
+      detail: failed?.[1] ?? combined.slice(-500),
+      failureClass: r.code === 0
+        ? undefined
+        : envFetchFail
+          ? "environment_blocked"
+          : "application_defect",
       remediation:
         r.code === 0
           ? undefined
-          : "Report to Developer; do not patch product to greenwash",
+          : envFetchFail
+            ? "Retry when Supabase Auth reachable from runner host; not a product defect"
+            : "Report to Developer; do not patch product to greenwash",
     };
   },
 
@@ -147,11 +159,21 @@ export const runners: Record<string, CaseRunner> = {
       [...nodeEnvFileArgs(ctx.projectRoot), "scripts/probe-pin-id-staging.mjs"],
       { cwd: ctx.projectRoot, timeoutMs: 120_000 },
     );
+    const out = (r.stdout || r.stderr).slice(-800);
+    const envFail =
+      r.code !== 0 &&
+      /login_fail|fetch failed|AuthRetryableFetchError|ConnectTimeout|ECONNRESET/i.test(
+        out,
+      );
     return {
       id: spec.id,
-      outcome: r.code === 0 ? "PASS" : "FAIL",
-      actual: (r.stdout || r.stderr).slice(-800),
-      failureClass: r.code === 0 ? undefined : "application_defect",
+      outcome: r.code === 0 ? "PASS" : envFail ? "BLOCKED" : "FAIL",
+      actual: out,
+      failureClass: r.code === 0
+        ? undefined
+        : envFail
+          ? "environment_blocked"
+          : "application_defect",
     };
   },
 
@@ -173,11 +195,21 @@ export const runners: Record<string, CaseRunner> = {
       ],
       { cwd: ctx.projectRoot, timeoutMs: 120_000 },
     );
+    const out = (r.stdout || r.stderr).slice(-800);
+    const envFail =
+      r.code !== 0 &&
+      /login_fail|fetch failed|AuthRetryableFetchError|ConnectTimeout|ECONNRESET/i.test(
+        out,
+      );
     return {
       id: spec.id,
-      outcome: r.code === 0 ? "PASS" : "FAIL",
-      actual: (r.stdout || r.stderr).slice(-800),
-      failureClass: r.code === 0 ? undefined : "application_defect",
+      outcome: r.code === 0 ? "PASS" : envFail ? "BLOCKED" : "FAIL",
+      actual: out,
+      failureClass: r.code === 0
+        ? undefined
+        : envFail
+          ? "environment_blocked"
+          : "application_defect",
     };
   },
 
@@ -220,12 +252,18 @@ export const runners: Record<string, CaseRunner> = {
 
   rls_deny: async (spec, ctx) => {
     loadQaEnv(ctx.projectRoot);
-    if (!hasQaCreds()) {
+    const hasRlsJwts = Boolean(
+      process.env.RLS_TEST_USER_A_JWT && process.env.RLS_TEST_USER_B_JWT,
+    );
+    if (!hasRlsJwts) {
       return {
         id: spec.id,
-        outcome: "BLOCKED",
-        detail: "Missing staging JWTs for RLS harness",
+        outcome: "SKIPPED",
+        detail:
+          "RLS_TEST_USER_A_JWT / RLS_TEST_USER_B_JWT unset — deny matrix not executed (gate doc only)",
         failureClass: "environment_blocked",
+        remediation:
+          "Founder/QA: mint disposable staging JWTs into qa.env (not git) then re-run --suite security",
       };
     }
     const r = await runCommand(

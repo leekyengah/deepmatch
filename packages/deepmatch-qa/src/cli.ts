@@ -144,34 +144,40 @@ GA stance remains NO-GO.
 
   const execPath = join(adapter.evidenceDir, "EXECUTIVE_LATEST.md");
   mkdirSync(adapter.evidenceDir, { recursive: true });
-  writeFileSync(
-    execPath,
-    [
-      `# DeepMatch QA Executive — ${report.context.runId}`,
-      ``,
-      `GA stance: **${report.gaStance}** (recommendation only)`,
-      `Release recommendation: ${report.releaseRecommendation}`,
-      `Lifecycle effect: ${report.lifecycleEffect ?? "none"}`,
-      ``,
-      `| PASS | FAIL | BLOCKED | SKIPPED | INCONCLUSIVE | Total |`,
-      `|-----:|-----:|--------:|--------:|-------------:|------:|`,
-      `| ${report.summary.pass} | ${report.summary.fail} | ${report.summary.blocked} | ${report.summary.skipped} | ${report.summary.inconclusive} | ${report.summary.total} |`,
-      ``,
-      `Regression vs baseline: ${regression.join("; ") || "n/a"}`,
-      `Sheet 53: ${sheetApply}${proposed.path ? ` · proposed ${proposed.path}` : ""}${narrowPlanPath ? ` · narrow ${narrowPlanPath}` : ""}`,
-      `Evidence: ${jsonPath}`,
-      `Duration: ${report.durationMs}ms`,
-      ``,
-      `Open blockers:`,
-      ...(report.openBlockers.length
-        ? report.openBlockers.map((b) => `- ${b}`)
-        : ["- none"]),
-      ``,
-      `Next: human independent review required before any VERIFIED/GA GO.`,
-      ``,
-    ].join("\n"),
-    "utf8",
-  );
+  const execBody = [
+    `# DeepMatch QA Executive — ${report.context.runId}`,
+    ``,
+    `GA stance: **${report.gaStance}** (recommendation only)`,
+    `Release recommendation: ${report.releaseRecommendation}`,
+    `Lifecycle effect: ${report.lifecycleEffect ?? "none"}`,
+    ``,
+    `| PASS | FAIL | BLOCKED | SKIPPED | INCONCLUSIVE | Total |`,
+    `|-----:|-----:|--------:|--------:|-------------:|------:|`,
+    `| ${report.summary.pass} | ${report.summary.fail} | ${report.summary.blocked} | ${report.summary.skipped} | ${report.summary.inconclusive} | ${report.summary.total} |`,
+    ``,
+    `Regression vs baseline: ${regression.join("; ") || "n/a"}`,
+    `Sheet 53: ${sheetApply}${proposed.path ? ` · proposed ${proposed.path}` : ""}${narrowPlanPath ? ` · narrow ${narrowPlanPath}` : ""}`,
+    `Evidence: ${jsonPath}`,
+    `Duration: ${report.durationMs}ms`,
+    ``,
+    `Open blockers:`,
+    ...(report.openBlockers.length
+      ? report.openBlockers.map((b) => `- ${b}`)
+      : ["- none"]),
+    ``,
+    `Next: human independent review required before any VERIFIED/GA GO.`,
+    ``,
+  ].join("\n");
+  try {
+    writeFileSync(execPath, execBody, "utf8");
+  } catch (err) {
+    const alt = join(
+      adapter.evidenceDir,
+      `EXECUTIVE_${report.context.runId}.md`,
+    );
+    writeFileSync(alt, execBody, "utf8");
+    console.warn(`EXECUTIVE_LATEST.md locked; wrote ${alt}: ${String(err)}`);
+  }
 
   console.log(
     JSON.stringify(

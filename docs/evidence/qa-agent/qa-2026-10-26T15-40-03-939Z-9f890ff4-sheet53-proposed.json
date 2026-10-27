@@ -1,0 +1,247 @@
+{
+  "status": "PROPOSED_ONLY",
+  "spreadsheetId": "1R_de74Szc0xbPZEJpXcoKrNrX5QESi39FYBRESDm6D8",
+  "sheet": "53 REMEDIATION EXECUTION PLAN",
+  "runId": "qa-2026-10-26T15-40-03-939Z-9f890ff4",
+  "note": "Narrow QA-owned fields only. Never set DONE_VERIFIED automatically.",
+  "rows": [
+    {
+      "fixId": "FIX26-011",
+      "auditId": "AUD26-011",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-P0-001",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-011",
+      "auditId": "AUD26-011",
+      "qaOwned": {
+        "QA độc lập": "QA_FAILED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-P0-002",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-011",
+      "auditId": "AUD26-011",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-P0-003",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-018",
+      "auditId": "AUD26-018",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-P0-004",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-003",
+      "auditId": "AUD26-003",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-P0-005",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-011",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-P0-007",
+        "Ghi chú": "automated only; not DONE_VERIFIED · ue,\"ff_billing\":true,\"ff_lifestyle\":true,\"ff_ai\":true}\nPASS  discovery_candidates_rls — count=10\nPASS  rls_peer_profile_mutual\nPASS  rls_private_note_deny — denied_"
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-018",
+      "auditId": "AUD26-018",
+      "qaOwned": {
+        "QA độc lập": "SKIPPED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-A-001",
+        "Ghi chú": "automated only; not DONE_VERIFIED · RLS_TEST_USER_A_JWT / RLS_TEST_USER_B_JWT unset — deny matrix not executed (gate doc only)"
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-022",
+      "auditId": "AUD26-022",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-W2-001",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-023",
+      "auditId": "AUD26-023",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-W2-002",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-017",
+      "auditId": "AUD26-017",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-W2-003",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-016",
+      "auditId": "AUD26-016",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-W2-004",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-028",
+      "auditId": "AUD26-028",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-W2-005",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-028",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-W2-006",
+        "Ghi chú": "automated only; not DONE_VERIFIED · Destructive unmatch against live QA mutual match NOT executed (preserve fixture)"
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-027",
+      "auditId": "AUD26-027",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-W2-007",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-039",
+      "auditId": "AUD26-039",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-40-03-939Z-9f890ff4 · 6449e06 · DM-QA-W3-001",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    }
+  ]
+}

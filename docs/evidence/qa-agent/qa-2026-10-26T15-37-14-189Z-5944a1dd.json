@@ -1,0 +1,117 @@
+{
+  "context": {
+    "runId": "qa-2026-10-26T15-37-14-189Z-5944a1dd",
+    "projectId": "deepmatch",
+    "commitSha": "6449e06e32d26c0ff8dd32ba30bb1191e63ce4d8",
+    "branch": "feat/w2-core-member-wp1-3",
+    "environment": {
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
+      "allowWrites": false
+    },
+    "startedAt": "2026-10-26T15:37:14.189Z",
+    "suite": "w2",
+    "actor": "qa-agent-automated"
+  },
+  "results": [
+    {
+      "id": "DM-QA-W2-001",
+      "outcome": "PASS",
+      "actual": "▶ normalizeIntent\n  ✔ maps canonical and legacy web tokens (2.6267ms)\n  ✔ rejects unknown (0.4717ms)\n  ✔ isCanonicalIntent (0.5108ms)\n✔ normalizeIntent (6.9271ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 408.393\n",
+      "durationMs": 3453,
+      "requirements": {
+        "fixId": "FIX26-022",
+        "auditId": "AUD26-022"
+      },
+      "expected": "normalizeIntent maps legacy + canonical intents"
+    },
+    {
+      "id": "DM-QA-W2-002",
+      "outcome": "PASS",
+      "actual": "▶ evaluateDiscoverMediaGate\n  ✔ blocks under 3 images (1.3242ms)\n  ✔ allows 3–10 images and ≤2 videos (0.223ms)\n  ✔ blocks over max images or videos (0.2897ms)\n✔ evaluateDiscoverMediaGate (3.7044ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 233.8645\n",
+      "durationMs": 2222,
+      "requirements": {
+        "fixId": "FIX26-023",
+        "auditId": "AUD26-023"
+      },
+      "expected": "discover-gate unit enforces minimum photos"
+    },
+    {
+      "id": "DM-QA-W2-003",
+      "outcome": "PASS",
+      "actual": "▶ isAgeEligible\n  ✔ allows 18+ (2.4946ms)\n  ✔ denies under 18 (0.2331ms)\n  ✔ boundary: exactly 18 on birthday is eligible (0.1822ms)\n  ✔ boundary: day before 18th birthday is ineligible (0.2266ms)\n  ✔ denies invalid date (0.2884ms)\n  ✔ rejects API-style bypass attempts with malformed ISO (0.2053ms)\n✔ isAgeEligible (5.5875ms)\nℹ tests 6\nℹ suites 1\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 320.688\n",
+      "durationMs": 2376,
+      "requirements": {
+        "fixId": "FIX26-017",
+        "auditId": "AUD26-017"
+      },
+      "expected": "isAgeEligible rejects underage"
+    },
+    {
+      "id": "DM-QA-W2-004",
+      "outcome": "PASS",
+      "actual": "▶ isEmailVerified\n  ✔ requires email_confirmed_at (1.7131ms)\n✔ isEmailVerified (4.0708ms)\n▶ isUnverifiedAllowedPath\n  ✔ allows auth and legal surfaces (0.6153ms)\n  ✔ blocks dating surfaces (0.4033ms)\n✔ isUnverifiedAllowedPath (1.4751ms)\nℹ tests 3\nℹ suites 2\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 289.6977\n",
+      "durationMs": 3074,
+      "requirements": {
+        "fixId": "FIX26-016",
+        "auditId": "AUD26-016"
+      },
+      "expected": "email-verified unit PASS"
+    },
+    {
+      "id": "DM-QA-W2-005",
+      "outcome": "PASS",
+      "actual": "status=200 emptyReason=MEDIA_GATE candidates=0",
+      "durationMs": 2713,
+      "requirements": {
+        "fixId": "FIX26-028",
+        "auditId": "AUD26-028"
+      },
+      "expected": "Authenticated discovery returns candidates or emptyReason"
+    },
+    {
+      "id": "DM-QA-W2-006",
+      "outcome": "PASS",
+      "actual": "guest=401 authed_empty=400",
+      "detail": "Destructive unmatch against live QA mutual match NOT executed (preserve fixture)",
+      "remediation": "Add disposable match seed for unmatch happy-path E2E",
+      "durationMs": 1318,
+      "requirements": {
+        "fixId": "FIX26-028"
+      },
+      "expected": "Guest denied; authed empty body not 500; no fixture destroy"
+    },
+    {
+      "id": "DM-QA-W2-007",
+      "outcome": "PASS",
+      "actual": "status=200",
+      "durationMs": 1298,
+      "requirements": {
+        "fixId": "FIX26-027",
+        "auditId": "AUD26-027"
+      },
+      "expected": "QA user can read own profile via API when Bearer [REDACTED]"
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "pass": 7,
+    "fail": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "inconclusive": 0,
+    "notRun": 0,
+    "filteredOut": 10
+  },
+  "openBlockers": [],
+  "releaseRecommendation": "CONDITIONAL",
+  "gaStance": "NO-GO",
+  "costEstimateUsd": 0,
+  "durationMs": 16649,
+  "lifecycleEffect": "QA_PASSED_AUTOMATED",
+  "reviewerSignoff": {
+    "identity": null,
+    "status": "unsigned"
+  }
+}

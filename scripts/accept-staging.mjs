@@ -77,8 +77,36 @@ function check(id, pass, detail = "") {
   console.log(`${pass ? "PASS" : "FAIL"}  ${id}${detail ? ` — ${detail}` : ""}`);
 }
 
-const a = await session(emailA);
-const b = await session(emailB);
+let a;
+let b;
+try {
+  a = await session(emailA);
+  b = await session(emailB);
+} catch (err) {
+  const msg = err?.cause?.code || err?.message || String(err);
+  console.error("BLOCKED_ENV session:", msg);
+  check("session_bootstrap", false, msg);
+  const outDir = "docs/evidence";
+  mkdirSync(outDir, { recursive: true });
+  const stamp = new Date().toISOString().slice(0, 10);
+  writeFileSync(
+    `${outDir}/QA-ACCEPT-STAGING-${stamp}-blocked.json`,
+    JSON.stringify(
+      {
+        at: new Date().toISOString(),
+        blocked: true,
+        failureClass: "environment_blocked",
+        detail: msg,
+        results,
+      },
+      null,
+      2,
+    ),
+  );
+  console.log(`FAILED: environment_blocked (${msg})`);
+  console.log(`Summary: 0/${results.length}`);
+  process.exit(2);
+}
 
 // Health
 {

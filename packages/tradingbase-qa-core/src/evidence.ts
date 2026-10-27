@@ -31,12 +31,18 @@ export function buildReport(opts: {
   durationMs: number;
   lifecycleEffect: QaRunReport["lifecycleEffect"];
   costEstimateUsd?: number;
+  filteredOut?: number;
 }): QaRunReport {
-  const summary = summarize(opts.results);
+  const summary = {
+    ...summarize(opts.results),
+    filteredOut: opts.filteredOut ?? 0,
+  };
+  // CONDITIONAL when every in-scope result is PASS (SKIPPED/NOT_RUN do not inflate FAIL).
+  const inScope = summary.total - summary.skipped - summary.notRun;
   const releaseRecommendation: QaRunReport["releaseRecommendation"] =
-    summary.fail > 0 || summary.blocked > 0
+    summary.fail > 0 || summary.blocked > 0 || summary.inconclusive > 0
       ? "NO-GO"
-      : summary.pass === summary.total && summary.total > 0
+      : inScope > 0 && summary.pass === inScope
         ? "CONDITIONAL"
         : "NO-GO";
 
@@ -85,9 +91,9 @@ export function toMarkdown(report: QaRunReport): string {
     ``,
     `## Summary`,
     ``,
-    `| PASS | FAIL | BLOCKED | SKIPPED | INCONCLUSIVE | NOT_RUN | Total |`,
-    `|-----:|-----:|--------:|--------:|-------------:|--------:|------:|`,
-    `| ${s.pass} | ${s.fail} | ${s.blocked} | ${s.skipped} | ${s.inconclusive} | ${s.notRun} | ${s.total} |`,
+    `| PASS | FAIL | BLOCKED | SKIPPED | INCONCLUSIVE | NOT_RUN | FilteredOut | Total |`,
+    `|-----:|-----:|--------:|--------:|-------------:|--------:|------------:|------:|`,
+    `| ${s.pass} | ${s.fail} | ${s.blocked} | ${s.skipped} | ${s.inconclusive} | ${s.notRun} | ${s.filteredOut ?? 0} | ${s.total} |`,
     ``,
     `## Lifecycle effect`,
     ``,

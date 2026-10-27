@@ -72,13 +72,15 @@ export function loadQaEnv(projectRoot: string): void {
   } catch {
     /* optional */
   }
-  try {
-    const raw = readFileSync(join(projectRoot, ".ai/qa.env.ps1"), "utf8");
-    for (const line of raw.split(/\r?\n/)) {
-      const m = line.match(/^\$env:([A-Z0-9_]+)="(.*)"$/);
-      if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+  for (const rel of [".ai/qa.env.ps1", ".ai/rls-test.env.ps1"]) {
+    try {
+      const raw = readFileSync(join(projectRoot, rel), "utf8");
+      for (const line of raw.split(/\r?\n/)) {
+        const m = line.match(/^\$env:([A-Z0-9_]+)="(.*)"$/);
+        if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+      }
+    } catch {
+      /* optional */
     }
-  } catch {
-    /* optional */
   }
 }

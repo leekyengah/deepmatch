@@ -74,30 +74,29 @@ export async function runOrchestrator(
     }
   }
 
+  let filteredOut = 0;
   if (!openBlockers.length) {
     for (const spec of input.cases) {
-      if (input.suite !== "all" && spec.suite !== input.suite && input.suite !== "p0") {
-        /* suite filter below */
-      }
+      const tags = spec.tags ?? [];
       const suiteMatch =
         input.suite === "all" ||
         spec.suite === input.suite ||
         (input.suite === "p0" &&
-          spec.priority === "P0" &&
-          (spec.suite === "p0" ||
-            spec.suite === "unit" ||
-            spec.suite === "staging-accept")) ||
+          (spec.priority === "P0" ||
+            spec.suite === "p0" ||
+            tags.includes("p0"))) ||
         (input.suite === "w2" &&
-          (spec.suite === "w2" || (spec.tags ?? []).includes("w2"))) ||
+          (spec.suite === "w2" || tags.includes("w2"))) ||
         (input.suite === "w3" &&
-          (spec.suite === "w3" || (spec.tags ?? []).includes("w3")));
+          (spec.suite === "w3" || tags.includes("w3"))) ||
+        (input.suite === "security" &&
+          (spec.suite === "security" || tags.includes("security"))) ||
+        (input.suite === "e2e" &&
+          (spec.suite === "e2e" || tags.includes("e2e")));
+      // Suite filter excludes cases from the report entirely — do NOT inflate SKIPPED.
+      // SKIPPED is reserved for intentional in-suite skips (env/capability).
       if (!suiteMatch) {
-        results.push({
-          id: spec.id,
-          outcome: "SKIPPED",
-          detail: `suite filter ${input.suite}`,
-          requirements: spec.requirements,
-        });
+        filteredOut += 1;
         continue;
       }
       const runner = input.runners[spec.runner];
@@ -167,6 +166,7 @@ export async function runOrchestrator(
     durationMs: Date.now() - started,
     lifecycleEffect,
     costEstimateUsd: input.costEstimateUsd,
+    filteredOut,
   });
 
   const { jsonPath, mdPath } = writeEvidence(report, input.evidenceDir);

@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-26T15:40:40.943Z",
+  "base": "https://datingvn.com",
+  "pass": true,
+  "note": "Non-destructive; AI revoke stickiness + full delete not exercised against live QA user",
+  "checks": [
+    {
+      "id": "profile_me",
+      "pass": true,
+      "detail": "status=200"
+    },
+    {
+      "id": "discovery_media_isolation",
+      "pass": true,
+      "detail": "emptyReason=MEDIA_GATE"
+    },
+    {
+      "id": "unmatch_authz",
+      "pass": true,
+      "detail": "status=400"
+    },
+    {
+      "id": "matching_and_chat_surface",
+      "pass": true,
+      "detail": "status=200 matches=1"
+    },
+    {
+      "id": "bookings_own",
+      "pass": true,
+      "detail": "status=200"
+    },
+    {
+      "id": "delete_confirm_gate",
+      "pass": true,
+      "detail": "status=400"
+    },
+    {
+      "id": "ai_assist_surface",
+      "pass": true,
+      "detail": "status=401"
+    },
+    {
+      "id": "privacy_consent_route",
+      "pass": true,
+      "detail": "status=307"
+    },
+    {
+      "id": "account_deletion_page",
+      "pass": true,
+      "detail": "status=200"
+    }
+  ]
+}

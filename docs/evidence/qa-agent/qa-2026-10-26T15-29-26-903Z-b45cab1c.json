@@ -1,0 +1,234 @@
+{
+  "context": {
+    "runId": "qa-2026-10-26T15-29-26-903Z-b45cab1c",
+    "projectId": "deepmatch",
+    "commitSha": "6449e06e32d26c0ff8dd32ba30bb1191e63ce4d8",
+    "branch": "feat/w2-core-member-wp1-3",
+    "environment": {
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
+      "allowWrites": false
+    },
+    "startedAt": "2026-10-26T15:29:26.903Z",
+    "suite": "all",
+    "actor": "qa-agent-automated"
+  },
+  "results": [
+    {
+      "id": "DM-QA-P0-001",
+      "outcome": "PASS",
+      "actual": "PASS  pair_pins_three_layers — A=3 B=3",
+      "durationMs": 77164,
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      },
+      "expected": "Both pair members see ≥3 pins covering visited, wishlist, milestone via RLS"
+    },
+    {
+      "id": "DM-QA-P0-002",
+      "outcome": "PASS",
+      "actual": "{\n  \"at\": \"2026-10-26T15:30:45.308Z\",\n  \"pairConfigured\": true,\n  \"pinEnvConfigured\": true,\n  \"media_select\": {\n    \"ok\": true,\n    \"err\": null\n  },\n  \"pins\": {\n    \"ok\": true,\n    \"count\": 3,\n    \"err\": null\n  },\n  \"usedExistingPin\": true,\n  \"probePinId\": \"<uuid>\",\n  \"insert_with_pin\": {\n    \"ok\": true,\n    \"err\": null\n  },\n  \"roundtrip\": {\n    \"ok\": true\n  },\n  \"bff_couples_active\": {\n    \"status\": 200,\n    \"keys\": [\n      \"data\",\n      \"meta\"\n    ]\n  }\n}\n",
+      "durationMs": 5974,
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      },
+      "expected": "Authenticated user can attach pin_id; outsider/anon denied or empty"
+    },
+    {
+      "id": "DM-QA-P0-003",
+      "outcome": "PASS",
+      "actual": "{\n  \"pass\": true,\n  \"results\": {\n    \"at\": \"2026-10-26T15:30:55.088Z\",\n    \"owner_sees_three_layers\": {\n      \"pass\": true,\n      \"count\": 3,\n      \"err\": null\n    },\n    \"partner_sees_pins\": {\n      \"pass\": true,\n      \"count\": 3,\n      \"err\": null\n    },\n    \"anonymous_denied_or_empty\": {\n      \"pass\": true,\n      \"count\": 0,\n      \"err\": null\n    },\n    \"outsider_denied_or_empty\": {\n      \"pass\": null,\n      \"count\": null,\n      \"err\": \"no_third_user\"\n    }\n  }\n}\n",
+      "durationMs": 5088,
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      },
+      "expected": "Owner and partner see three layers; anonymous empty"
+    },
+    {
+      "id": "DM-QA-P0-004",
+      "outcome": "PASS",
+      "actual": "\n> deepmatch@0.1.0 test:no-leak\n> node scripts/no-leak-public.mjs https://datingvn.com\n\nno-leak scan base=https://datingvn.com\nPASS / status=200 bytes=33779\nPASS /faq status=200 bytes=16919\nPASS /privacy status=200 bytes=42150\nPASS /terms status=200 bytes=33781\nPASS /login status=200 bytes=12175\nPASS /signup status=200 bytes=15040\nPASS /robots.txt status=200 bytes=27\nPASS /sitemap.xml status=200 bytes=2651\nPASS probe /.env status=307\nPASS probe /.git/config status=307\nPASS probe /.ai/NEXT_ACTION.md status=307\nPASS probe /docs/audits/DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md status=307\nPASS probe /api/v1/admin/users status=404\nno-leak PASSED\n",
+      "durationMs": 4789,
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      },
+      "expected": "Public pages do not leak staging banners, service role, or private routes"
+    },
+    {
+      "id": "DM-QA-P0-005",
+      "outcome": "PASS",
+      "actual": "{\n  \"doneTotal\": 85,\n  \"byBucket\": {\n    \"ID_NAMED_EVIDENCE\": 1,\n    \"WAVE_MENTION_ONLY\": 84,\n    \"NO_ID_EVIDENCE\": 0\n  }\n}\n",
+      "remediation": "Do not auto-mark EXT Done as VERIFIED",
+      "durationMs": 38177,
+      "requirements": {
+        "fixId": "FIX26-003",
+        "auditId": "AUD26-003"
+      },
+      "expected": "Eval script runs read-only; zero fabricated VERIFIED"
+    },
+    {
+      "id": "DM-QA-P0-006",
+      "outcome": "PASS",
+      "actual": "core=0 adapters=0",
+      "detail": "\n> @tradingbase/qa-core@1.0.0 test\n> tsx --test src/*.test.ts\n\n▶ evidence\n  ✔ summarizes outcomes (5.6897ms)\n  ✔ writes redacted json and keeps GA NO-GO (189.0785ms)\n✔ evidence (201.2231ms)\n▶ safety\n  ✔ allows staging datingvn.com (14.0507ms)\n  ✔ blocks production kind (3.0002ms)\n  ✔ blocks unknown hosts (2.3018ms)\n  ✔ redacts JWTs and bearer tokens (2.789ms)\n✔ safety (29.8308ms)\n▶ status-machine\n  ✔ allows READY_FOR_QA → QA_PASSED_AUTOMATED (11.3914ms)\n  ✔ blocks automated self-sign of independent review (3.1128ms)\n  ✔ blocks RELEASE_APPROVED from automated path (1.2473ms)\n  ✔ maps failures to QA_FAILED (1.7203ms)\n  ✔ maps all pass to QA_PASSED_AUTOMATED (0.8731ms)\n✔ status-machine (59.3295ms)\nℹ tests 11\nℹ suites 3\nℹ pass 11\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2592.4734\n\n\n> @tradingbase/qa-adapters@1.0.0 test\n> tsx --test src/*.test.ts\n\n▶ adapter registry\n  ✔ registers and resolves executable adapter (5.6181ms)\n  ✔ refuses non-executable stubs (4.3191ms)\n  ✔ lists future stubs as non-executable (1.8614ms)\n✔ adapter registry (18.4561ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1173.9199\n",
+      "durationMs": 20864,
+      "requirements": {
+        "other": [
+          "QA-GATE-7"
+        ]
+      },
+      "expected": "@tradingbase/qa-core and adapters unit tests pass"
+    },
+    {
+      "id": "DM-QA-P0-007",
+      "outcome": "FAIL",
+      "actual": "exit=1",
+      "detail": "t\\main\\lib\\fetch.js:113:18)\r\n    at async SupabaseAuthClient.signInWithPassword (D:\\DỰ ÁN CÔNG NGHỆ\\DEEPMATCH\\node_modules\\@supabase\\auth-js\\dist\\main\\GoTrueClient.js:934:23)\r\n    at async session (file:///D:/D%E1%BB%B0%20%C3%81N%20C%C3%94NG%20NGH%E1%BB%86/DEEPMATCH/scripts/accept-staging.mjs:47:27)\r\n    at async file:///D:/D%E1%BB%B0%20%C3%81N%20C%C3%94NG%20NGH%E1%BB%86/DEEPMATCH/scripts/accept-staging.mjs:80:11 {\r\n  __isAuthError: true,\r\n  status: 0,\r\n  code: undefined\r\n}\r\n\r\nNode.js v24.18.0\r\n",
+      "failureClass": "application_defect",
+      "remediation": "Report to Developer; do not patch product to greenwash",
+      "durationMs": 12918,
+      "requirements": {
+        "fixId": "FIX26-011"
+      },
+      "expected": "scripts/accept-staging.mjs reports all checks; classify seed vs app defects"
+    },
+    {
+      "id": "DM-QA-A-001",
+      "outcome": "PASS",
+      "actual": "﹣ RLS deny suite (0.7099ms) # SKIP\n▶ RLS harness gate\n  ✔ documents skip when credentials absent (0.5886ms)\n✔ RLS harness gate (1.1272ms)\nℹ tests 1\nℹ suites 2\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 372.5591\n",
+      "durationMs": 2399,
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      },
+      "expected": "Cross-user deny cases reproducible on staging JWTs"
+    },
+    {
+      "id": "DM-QA-H-001",
+      "outcome": "FAIL",
+      "actual": "etByRole(\"heading\", { name: /Câu hỏi thường gặp/i })).toBeVisible();\n         |                                                                              ^\n      43 |   });\n      44 | });\n      45 |\n        at D:\\DỰ ÁN CÔNG NGHỆ\\DEEPMATCH\\tests\\e2e\\smoke.spec.ts:42:78\n\n    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────\n    test-results\\smoke-public-smoke-faq-guest-page-reachable-chromium\\test-failed-1.png\n    ────────────────────────────────────────────────────────────────────────────────────────────────\n\n    Error Context: test-results\\smoke-public-smoke-faq-guest-page-reachable-chromium\\error-context.md\n\n  3 failed\n    [chromium] › tests\\e2e\\smoke.spec.ts:4:7 › public smoke › home and health ──────────────────────\n    [chromium] › tests\\e2e\\smoke.spec.ts:15:7 › public smoke › login and signup pages render ───────\n    [chromium] › tests\\e2e\\smoke.spec.ts:40:7 › public smoke › faq guest page reachable ────────────\n  2 passed (23.5s)\n",
+      "failureClass": "application_defect",
+      "durationMs": 33592,
+      "requirements": {
+        "other": [
+          "coverage-H"
+        ]
+      },
+      "expected": "smoke.spec.ts PASS against allowlisted staging/local"
+    },
+    {
+      "id": "DM-QA-W2-001",
+      "outcome": "PASS",
+      "actual": "▶ normalizeIntent\n  ✔ maps canonical and legacy web tokens (1.0767ms)\n  ✔ rejects unknown (0.2049ms)\n  ✔ isCanonicalIntent (0.1856ms)\n✔ normalizeIntent (3.0969ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 758.1944\n",
+      "durationMs": 2459,
+      "requirements": {
+        "fixId": "FIX26-022",
+        "auditId": "AUD26-022"
+      },
+      "expected": "normalizeIntent maps legacy + canonical intents"
+    },
+    {
+      "id": "DM-QA-W2-002",
+      "outcome": "PASS",
+      "actual": "▶ evaluateDiscoverMediaGate\n  ✔ blocks under 3 images (1.1555ms)\n  ✔ allows 3–10 images and ≤2 videos (0.1988ms)\n  ✔ blocks over max images or videos (0.2083ms)\n✔ evaluateDiscoverMediaGate (3.2547ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 463.3358\n",
+      "durationMs": 2152,
+      "requirements": {
+        "fixId": "FIX26-023",
+        "auditId": "AUD26-023"
+      },
+      "expected": "discover-gate unit enforces minimum photos"
+    },
+    {
+      "id": "DM-QA-W2-003",
+      "outcome": "PASS",
+      "actual": "▶ isAgeEligible\n  ✔ allows 18+ (2.5879ms)\n  ✔ denies under 18 (0.2243ms)\n  ✔ boundary: exactly 18 on birthday is eligible (0.1887ms)\n  ✔ boundary: day before 18th birthday is ineligible (0.2049ms)\n  ✔ denies invalid date (0.1895ms)\n  ✔ rejects API-style bypass attempts with malformed ISO (0.1944ms)\n✔ isAgeEligible (5.5401ms)\nℹ tests 6\nℹ suites 1\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 302.0574\n",
+      "durationMs": 1738,
+      "requirements": {
+        "fixId": "FIX26-017",
+        "auditId": "AUD26-017"
+      },
+      "expected": "isAgeEligible rejects underage"
+    },
+    {
+      "id": "DM-QA-W2-004",
+      "outcome": "PASS",
+      "actual": "▶ isEmailVerified\n  ✔ requires email_confirmed_at (0.9861ms)\n✔ isEmailVerified (2.2859ms)\n▶ isUnverifiedAllowedPath\n  ✔ allows auth and legal surfaces (0.3157ms)\n  ✔ blocks dating surfaces (0.2206ms)\n✔ isUnverifiedAllowedPath (0.7883ms)\nℹ tests 3\nℹ suites 2\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 342.0221\n",
+      "durationMs": 1762,
+      "requirements": {
+        "fixId": "FIX26-016",
+        "auditId": "AUD26-016"
+      },
+      "expected": "email-verified unit PASS"
+    },
+    {
+      "id": "DM-QA-W2-005",
+      "outcome": "PASS",
+      "actual": "status=200 emptyReason=MEDIA_GATE candidates=0",
+      "durationMs": 4476,
+      "requirements": {
+        "fixId": "FIX26-028",
+        "auditId": "AUD26-028"
+      },
+      "expected": "Authenticated discovery returns candidates or emptyReason"
+    },
+    {
+      "id": "DM-QA-W2-006",
+      "outcome": "PASS",
+      "actual": "guest=401 authed_empty=400",
+      "detail": "Destructive unmatch against live QA mutual match NOT executed (preserve fixture)",
+      "remediation": "Add disposable match seed for unmatch happy-path E2E",
+      "durationMs": 1333,
+      "requirements": {
+        "fixId": "FIX26-028"
+      },
+      "expected": "Guest denied; authed empty body not 500; no fixture destroy"
+    },
+    {
+      "id": "DM-QA-W2-007",
+      "outcome": "PASS",
+      "actual": "status=200",
+      "durationMs": 797,
+      "requirements": {
+        "fixId": "FIX26-027",
+        "auditId": "AUD26-027"
+      },
+      "expected": "QA user can read own profile via API when Bearer [REDACTED]"
+    },
+    {
+      "id": "DM-QA-W3-001",
+      "outcome": "PASS",
+      "actual": "▶ ai gateway stub\n  ✔ redacts private keys (2.4056ms)\n  ✔ returns demo-labeled gift suggestions (1.5403ms)\n  ✔ deepmind is non-clinical (0.7779ms)\n  ✔ resolveAiAdapter defaults to stub (DECISION-AI-01 C) (0.6544ms)\n✔ ai gateway stub (8.6972ms)\nℹ tests 4\nℹ suites 1\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 893.1532\n",
+      "durationMs": 8120,
+      "requirements": {
+        "fixId": "FIX26-039",
+        "auditId": "AUD26-039"
+      },
+      "expected": "packages/shared AI gateway unit tests PASS"
+    }
+  ],
+  "summary": {
+    "total": 17,
+    "pass": 15,
+    "fail": 2,
+    "blocked": 0,
+    "skipped": 0,
+    "inconclusive": 0,
+    "notRun": 0,
+    "filteredOut": 0
+  },
+  "openBlockers": [],
+  "releaseRecommendation": "NO-GO",
+  "gaStance": "NO-GO",
+  "costEstimateUsd": 0,
+  "durationMs": 223978,
+  "lifecycleEffect": "QA_FAILED",
+  "reviewerSignoff": {
+    "identity": null,
+    "status": "unsigned"
+  }
+}

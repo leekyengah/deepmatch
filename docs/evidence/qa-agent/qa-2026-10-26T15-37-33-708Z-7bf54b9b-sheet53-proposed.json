@@ -1,0 +1,41 @@
+{
+  "status": "PROPOSED_ONLY",
+  "spreadsheetId": "1R_de74Szc0xbPZEJpXcoKrNrX5QESi39FYBRESDm6D8",
+  "sheet": "53 REMEDIATION EXECUTION PLAN",
+  "runId": "qa-2026-10-26T15-37-33-708Z-7bf54b9b",
+  "note": "Narrow QA-owned fields only. Never set DONE_VERIFIED automatically.",
+  "rows": [
+    {
+      "fixId": "FIX26-018",
+      "auditId": "AUD26-018",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-37-33-708Z-7bf54b9b · 6449e06 · DM-QA-P0-004",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-018",
+      "auditId": "AUD26-018",
+      "qaOwned": {
+        "QA độc lập": "SKIPPED",
+        "Evidence mới / commit / test": "qa-2026-10-26T15-37-33-708Z-7bf54b9b · 6449e06 · DM-QA-A-001",
+        "Ghi chú": "automated only; not DONE_VERIFIED · RLS_TEST_USER_A_JWT / RLS_TEST_USER_B_JWT unset — deny matrix not executed (gate doc only)"
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    }
+  ]
+}

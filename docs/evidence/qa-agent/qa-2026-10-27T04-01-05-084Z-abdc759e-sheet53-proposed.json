@@ -1,0 +1,41 @@
+{
+  "status": "PROPOSED_ONLY",
+  "spreadsheetId": "1R_de74Szc0xbPZEJpXcoKrNrX5QESi39FYBRESDm6D8",
+  "sheet": "53 REMEDIATION EXECUTION PLAN",
+  "runId": "qa-2026-10-27T04-01-05-084Z-abdc759e",
+  "note": "Narrow QA-owned fields only. Never set DONE_VERIFIED automatically.",
+  "rows": [
+    {
+      "fixId": "FIX26-018",
+      "auditId": "AUD26-018",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-27T04-01-05-084Z-abdc759e · 6449e06 · DM-QA-P0-004",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    },
+    {
+      "fixId": "FIX26-018",
+      "auditId": "AUD26-018",
+      "qaOwned": {
+        "QA độc lập": "QA_PASSED_AUTOMATED",
+        "Evidence mới / commit / test": "qa-2026-10-27T04-01-05-084Z-abdc759e · 6449e06 · DM-QA-A-001",
+        "Ghi chú": "automated only; not DONE_VERIFIED · "
+      },
+      "doNotTouch": [
+        "Verdict audit 26/10",
+        "Trạng thái thực thi",
+        "Owner đề xuất",
+        "Hành động khắc phục + Acceptance Criteria",
+        "Người ký duyệt / ngày"
+      ]
+    }
+  ]
+}

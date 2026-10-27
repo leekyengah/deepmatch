@@ -1,0 +1,86 @@
+{
+  "spreadsheetId": "1R_de74Szc0xbPZEJpXcoKrNrX5QESi39FYBRESDm6D8",
+  "sheet": "53 REMEDIATION EXECUTION PLAN",
+  "runId": "qa-2026-10-26T12-27-07-368Z-0158a195",
+  "policy": {
+    "writableFields": [
+      "Evidence mới / commit / test",
+      "QA độc lập",
+      "Ghi chú"
+    ],
+    "neverWrite": [
+      "Verdict audit 26/10",
+      "Trạng thái thực thi",
+      "Owner đề xuất",
+      "Hành động khắc phục + Acceptance Criteria",
+      "Người ký duyệt / ngày",
+      "DONE_VERIFIED"
+    ],
+    "mergeEvidence": true
+  },
+  "patches": [
+    {
+      "rowNumber": 12,
+      "actionId": "FIX26-011",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q12",
+          "value": "PR #2 · c05e6a7 · W1_CLOSURE_W2_READINESS.md · QA-ACCEPT-STAGING-RERUN-13-13.json | qa-2026-10-26T12-27-07-368Z-0158a195 · 1b78258 · DM-QA-P0-001=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R12",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U12",
+          "value": "No DONE_VERIFIED. No prod change this step. Outsider pin N/A | auto:DM-QA-P0-001 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    },
+    {
+      "rowNumber": 19,
+      "actionId": "FIX26-018",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q19",
+          "value": "qa-2026-10-26T12-27-07-368Z-0158a195 · 1b78258 · DM-QA-P0-004=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R19",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U19",
+          "value": "Audit ĐÃ TRẢ LỜI 2026-10-26 · 20,34,36,40,48 · kiểm chứng nguồn 45% | auto:DM-QA-P0-004 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    },
+    {
+      "rowNumber": 4,
+      "actionId": "FIX26-003",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q4",
+          "value": "EXT-DONE-EVIDENCE-EVAL.json · PR #2 evidence pack | qa-2026-10-26T12-27-07-368Z-0158a195 · 1b78258 · DM-QA-P0-005=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R4",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U4",
+          "value": "PMO attach URLs; do not auto-VERIFIED | auto:DM-QA-P0-005 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    }
+  ]
+}
