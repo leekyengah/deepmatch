@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-27  
 **Time (UTC+7):** ~04:10–11:15 repair window; gates rechecked after  
-**Baseline repair commit (pending push):** working tree on branch `feat/w2-core-member-wp1-3`  
+**Repair commit:** `286a14f` (pushed on `feat/w2-core-member-wp1-3`)  
 **Parent SHA:** `6449e06`  
 **Expo app dir:** `apps/mobile` (`@deepmatch/mobile`)  
 **Overall:** **BLOCKED** (local eng gates **PASS**; EAS cloud Supabase env **not verified**)  
