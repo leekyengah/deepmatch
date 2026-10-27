@@ -105,6 +105,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(async () => {
     // Local first so SecureStore clears even if network/global revoke fails.
     await supabase.auth.signOut({ scope: "local" });
+    setSession(null);
     try {
       await supabase.auth.signOut({ scope: "global" });
     } catch {

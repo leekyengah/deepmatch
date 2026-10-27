@@ -131,6 +131,19 @@ export default function MeScreen() {
         <Title>{t("profile.title")}</Title>
         <Muted>{user?.email ?? ""}</Muted>
 
+        <Text style={styles.h2}>{t("profile.title")}</Text>
+        <Button
+          label={t("mobile.editProfile")}
+          onPress={() => router.push("/me/edit" as never)}
+        />
+        <Text style={{ height: 10 }} />
+        <Button
+          label={t("mobile.openProfilePhotos")}
+          variant="outline"
+          onPress={() => router.push("/me/media" as never)}
+        />
+        <Muted>{t("profile.mediaGateRule")}</Muted>
+
         <Text style={styles.h2}>{t("profile.account")}</Text>
         <Button
           label={t("auth.logout")}

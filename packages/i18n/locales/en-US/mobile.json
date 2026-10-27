@@ -25,6 +25,8 @@
   "coupleNativeTitle": "Couple Space",
   "coupleNeedPair": "Couple Space opens only after a two-sided invite acceptance.",
   "adminDenied": "You do not have Admin access on this device.",
+  "editProfile": "Edit profile",
+  "openProfilePhotos": "Profile photos (Discover gate)",
   "adminTitle": "Admin Control Center",
   "offline": "You are offline",
   "retry": "Retry",

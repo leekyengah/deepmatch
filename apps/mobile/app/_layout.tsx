@@ -70,6 +70,14 @@ function RootStack() {
         name="notifications"
         options={{ title: t("mobile.notificationsTitle") }}
       />
+      <Stack.Screen
+        name="me/edit"
+        options={{ title: t("profile.title"), presentation: "card" }}
+      />
+      <Stack.Screen
+        name="me/media"
+        options={{ title: t("profile.mediaGateTitle"), presentation: "card" }}
+      />
     </Stack>
   );
 }
