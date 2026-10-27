@@ -1,0 +1,61 @@
+{
+  "context": {
+    "runId": "qa-2026-10-27T04-01-05-084Z-abdc759e",
+    "projectId": "deepmatch",
+    "commitSha": "6449e06e32d26c0ff8dd32ba30bb1191e63ce4d8",
+    "branch": "feat/w2-core-member-wp1-3",
+    "environment": {
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
+      "allowWrites": false
+    },
+    "startedAt": "2026-10-27T04:01:05.084Z",
+    "suite": "security",
+    "actor": "qa-agent-automated"
+  },
+  "results": [
+    {
+      "id": "DM-QA-P0-004",
+      "outcome": "PASS",
+      "actual": "\n> deepmatch@0.1.0 test:no-leak\n> node scripts/no-leak-public.mjs https://datingvn.com\n\nno-leak scan base=https://datingvn.com\nPASS / status=200 bytes=33779\nPASS /faq status=200 bytes=16919\nPASS /privacy status=200 bytes=42150\nPASS /terms status=200 bytes=33781\nPASS /login status=200 bytes=12175\nPASS /signup status=200 bytes=15040\nPASS /robots.txt status=200 bytes=27\nPASS /sitemap.xml status=200 bytes=2651\nPASS probe /.env status=307\nPASS probe /.git/config status=307\nPASS probe /.ai/NEXT_ACTION.md status=307\nPASS probe /docs/audits/DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md status=307\nPASS probe /api/v1/admin/users status=404\nno-leak PASSED\n",
+      "durationMs": 7096,
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      },
+      "expected": "Public pages do not leak staging banners, service role, or private routes"
+    },
+    {
+      "id": "DM-QA-A-001",
+      "outcome": "PASS",
+      "actual": "▶ RLS deny suite\n  ✔ user B cannot read user A private notes when not shared (602.8117ms)\n  ✔ user B cannot read audit_logs (930.1432ms)\n✔ RLS deny suite (1536.0795ms)\n▶ RLS harness gate\n  ✔ documents skip when credentials absent (0.4752ms)\n✔ RLS harness gate (0.8728ms)\nℹ tests 3\nℹ suites 2\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2381.2411\n",
+      "durationMs": 5736,
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      },
+      "expected": "Cross-user deny cases reproducible on staging JWTs"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "pass": 2,
+    "fail": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "inconclusive": 0,
+    "notRun": 0,
+    "filteredOut": 15
+  },
+  "openBlockers": [],
+  "releaseRecommendation": "CONDITIONAL",
+  "gaStance": "NO-GO",
+  "costEstimateUsd": 0,
+  "durationMs": 13062,
+  "lifecycleEffect": "QA_PASSED_AUTOMATED",
+  "reviewerSignoff": {
+    "identity": null,
+    "status": "unsigned"
+  }
+}

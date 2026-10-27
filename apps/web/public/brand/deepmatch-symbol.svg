@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t d">
+  <title id="t">DeepMatch</title>
+  <desc id="d">Interlocking loops mark — champagne bronze on transparent</desc>
+  <g fill="none" stroke="#A88A62" stroke-width="3.2" stroke-linecap="round">
+    <ellipse cx="26" cy="32" rx="14" ry="18" transform="rotate(-28 26 32)"/>
+    <ellipse cx="38" cy="32" rx="14" ry="18" transform="rotate(28 38 32)"/>
+  </g>
+</svg>

@@ -1,0 +1,193 @@
+{
+  "context": {
+    "runId": "qa-2026-10-26T12-27-00-100Z-f6fb7784",
+    "projectId": "deepmatch",
+    "commitSha": "1b782580eaf47260e2067b4aaa7ea47a20813f37",
+    "branch": "feat/w2-core-member-wp1-3",
+    "environment": {
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
+      "allowWrites": false
+    },
+    "startedAt": "2026-10-26T12:27:00.100Z",
+    "suite": "security",
+    "actor": "qa-agent-automated"
+  },
+  "results": [
+    {
+      "id": "DM-QA-P0-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      }
+    },
+    {
+      "id": "DM-QA-P0-002",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      }
+    },
+    {
+      "id": "DM-QA-P0-003",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      }
+    },
+    {
+      "id": "DM-QA-P0-004",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      }
+    },
+    {
+      "id": "DM-QA-P0-005",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-003",
+        "auditId": "AUD26-003"
+      }
+    },
+    {
+      "id": "DM-QA-P0-006",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "other": [
+          "QA-GATE-7"
+        ]
+      }
+    },
+    {
+      "id": "DM-QA-P0-007",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-011"
+      }
+    },
+    {
+      "id": "DM-QA-A-001",
+      "outcome": "PASS",
+      "actual": "﹣ RLS deny suite (1.3547ms) # SKIP\n▶ RLS harness gate\n  ✔ documents skip when credentials absent (0.8662ms)\n✔ RLS harness gate (1.7782ms)\nℹ tests 1\nℹ suites 2\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 362.0717\n",
+      "durationMs": 2855,
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      },
+      "expected": "Cross-user deny cases reproducible on staging JWTs"
+    },
+    {
+      "id": "DM-QA-H-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "other": [
+          "coverage-H"
+        ]
+      }
+    },
+    {
+      "id": "DM-QA-W2-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-022",
+        "auditId": "AUD26-022"
+      }
+    },
+    {
+      "id": "DM-QA-W2-002",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-023",
+        "auditId": "AUD26-023"
+      }
+    },
+    {
+      "id": "DM-QA-W2-003",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-017",
+        "auditId": "AUD26-017"
+      }
+    },
+    {
+      "id": "DM-QA-W2-004",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-016",
+        "auditId": "AUD26-016"
+      }
+    },
+    {
+      "id": "DM-QA-W2-005",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-028",
+        "auditId": "AUD26-028"
+      }
+    },
+    {
+      "id": "DM-QA-W2-006",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-028"
+      }
+    },
+    {
+      "id": "DM-QA-W2-007",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-027",
+        "auditId": "AUD26-027"
+      }
+    },
+    {
+      "id": "DM-QA-W3-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter security",
+      "requirements": {
+        "fixId": "FIX26-039",
+        "auditId": "AUD26-039"
+      }
+    }
+  ],
+  "summary": {
+    "total": 17,
+    "pass": 1,
+    "fail": 0,
+    "blocked": 0,
+    "skipped": 16,
+    "inconclusive": 0,
+    "notRun": 0
+  },
+  "openBlockers": [],
+  "releaseRecommendation": "NO-GO",
+  "gaStance": "NO-GO",
+  "costEstimateUsd": 0,
+  "durationMs": 3096,
+  "lifecycleEffect": "QA_PASSED_AUTOMATED",
+  "reviewerSignoff": {
+    "identity": null,
+    "status": "unsigned"
+  }
+}

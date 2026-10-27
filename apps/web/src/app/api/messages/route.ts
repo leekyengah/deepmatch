@@ -1,21 +1,22 @@
 import { NextResponse } from "next/server";
 import { canAccessChat } from "@deepmatch/shared";
-import { createClient } from "@/lib/supabase/server";
+import { createServiceClient, getRouteUser } from "@/lib/supabase/route";
 import { flagEnabled } from "@/lib/flags";
+import { jsonError, makeRequestId } from "@/lib/api-error";
+import { getStorageBackend, type StorageBackend } from "@/lib/media/limits";
+import { createSignedReadUrl } from "@/lib/media/storage";
 
 export async function GET(req: Request) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getRouteUser(req);
+  const requestId = makeRequestId();
   if (!user) {
-    return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
+    return jsonError("UNAUTHENTICATED", null, requestId);
   }
 
   const url = new URL(req.url);
   const conversationId = url.searchParams.get("conversationId");
   if (!conversationId) {
-    return NextResponse.json({ error: "conversationId_required" }, { status: 400 });
+    return jsonError("VALIDATION_ERROR", "missingConversationId", requestId);
   }
 
   const allowed = await assertChatAccess(supabase, user.id, conversationId);
@@ -25,38 +26,111 @@ export async function GET(req: Request) {
 
   const { data, error } = await supabase
     .from("messages")
-    .select("id, sender_id, body, created_at, client_dedupe_key")
+    .select("id, sender_id, body, media_id, created_at, client_dedupe_key")
     .eq("conversation_id", conversationId)
     .order("created_at", { ascending: true })
     .limit(100);
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return jsonError("VALIDATION_ERROR", null, requestId);
   }
-  return NextResponse.json({ messages: data });
+
+  const mediaIds = [
+    ...new Set(
+      (data ?? [])
+        .map((m) => m.media_id)
+        .filter((id): id is string => Boolean(id)),
+    ),
+  ];
+  type MediaRow = {
+    id: string;
+    storage_path: string;
+    content_type: string;
+    storage_backend?: string;
+    processing_status?: string;
+  };
+  let rows: MediaRow[] = [];
+  if (mediaIds.length) {
+    const full = await supabase
+      .from("media_objects")
+      .select(
+        "id, storage_path, content_type, storage_backend, processing_status",
+      )
+      .in("id", mediaIds);
+    if (full.error) {
+      const legacy = await supabase
+        .from("media_objects")
+        .select("id, storage_path, content_type")
+        .in("id", mediaIds);
+      rows = (legacy.data ?? []) as MediaRow[];
+    } else {
+      rows = (full.data ?? []) as MediaRow[];
+    }
+  }
+
+  const mediaMeta = new Map<string, { url: string; content_type: string }>();
+  for (const row of rows) {
+    if (row.processing_status && row.processing_status !== "ready") continue;
+    const backend = (row.storage_backend ??
+      getStorageBackend()) as StorageBackend;
+    const signedUrl = await createSignedReadUrl(row.storage_path, backend, 600);
+    if (signedUrl) {
+      mediaMeta.set(row.id, {
+        url: signedUrl,
+        content_type: row.content_type,
+      });
+    }
+  }
+
+  const messages = (data ?? []).map((m) => {
+    const meta = m.media_id ? mediaMeta.get(m.media_id) : undefined;
+    return {
+      ...m,
+      media_url: meta?.url ?? null,
+      media_content_type: meta?.content_type ?? null,
+    };
+  });
+
+  return NextResponse.json({ messages });
 }
 
 export async function POST(req: Request) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const requestId = makeRequestId();
+  const { supabase, user } = await getRouteUser(req);
   if (!user) {
-    return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
+    return jsonError("UNAUTHENTICATED", null, requestId);
   }
 
   const body = (await req.json()) as {
     conversationId?: string;
     text?: string;
+    mediaId?: string;
     clientDedupeKey?: string;
   };
-  if (!body.conversationId || !body.text?.trim()) {
-    return NextResponse.json({ error: "invalid_body" }, { status: 400 });
+  const text = body.text?.trim() ?? "";
+  if (!body.conversationId || (!text && !body.mediaId)) {
+    return jsonError("VALIDATION_ERROR", "invalidJson", requestId);
   }
 
   const allowed = await assertChatAccess(supabase, user.id, body.conversationId);
   if (!allowed.allowed) {
     return NextResponse.json(allowed, { status: 403 });
+  }
+
+  if (body.mediaId) {
+    const { data: media } = await supabase
+      .from("media_objects")
+      .select("id, owner_user_id, processing_status")
+      .eq("id", body.mediaId)
+      .eq("owner_user_id", user.id)
+      .maybeSingle();
+    if (!media) {
+      return jsonError("RESOURCE_NOT_ACCESSIBLE", null, requestId);
+    }
+    const st = (media as { processing_status?: string }).processing_status;
+    if (st && st !== "ready") {
+      return jsonError("VALIDATION_ERROR", "mediaNotReady", requestId);
+    }
   }
 
   const { data, error } = await supabase
@@ -65,7 +139,8 @@ export async function POST(req: Request) {
       {
         conversation_id: body.conversationId,
         sender_id: user.id,
-        body: body.text.trim(),
+        body: text || null,
+        media_id: body.mediaId ?? null,
         client_dedupe_key: body.clientDedupeKey ?? null,
       },
       { onConflict: "conversation_id,client_dedupe_key", ignoreDuplicates: true },
@@ -74,13 +149,13 @@ export async function POST(req: Request) {
     .maybeSingle();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return jsonError("VALIDATION_ERROR", null, requestId);
   }
   return NextResponse.json({ message: data });
 }
 
 async function assertChatAccess(
-  supabase: Awaited<ReturnType<typeof createClient>>,
+  supabase: Awaited<ReturnType<typeof getRouteUser>>["supabase"],
   userId: string,
   conversationId: string,
 ) {
@@ -101,7 +176,9 @@ async function assertChatAccess(
 
   let blocked = false;
   if (otherId) {
-    const { data: blocks } = await supabase
+    // Service role: blocked party cannot see blocker-owned rows under blocks_self RLS
+    const admin = createServiceClient();
+    const { data: blocks } = await admin
       .from("blocks")
       .select("blocker_id")
       .or(
@@ -122,7 +199,7 @@ async function assertChatAccess(
     isMutualMatch: !!match,
     isParticipant,
     isBlockedEitherWay: blocked,
-    chatFlagEnabled: flagEnabled("ff_chat"),
+    chatFlagEnabled: await flagEnabled("ff_chat"),
     userSuspended: Boolean(profile?.suspended),
   });
 }

@@ -17,8 +17,22 @@ test-results
 .idea
 .vscode/*
 !.vscode/extensions.json
+!.vscode/tasks.json
 .env*
 
 tools/
 .vercel
+
+
+.ai/rls-test.env.ps1
+.ai/*.env*
+.ai/*password*
+.ai/prod*
+
+
+.ai/e2e.env.ps1
+
+
+# Local binary handoff (do not commit APK)
+artifacts/
 

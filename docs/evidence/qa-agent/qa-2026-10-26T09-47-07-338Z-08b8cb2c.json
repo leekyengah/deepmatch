@@ -1,0 +1,138 @@
+{
+  "context": {
+    "runId": "qa-2026-10-26T09-47-07-338Z-08b8cb2c",
+    "projectId": "deepmatch",
+    "commitSha": "c05e6a7044726151c33661febaf071e1936331c4",
+    "branch": "feat/w2-core-member-wp1-3",
+    "environment": {
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
+      "allowWrites": false
+    },
+    "startedAt": "2026-10-26T09:47:07.338Z",
+    "suite": "p0",
+    "actor": "qa-agent-automated"
+  },
+  "results": [
+    {
+      "id": "DM-QA-P0-001",
+      "outcome": "PASS",
+      "actual": "PASS  pair_pins_three_layers — A=3 B=3",
+      "durationMs": 10550,
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      },
+      "expected": "Both pair members see ≥3 pins covering visited, wishlist, milestone via RLS"
+    },
+    {
+      "id": "DM-QA-P0-002",
+      "outcome": "PASS",
+      "actual": "{\n  \"at\": \"2026-10-26T09:47:19.035Z\",\n  \"pairConfigured\": true,\n  \"pinEnvConfigured\": true,\n  \"media_select\": {\n    \"ok\": true,\n    \"err\": null\n  },\n  \"pins\": {\n    \"ok\": true,\n    \"count\": 3,\n    \"err\": null\n  },\n  \"usedExistingPin\": true,\n  \"probePinId\": \"<uuid>\",\n  \"insert_with_pin\": {\n    \"ok\": true,\n    \"err\": null\n  },\n  \"roundtrip\": {\n    \"ok\": true\n  },\n  \"bff_couples_active\": {\n    \"status\": 200,\n    \"keys\": [\n      \"data\",\n      \"meta\"\n    ]\n  }\n}\n",
+      "durationMs": 4422,
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      },
+      "expected": "Authenticated user can attach pin_id; outsider/anon denied or empty"
+    },
+    {
+      "id": "DM-QA-P0-003",
+      "outcome": "PASS",
+      "actual": "{\n  \"pass\": true,\n  \"results\": {\n    \"at\": \"2026-10-26T09:47:26.750Z\",\n    \"owner_sees_three_layers\": {\n      \"pass\": true,\n      \"count\": 3,\n      \"err\": null\n    },\n    \"partner_sees_pins\": {\n      \"pass\": true,\n      \"count\": 3,\n      \"err\": null\n    },\n    \"anonymous_denied_or_empty\": {\n      \"pass\": true,\n      \"count\": 0,\n      \"err\": null\n    },\n    \"outsider_denied_or_empty\": {\n      \"pass\": null,\n      \"count\": null,\n      \"err\": \"no_third_user\"\n    }\n  }\n}\n",
+      "durationMs": 4286,
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      },
+      "expected": "Owner and partner see three layers; anonymous empty"
+    },
+    {
+      "id": "DM-QA-P0-004",
+      "outcome": "INCONCLUSIVE",
+      "detail": "Error: spawn EINVAL",
+      "failureClass": "test_infrastructure",
+      "durationMs": 2,
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      },
+      "expected": "Public pages do not leak staging banners, service role, or private routes"
+    },
+    {
+      "id": "DM-QA-P0-005",
+      "outcome": "PASS",
+      "actual": "{\n  \"doneTotal\": 85,\n  \"byBucket\": {\n    \"ID_NAMED_EVIDENCE\": 1,\n    \"WAVE_MENTION_ONLY\": 84,\n    \"NO_ID_EVIDENCE\": 0\n  }\n}\n",
+      "remediation": "Do not auto-mark EXT Done as VERIFIED",
+      "durationMs": 5489,
+      "requirements": {
+        "fixId": "FIX26-003",
+        "auditId": "AUD26-003"
+      },
+      "expected": "Eval script runs read-only; zero fabricated VERIFIED"
+    },
+    {
+      "id": "DM-QA-P0-006",
+      "outcome": "INCONCLUSIVE",
+      "detail": "Error: spawn EINVAL",
+      "failureClass": "test_infrastructure",
+      "durationMs": 1,
+      "requirements": {
+        "other": [
+          "QA-GATE-7"
+        ]
+      },
+      "expected": "@tradingbase/qa-core and adapters unit tests pass"
+    },
+    {
+      "id": "DM-QA-P0-007",
+      "outcome": "PASS",
+      "actual": "13/13",
+      "detail": "rue,\"ff_billing\":true,\"ff_lifestyle\":true,\"ff_ai\":true}\nPASS  discovery_candidates_rls — count=10\nPASS  rls_peer_profile_mutual\nPASS  rls_private_note_deny — denied_or_empty\nPASS  pair_pins_three_layers — A=3 B=3\nPASS  chat_messages_readable — count=20\nPASS  chat_send_message\nPASS  mutual_match_exists\nPASS  media_signed_upload — ok\nPASS  concierge_offerings — count=7\nPASS  concierge_bookings_own — count=2\nPASS  concierge_booking_rls_deny — leaked=0\nPASS  consent_self_select\n\nSummary: 13/13 PASS\n",
+      "durationMs": 3941,
+      "requirements": {
+        "fixId": "FIX26-011"
+      },
+      "expected": "scripts/accept-staging.mjs reports all checks; classify seed vs app defects"
+    },
+    {
+      "id": "DM-QA-A-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter p0",
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      }
+    },
+    {
+      "id": "DM-QA-H-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter p0",
+      "requirements": {
+        "other": [
+          "coverage-H"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total": 9,
+    "pass": 5,
+    "fail": 0,
+    "blocked": 0,
+    "skipped": 2,
+    "inconclusive": 2,
+    "notRun": 0
+  },
+  "openBlockers": [],
+  "releaseRecommendation": "NO-GO",
+  "gaStance": "NO-GO",
+  "costEstimateUsd": 0,
+  "durationMs": 28876,
+  "lifecycleEffect": "READY_FOR_QA",
+  "reviewerSignoff": {
+    "identity": null,
+    "status": "unsigned"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Memories",
+  "map": "Memory Map",
+  "timeline": "Timeline",
+  "add": "Add a memory",
+  "emptyTitle": "No memories yet",
+  "emptyBody": "When you are both ready, add places you have been or moments worth keeping.",
+  "wishlist": "Wishlist",
+  "pageIntro": "Shared memories use the same data as the map. Private notes stay private unless shared.",
+  "emptySpaceTitle": "No couple space yet",
+  "emptySpaceBody": "A two-sided invite is required before viewing the timeline.",
+  "inviteCta": "Invite",
+  "addCta": "Add new",
+  "emptyTimelineBody": "Create your first pin to start the timeline.",
+  "momentsHeading": "Memorable moments",
+  "privateBadge": "Just the two of us",
+  "privateHint": "Couple-only content — access ends after disconnect; not carried to a new space.",
+  "addPhoto": "Add photo",
+  "addVideo": "Add video"
+}

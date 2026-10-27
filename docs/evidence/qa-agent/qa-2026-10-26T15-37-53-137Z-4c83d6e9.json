@@ -1,0 +1,186 @@
+{
+  "context": {
+    "runId": "qa-2026-10-26T15-37-53-137Z-4c83d6e9",
+    "projectId": "deepmatch",
+    "commitSha": "6449e06e32d26c0ff8dd32ba30bb1191e63ce4d8",
+    "branch": "feat/w2-core-member-wp1-3",
+    "environment": {
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
+      "allowWrites": false
+    },
+    "startedAt": "2026-10-26T15:37:53.136Z",
+    "suite": "p0",
+    "actor": "qa-agent-automated"
+  },
+  "results": [
+    {
+      "id": "DM-QA-P0-001",
+      "outcome": "PASS",
+      "actual": "PASS  pair_pins_three_layers — A=3 B=3",
+      "durationMs": 27444,
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      },
+      "expected": "Both pair members see ≥3 pins covering visited, wishlist, milestone via RLS"
+    },
+    {
+      "id": "DM-QA-P0-002",
+      "outcome": "PASS",
+      "actual": "{\n  \"at\": \"2026-10-26T15:38:24.171Z\",\n  \"pairConfigured\": true,\n  \"pinEnvConfigured\": true,\n  \"media_select\": {\n    \"ok\": true,\n    \"err\": null\n  },\n  \"pins\": {\n    \"ok\": true,\n    \"count\": 3,\n    \"err\": null\n  },\n  \"usedExistingPin\": true,\n  \"probePinId\": \"<uuid>\",\n  \"insert_with_pin\": {\n    \"ok\": true,\n    \"err\": null\n  },\n  \"roundtrip\": {\n    \"ok\": true\n  },\n  \"bff_couples_active\": {\n    \"status\": 200,\n    \"keys\": [\n      \"data\",\n      \"meta\"\n    ]\n  }\n}\n",
+      "durationMs": 8154,
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      },
+      "expected": "Authenticated user can attach pin_id; outsider/anon denied or empty"
+    },
+    {
+      "id": "DM-QA-P0-003",
+      "outcome": "PASS",
+      "actual": "{\n  \"pass\": true,\n  \"results\": {\n    \"at\": \"2026-10-26T15:38:33.259Z\",\n    \"owner_sees_three_layers\": {\n      \"pass\": true,\n      \"count\": 3,\n      \"err\": null\n    },\n    \"partner_sees_pins\": {\n      \"pass\": true,\n      \"count\": 3,\n      \"err\": null\n    },\n    \"anonymous_denied_or_empty\": {\n      \"pass\": true,\n      \"count\": 0,\n      \"err\": null\n    },\n    \"outsider_denied_or_empty\": {\n      \"pass\": null,\n      \"count\": null,\n      \"err\": \"no_third_user\"\n    }\n  }\n}\n",
+      "durationMs": 3917,
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      },
+      "expected": "Owner and partner see three layers; anonymous empty"
+    },
+    {
+      "id": "DM-QA-P0-004",
+      "outcome": "PASS",
+      "actual": "\n> deepmatch@0.1.0 test:no-leak\n> node scripts/no-leak-public.mjs https://datingvn.com\n\nno-leak scan base=https://datingvn.com\nPASS / status=200 bytes=33779\nPASS /faq status=200 bytes=16919\nPASS /privacy status=200 bytes=42150\nPASS /terms status=200 bytes=33781\nPASS /login status=200 bytes=12175\nPASS /signup status=200 bytes=15040\nPASS /robots.txt status=200 bytes=27\nPASS /sitemap.xml status=200 bytes=2651\nPASS probe /.env status=307\nPASS probe /.git/config status=307\nPASS probe /.ai/NEXT_ACTION.md status=307\nPASS probe /docs/audits/DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md status=307\nPASS probe /api/v1/admin/users status=404\nno-leak PASSED\n",
+      "durationMs": 12597,
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      },
+      "expected": "Public pages do not leak staging banners, service role, or private routes"
+    },
+    {
+      "id": "DM-QA-P0-005",
+      "outcome": "PASS",
+      "actual": "{\n  \"doneTotal\": 85,\n  \"byBucket\": {\n    \"ID_NAMED_EVIDENCE\": 1,\n    \"WAVE_MENTION_ONLY\": 84,\n    \"NO_ID_EVIDENCE\": 0\n  }\n}\n",
+      "remediation": "Do not auto-mark EXT Done as VERIFIED",
+      "durationMs": 7858,
+      "requirements": {
+        "fixId": "FIX26-003",
+        "auditId": "AUD26-003"
+      },
+      "expected": "Eval script runs read-only; zero fabricated VERIFIED"
+    },
+    {
+      "id": "DM-QA-P0-006",
+      "outcome": "PASS",
+      "actual": "core=0 adapters=0",
+      "detail": "\n> @tradingbase/qa-core@1.0.0 test\n> tsx --test src/*.test.ts\n\n▶ evidence\n  ✔ summarizes outcomes (20.3455ms)\n  ✔ writes redacted json and keeps GA NO-GO (128.2875ms)\n✔ evidence (154.878ms)\n▶ safety\n  ✔ allows staging datingvn.com (4.7596ms)\n  ✔ blocks production kind (3.8104ms)\n  ✔ blocks unknown hosts (1.7694ms)\n  ✔ redacts JWTs and bearer tokens (2.4895ms)\n✔ safety (72.0131ms)\n▶ status-machine\n  ✔ allows READY_FOR_QA → QA_PASSED_AUTOMATED (5.8126ms)\n  ✔ blocks automated self-sign of independent review (1.8804ms)\n  ✔ blocks RELEASE_APPROVED from automated path (0.7822ms)\n  ✔ maps failures to QA_FAILED (0.8313ms)\n  ✔ maps all pass to QA_PASSED_AUTOMATED (0.6208ms)\n✔ status-machine (22.9299ms)\nℹ tests 11\nℹ suites 3\nℹ pass 11\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2579.979\n\n\n> @tradingbase/qa-adapters@1.0.0 test\n> tsx --test src/*.test.ts\n\n▶ adapter registry\n  ✔ registers and resolves executable adapter (5.2699ms)\n  ✔ refuses non-executable stubs (2.673ms)\n  ✔ lists future stubs as non-executable (1.3962ms)\n✔ adapter registry (16.2138ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1144.1048\n",
+      "durationMs": 17923,
+      "requirements": {
+        "other": [
+          "QA-GATE-7"
+        ]
+      },
+      "expected": "@tradingbase/qa-core and adapters unit tests pass"
+    },
+    {
+      "id": "DM-QA-P0-007",
+      "outcome": "PASS",
+      "actual": "13/13",
+      "detail": "ue,\"ff_billing\":true,\"ff_lifestyle\":true,\"ff_ai\":true}\nPASS  discovery_candidates_rls — count=10\nPASS  rls_peer_profile_mutual\nPASS  rls_private_note_deny — denied_or_empty\nPASS  pair_pins_three_layers — A=3 B=3\nPASS  chat_messages_readable — count=30\nPASS  chat_send_message\nPASS  mutual_match_exists\nPASS  media_signed_upload — ok\nPASS  concierge_offerings — count=7\nPASS  concierge_bookings_own — count=4\nPASS  concierge_booking_rls_deny — leaked=0\nPASS  consent_self_select\n\nSummary: 13/13 PASS\n\n",
+      "durationMs": 9091,
+      "requirements": {
+        "fixId": "FIX26-011"
+      },
+      "expected": "scripts/accept-staging.mjs reports all checks; classify seed vs app defects"
+    },
+    {
+      "id": "DM-QA-W2-001",
+      "outcome": "PASS",
+      "actual": "▶ normalizeIntent\n  ✔ maps canonical and legacy web tokens (8.1994ms)\n  ✔ rejects unknown (2.0225ms)\n  ✔ isCanonicalIntent (2.0029ms)\n✔ normalizeIntent (21.5616ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1275.6262\n",
+      "durationMs": 6896,
+      "requirements": {
+        "fixId": "FIX26-022",
+        "auditId": "AUD26-022"
+      },
+      "expected": "normalizeIntent maps legacy + canonical intents"
+    },
+    {
+      "id": "DM-QA-W2-002",
+      "outcome": "PASS",
+      "actual": "▶ evaluateDiscoverMediaGate\n  ✔ blocks under 3 images (1.0087ms)\n  ✔ allows 3–10 images and ≤2 videos (0.2172ms)\n  ✔ blocks over max images or videos (0.198ms)\n✔ evaluateDiscoverMediaGate (2.8442ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 209.2639\n",
+      "durationMs": 3352,
+      "requirements": {
+        "fixId": "FIX26-023",
+        "auditId": "AUD26-023"
+      },
+      "expected": "discover-gate unit enforces minimum photos"
+    },
+    {
+      "id": "DM-QA-W2-003",
+      "outcome": "PASS",
+      "actual": "▶ isAgeEligible\n  ✔ allows 18+ (2.1598ms)\n  ✔ denies under 18 (0.645ms)\n  ✔ boundary: exactly 18 on birthday is eligible (0.3689ms)\n  ✔ boundary: day before 18th birthday is ineligible (0.2382ms)\n  ✔ denies invalid date (0.2257ms)\n  ✔ rejects API-style bypass attempts with malformed ISO (0.2138ms)\n✔ isAgeEligible (6.5179ms)\nℹ tests 6\nℹ suites 1\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 206.8535\n",
+      "durationMs": 1840,
+      "requirements": {
+        "fixId": "FIX26-017",
+        "auditId": "AUD26-017"
+      },
+      "expected": "isAgeEligible rejects underage"
+    },
+    {
+      "id": "DM-QA-W2-005",
+      "outcome": "PASS",
+      "actual": "status=200 emptyReason=MEDIA_GATE candidates=0",
+      "durationMs": 2046,
+      "requirements": {
+        "fixId": "FIX26-028",
+        "auditId": "AUD26-028"
+      },
+      "expected": "Authenticated discovery returns candidates or emptyReason"
+    },
+    {
+      "id": "DM-QA-W2-006",
+      "outcome": "PASS",
+      "actual": "guest=401 authed_empty=400",
+      "detail": "Destructive unmatch against live QA mutual match NOT executed (preserve fixture)",
+      "remediation": "Add disposable match seed for unmatch happy-path E2E",
+      "durationMs": 1930,
+      "requirements": {
+        "fixId": "FIX26-028"
+      },
+      "expected": "Guest denied; authed empty body not 500; no fixture destroy"
+    },
+    {
+      "id": "DM-QA-W3-001",
+      "outcome": "PASS",
+      "actual": "▶ ai gateway stub\n  ✔ redacts private keys (2.1912ms)\n  ✔ returns demo-labeled gift suggestions (1.2939ms)\n  ✔ deepmind is non-clinical (0.5312ms)\n  ✔ resolveAiAdapter defaults to stub (DECISION-AI-01 C) (0.3748ms)\n✔ ai gateway stub (7.1435ms)\nℹ tests 4\nℹ suites 1\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 487.9008\n",
+      "durationMs": 2073,
+      "requirements": {
+        "fixId": "FIX26-039",
+        "auditId": "AUD26-039"
+      },
+      "expected": "packages/shared AI gateway unit tests PASS"
+    }
+  ],
+  "summary": {
+    "total": 13,
+    "pass": 13,
+    "fail": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "inconclusive": 0,
+    "notRun": 0,
+    "filteredOut": 4
+  },
+  "openBlockers": [],
+  "releaseRecommendation": "CONDITIONAL",
+  "gaStance": "NO-GO",
+  "costEstimateUsd": 0,
+  "durationMs": 105793,
+  "lifecycleEffect": "QA_PASSED_AUTOMATED",
+  "reviewerSignoff": {
+    "identity": null,
+    "status": "unsigned"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "spreadsheetId": "1R_de74Szc0xbPZEJpXcoKrNrX5QESi39FYBRESDm6D8",
+  "sheet": "53 REMEDIATION EXECUTION PLAN",
+  "runId": "qa-2026-10-26T10-05-43-874Z-53368451",
+  "policy": {
+    "writableFields": [
+      "Evidence mới / commit / test",
+      "QA độc lập",
+      "Ghi chú"
+    ],
+    "neverWrite": [
+      "Verdict audit 26/10",
+      "Trạng thái thực thi",
+      "Owner đề xuất",
+      "Hành động khắc phục + Acceptance Criteria",
+      "Người ký duyệt / ngày",
+      "DONE_VERIFIED"
+    ],
+    "mergeEvidence": true
+  },
+  "patches": [
+    {
+      "rowNumber": 40,
+      "actionId": "FIX26-039",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q40",
+          "value": "qa-2026-10-26T10-05-43-874Z-53368451 · ecb9595 · DM-QA-W3-001=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R40",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U40",
+          "value": "Audit ĐÃ TRẢ LỜI 2026-10-26 · 45,48 · kiểm chứng nguồn 60% | auto:DM-QA-W3-001 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    }
+  ]
+}

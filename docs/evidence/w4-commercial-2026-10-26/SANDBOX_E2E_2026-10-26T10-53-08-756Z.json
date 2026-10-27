@@ -1,0 +1,39 @@
+{
+  "base": "https://datingvn.com",
+  "commit": "008ca3f26e49c90a6b8272886c7cb04701f3bd52",
+  "live_psp": false,
+  "pass": 5,
+  "fail": 1,
+  "results": [
+    {
+      "id": "env.staging_project",
+      "ok": true,
+      "detail": "zzqpvjdyvjarpphqhaze"
+    },
+    {
+      "id": "env.live_psp_off",
+      "ok": true,
+      "detail": "OFF"
+    },
+    {
+      "id": "schema.commerce_audit_log",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "id": "schema.staff_transition_booking",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "id": "auth.qa_token_a",
+      "ok": false,
+      "detail": "missing — run npm run seed:qa"
+    },
+    {
+      "id": "audit.rows_readable",
+      "ok": true,
+      "detail": "count=0"
+    }
+  ]
+}

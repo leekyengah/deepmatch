@@ -1,0 +1,149 @@
+{
+  "spreadsheetId": "1R_de74Szc0xbPZEJpXcoKrNrX5QESi39FYBRESDm6D8",
+  "sheet": "53 REMEDIATION EXECUTION PLAN",
+  "runId": "qa-2026-10-26T15-37-14-189Z-5944a1dd",
+  "policy": {
+    "writableFields": [
+      "Evidence mới / commit / test",
+      "QA độc lập",
+      "Ghi chú"
+    ],
+    "neverWrite": [
+      "Verdict audit 26/10",
+      "Trạng thái thực thi",
+      "Owner đề xuất",
+      "Hành động khắc phục + Acceptance Criteria",
+      "Người ký duyệt / ngày",
+      "DONE_VERIFIED"
+    ],
+    "mergeEvidence": true
+  },
+  "patches": [
+    {
+      "rowNumber": 23,
+      "actionId": "FIX26-022",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q23",
+          "value": "docs/evidence/w2-core-member-2026-10-26/W2_CORE_MEMBER_COMPLETION.md · intents unit PASS | qa-2026-10-26T15-37-14-189Z-5944a1dd · 6449e06 · DM-QA-W2-001=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R23",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U23",
+          "value": "Web intents=friendship|dating|marriage; legacy map; NOT VERIFIED | auto:DM-QA-W2-001 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    },
+    {
+      "rowNumber": 24,
+      "actionId": "FIX26-023",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q24",
+          "value": "candidates MEDIA_GATE + discover-gate.test PASS | qa-2026-10-26T15-37-14-189Z-5944a1dd · 6449e06 · DM-QA-W2-002=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R24",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U24",
+          "value": "Discover GET empty when <3 images; staging E2E pending; NOT VERIFIED | auto:DM-QA-W2-002 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    },
+    {
+      "rowNumber": 18,
+      "actionId": "FIX26-017",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q18",
+          "value": "qa-2026-10-26T15-37-14-189Z-5944a1dd · 6449e06 · DM-QA-W2-003=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R18",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U18",
+          "value": "Audit ĐÃ TRẢ LỜI 2026-10-26 · 20,34,36,40,48 · kiểm chứng nguồn 50% | auto:DM-QA-W2-003 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    },
+    {
+      "rowNumber": 17,
+      "actionId": "FIX26-016",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q17",
+          "value": "qa-2026-10-26T15-37-14-189Z-5944a1dd · 6449e06 · DM-QA-W2-004=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R17",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U17",
+          "value": "Audit ĐÃ TRẢ LỜI 2026-10-26 · 20,34,36,40,48 · kiểm chứng nguồn 45% | auto:DM-QA-W2-004 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    },
+    {
+      "rowNumber": 29,
+      "actionId": "FIX26-028",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q29",
+          "value": "POST /api/v1/matches/unmatch + LikesClient; MEDIA_GATE | qa-2026-10-26T15-37-14-189Z-5944a1dd · 6449e06 · DM-QA-W2-005=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R29",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U29",
+          "value": "Unmatch API+UI shipped; filter matrix prior; NOT VERIFIED | auto:DM-QA-W2-005 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    },
+    {
+      "rowNumber": 28,
+      "actionId": "FIX26-027",
+      "cells": [
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!Q28",
+          "value": "MemberCenter live aggregates; no fixture-as-self | qa-2026-10-26T15-37-14-189Z-5944a1dd · 6449e06 · DM-QA-W2-007=PASS",
+          "field": "Evidence mới / commit / test"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!R28",
+          "value": "QA_PASSED_AUTOMATED",
+          "field": "QA độc lập"
+        },
+        {
+          "range": "'53 REMEDIATION EXECUTION PLAN'!U28",
+          "value": "Avatar/counts from DB; home-fixtures still open; NOT VERIFIED | auto:DM-QA-W2-007 PASS; not DONE_VERIFIED",
+          "field": "Ghi chú"
+        }
+      ]
+    }
+  ]
+}

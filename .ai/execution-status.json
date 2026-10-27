@@ -1,15 +1,22 @@
-{
+﻿{
   "project": "DeepMatch",
-  "updatedAt": "2026-10-11T19:45:00+07:00",
-  "state": "G0 GO by Founder (đồng ý hết); await staging Supabase credentials for DM-022+",
-  "gates": {
-    "G0": "GO",
-    "G1": "Pending",
-    "G6": "NO-GO until Founder+Safety"
+  "updatedAt": "2026-10-26T16:50:00+07:00",
+  "state": "W1 IMPLEMENTATION_CLOSED_WITH_RESIDUALS; W2 WP1-3 shipped (intent+MEDIA_GATE+unmatch+live /me); GA NO-GO",
+  "branch": "feat/w2-core-member-wp1-3",
+  "baseline": {
+    "w1Pr": "https://github.com/leekyengah/deepmatch/pull/2",
+    "w1Tip": "c05e6a7044726151c33661febaf071e1936331c4"
   },
-  "blockerIds": ["B1-soft", "B5", "B6"],
-  "nextReady": [
-    "Provide staging Supabase env",
-    "DM-022 Authentication & consent"
-  ]
+  "wave": {
+    "w1": "IMPLEMENTATION_CLOSED_WITH_RESIDUALS",
+    "w2": "IN_PROGRESS",
+    "donePendingQa": ["FIX26-022", "FIX26-023", "FIX26-027", "FIX26-028", "FIX26-W2-WP1", "FIX26-W2-WP2", "FIX26-W2-WP3"],
+    "gates": {
+      "sharedUnit": "PASS",
+      "webTypecheck": "PASS",
+      "doneVerified": 0,
+      "ga": "NO-GO"
+    }
+  },
+  "blocked": ["Sentry DSN", "ASC/Play", "Legal", "DR restore", "LIVE PSP", "Independent QA / VERIFIED"]
 }

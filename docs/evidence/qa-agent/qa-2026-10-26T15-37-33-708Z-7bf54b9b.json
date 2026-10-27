@@ -1,0 +1,63 @@
+{
+  "context": {
+    "runId": "qa-2026-10-26T15-37-33-708Z-7bf54b9b",
+    "projectId": "deepmatch",
+    "commitSha": "6449e06e32d26c0ff8dd32ba30bb1191e63ce4d8",
+    "branch": "feat/w2-core-member-wp1-3",
+    "environment": {
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
+      "allowWrites": false
+    },
+    "startedAt": "2026-10-26T15:37:33.708Z",
+    "suite": "security",
+    "actor": "qa-agent-automated"
+  },
+  "results": [
+    {
+      "id": "DM-QA-P0-004",
+      "outcome": "PASS",
+      "actual": "\n> deepmatch@0.1.0 test:no-leak\n> node scripts/no-leak-public.mjs https://datingvn.com\n\nno-leak scan base=https://datingvn.com\nPASS / status=200 bytes=33779\nPASS /faq status=200 bytes=16919\nPASS /privacy status=200 bytes=42150\nPASS /terms status=200 bytes=33781\nPASS /login status=200 bytes=12175\nPASS /signup status=200 bytes=15040\nPASS /robots.txt status=200 bytes=27\nPASS /sitemap.xml status=200 bytes=2651\nPASS probe /.env status=307\nPASS probe /.git/config status=307\nPASS probe /.ai/NEXT_ACTION.md status=307\nPASS probe /docs/audits/DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md status=307\nPASS probe /api/v1/admin/users status=404\nno-leak PASSED\n",
+      "durationMs": 16108,
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      },
+      "expected": "Public pages do not leak staging banners, service role, or private routes"
+    },
+    {
+      "id": "DM-QA-A-001",
+      "outcome": "SKIPPED",
+      "detail": "RLS_TEST_USER_A_JWT / RLS_TEST_USER_B_JWT unset — deny matrix not executed (gate doc only)",
+      "failureClass": "environment_blocked",
+      "remediation": "Founder/QA: mint disposable staging JWTs into qa.env (not git) then re-run --suite security",
+      "durationMs": 4,
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      },
+      "expected": "Cross-user deny cases reproducible on staging JWTs"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "pass": 1,
+    "fail": 0,
+    "blocked": 0,
+    "skipped": 1,
+    "inconclusive": 0,
+    "notRun": 0,
+    "filteredOut": 15
+  },
+  "openBlockers": [],
+  "releaseRecommendation": "CONDITIONAL",
+  "gaStance": "NO-GO",
+  "costEstimateUsd": 0,
+  "durationMs": 16496,
+  "lifecycleEffect": "QA_PASSED_AUTOMATED",
+  "reviewerSignoff": {
+    "identity": null,
+    "status": "unsigned"
+  }
+}

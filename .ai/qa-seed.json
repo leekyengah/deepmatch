@@ -1,0 +1,11 @@
+{
+  "emailA": "qa_a@deepmatch.test",
+  "emailB": "qa_b@deepmatch.test",
+  "idA": "67a88092-7f0b-4fd1-bb3e-357d1ba98e18",
+  "idB": "cd82631a-fa6f-4b4a-a324-0394dc4074ed",
+  "pairId": "d8bcbc13-442e-4b73-a960-a10ad2af2f08",
+  "conversationId": "c7ba0c83-3070-4699-8af2-2eaf60805b5e",
+  "matchId": "eb398d74-5030-4e15-812e-33782158986a",
+  "pinId": "7baa038e-5acc-43e2-856d-271e09647c9d",
+  "seededAt": "2026-10-26T10:50:28.928Z"
+}

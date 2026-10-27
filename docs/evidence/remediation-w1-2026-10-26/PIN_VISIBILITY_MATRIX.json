@@ -1,0 +1,26 @@
+{
+  "pass": true,
+  "results": {
+    "at": "2026-10-26T15:40:21.604Z",
+    "owner_sees_three_layers": {
+      "pass": true,
+      "count": 3,
+      "err": null
+    },
+    "partner_sees_pins": {
+      "pass": true,
+      "count": 3,
+      "err": null
+    },
+    "anonymous_denied_or_empty": {
+      "pass": true,
+      "count": 0,
+      "err": null
+    },
+    "outsider_denied_or_empty": {
+      "pass": null,
+      "count": null,
+      "err": "no_third_user"
+    }
+  }
+}

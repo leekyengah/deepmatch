@@ -2,6 +2,6 @@
   "framework": "nextjs",
   "regions": ["sin1"],
   "installCommand": "npm install",
-  "buildCommand": "npm run build -w @deepmatch/shared && npm run build -w @deepmatch/admin",
+  "buildCommand": "npm run vercel-build:admin",
   "outputDirectory": "apps/admin/.next"
 }

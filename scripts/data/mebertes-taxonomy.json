@@ -1,0 +1,519 @@
+{
+  "version": 1,
+  "cohort": "Mebertes",
+  "source": "Drive folder taxonomy names only — no Excel cell/PII import",
+  "driveRoot": "1ZZnqjZ996GmAVX6pGn9YzKlmCDmUPlgh",
+  "generatedAt": "2026-10-27T08:06:32.485Z",
+  "entries": [
+    {
+      "region": "HN",
+      "category": "CC DƯƠNG NỘI",
+      "taxonomy_key": "HN::cc dương nội"
+    },
+    {
+      "region": "HN",
+      "category": "Cc Mỹ Sơn Tower. HN",
+      "taxonomy_key": "HN::cc mỹ sơn tower. hn"
+    },
+    {
+      "region": "HN",
+      "category": "CC-NAM CƯỜNG. Hn",
+      "taxonomy_key": "HN::cc-nam cường. hn"
+    },
+    {
+      "region": "HN",
+      "category": "CC.Golden",
+      "taxonomy_key": "HN::cc.golden"
+    },
+    {
+      "region": "HN",
+      "category": "CHU DOANH NGHIEP HA NOI",
+      "taxonomy_key": "HN::chu doanh nghiep ha noi"
+    },
+    {
+      "region": "HN",
+      "category": "CHUNG CU AN BINH HN",
+      "taxonomy_key": "HN::chung cu an binh hn"
+    },
+    {
+      "region": "HN",
+      "category": "Chung cư Five Star Garden",
+      "taxonomy_key": "HN::chung cư five star garden"
+    },
+    {
+      "region": "HN",
+      "category": "CIPUTRA-HN",
+      "taxonomy_key": "HN::ciputra-hn"
+    },
+    {
+      "region": "HN",
+      "category": "CIPUTRA HN. BĐS",
+      "taxonomy_key": "HN::ciputra hn. bđs"
+    },
+    {
+      "region": "HN",
+      "category": "COMPLEX VẠN-PHÚC",
+      "taxonomy_key": "HN::complex vạn-phúc"
+    },
+    {
+      "region": "HN",
+      "category": "CT3 TRUNG VAN",
+      "taxonomy_key": "HN::ct3 trung van"
+    },
+    {
+      "region": "HN",
+      "category": "CT5 mễ trì",
+      "taxonomy_key": "HN::ct5 mễ trì"
+    },
+    {
+      "region": "HN",
+      "category": "CƯ DÂN WESBAY VŨ PHẠM HÀM",
+      "taxonomy_key": "HN::cư dân wesbay vũ phạm hàm"
+    },
+    {
+      "region": "HN",
+      "category": "CƯ DÂN YÊN HÒA SUNSHINE VŨ PHẠM HÀM",
+      "taxonomy_key": "HN::cư dân yên hòa sunshine vũ phạm hàm"
+    },
+    {
+      "region": "HN",
+      "category": "Cư dân Keangnam cập nhật",
+      "taxonomy_key": "HN::cư dân keangnam cập nhật"
+    },
+    {
+      "region": "HN",
+      "category": "DANH BA GELEXIMCO",
+      "taxonomy_key": "HN::danh ba geleximco"
+    },
+    {
+      "region": "HN",
+      "category": "Danh sach khach hang gleximco",
+      "taxonomy_key": "HN::danh sach khach hang gleximco"
+    },
+    {
+      "region": "HN",
+      "category": "Data dự án FLC 265 Cầu Giấy",
+      "taxonomy_key": "HN::data dự án flc 265 cầu giấy"
+    },
+    {
+      "region": "HN",
+      "category": "discovery complex HN",
+      "taxonomy_key": "HN::discovery complex hn"
+    },
+    {
+      "region": "HN",
+      "category": "DU AN ARTEMIS số 3 Lê Trọng Tấn",
+      "taxonomy_key": "HN::du an artemis số 3 lê trọng tấn"
+    },
+    {
+      "region": "HN",
+      "category": "DỰ ÁN CHUNG CƯ ECO GREEN CITY NGUYỄN XIỂN HN.",
+      "taxonomy_key": "HN::dự án chung cư eco green city nguyễn xiển hn."
+    },
+    {
+      "region": "HN",
+      "category": "DỰ-ÁN-CHUNG-CƯ-ECO-GREEN-CITY-NGUYỄN-XIỂN HN.",
+      "taxonomy_key": "HN::dự-án-chung-cư-eco-green-city-nguyễn-xiển hn."
+    },
+    {
+      "region": "HN",
+      "category": "DỰ-ÁN MBLand-Trung-Kính-KHÁCH-KÝ-HHĐ",
+      "taxonomy_key": "HN::dự-án mbland-trung-kính-khách-ký-hhđ"
+    },
+    {
+      "region": "HN",
+      "category": "ECOLIFE LÊ VĂN LƯƠNG",
+      "taxonomy_key": "HN::ecolife lê văn lương"
+    },
+    {
+      "region": "HN",
+      "category": "FIVE STAR GARDEN",
+      "taxonomy_key": "HN::five star garden"
+    },
+    {
+      "region": "HN",
+      "category": "FLC Pham Hung",
+      "taxonomy_key": "HN::flc pham hung"
+    },
+    {
+      "region": "HN",
+      "category": "FLC-Star-Hà đông .HN",
+      "taxonomy_key": "HN::flc-star-hà đông .hn"
+    },
+    {
+      "region": "HN",
+      "category": "Full Goldmark City",
+      "taxonomy_key": "HN::full goldmark city"
+    },
+    {
+      "region": "HN",
+      "category": "GAMUDA",
+      "taxonomy_key": "HN::gamuda"
+    },
+    {
+      "region": "HN",
+      "category": "giam-doc-ha-noi",
+      "taxonomy_key": "HN::giam-doc-ha-noi"
+    },
+    {
+      "region": "HN",
+      "category": "GIÁM ĐỐC MARKETING CÁC CÔNG TY HÀ NỘI",
+      "taxonomy_key": "HN::giám đốc marketing các công ty hà nội"
+    },
+    {
+      "region": "HN",
+      "category": "GLEXIMCO HA DONG (2)",
+      "taxonomy_key": "HN::gleximco ha dong (2)"
+    },
+    {
+      "region": "HN",
+      "category": "GOLD-MARK-CITY",
+      "taxonomy_key": "HN::gold-mark-city"
+    },
+    {
+      "region": "HN",
+      "category": "GoldSeason NGUYEN TUAN (1)",
+      "taxonomy_key": "HN::goldseason nguyen tuan (1)"
+    },
+    {
+      "region": "HN",
+      "category": "GOLDSILK COMPLEX .HĐ HN",
+      "taxonomy_key": "HN::goldsilk complex .hđ hn"
+    },
+    {
+      "region": "HN",
+      "category": "GREEN BAY",
+      "taxonomy_key": "HN::green bay"
+    },
+    {
+      "region": "HN",
+      "category": "Green City",
+      "taxonomy_key": "HN::green city"
+    },
+    {
+      "region": "HN",
+      "category": "HAMONY",
+      "taxonomy_key": "HN::hamony"
+    },
+    {
+      "region": "HN",
+      "category": "HD moncity.HN",
+      "taxonomy_key": "HN::hd moncity.hn"
+    },
+    {
+      "region": "HN",
+      "category": "Hei Tower thanh xuan hn",
+      "taxonomy_key": "HN::hei tower thanh xuan hn"
+    },
+    {
+      "region": "HN",
+      "category": "HN BDS KHÁCH HÀNG INDOCHINA",
+      "taxonomy_key": "HN::hn bds khách hàng indochina"
+    },
+    {
+      "region": "HN",
+      "category": "HOMECITY-TRUNG-KÍNH-4-TÒA",
+      "taxonomy_key": "HN::homecity-trung-kính-4-tòa"
+    },
+    {
+      "region": "HN",
+      "category": "HÀ NỘI -DANH SÁCH KHÁCH HÀNG VIP SỞ HỮU CĂN HỘ ROYAL CITY HÀ NỘI",
+      "taxonomy_key": "HN::hà nội -danh sách khách hàng vip sở hữu căn hộ royal city hà nội"
+    },
+    {
+      "region": "HN",
+      "category": "HÀ NỘI -DANH SÁCH KHÁCH HÀNG VIP THUÊ BAO VÀNG TRẢ SAU VIETTEL TÂY HỒ HÀ NỘI",
+      "taxonomy_key": "HN::hà nội -danh sách khách hàng vip thuê bao vàng trả sau viettel tây hồ hà nội"
+    },
+    {
+      "region": "HN",
+      "category": "HÀ NỘI KH VIP SỞ HỮU CĂN HỘ VIP ROYAL CITY TRONG TỔNG SỐ (2600)",
+      "taxonomy_key": "HN::hà nội kh vip sở hữu căn hộ vip royal city trong tổng số (2600)"
+    },
+    {
+      "region": "HN",
+      "category": "Hội sở ngân hàng đông nam á",
+      "taxonomy_key": "HN::hội sở ngân hàng đông nam á"
+    },
+    {
+      "region": "HN",
+      "category": "IMPERIA GARDEN",
+      "taxonomy_key": "HN::imperia garden"
+    },
+    {
+      "region": "HN",
+      "category": "KH BIDV HN",
+      "taxonomy_key": "HN::kh bidv hn"
+    },
+    {
+      "region": "HN",
+      "category": "KH CT3 CỔ NHUẾ HN",
+      "taxonomy_key": "HN::kh ct3 cổ nhuế hn"
+    },
+    {
+      "region": "HN",
+      "category": "KH GOLD MARK CITY HN",
+      "taxonomy_key": "HN::kh gold mark city hn"
+    },
+    {
+      "region": "HN",
+      "category": "KH MUA CĂN HỘ HỒ GƯƠM PLAZA HÀ NỘI",
+      "taxonomy_key": "HN::kh mua căn hộ hồ gươm plaza hà nội"
+    },
+    {
+      "region": "HN",
+      "category": "KH VIP VINCOM HN",
+      "taxonomy_key": "HN::kh vip vincom hn"
+    },
+    {
+      "region": "HN",
+      "category": "KH ĐĂNG KÝ XEM NHÀ MẪU",
+      "taxonomy_key": "HN::kh đăng ký xem nhà mẫu"
+    },
+    {
+      "region": "HN",
+      "category": "KH-Mipec",
+      "taxonomy_key": "HN::kh-mipec"
+    },
+    {
+      "region": "HN",
+      "category": "KH-sunsquare",
+      "taxonomy_key": "HN::kh-sunsquare"
+    },
+    {
+      "region": "HN",
+      "category": "KH.PG BANK HÀ NỘI VÀ TOÀN VIỆT NAM",
+      "taxonomy_key": "HN::kh.pg bank hà nội và toàn việt nam"
+    },
+    {
+      "region": "HN",
+      "category": "KH BIDV.HN",
+      "taxonomy_key": "HN::kh bidv.hn"
+    },
+    {
+      "region": "HN",
+      "category": "KH Thự Hyundai Hillstate hđ",
+      "taxonomy_key": "HN::kh thự hyundai hillstate hđ"
+    },
+    {
+      "region": "HN",
+      "category": "KHÁCH GỬI TK TẠI AGRIBANK CN -HÀ NỘI",
+      "taxonomy_key": "HN::khách gửi tk tại agribank cn -hà nội"
+    },
+    {
+      "region": "HN",
+      "category": "KHÁCH HÀNG TIỀM NĂNG NGÂN HÀNG VIETCOM BANK SỞ GD HÀ NỘI",
+      "taxonomy_key": "HN::khách hàng tiềm năng ngân hàng vietcom bank sở gd hà nội"
+    },
+    {
+      "region": "HN",
+      "category": "KHÁCH HÀNG VIP HÀ NỘI - TỔNG CÔNG TY CỔ PHẦN VINACONEX.doc",
+      "taxonomy_key": "HN::khách hàng vip hà nội - tổng công ty cổ phần vinaconex.doc"
+    },
+    {
+      "region": "HN",
+      "category": "KHÁCH HÀNG VIP HÀ NỘI - KH VIP BẤT ĐỘNG SẢN Ở HÀ NỘI",
+      "taxonomy_key": "HN::khách hàng vip hà nội - kh vip bất động sản ở hà nội"
+    },
+    {
+      "region": "HN",
+      "category": "KHÁCH HÀNG VIP HÀ NỘI CHỦ DOANH NGHIỆP HÀ NỘI",
+      "taxonomy_key": "HN::khách hàng vip hà nội chủ doanh nghiệp hà nội"
+    },
+    {
+      "region": "HN",
+      "category": "KHÁCH HÀNG VIP HÀ NỘI HỘI VIÊN CÂU LẠC BỘ BẤT ĐỘNG SẢN HÀ NỘI",
+      "taxonomy_key": "HN::khách hàng vip hà nội hội viên câu lạc bộ bất động sản hà nội"
+    },
+    {
+      "region": "HN",
+      "category": "Mandarin Garden Hòa Phát",
+      "taxonomy_key": "HN::mandarin garden hòa phát"
+    },
+    {
+      "region": "HN",
+      "category": "MULBERRY LAND MO LAO",
+      "taxonomy_key": "HN::mulberry land mo lao"
+    },
+    {
+      "region": "HN",
+      "category": "MULBERRY LAND mỗ lao",
+      "taxonomy_key": "HN::mulberry land mỗ lao"
+    },
+    {
+      "region": "HN",
+      "category": "Mễ-Trì-Plaza-File-tổng-hợp",
+      "taxonomy_key": "HN::mễ-trì-plaza-file-tổng-hợp"
+    },
+    {
+      "region": "HN",
+      "category": "MỸ ĐÌNH - GOLDEN",
+      "taxonomy_key": "HN::mỹ đình - golden"
+    },
+    {
+      "region": "HN",
+      "category": "N04AA-CC-NGOẠI-GIAO-ĐOÀN(1)",
+      "taxonomy_key": "HN::n04aa-cc-ngoại-giao-đoàn(1)"
+    },
+    {
+      "region": "HN",
+      "category": "N04AA-CC-NGOẠI-GIAO-ĐOÀN",
+      "taxonomy_key": "HN::n04aa-cc-ngoại-giao-đoàn"
+    },
+    {
+      "region": "HN",
+      "category": "Royal city mới",
+      "taxonomy_key": "HN::royal city mới"
+    },
+    {
+      "region": "HN",
+      "category": "ROYAL TỪ R1 den R6",
+      "taxonomy_key": "HN::royal từ r1 den r6"
+    },
+    {
+      "region": "HN",
+      "category": "ROYAL-CITY HN",
+      "taxonomy_key": "HN::royal-city hn"
+    },
+    {
+      "region": "HN",
+      "category": "season avanue",
+      "taxonomy_key": "HN::season avanue"
+    },
+    {
+      "region": "HN",
+      "category": "STAR-TOWER-HN",
+      "taxonomy_key": "HN::star-tower-hn"
+    },
+    {
+      "region": "HN",
+      "category": "Sun Square Lê Đức Thọ",
+      "taxonomy_key": "HN::sun square lê đức thọ"
+    },
+    {
+      "region": "HN",
+      "category": "THE TWO GAMUDA",
+      "taxonomy_key": "HN::the two gamuda"
+    },
+    {
+      "region": "HN",
+      "category": "Times City",
+      "taxonomy_key": "HN::times city"
+    },
+    {
+      "region": "HN",
+      "category": "TOA 25T1 TDH",
+      "taxonomy_key": "HN::toa 25t1 tdh"
+    },
+    {
+      "region": "HN",
+      "category": "Trang An COMPLEX",
+      "taxonomy_key": "HN::trang an complex"
+    },
+    {
+      "region": "HN",
+      "category": "VH Riverside",
+      "taxonomy_key": "HN::vh riverside"
+    },
+    {
+      "region": "HN",
+      "category": "VHR - HAMONY",
+      "taxonomy_key": "HN::vhr - hamony"
+    },
+    {
+      "region": "HN",
+      "category": "VHR-TRAN DUY HUNG",
+      "taxonomy_key": "HN::vhr-tran duy hung"
+    },
+    {
+      "region": "HN",
+      "category": "VIMECO CT4. A",
+      "taxonomy_key": "HN::vimeco ct4. a"
+    },
+    {
+      "region": "HN",
+      "category": "VINACONEX 1- KHUAT DUY TIEN",
+      "taxonomy_key": "HN::vinaconex 1- khuat duy tien"
+    },
+    {
+      "region": "HN",
+      "category": "VincomBaTrieu",
+      "taxonomy_key": "HN::vincombatrieu"
+    },
+    {
+      "region": "HN",
+      "category": "Vinhome Gardenia",
+      "taxonomy_key": "HN::vinhome gardenia"
+    },
+    {
+      "region": "HN",
+      "category": "Vinhome Metropolis (1)",
+      "taxonomy_key": "HN::vinhome metropolis (1)"
+    },
+    {
+      "region": "HN",
+      "category": "Vinhome Metropolis",
+      "taxonomy_key": "HN::vinhome metropolis"
+    },
+    {
+      "region": "HN",
+      "category": "VINHOMES MY DINH",
+      "taxonomy_key": "HN::vinhomes my dinh"
+    },
+    {
+      "region": "HN",
+      "category": "XUAN MAI COMPLEX HA ĐONG",
+      "taxonomy_key": "HN::xuan mai complex ha đong"
+    },
+    {
+      "region": "HN",
+      "category": "XUAN MAI REVERSHIDE(1)",
+      "taxonomy_key": "HN::xuan mai revershide(1)"
+    },
+    {
+      "region": "HN",
+      "category": "XUAN MAI REVERSHIDE",
+      "taxonomy_key": "HN::xuan mai revershide"
+    },
+    {
+      "region": "HN",
+      "category": "XUÂN MAI MỄ TRÌ",
+      "taxonomy_key": "HN::xuân mai mễ trì"
+    },
+    {
+      "region": "HCM",
+      "category": "CC",
+      "taxonomy_key": "HCM::cc"
+    },
+    {
+      "region": "HCM",
+      "category": "DANH SÁCH BỔ SUNG",
+      "taxonomy_key": "HCM::danh sách bổ sung"
+    },
+    {
+      "region": "HCM",
+      "category": "HỒ CHÍ MINH 2",
+      "taxonomy_key": "HCM::hồ chí minh 2"
+    },
+    {
+      "region": "HCM",
+      "category": "Hồ Chí Minh 1",
+      "taxonomy_key": "HCM::hồ chí minh 1"
+    },
+    {
+      "region": "HCM",
+      "category": "Ô TÔ",
+      "taxonomy_key": "HCM::ô tô"
+    },
+    {
+      "region": "HCM",
+      "category": "ĐIỆN MÁY",
+      "taxonomy_key": "HCM::điện máy"
+    },
+    {
+      "region": "HCM",
+      "category": "CC/CAO CẤP",
+      "taxonomy_key": "HCM::cc/cao cấp"
+    }
+  ]
+}

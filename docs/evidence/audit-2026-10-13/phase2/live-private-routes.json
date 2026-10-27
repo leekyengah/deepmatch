@@ -1,0 +1,186 @@
+﻿[
+    {
+        "path":  "/discover",
+        "status":  307,
+        "location":  "/login?next=%2Fdiscover",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/chat",
+        "status":  307,
+        "location":  "/login?next=%2Fchat",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/me",
+        "status":  307,
+        "location":  "/login?next=%2Fme",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/likes",
+        "status":  307,
+        "location":  "/login?next=%2Flikes",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/couple",
+        "status":  307,
+        "location":  "/login?next=%2Fcouple",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/home",
+        "status":  307,
+        "location":  "/login?next=%2Fhome",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/services",
+        "status":  307,
+        "location":  "/login?next=%2Fservices",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/bookings",
+        "status":  307,
+        "location":  "/login?next=%2Fbookings",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/ai",
+        "status":  307,
+        "location":  "/login?next=%2Fai",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/lifestyle",
+        "status":  307,
+        "location":  "/login?next=%2Flifestyle",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/places/map",
+        "status":  307,
+        "location":  "/login?next=%2Fplaces%2Fmap",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/me/orders",
+        "status":  307,
+        "location":  "/login?next=%2Fme%2Forders",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/checkout/cart",
+        "status":  307,
+        "location":  "/login?next=%2Fcheckout%2Fcart",
+        "cacheControl":  "public, max-age=0, must-revalidate",
+        "pass":  true,
+        "class":  "private"
+    },
+    {
+        "path":  "/",
+        "status":  200,
+        "location":  null,
+        "cacheControl":  "",
+        "pass":  true,
+        "class":  "public"
+    },
+    {
+        "path":  "/login",
+        "status":  200,
+        "location":  null,
+        "cacheControl":  "",
+        "pass":  true,
+        "class":  "public"
+    },
+    {
+        "path":  "/signup",
+        "status":  200,
+        "location":  null,
+        "cacheControl":  "",
+        "pass":  true,
+        "class":  "public"
+    },
+    {
+        "path":  "/legal",
+        "status":  200,
+        "location":  null,
+        "cacheControl":  "",
+        "pass":  true,
+        "class":  "public"
+    },
+    {
+        "path":  "/faq",
+        "status":  200,
+        "location":  null,
+        "cacheControl":  "",
+        "pass":  true,
+        "class":  "public"
+    },
+    {
+        "path":  "/support",
+        "status":  200,
+        "location":  null,
+        "cacheControl":  "",
+        "pass":  true,
+        "class":  "public"
+    },
+    {
+        "path":  "/privacy",
+        "status":  308,
+        "location":  "/legal/privacy",
+        "cacheControl":  "",
+        "pass":  false,
+        "class":  "public"
+    },
+    {
+        "path":  "/terms",
+        "status":  308,
+        "location":  "/legal/terms",
+        "cacheControl":  "",
+        "pass":  false,
+        "class":  "public"
+    },
+    {
+        "path":  "/account-deletion",
+        "status":  200,
+        "location":  null,
+        "cacheControl":  "",
+        "pass":  true,
+        "class":  "public"
+    },
+    {
+        "path":  "/forgot-password",
+        "status":  200,
+        "location":  null,
+        "cacheControl":  "",
+        "pass":  true,
+        "class":  "public"
+    }
+]

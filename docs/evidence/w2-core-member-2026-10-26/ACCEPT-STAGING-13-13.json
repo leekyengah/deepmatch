@@ -1,0 +1,22 @@
+{
+  "runAt": "2026-10-26T10:34:00Z",
+  "base": "https://datingvn.com",
+  "commitTipAtRun": "218e954",
+  "result": "13/13 PASS",
+  "cases": [
+    "health",
+    "discovery_candidates_rls",
+    "rls_peer_profile_mutual",
+    "rls_private_note_deny",
+    "pair_pins_three_layers",
+    "chat_messages_readable",
+    "chat_send_message",
+    "mutual_match_exists",
+    "media_signed_upload",
+    "concierge_offerings",
+    "concierge_bookings_own",
+    "concierge_booking_rls_deny",
+    "consent_self_select"
+  ],
+  "notes": "Synthetic QA only. NOT DONE_VERIFIED. LIVE PSP not exercised."
+}

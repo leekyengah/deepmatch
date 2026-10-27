@@ -1,0 +1,11 @@
+{
+  "projectId": "deepmatch",
+  "displayName": "DeepMatch",
+  "defaultEnvironmentId": "dm-staging",
+  "gaDefaultStance": "NO-GO",
+  "tracker": {
+    "kind": "google_sheets",
+    "spreadsheetId": "1R_de74Szc0xbPZEJpXcoKrNrX5QESi39FYBRESDm6D8",
+    "writeEnabled": false
+  }
+}

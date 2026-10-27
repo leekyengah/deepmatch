@@ -3,7 +3,6 @@ tools
 .git
 .env.local
 **/.env.local
-apps/admin
 docs
 tests
 .ai

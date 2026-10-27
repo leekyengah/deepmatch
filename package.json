@@ -8,17 +8,53 @@
     "packages/*"
   ],
   "scripts": {
+    "qa:deepmatch": "npm run qa -w @deepmatch/qa --",
+    "test:qa-core": "npm run test -w @tradingbase/qa-core && npm run test -w @tradingbase/qa-adapters && npm run test -w @deepmatch/qa",
     "dev:web": "npm run dev -w @deepmatch/web",
     "dev:admin": "npm run dev -w @deepmatch/admin",
+    "dev:mobile": "npm run go -w @deepmatch/mobile",
+    "dev:mobile:tunnel": "npm run go:tunnel -w @deepmatch/mobile",
+    "dev:all": "node scripts/dev-all.mjs",
     "build": "npm run build -w @deepmatch/shared && npm run build -w @deepmatch/web && npm run build -w @deepmatch/admin",
-    "lint": "npm run lint -w @deepmatch/shared && npm run lint -w @deepmatch/web && npm run lint -w @deepmatch/admin",
-    "typecheck": "npm run typecheck -w @deepmatch/shared && npm run typecheck -w @deepmatch/web && npm run typecheck -w @deepmatch/admin",
-    "test": "npm run test -w @deepmatch/shared",
-    "test:unit": "npm run test -w @deepmatch/shared",
+    "vercel-build": "npm run vercel-build:web",
+    "vercel-build:web": "node scripts/vercel-build-web.mjs",
+    "vercel-build:admin": "node scripts/vercel-build-admin.mjs",
+    "check:workspaces": "node scripts/check-workspace-resolution.mjs",
+    "lint": "npm run lint -w @deepmatch/i18n && npm run lint -w @deepmatch/legal-content && npm run lint -w @deepmatch/shared && npm run lint -w @deepmatch/design-tokens && npm run lint -w @tradingbase/qa-core && npm run lint -w @tradingbase/qa-adapters && npm run lint -w @deepmatch/qa && npm run lint -w @deepmatch/web && npm run lint -w @deepmatch/admin",
+    "typecheck": "npm run typecheck -w @deepmatch/i18n && npm run typecheck -w @deepmatch/legal-content && npm run typecheck -w @deepmatch/shared && npm run typecheck -w @deepmatch/design-tokens && npm run typecheck -w @tradingbase/qa-core && npm run typecheck -w @tradingbase/qa-adapters && npm run typecheck -w @deepmatch/qa && npm run typecheck -w @deepmatch/web && npm run typecheck -w @deepmatch/admin",
+    "test": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content && npm run test -w @deepmatch/design-tokens && npm run test:qa-core",
+    "test:unit": "npm run test -w @deepmatch/shared && npm run test -w @deepmatch/i18n && npm run test -w @deepmatch/legal-content && npm run test -w @deepmatch/design-tokens && npm run test:qa-core",
+    "i18n:parity": "node scripts/i18n-parity.mjs",
+    "test:integration": "npx tsx --test tests/integration/rls-deny.test.ts",
+    "test:e2e": "playwright test",
+    "seed:rls": "node --env-file=.env.local scripts/seed-rls-users.mjs",
+    "seed:e2e": "node --env-file=.env.local scripts/seed-e2e-user.mjs",
+    "seed:qa": "node --env-file=.env.local scripts/seed-qa-pair.mjs",
+    "seed:qa-matrix": "node --env-file=.env.local scripts/seed-qa-matrix.mjs",
+    "seed:catalog": "node --env-file=.env.local scripts/seed-catalog-mock-60.mjs",
+    "test:no-leak": "node scripts/no-leak-public.mjs",
+    "accept:staging": "node --env-file=.env.local scripts/accept-staging.mjs",
+    "mint:rls-jwts": "node --env-file=.env.local scripts/mint-rls-test-jwts.mjs",
+    "critical-path:smoke": "node --env-file=.env.local scripts/critical-path-smoke.mjs",
+    "grant:owner": "node --env-file=.env.local scripts/grant-admin-owner.mjs",
+    "outbox:worker": "node --env-file=.env.local scripts/outbox-worker.mjs",
     "format:check": "echo \"format check placeholder — prettier optional\"",
-    "ci": "npm run lint && npm run typecheck && npm run test && npm run build"
+    "ci": "npm run check:workspaces && npm run lint && npm run typecheck && npm run test && npm run build",
+    "postinstall": "node scripts/link-mobile-expo-modules.mjs",
+    "link:mobile-expo": "node scripts/link-mobile-expo-modules.mjs"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@expo/json-file": "~11.0.1",
+    "@playwright/test": "^1.49.1"
+  },
+  "overrides": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "allowScripts": {
+    "ffmpeg-static@5.3.0": true
   }
 }

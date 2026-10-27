@@ -1,0 +1,198 @@
+{
+  "context": {
+    "runId": "qa-2026-10-26T10-01-02-566Z-99ee505c",
+    "projectId": "deepmatch",
+    "commitSha": "968ca50c3dd8a1c8d36a430f6879cf17ad469bc7",
+    "branch": "feat/w2-core-member-wp1-3",
+    "environment": {
+      "id": "dm-staging",
+      "baseUrl": "https://datingvn.com",
+      "kind": "staging",
+      "allowWrites": false
+    },
+    "startedAt": "2026-10-26T10:01:02.566Z",
+    "suite": "w2",
+    "actor": "qa-agent-automated"
+  },
+  "results": [
+    {
+      "id": "DM-QA-P0-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w2",
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      }
+    },
+    {
+      "id": "DM-QA-P0-002",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w2",
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      }
+    },
+    {
+      "id": "DM-QA-P0-003",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w2",
+      "requirements": {
+        "fixId": "FIX26-011",
+        "auditId": "AUD26-011"
+      }
+    },
+    {
+      "id": "DM-QA-P0-004",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w2",
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      }
+    },
+    {
+      "id": "DM-QA-P0-005",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w2",
+      "requirements": {
+        "fixId": "FIX26-003",
+        "auditId": "AUD26-003"
+      }
+    },
+    {
+      "id": "DM-QA-P0-006",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w2",
+      "requirements": {
+        "other": [
+          "QA-GATE-7"
+        ]
+      }
+    },
+    {
+      "id": "DM-QA-P0-007",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w2",
+      "requirements": {
+        "fixId": "FIX26-011"
+      }
+    },
+    {
+      "id": "DM-QA-A-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w2",
+      "requirements": {
+        "fixId": "FIX26-018",
+        "auditId": "AUD26-018"
+      }
+    },
+    {
+      "id": "DM-QA-H-001",
+      "outcome": "SKIPPED",
+      "detail": "suite filter w2",
+      "requirements": {
+        "other": [
+          "coverage-H"
+        ]
+      }
+    },
+    {
+      "id": "DM-QA-W2-001",
+      "outcome": "PASS",
+      "actual": "▶ normalizeIntent\n  ✔ maps canonical and legacy web tokens (1.6585ms)\n  ✔ rejects unknown (0.3711ms)\n  ✔ isCanonicalIntent (0.2384ms)\n✔ normalizeIntent (4.3411ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 537.5459\n",
+      "durationMs": 3243,
+      "requirements": {
+        "fixId": "FIX26-022",
+        "auditId": "AUD26-022"
+      },
+      "expected": "normalizeIntent maps legacy + canonical intents"
+    },
+    {
+      "id": "DM-QA-W2-002",
+      "outcome": "PASS",
+      "actual": "▶ evaluateDiscoverMediaGate\n  ✔ blocks under 3 images (1.605ms)\n  ✔ allows 3–10 images and ≤2 videos (0.2555ms)\n  ✔ blocks over max images or videos (0.2744ms)\n✔ evaluateDiscoverMediaGate (4.4467ms)\nℹ tests 3\nℹ suites 1\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 591.161\n",
+      "durationMs": 3454,
+      "requirements": {
+        "fixId": "FIX26-023",
+        "auditId": "AUD26-023"
+      },
+      "expected": "discover-gate unit enforces minimum photos"
+    },
+    {
+      "id": "DM-QA-W2-003",
+      "outcome": "PASS",
+      "actual": "▶ isAgeEligible\n  ✔ allows 18+ (13.5939ms)\n  ✔ denies under 18 (0.6705ms)\n  ✔ boundary: exactly 18 on birthday is eligible (0.5785ms)\n  ✔ boundary: day before 18th birthday is ineligible (0.6038ms)\n  ✔ denies invalid date (2.4044ms)\n  ✔ rejects API-style bypass attempts with malformed ISO (1.3457ms)\n✔ isAgeEligible (26.7157ms)\nℹ tests 6\nℹ suites 1\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1464.7982\n",
+      "durationMs": 5354,
+      "requirements": {
+        "fixId": "FIX26-017",
+        "auditId": "AUD26-017"
+      },
+      "expected": "isAgeEligible rejects underage"
+    },
+    {
+      "id": "DM-QA-W2-004",
+      "outcome": "PASS",
+      "actual": "▶ isEmailVerified\n  ✔ requires email_confirmed_at (2.1835ms)\n✔ isEmailVerified (5.5551ms)\n▶ isUnverifiedAllowedPath\n  ✔ allows auth and legal surfaces (0.5677ms)\n  ✔ blocks dating surfaces (0.3156ms)\n✔ isUnverifiedAllowedPath (1.2427ms)\nℹ tests 3\nℹ suites 2\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 857.7662\n",
+      "durationMs": 5528,
+      "requirements": {
+        "fixId": "FIX26-016",
+        "auditId": "AUD26-016"
+      },
+      "expected": "email-verified unit PASS"
+    },
+    {
+      "id": "DM-QA-W2-005",
+      "outcome": "PASS",
+      "actual": "status=200 emptyReason=NO_MATCH candidates=0",
+      "durationMs": 2540,
+      "requirements": {
+        "fixId": "FIX26-028",
+        "auditId": "AUD26-028"
+      },
+      "expected": "Authenticated discovery returns candidates or emptyReason"
+    },
+    {
+      "id": "DM-QA-W2-006",
+      "outcome": "FAIL",
+      "actual": "guest=404 authed_empty=404",
+      "detail": "Destructive unmatch against live QA mutual match NOT executed (preserve fixture)",
+      "remediation": "Add disposable match seed for unmatch happy-path E2E",
+      "durationMs": 692,
+      "requirements": {
+        "fixId": "FIX26-028"
+      },
+      "expected": "Guest denied; authed empty body not 500; no fixture destroy"
+    },
+    {
+      "id": "DM-QA-W2-007",
+      "outcome": "PASS",
+      "actual": "status=200",
+      "durationMs": 597,
+      "requirements": {
+        "fixId": "FIX26-027",
+        "auditId": "AUD26-027"
+      },
+      "expected": "QA user can read own profile via API when Bearer [REDACTED]"
+    }
+  ],
+  "summary": {
+    "total": 16,
+    "pass": 6,
+    "fail": 1,
+    "blocked": 0,
+    "skipped": 9,
+    "inconclusive": 0,
+    "notRun": 0
+  },
+  "openBlockers": [],
+  "releaseRecommendation": "NO-GO",
+  "gaStance": "NO-GO",
+  "costEstimateUsd": 0,
+  "durationMs": 21861,
+  "lifecycleEffect": "QA_FAILED",
+  "reviewerSignoff": {
+    "identity": null,
+    "status": "unsigned"
+  }
+}

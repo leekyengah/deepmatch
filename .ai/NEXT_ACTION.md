@@ -1,21 +1,21 @@
-# NEXT ACTION
+﻿# NEXT ACTION
 
-## Done
+## Immediate (Eng — residual after P1 closure)
+1. Android **DEVICE_TEST** on APK `e12006fa` (SHA-256 `7EF84ADA…E30C`).
+2. Dual-account like → match → chat → unmatch + media IDOR refresh.
+3. `npm run seed:qa` then commerce sandbox e2e (QA_JWT_A).
+4. iOS device/TestFlight — BLOCKED_EXTERNAL (ASC).
 
-- [x] Supabase cloud project `deepmatch` (`zzqpvjdyvjarpphqhaze`, ap-southeast-1)
-- [x] Linked + `db push` migrations
-- [x] Local `.env.local` written (gitignored) for root/web/admin
+## Staging (done this cycle)
+- Deploy `dpl_2VvmVkdMR2rHRVJ9bQSC8XXkzyCZ` @ datingvn.com · tip `798c199`
+- Member leakage hitCount=0 · accept 13/13 · DEMO catalog deactivated · Synthetic isolated
 
-## Need Founder (1 phút)
+## Founder (blocking release)
+1. GA remains **NO-GO**
+2. PR #3 merge decision (do not self-merge)
+3. Independent QA handoff
+4. Apple ASC / Play / Sentry out-of-band
+5. Legal/store; **no LIVE PSP**
 
-Vercel CLI token hiện invalid / login cần TTY. Làm **một** trong hai:
-
-1. Trong terminal repo: `npx vercel login` → Continue with GitHub → rồi báo mình  
-2. Hoặc tạo token tại https://vercel.com/account/tokens → gửi token (hoặc set `$env:VERCEL_TOKEN`) — mình sẽ tạo `deepmatch-web` + `deepmatch-admin` và gắn env
-
-## After Vercel login
-
-```bash
-npx vercel --cwd apps/web --yes
-npx vercel --cwd apps/admin --yes
-```
+## Hard stops
+- No production writes, Store submit, Independent VERIFIED, GA GO, LIVE PSP.

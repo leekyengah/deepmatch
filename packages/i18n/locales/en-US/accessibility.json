@@ -1,0 +1,12 @@
+{
+  "skipToContent": "Skip to content",
+  "openMenu": "Open menu",
+  "closeMenu": "Close menu",
+  "loadingRegion": "Loading content",
+  "errorRegion": "Error message",
+  "successRegion": "Success message",
+  "requiredField": "Required field",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "languageSwitcher": "Choose interface language"
+}
