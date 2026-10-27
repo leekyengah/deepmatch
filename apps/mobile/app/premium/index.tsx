@@ -74,15 +74,19 @@ export default function PremiumScreenRoute() {
     <PremiumScreen>
       <PremiumHeader title={t("mobile.premiumTitle")} />
       <StatusBadge
-        label={entitled ? "Entitled" : "BLOCKED_EXTERNAL · LIVE PSP"}
-        tone={entitled ? "good" : "danger"}
+        label={entitled ? t("commerce.premiumActive") || "Premium" : t("mobile.servicesPreviewBadge")}
+        tone={entitled ? "good" : "gold"}
       />
       <Text style={styles.price}>499.000đ / tháng</Text>
       <Text style={styles.body}>{t("mobile.premiumSandboxNote")}</Text>
       <View style={{ height: spacing[3] }} />
-      <PremiumButton label="Sandbox checkout" onPress={sandboxCheckout} />
+      <PremiumButton label={t("mobile.premiumCheckoutCta")} onPress={sandboxCheckout} />
       <View style={{ height: spacing[2] }} />
-      <PremiumButton label="Apple/Google IAP (dev build)" variant="outline" onPress={tryIap} />
+      <PremiumButton
+        label={t("commerce.restorePurchases") || "Restore purchases"}
+        variant="outline"
+        onPress={tryIap}
+      />
     </PremiumScreen>
   );
 }

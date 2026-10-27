@@ -188,7 +188,7 @@
   "osmEmptyPins": "Chưa có ghim gắn tọa độ. Dùng “Tìm tọa độ” từ tên địa điểm hoặc nhập lat/lng thủ công.",
   "osmClickHint": "Chạm bản đồ để điền vĩ độ / kinh độ cho ghim mới.",
   "addMediaLabel": "Ảnh tùy chọn (riêng cặp đôi)",
-  "addMediaHint": "Lưu couple_private qua signed upload (R2 hoặc Supabase). Không dùng thanh toán LIVE.",
+  "addMediaHint": "Ảnh chỉ dành cho không gian sánh đôi. Tải lên qua liên kết bảo mật có thời hạn ngắn.",
   "addMediaTypeError": "Dùng JPEG, PNG hoặc WebP.",
   "addMediaSizeError": "Ảnh dưới 10MB.",
   "addMediaIntentFailed": "Không khởi tạo được upload media.",

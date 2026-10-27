@@ -255,23 +255,8 @@ export function CheckoutClient({
               <p className="text-xs text-dm-muted">
                 {t("commerce.checkoutOrderId")}: {order.id.slice(0, 8)}…
               </p>
-              <div className="flex flex-wrap justify-center gap-2">
-                <Button
-                  type="button"
-                  disabled={busy}
-                  onClick={() => void act("sandbox_succeed")}
-                >
-                  {t("commerce.checkoutSimulatePaid")}
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  disabled={busy}
-                  onClick={() => void act("sandbox_fail")}
-                >
-                  {t("commerce.checkoutSimulateFail")}
-                </Button>
-              </div>
+              {/* Sandbox succeed/fail controls removed from member UI (AUD leak).
+                  Engineers use sandbox webhook — not customer-facing simulate CTAs. */}
             </Card>
           ) : null}
 

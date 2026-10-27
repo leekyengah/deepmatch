@@ -72,9 +72,9 @@ export default function PlacesScreen() {
     <PremiumScreen>
       <PremiumHeader title={t("mobile.placesTitle")} subtitle={t("nav.places")} />
       {!mapConfigured ? (
-        <StatusBadge label="BLOCKED_EXTERNAL · Maps keys" tone="danger" />
+        <StatusBadge label={t("mobile.placesBlocked")} tone="gold" />
       ) : (
-        <StatusBadge label="Map token present" tone="good" />
+        <StatusBadge label={t("mobile.placesTitle")} tone="good" />
       )}
       <Text style={styles.note}>{t("mobile.placesBlocked")}</Text>
       <FlatList

@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getServerTranslator } from "@/lib/i18n/server";
 import { safeNextPath } from "@/lib/safe-next";
 
 const OWNER_EMAILS = new Set(
@@ -25,7 +26,9 @@ export async function loginAction(formData: FormData) {
     password,
   });
   if (error) {
-    const q = new URLSearchParams({ error: error.message });
+    const { t } = await getServerTranslator();
+    // Never reflect raw IdP/Supabase messages to the URL or UI.
+    const q = new URLSearchParams({ error: t("auth.loginFailed") });
     if (next !== "/me") q.set("next", next);
     redirect(`/login?${q.toString()}`);
   }

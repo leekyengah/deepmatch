@@ -57,7 +57,7 @@ export async function signupAction(formData: FormData) {
   });
 
   if (error) {
-    redirect(signupErrorUrl(error.message, next));
+    redirect(signupErrorUrl(t("auth.signupFailed"), next));
   }
 
   const userId = data.user?.id;

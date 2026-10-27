@@ -158,7 +158,7 @@ export function HomeDashboard({
                 </h2>
                 {!useLiveSuggests ? (
                   <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[#A88A62]">
-                    DEMO — không phải hồ sơ thật
+                    Gợi ý minh họa — chưa phải gợi ý từ hồ sơ thật
                   </p>
                 ) : null}
               </div>
@@ -214,7 +214,7 @@ export function HomeDashboard({
                     ) : null}
                     {!p.live ? (
                       <span className="absolute right-3 top-3 rounded-full bg-[#A88A62] px-2 py-1 text-[10px] font-bold text-white">
-                        DEMO
+                        Minh họa
                       </span>
                     ) : null}
                   </div>
@@ -368,7 +368,7 @@ export function HomeDashboard({
               Hoạt động gần đây
             </h2>
             <p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-[#A88A62]">
-              DEMO minh họa
+              Minh họa
             </p>
             <ul className="mt-4 space-y-3">
               {HOME_ACTIVITY.map((a) => (
@@ -389,7 +389,7 @@ export function HomeDashboard({
             <div className="flex items-start justify-between gap-2">
               <div>
                 <p className="text-[10px] font-extrabold uppercase tracking-[1.5px] text-[#A88A62]">
-                  DeepMatch Concierge · BETA
+                  DeepMatch Concierge
                 </p>
                 <h2 className="mt-1 font-display text-xl font-semibold text-[#241A1C]">
                   Trợ lý AI của bạn

@@ -52,7 +52,7 @@ export default function HomeHubScreen() {
     { href: "/(tabs)/discover", title: t("nav.explore"), body: t("home.tileDiscoverBody") },
     { href: "/(tabs)/chat", title: t("nav.messages"), body: t("home.tileChatBody") },
     { href: "/places/", title: t("mobile.hubPlaces"), body: t("nav.places") },
-    { href: "/lifestyle/", title: t("mobile.hubLifestyle"), body: "DEMO" },
+    { href: "/lifestyle/", title: t("mobile.hubLifestyle"), body: t("mobile.hubLifestyleBody") },
     { href: "/services/", title: t("mobile.hubServices"), body: t("nav.companion") },
     { href: "/premium/", title: t("mobile.hubPremium"), body: t("mobile.premiumSandboxNote") },
     { href: "/notifications", title: t("mobile.hubNotifications"), body: t("nav.notificationsAria") },

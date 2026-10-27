@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-27T08:40:00Z",
+  "cohort": "Mebertes",
+  "host": "zzqpvjdyvjarpphqhaze.supabase.co",
+  "target": 5000,
+  "registry": 5000,
+  "profiles": 5000,
+  "taxonomyEntries": 102,
+  "discover": {
+    "discovery_opt_in": true,
+    "hidden_from_discovery": false
+  },
+  "policy": {
+    "piiImport": false,
+    "source": "Drive folder/file names only",
+    "purge": "CEO-gated via scripts/purge-mebertes.mjs --ceo-approve --confirm=Mebertes --execute"
+  },
+  "artifacts": {
+    "migration": "supabase/migrations/20261027150000_mebertes_cohort.sql",
+    "seed": "scripts/seed-mebertes.mjs",
+    "purge": "scripts/purge-mebertes.mjs",
+    "taxonomy": "scripts/data/mebertes-taxonomy.json",
+    "vault": ".ai/mebertes.env.ps1"
+  },
+  "note": "Synthetic only; no Excel cell/PII. Password only in gitignored vault."
+}

@@ -82,7 +82,7 @@ export default function ServicesScreen() {
   return (
     <PremiumScreen>
       <PremiumHeader title={t("mobile.servicesTitle")} subtitle={t("nav.companion")} />
-      <StatusBadge label="Sandbox · no LIVE charge" tone="gold" />
+      <StatusBadge label={t("mobile.servicesPreviewBadge")} tone="gold" />
       <FlatList
         data={items}
         keyExtractor={(o) => o.id}

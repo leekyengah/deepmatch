@@ -22,7 +22,7 @@ export async function forgotPasswordAction(formData: FormData) {
 
   if (error) {
     redirect(
-      `/forgot-password?error=${encodeURIComponent(error.message)}`,
+      `/forgot-password?error=${encodeURIComponent(t("auth.resetSendFailed"))}`,
     );
   }
 

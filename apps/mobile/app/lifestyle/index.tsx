@@ -67,7 +67,7 @@ export default function LifestyleScreen() {
   return (
     <PremiumScreen>
       <PremiumHeader title={t("mobile.lifestyleTitle")} />
-      <StatusBadge label="DEMO / sandbox" tone="gold" />
+      <StatusBadge label={t("mobile.lifestylePreviewBadge")} tone="gold" />
       <FlatList
         data={items}
         keyExtractor={(p) => p.id}

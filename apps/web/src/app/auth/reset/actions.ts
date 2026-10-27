@@ -32,7 +32,9 @@ export async function resetPasswordAction(formData: FormData) {
 
   const { error } = await supabase.auth.updateUser({ password });
   if (error) {
-    redirect(`/auth/reset?error=${encodeURIComponent(error.message)}`);
+    redirect(
+      `/auth/reset?error=${encodeURIComponent(t("auth.resetFailed"))}`,
+    );
   }
 
   redirect("/me?password_updated=1");

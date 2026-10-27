@@ -188,7 +188,7 @@
   "osmEmptyPins": "No pins with coordinates yet. Use “Find coordinates” from a place name or enter lat/lng manually.",
   "osmClickHint": "Click the map to fill latitude / longitude for a new pin.",
   "addMediaLabel": "Optional photo (couple-private)",
-  "addMediaHint": "Stored as couple_private via signed upload (R2 or Supabase). Not used for LIVE billing.",
+  "addMediaHint": "Photos stay private to your couple space. Uploads use a short-lived secure link.",
   "addMediaTypeError": "Use JPEG, PNG, or WebP.",
   "addMediaSizeError": "Photo must be under 10MB.",
   "addMediaIntentFailed": "Could not start media upload.",
