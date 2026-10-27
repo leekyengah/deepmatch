@@ -1,14 +1,17 @@
 ﻿# NEXT ACTION
 
-## Immediate (Eng — unblocked)
-1. **Redeploy staging web** — leakage fixes: checkout simulate removed, auth error sanitization, commerce/AI/couple/home copy.
-2. **EAS Android preview rebuild** — premium/places badges + prior admin logout + i18n.
-3. Sanitize Lifestyle catalog seed (`DEMO Partner` / `Fictional seed` / `Synthetic *`) or gate Lifestyle.
-4. Dual-account staging: like → match → chat → unmatch + media IDOR.
-5. Audit pack: `docs/evidence/full-product-audit-2026-10-27/` (+ matrix from inventory agent).
+## Immediate (Eng — residual after P1 closure)
+1. Android **DEVICE_TEST** on APK `e12006fa` (SHA-256 `7EF84ADA…E30C`).
+2. Dual-account like → match → chat → unmatch + media IDOR refresh.
+3. `npm run seed:qa` then commerce sandbox e2e (QA_JWT_A).
+4. iOS device/TestFlight — BLOCKED_EXTERNAL (ASC).
+
+## Staging (done this cycle)
+- Deploy `dpl_2VvmVkdMR2rHRVJ9bQSC8XXkzyCZ` @ datingvn.com · tip `798c199`
+- Member leakage hitCount=0 · accept 13/13 · DEMO catalog deactivated · Synthetic isolated
 
 ## Founder (blocking release)
-1. `docs/evidence/final-release-closure-2026-10-26/12_FOUNDER_GO_NO_GO.md` → **NO-GO**
+1. GA remains **NO-GO**
 2. PR #3 merge decision (do not self-merge)
 3. Independent QA handoff
 4. Apple ASC / Play / Sentry out-of-band

@@ -1,0 +1,47 @@
+{
+  "id": "e12006fa-9449-4952-b0f1-3e1f5ffa263c",
+  "status": "FINISHED",
+  "platform": "ANDROID",
+  "artifacts": {
+    "buildUrl": "https://expo.dev/artifacts/eas/UtunApj594OvrqMZ3QNSrGhIv_y7FOxUxKwk_vSPYeg.apk",
+    "applicationArchiveUrl": "https://expo.dev/artifacts/eas/UtunApj594OvrqMZ3QNSrGhIv_y7FOxUxKwk_vSPYeg.apk"
+  },
+  "fingerprint": {
+    "id": "01a17c19-4013-7d9d-b97d-829f6ec398cb",
+    "hash": "acc3e436f6203cf8ccafa4a9feba015ddf91f922"
+  },
+  "initiatingActor": {
+    "id": "2b4cdfea-ed34-451c-a34a-92715306b5c1",
+    "displayName": "kyengah"
+  },
+  "logFiles": [
+    "https://storage.googleapis.com/eas-workflows-production/logs/af381d32-4497-4ad7-bdf7-e75089def85b/e12006fa-9449-4952-b0f1-3e1f5ffa263c/2026-10-27T09%3A20%3A13Z-d2a1b538-15f8-494b-9c15-bcc7a76031ac.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=www-production%40exponentjs.iam.gserviceaccount.com%2F20261027%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261027T093929Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5ac721272e3cb3f0c91afd418a35f8207d6e3ec97bd0195be6f95e52ae2dd8d072f423a5f6372c7294fed1b7c25bdbcc70d52f30633f0f2521174295933cffbe26b69ea7797e03c31f695527e6d145ee59bc0f80224bb55aafbbbaf46b9baf069c7822e7d8c3e500ad72f7a71ba63b97d03e5acf47ce9dc8a5dfc1125714b42ecc5826a15ad492cd7d90e7bef4f1ce08b5cb82a656c38cc7d2361485a42a3947426a85ff612548bef7acd8bf622c74a6f2f2287007b30240fd274976bd86eadf687bc0de2e141d6c9b216aea92e4c6f62903afcb7ef46faab5232114dec5290d6bb059848b716e3bbf8c193c17c66097170a676e724c62e0eaea2b9c2c5bc482"
+  ],
+  "project": {
+    "id": "af381d32-4497-4ad7-bdf7-e75089def85b",
+    "name": "deepmatch",
+    "slug": "deepmatch",
+    "ownerAccount": {
+      "id": "a86bd359-e928-490b-bb0f-0ec3efc6e120",
+      "name": "kyengah"
+    }
+  },
+  "distribution": "INTERNAL",
+  "buildProfile": "preview",
+  "sdkVersion": "57.0.0",
+  "appVersion": "1.0.0",
+  "appBuildVersion": "1",
+  "gitCommitHash": "7e724d153b5ef68fb758cf083cc4fd9344f992ca",
+  "gitCommitMessage": "fix(p1): filter synthetic cohorts from home suggest fallback\n\nHome direct pool sample skipped discovery cohort isolation and could surface Synthetic Mebertes bios to organic QA members.\n\nCo-authored-by: Cursor <cursoragent@cursor.com>",
+  "priority": "NORMAL",
+  "createdAt": "2026-10-27T09:20:09.369Z",
+  "updatedAt": "2026-10-27T09:33:45.905Z",
+  "completedAt": "2026-10-27T09:33:45.752Z",
+  "expirationDate": "2026-11-10T09:20:09.447Z",
+  "isForIosSimulator": false,
+  "metrics": {
+    "buildWaitTime": 3846,
+    "buildQueueTime": 7053,
+    "buildDuration": 805484
+  }
+}
