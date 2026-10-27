@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { evaluateDiscoverMediaGate } from "@deepmatch/shared";
 import { getRouteUser } from "@/lib/supabase/route";
 import { jsonError, makeRequestId } from "@/lib/api-error";
 
@@ -41,8 +42,10 @@ export async function GET(req: NextRequest) {
   });
 
   const approvedCount = approved.length;
-  const discoverEligible = approvedCount >= 3 && approvedCount <= 10;
-  const videoOk = videos.length <= 2;
+  const gate = evaluateDiscoverMediaGate({
+    approvedOrPendingImages: approvedCount,
+    videoCount: videos.length,
+  });
 
   return NextResponse.json({
     data: {
@@ -53,15 +56,11 @@ export async function GET(req: NextRequest) {
         approved_or_pending: approvedCount,
       },
       gate: {
-        min_images: 3,
+        min_images: 0,
         max_images: 10,
         max_videos: 2,
-        discover_eligible: discoverEligible && videoOk,
-        reasons: [
-          ...(approvedCount < 3 ? ["need_min_3_images"] : []),
-          ...(approvedCount > 10 ? ["over_max_10_images"] : []),
-          ...(!videoOk ? ["over_max_2_videos"] : []),
-        ],
+        discover_eligible: gate.discoverEligible,
+        reasons: gate.reasons,
       },
     },
     meta: { request_id: requestId },

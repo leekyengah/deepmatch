@@ -3,10 +3,20 @@ import { describe, it } from "node:test";
 import { evaluateDiscoverMediaGate } from "./discover-gate";
 
 describe("evaluateDiscoverMediaGate", () => {
-  it("blocks under 3 images", () => {
+  it("allows zero images by default (photos optional)", () => {
+    const r = evaluateDiscoverMediaGate({
+      approvedOrPendingImages: 0,
+      videoCount: 0,
+    });
+    assert.equal(r.discoverEligible, true);
+    assert.equal(r.reasons.length, 0);
+  });
+
+  it("still enforces explicit minImages when provided", () => {
     const r = evaluateDiscoverMediaGate({
       approvedOrPendingImages: 2,
       videoCount: 0,
+      minImages: 3,
     });
     assert.equal(r.discoverEligible, false);
     assert.ok(r.reasons.includes("need_min_3_images"));
