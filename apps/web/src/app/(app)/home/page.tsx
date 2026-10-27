@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { isDiscoverCohortVisible } from "@deepmatch/shared";
 import { createClient } from "@/lib/supabase/server";
 import { resolveHomeState } from "@/lib/home-state";
 import {
@@ -144,14 +145,29 @@ export default async function PersonaHomePage() {
   // If internal fetch unavailable, try direct pool sample with avatars.
   if (suggests.length === 0 && profile?.discovery_opt_in) {
     const backend = getStorageBackend();
-    const { data: pool } = await supabase
+    const { data: meCohortRow } = await supabase
       .from("profiles")
-      .select("id, display_name, birth_date, fuzzy_region, avatar_path, bio")
+      .select("cohort")
+      .eq("id", user.id)
+      .maybeSingle();
+    const viewerCohort =
+      typeof meCohortRow?.cohort === "string" ? meCohortRow.cohort : null;
+    const { data: poolRaw } = await supabase
+      .from("profiles")
+      .select("id, display_name, birth_date, fuzzy_region, avatar_path, bio, cohort")
       .eq("discovery_opt_in", true)
       .eq("hidden_from_discovery", false)
       .neq("id", user.id)
-      .limit(3);
-    for (const p of pool ?? []) {
+      .limit(24);
+    const pool = (poolRaw ?? [])
+      .filter((p) =>
+        isDiscoverCohortVisible(
+          viewerCohort,
+          typeof p.cohort === "string" ? p.cohort : null,
+        ),
+      )
+      .slice(0, 3);
+    for (const p of pool) {
       let photo: string | null = null;
       if (p.avatar_path) {
         try {
