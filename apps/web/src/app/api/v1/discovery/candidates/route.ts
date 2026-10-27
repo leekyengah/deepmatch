@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import {
   INTENT_GOAL_ALIASES,
   MIN_AGE_DEFAULT,
-  evaluateDiscoverMediaGate,
   isAgeEligible,
   isCustomerVisibleDiscoverBio,
   isDiscoverCohortVisible,
@@ -23,35 +22,6 @@ const INTENT_GOALS: Record<string, string[]> = {
   dating: INTENT_GOAL_ALIASES.dating,
   marriage: INTENT_GOAL_ALIASES.marriage,
 };
-
-async function viewerDiscoverEligible(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  supabase: any,
-  userId: string,
-): Promise<{ ok: boolean; reasons: string[] }> {
-  const full = await supabase
-    .from("media_objects")
-    .select("content_type, moderation_status")
-    .eq("owner_user_id", userId)
-    .is("pair_id", null)
-    .limit(50);
-  const rows = full.data ?? [];
-  const images = rows.filter((r: { content_type?: string }) =>
-    String(r.content_type || "").startsWith("image/"),
-  );
-  const videos = rows.filter((r: { content_type?: string }) =>
-    String(r.content_type || "").startsWith("video/"),
-  );
-  const approved = images.filter((r: { moderation_status?: string }) => {
-    const st = r.moderation_status;
-    return !st || st === "approved" || st === "pending";
-  });
-  const gate = evaluateDiscoverMediaGate({
-    approvedOrPendingImages: approved.length,
-    videoCount: videos.length,
-  });
-  return { ok: gate.discoverEligible, reasons: gate.reasons };
-}
 
 function ageYears(birthDateIso: string | null | undefined): number | null {
   if (!birthDateIso) return null;
@@ -130,27 +100,7 @@ export async function GET(req: Request) {
     return jsonError("FORBIDDEN", "ageUnderage", requestId);
   }
 
-  const mediaGate = await viewerDiscoverEligible(supabase, user.id);
-  if (!mediaGate.ok) {
-    return NextResponse.json({
-      data: {
-        candidates: [],
-        emptyReason: "MEDIA_GATE",
-        gate: {
-          discover_eligible: false,
-          reasons: mediaGate.reasons,
-        },
-        meta: {
-          poolCount: 0,
-          excludedCount: 0,
-          intent,
-          strict,
-          softMode: !strict,
-        },
-      },
-      meta: { request_id: requestId, page_size: pageSize },
-    });
-  }
+  // Photos optional — Discover open when discovery_opt_in (default true).
 
   const { data: poolRaw } = await supabase
     .from("profiles")

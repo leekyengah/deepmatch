@@ -18,17 +18,17 @@ describe("catalog-visibility", () => {
     assert.equal(isCustomerVisibleFulfillment("PARTNER"), true);
   });
 
-  it("isolates discover cohorts", () => {
-    assert.equal(isDiscoverCohortVisible(null, "Mebertes"), false);
+  it("treats cohort as purge marker only (Discover peers)", () => {
+    assert.equal(isDiscoverCohortVisible(null, "Mebertes"), true);
     assert.equal(isDiscoverCohortVisible(null, null), true);
     assert.equal(isDiscoverCohortVisible("Mebertes", "Mebertes"), true);
-    assert.equal(isDiscoverCohortVisible("Mebertes", null), false);
+    assert.equal(isDiscoverCohortVisible("Mebertes", null), true);
   });
 
-  it("hides Synthetic Mebertes bios", () => {
+  it("does not hide Mebertes bios from Discover", () => {
     assert.equal(
       isCustomerVisibleDiscoverBio("Synthetic Mebertes · HN · CC"),
-      false,
+      true,
     );
     assert.equal(isCustomerVisibleDiscoverBio("Loves coffee and travel"), true);
   });

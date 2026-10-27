@@ -27,22 +27,23 @@ export function isCustomerVisibleFulfillment(
   return !HIDDEN_FULFILLMENT.has(String(fulfillment).trim().toUpperCase());
 }
 
-/** Organic members never see seeded cohorts; cohort members only see same cohort. */
+/**
+ * Cohort is purge metadata (e.g. Mebertes), not a Discover silo.
+ * Organic and bootstrap accounts see each other as peers (Founder policy).
+ */
 export function isDiscoverCohortVisible(
-  viewerCohort: string | null | undefined,
-  candidateCohort: string | null | undefined,
+  _viewerCohort: string | null | undefined,
+  _candidateCohort: string | null | undefined,
 ): boolean {
-  const viewer = viewerCohort?.trim() || null;
-  const candidate = candidateCohort?.trim() || null;
-  if (viewer) return candidate === viewer;
-  return candidate == null;
+  return true;
 }
 
-/** Defense-in-depth: hide leftover seed bios even if cohort column is null. */
+/**
+ * Bios are customer-visible. Do not hide Mebertes/bootstrap copy —
+ * cohort column is the purge marker, not the Discover filter.
+ */
 export function isCustomerVisibleDiscoverBio(
-  bio: string | null | undefined,
+  _bio: string | null | undefined,
 ): boolean {
-  if (!bio) return true;
-  const t = bio.trim();
-  return !/synthetic\s+mebertes/i.test(t) && !/^synthetic\b/i.test(t);
+  return true;
 }
