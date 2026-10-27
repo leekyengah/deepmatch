@@ -5,7 +5,7 @@
 **RELEASE_CANDIDATE_READY:** **NO**  
 **GA:** **NO-GO**  
 **Android preview APK:** **YES** (`ANDROID_PREVIEW_BUILD_COMPLETED`)  
-**Device QA:** **`DEVICE_TEST_BLOCKED`**
+**Device QA:** **`READY_FOR_INDEPENDENT_DEVICE_QA`** (package ready; eng host still no adb)
 
 ## Checklist
 

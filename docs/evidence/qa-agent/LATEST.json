@@ -1,8 +1,8 @@
 {
   "context": {
-    "runId": "qa-2026-10-27T04-01-05-084Z-abdc759e",
+    "runId": "qa-2026-10-27T06-45-51-005Z-d64bc81b",
     "projectId": "deepmatch",
-    "commitSha": "6449e06e32d26c0ff8dd32ba30bb1191e63ce4d8",
+    "commitSha": "d98cb1c1714a8906ce3ed01702863c2c6483fe3a",
     "branch": "feat/w2-core-member-wp1-3",
     "environment": {
       "id": "dm-staging",
@@ -10,7 +10,7 @@
       "kind": "staging",
       "allowWrites": false
     },
-    "startedAt": "2026-10-27T04:01:05.084Z",
+    "startedAt": "2026-10-27T06:45:51.005Z",
     "suite": "security",
     "actor": "qa-agent-automated"
   },
@@ -19,7 +19,7 @@
       "id": "DM-QA-P0-004",
       "outcome": "PASS",
       "actual": "\n> deepmatch@0.1.0 test:no-leak\n> node scripts/no-leak-public.mjs https://datingvn.com\n\nno-leak scan base=https://datingvn.com\nPASS / status=200 bytes=33779\nPASS /faq status=200 bytes=16919\nPASS /privacy status=200 bytes=42150\nPASS /terms status=200 bytes=33781\nPASS /login status=200 bytes=12175\nPASS /signup status=200 bytes=15040\nPASS /robots.txt status=200 bytes=27\nPASS /sitemap.xml status=200 bytes=2651\nPASS probe /.env status=307\nPASS probe /.git/config status=307\nPASS probe /.ai/NEXT_ACTION.md status=307\nPASS probe /docs/audits/DEEPMATCH_AUTONOMOUS_EXECUTION_REPORT.md status=307\nPASS probe /api/v1/admin/users status=404\nno-leak PASSED\n",
-      "durationMs": 7096,
+      "durationMs": 11517,
       "requirements": {
         "fixId": "FIX26-018",
         "auditId": "AUD26-018"
@@ -29,8 +29,8 @@
     {
       "id": "DM-QA-A-001",
       "outcome": "PASS",
-      "actual": "▶ RLS deny suite\n  ✔ user B cannot read user A private notes when not shared (602.8117ms)\n  ✔ user B cannot read audit_logs (930.1432ms)\n✔ RLS deny suite (1536.0795ms)\n▶ RLS harness gate\n  ✔ documents skip when credentials absent (0.4752ms)\n✔ RLS harness gate (0.8728ms)\nℹ tests 3\nℹ suites 2\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2381.2411\n",
-      "durationMs": 5736,
+      "actual": "▶ RLS deny suite\n  ✔ user B cannot read user A private notes when not shared (1888.3887ms)\n  ✔ user B cannot read audit_logs (980.8844ms)\n✔ RLS deny suite (2872.4785ms)\n▶ RLS harness gate\n  ✔ documents skip when credentials absent (0.2262ms)\n✔ RLS harness gate (2.2333ms)\nℹ tests 3\nℹ suites 2\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 3382.1529\n",
+      "durationMs": 7750,
       "requirements": {
         "fixId": "FIX26-018",
         "auditId": "AUD26-018"
@@ -52,7 +52,7 @@
   "releaseRecommendation": "CONDITIONAL",
   "gaStance": "NO-GO",
   "costEstimateUsd": 0,
-  "durationMs": 13062,
+  "durationMs": 19783,
   "lifecycleEffect": "QA_PASSED_AUTOMATED",
   "reviewerSignoff": {
     "identity": null,

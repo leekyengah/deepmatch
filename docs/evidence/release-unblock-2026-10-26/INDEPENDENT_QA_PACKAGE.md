@@ -1,22 +1,23 @@
 # Independent QA Package — DeepMatch Release Unblock
 
-**Prepared:** 2026-10-26  
-**Baseline commit (sprint start):** `6449e06`  
+**Prepared:** 2026-10-26 · **Updated:** 2026-10-27  
+**Eng HEAD:** `d98cb1c` · Android APK build `fe0ad595`  
 **Actor preparing pack:** Cursor automated eng — **cannot self-sign VERIFIED**  
 **Staging:** `https://datingvn.com` · Supabase project `zzqpvjdyvjarpphqhaze`
 
 ## Scope for Independent QA
 
-| Area | Required | Automation already run |
-|------|----------|------------------------|
-| Accept staging 13 checks | Re-run + sign | PASS (this sprint) |
-| W2/P0 catalog | Spot-check + sign | 7/7 and 13/13 PASS |
-| Security no-leak | Re-run | PASS |
-| RLS deny JWT matrix | Execute with JWTs | SKIPPED until FAR-11 |
-| Playwright smoke | Re-run | 5/5 PASS |
-| Critical path (delete gate, privacy, AI, media, match, booking) | Device + disposable delete | API smoke PASS |
+| Area | Required | Automation already run (2026-10-27) |
+|------|----------|--------------------------------------|
+| Accept staging 13 checks | Re-run + sign | **13/13 PASS** |
+| W2/P0 catalog | Spot-check + sign | Prior 7/7 and 13/13 PASS |
+| Security no-leak | Re-run | **PASS** (suite security) |
+| RLS deny JWT matrix A-001 | Execute with JWTs | **PASS** (`qa-…-d64bc81b`; remint via `npm run mint:rls-jwts`) |
+| Playwright smoke | Re-run | **5/5 PASS** |
+| Critical path | Device + disposable delete | API smoke **PASS** |
 | Commerce sandbox | Re-run cancel/refund | Prior 18/18; reconfirm |
-| Mobile RC | Device farm / TestFlight / APK | Not available to eng agent |
+| Mobile Android APK | Device checklist | Artifact ready — see `final-release-preparation/ANDROID_DEVICE_QA_PACKAGE.md` |
+| iOS | Simulator or TestFlight | Simulator `72114bb8`; device BLOCKED_EXTERNAL |
 | Store privacy forms | Counsel | Drafts only |
 
 ## How to run (trusted QA host)

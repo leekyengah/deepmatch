@@ -13,8 +13,9 @@
 4. **Crash reporting** — live Sentry DSN on preview/production profiles  
 5. **Independent QA VERIFIED** — human (`FAR-08`); Cursor must not self-VERIFIED  
 6. **No LIVE PSP** on store builds  
-7. **Device smoke** of Android preview APK (`DEVICE_TEST_BLOCKED` on CI host — no adb/emulator)  
+7. **Device smoke** of Android preview APK — eng package `READY_FOR_INDEPENDENT_DEVICE_QA` (see `final-release-preparation/ANDROID_DEVICE_QA_PACKAGE.md`); host still no adb  
 8. **Play Console** listing + upload key policy before any Play Internal track  
+9. **Independent QA signoff** before any `RELEASE_CANDIDATE_READY` claim  
 
 ## Present (engineering)
 

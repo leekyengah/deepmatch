@@ -222,7 +222,8 @@ export const runners: Record<string, CaseRunner> = {
     return {
       id: spec.id,
       outcome: r.code === 0 ? "PASS" : "FAIL",
-      actual: (r.stdout || r.stderr).slice(-800),
+      // Include stderr so FAIL lines (console.error) are visible in evidence.
+      actual: `${r.stdout}\n${r.stderr}`.trim().slice(-1200),
       failureClass: r.code === 0 ? undefined : "application_defect",
     };
   },
