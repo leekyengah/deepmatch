@@ -4,6 +4,7 @@ import {
   MIN_AGE_DEFAULT,
   evaluateDiscoverMediaGate,
   isAgeEligible,
+  isDiscoverCohortVisible,
   normalizeIntent,
   rankCandidates,
   type DiscoveryProfile,
@@ -96,7 +97,7 @@ export async function GET(req: Request) {
   const { data: me } = await supabase
     .from("profiles")
     .select(
-      "id, display_name, birth_date, fuzzy_region, discovery_opt_in, hidden_from_discovery, avatar_path, bio, job_title",
+      "id, display_name, birth_date, fuzzy_region, discovery_opt_in, hidden_from_discovery, avatar_path, bio, job_title, cohort",
     )
     .eq("id", user.id)
     .maybeSingle();
@@ -150,10 +151,10 @@ export async function GET(req: Request) {
     });
   }
 
-  const { data: poolRows } = await supabase
+  const { data: poolRaw } = await supabase
     .from("profiles")
     .select(
-      "id, display_name, birth_date, fuzzy_region, discovery_opt_in, hidden_from_discovery, avatar_path, bio, job_title",
+      "id, display_name, birth_date, fuzzy_region, discovery_opt_in, hidden_from_discovery, avatar_path, bio, job_title, cohort",
     )
     .eq("discovery_opt_in", true)
     .eq("hidden_from_discovery", false)
@@ -161,8 +162,17 @@ export async function GET(req: Request) {
     .neq("id", user.id)
     .limit(200);
 
-  const poolCount = poolRows?.length ?? 0;
-  const ids = (poolRows ?? []).map((p) => p.id);
+  const viewerCohort =
+    typeof me?.cohort === "string" ? me.cohort : null;
+  const poolRows = (poolRaw ?? []).filter((p) =>
+    isDiscoverCohortVisible(
+      viewerCohort,
+      typeof p.cohort === "string" ? p.cohort : null,
+    ),
+  );
+
+  const poolCount = poolRows.length;
+  const ids = poolRows.map((p) => p.id);
   const { data: deepRows } = ids.length
     ? await supabase
         .from("profile_deep")

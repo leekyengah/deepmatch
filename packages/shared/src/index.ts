@@ -14,3 +14,4 @@ export * from "./onboarding/intents";
 export * from "./media/discover-gate";
 export * from "./commerce/lifecycle";
 export * from "./commerce/product-split";
+export * from "./commerce/catalog-visibility";

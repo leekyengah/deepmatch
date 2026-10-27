@@ -132,7 +132,7 @@
   "categoryEmptyTitle": "Chưa có mục",
   "categoryEmptyBody": "Danh mục đang được cập nhật. Vui lòng thử lại sau.",
   "backCategory": "← Danh mục",
-  "fulfillmentNote": "Hình thức: {mode}",
+  "fulfillmentNote": "Đặt chỗ với đối tác sẽ mở khi mục này được kích hoạt.",
   "cartDemo": "Giỏ",
   "cartIntro": "Giỏ hàng Lifestyle. Kiểm tra tổng rồi tiếp tục thanh toán.",
   "cartEmpty": "Giỏ trống.",

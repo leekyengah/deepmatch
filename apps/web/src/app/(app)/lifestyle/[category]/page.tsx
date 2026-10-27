@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { isCustomerVisibleProviderStatus } from "@deepmatch/shared";
 import { createClient } from "@/lib/supabase/server";
 import { flagEnabled } from "@/lib/flags";
 import { Card } from "@/components/ui/Card";
@@ -65,7 +66,11 @@ export default async function LifestyleCategoryPage({
     query = query.gt("price_vnd", 800000);
   }
 
-  const { data: products } = await query;
+  const { data: productsRaw } = await query;
+  const products = (productsRaw ?? []).filter((p) => {
+    const prov = p.commerce_providers as { status?: string } | null;
+    return isCustomerVisibleProviderStatus(prov?.status);
+  });
 
   return (
     <div className="dm-page-frame dm-page-frame--standard pb-12">
@@ -132,7 +137,7 @@ export default async function LifestyleCategoryPage({
         </div>
       ) : null}
 
-      {!products?.length ? (
+      {!products.length ? (
         <div className="mt-10">
           <EmptyState
             title={t("commerce.categoryEmptyTitle")}
@@ -158,11 +163,6 @@ export default async function LifestyleCategoryPage({
                         <p className="mt-1 text-xs text-dm-muted">
                           {prov?.display_name ?? t("common.optional")}
                         </p>
-                        {p.description ? (
-                          <p className="mt-2 line-clamp-2 text-sm text-dm-muted">
-                            {p.description}
-                          </p>
-                        ) : null}
                       </div>
                       <p className="shrink-0 font-bold text-dm-primary">
                         {p.price_vnd.toLocaleString("vi-VN")}₫

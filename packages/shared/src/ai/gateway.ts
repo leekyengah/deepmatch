@@ -108,8 +108,8 @@ export function stubAssist(
             : `Phong cách cho ${occasion}`,
         body:
           locale === "en-US"
-            ? `Prefer neutral layers, budget ${budget}. See Fashion DEMO in Lifestyle.`
-            : `Ưu tiên lớp trung tính, ngân sách ${budget}. Xem mục Thời trang DEMO trong Lifestyle.`,
+            ? `Prefer neutral layers, budget ${budget}. Browse Fashion in Lifestyle when available.`
+            : `Ưu tiên lớp trung tính, ngân sách ${budget}. Xem mục Thời trang trong Lifestyle khi có.`,
         demo: true,
       },
     ],
@@ -126,11 +126,11 @@ export function stubAssist(
     ],
     gift: [
       {
-        title: locale === "en-US" ? "DEMO gift ideas" : "Gợi ý quà DEMO",
+        title: locale === "en-US" ? "Gift ideas" : "Gợi ý quà",
         body:
           locale === "en-US"
-            ? `For ${occasion}, budget ${budget}: see Seasonal flowers / Tea & treats (SANDBOX_ONLY).`
-            : `Dịp ${occasion}, ngân sách ${budget}: xem Hoa theo dịp / Hộp trà và bánh (SANDBOX_ONLY).`,
+            ? `For ${occasion}, budget ${budget}: seasonal flowers or a tea & treats set when listed.`
+            : `Dịp ${occasion}, ngân sách ${budget}: hoa theo mùa hoặc hộp trà và bánh khi có trong danh mục.`,
         demo: true,
       },
     ],
@@ -146,8 +146,8 @@ export function stubAssist(
         title: locale === "en-US" ? "Trip ideas" : "Ý tưởng chuyến đi",
         body:
           locale === "en-US"
-            ? "A one-night staycation or weekend city walk (DEMO). No real tickets or rooms."
-            : "Staycation 1 đêm hoặc City walk cuối tuần (DEMO). Không có vé/phòng thật.",
+            ? "A one-night staycation or weekend city walk. Booking is not completed in-app yet."
+            : "Staycation 1 đêm hoặc đi bộ cuối tuần trong phố. Đặt chỗ trong app chưa mở.",
         demo: true,
       },
     ],

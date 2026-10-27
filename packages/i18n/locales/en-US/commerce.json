@@ -132,7 +132,7 @@
   "categoryEmptyTitle": "Nothing here yet",
   "categoryEmptyBody": "This catalog is being updated. Please try again later.",
   "backCategory": "← Category",
-  "fulfillmentNote": "Fulfillment: {mode}",
+  "fulfillmentNote": "Partner booking opens when this listing is activated.",
   "cartDemo": "cart",
   "cartIntro": "Your Lifestyle cart. Review the total, then continue to checkout.",
   "cartEmpty": "cart is empty.",

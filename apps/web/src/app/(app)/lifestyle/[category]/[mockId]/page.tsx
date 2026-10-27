@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { isCustomerVisibleProviderStatus } from "@deepmatch/shared";
 import { createClient } from "@/lib/supabase/server";
 import { flagEnabled } from "@/lib/flags";
 import { Card } from "@/components/ui/Card";
@@ -19,7 +20,7 @@ export default async function ProductDetailPage({
   const { data: product } = await supabase
     .from("commerce_products")
     .select(
-      "id, mock_id, category, title, kind, description, price_vnd, unit, fulfillment, commerce_providers(display_name, status, source_note)",
+      "id, mock_id, category, title, kind, description, price_vnd, unit, fulfillment, commerce_providers(display_name, status)",
     )
     .eq("mock_id", mockId)
     .eq("category", category)
@@ -30,8 +31,8 @@ export default async function ProductDetailPage({
   const prov = product.commerce_providers as {
     display_name?: string;
     status?: string;
-    source_note?: string;
   } | null;
+  if (!isCustomerVisibleProviderStatus(prov?.status)) notFound();
 
   return (
     <div className="dm-page-frame dm-page-frame--narrow pb-12">
@@ -49,34 +50,17 @@ export default async function ProductDetailPage({
         {product.title}
       </h1>
       {prov?.display_name ? (
-        <p className="mt-2 text-sm text-dm-muted">
-          {prov.display_name}
-          {prov.status ? (
-            <span className="ml-2 text-[11px] font-bold uppercase tracking-wide text-dm-champagne">
-              {prov.status}
-            </span>
-          ) : null}
-        </p>
+        <p className="mt-2 text-sm text-dm-muted">{prov.display_name}</p>
       ) : null}
 
       <Card className="mt-8 space-y-4">
-        <p className="text-sm leading-relaxed text-dm-ink">
-          {product.description}
-        </p>
         <p className="font-display text-3xl font-semibold text-dm-primary">
           {product.price_vnd.toLocaleString("vi-VN")}₫
           <span className="ml-2 text-sm font-normal text-dm-muted">
             / {product.unit}
           </span>
         </p>
-        <p className="text-xs text-dm-muted">
-          {t("commerce.fulfillmentNote", { mode: product.fulfillment })}
-        </p>
-        {prov?.source_note ? (
-          <p className="rounded-xl bg-[#FAF7F4] px-3 py-2 text-xs text-dm-muted">
-            {prov.source_note}
-          </p>
-        ) : null}
+        <p className="text-xs text-dm-muted">{t("commerce.fulfillmentNote")}</p>
 
         <div className="flex flex-col gap-3 border-t border-dm-line pt-4 sm:flex-row sm:flex-wrap sm:items-center">
           <DemoBookButton productId={product.id} />
